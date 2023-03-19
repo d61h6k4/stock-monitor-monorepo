@@ -1,0 +1,26 @@
+version: "3.1"
+
+rules:
+- rule: Set an ASR reminder
+  steps:
+  - intent: ask_set_asr_reminder
+    entities:
+    - ticker
+    - timedelta
+  - action: action_set_asr_reminder
+
+- rule: Trigger `action_react_to_asr_reminder` for `asr_reminder`
+  steps:
+  - intent: asr_reminder
+    entities:
+      - ticker
+      - timedelta
+  - action: action_react_to_asr_reminder
+
+- rule: Cancel an ASR reminder
+  steps:
+  - intent: ask_unset_asr_reminder
+    entities:
+      - ticker
+      - timedelta
+  - action: action_unset_asr_reminder
