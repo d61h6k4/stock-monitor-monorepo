@@ -63,7 +63,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     @app.exception_handler(RequestValidationError)
     async def validation_exception_handler(request: Request, exc: RequestValidationError):
         exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
-        logger.error(f"{request}: {exc_str}")
+        logger.error(f"{request.headers=}: {exc_str}")
         content = {'status_code': 10422, 'message': exc_str, 'data': None}
         return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
@@ -81,7 +81,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         return {"message": 'ok'}
 
     @app.post("/telegram/webhook")
-    async def telegram_webhook(x_telegram_bot_api_secret_token: Annotated[str, Header()], update: Update):
+    async def telegram_webhook(x_telegram_bot_api_secret_token: Annotated[str | None, Header()], update: Update):
         assert x_telegram_bot_api_secret_token == telegram_client.secret_token
         logger.debug(update)
         return True
