@@ -75,7 +75,8 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     async def bot(r: RasaBotMessage):
         match r.custom.name:
             case BotAction.ASR_REMINDER:
-                telegram_client.send_message(chat_id=111874928, text=f"{asr_rule(r.custom.entities['ticker'])=}")
+                telegram_client.send_message(chat_id=111874928,
+                                             text=asr_rule(r.custom.entities['ticker']).explanation)
             case _:
                 logger.debug(r)
         return {"message": 'ok'}
@@ -84,7 +85,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     async def telegram_webhook(update: Update,
                                x_telegram_bot_api_secret_token: Annotated[str | None, Header()] = None):
         if x_telegram_bot_api_secret_token != telegram_client.secret_token:
-            logger.warning("Secret token violated. "
+            logger.warning("Secret token is violated. "
                            f"{x_telegram_bot_api_secret_token} != {telegram_client.secret_token}")
 
         logger.debug(update)
