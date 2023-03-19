@@ -1,10 +1,11 @@
 from enum import Enum
-from fastapi import FastAPI
+from fastapi import FastAPI, Header
 from pydantic import BaseModel
 from structlog import get_logger
-from typing import Mapping, Any
+from typing import Mapping, Any, Annotated
 from stock_monitor_backend.models import Stock
 from stock_monitor_backend.math import best_price_in_period, last_atr
+from stock_monitor_backend.telegram import TelegramClient, Update
 
 
 class BotAction(str, Enum):
@@ -48,7 +49,11 @@ def asr_rule(ticker: str) -> Decision:
     return Decision(action=decision_action, explanation=exp_msg)
 
 
-def create_app():
+def create_app(telegram_bot_token: str) -> FastAPI:
+    """Creates and web server based on the FastAPI."""
+
+    telegram_client = TelegramClient(token=telegram_bot_token)
+
     app = FastAPI()
     logger = get_logger()
 
@@ -65,12 +70,23 @@ def create_app():
                 logger.debug(r)
         return {"message": 'ok'}
 
+    @app.post("/telegram/webhook")
+    async def telegram_webhook(x_telegram_bot_api_secret_token: Annotated[str, Header()], update: Update):
+        assert x_telegram_bot_api_secret_token == telegram_client.secret_token
+        logger.debug(update)
+        return True
+
     return app
 
 
 def main():
     import uvicorn
-    uvicorn.run(create_app())
+    import os
+
+    telegram_bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
+    assert telegram_bot_token, "Missing TELEGRAM_BOT_TOKEN"
+
+    uvicorn.run(create_app(telegram_bot_token))
 
 
 if __name__ == "__main__":
