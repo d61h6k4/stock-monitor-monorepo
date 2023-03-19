@@ -52,10 +52,9 @@ def asr_rule(ticker: str) -> Decision:
 def create_app(telegram_bot_token: str) -> FastAPI:
     """Creates and web server based on the FastAPI."""
 
-    telegram_client = TelegramClient(token=telegram_bot_token)
-
     app = FastAPI()
     logger = get_logger()
+    telegram_client = TelegramClient(token=telegram_bot_token)
 
     @app.get("/")
     async def root():
@@ -76,6 +75,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         logger.debug(update)
         return True
 
+    telegram_client.set_webhook()
     return app
 
 
