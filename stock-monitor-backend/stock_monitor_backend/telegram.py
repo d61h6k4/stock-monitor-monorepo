@@ -100,3 +100,8 @@ class TelegramClient:
                               data={"url": "https://lochaufwallstrasse.de/api/telegram/webhook",
                                     "secret_token": self.secret_token})
         r.raise_for_status()
+
+    def send_message(self, chat_id: int, text: str):
+        r = self.session.post(url=f"{self._telegram_api_url}/sendMessage",
+                              data={"chat_id": chat_id, "text": text})
+        r.raise_for_status()
