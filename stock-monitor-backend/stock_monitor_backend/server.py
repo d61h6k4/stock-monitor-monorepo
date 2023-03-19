@@ -1,10 +1,15 @@
+from collections.abc import Mapping
 from enum import Enum
-from fastapi import FastAPI, Header
+from typing import Annotated, Any
+
+from fastapi import FastAPI, Header, Request, status
+from fastapi.exceptions import RequestValidationError
+from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from structlog import get_logger
-from typing import Mapping, Any, Annotated
-from stock_monitor_backend.models import Stock
+
 from stock_monitor_backend.math import best_price_in_period, last_atr
+from stock_monitor_backend.models import Stock
 from stock_monitor_backend.telegram import TelegramClient, Update
 
 
@@ -51,10 +56,16 @@ def asr_rule(ticker: str) -> Decision:
 
 def create_app(telegram_bot_token: str) -> FastAPI:
     """Creates and web server based on the FastAPI."""
-
     app = FastAPI()
     logger = get_logger()
     telegram_client = TelegramClient(token=telegram_bot_token)
+
+    @app.exception_handler(RequestValidationError)
+    async def validation_exception_handler(request: Request, exc: RequestValidationError):
+        exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
+        logger.error(f"{request}: {exc_str}")
+        content = {'status_code': 10422, 'message': exc_str, 'data': None}
+        return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     @app.get("/")
     async def root():
@@ -80,8 +91,9 @@ def create_app(telegram_bot_token: str) -> FastAPI:
 
 
 def main():
-    import uvicorn
     import os
+
+    import uvicorn
 
     telegram_bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
     assert telegram_bot_token, "Missing TELEGRAM_BOT_TOKEN"
