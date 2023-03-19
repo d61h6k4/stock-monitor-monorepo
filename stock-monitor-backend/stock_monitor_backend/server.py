@@ -81,7 +81,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         return {"message": 'ok'}
 
     @app.post("/telegram/webhook")
-    async def telegram_webhook(x_telegram_bot_api_secret_token: Annotated[str | None, Header()], update: Update):
+    async def telegram_webhook(update: Update, x_telegram_bot_api_secret_token: Annotated[str | None, Header()] = None ):
         assert x_telegram_bot_api_secret_token == telegram_client.secret_token
         logger.debug(update)
         return True

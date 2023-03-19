@@ -10,7 +10,7 @@ class User(BaseModel):
     See: https://core.telegram.org/bots/api#user
     """
     user_id: int = Field(alias="id")
-    is_boot: bool
+    is_bot: bool
     first_name: str
     last_name: Optional[str]
     username: Optional[str]
