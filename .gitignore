@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 stock-monitor-bot/.rasa
 stock-monitor-bot/models
+stock-monitor-backend/yfinance.cache
