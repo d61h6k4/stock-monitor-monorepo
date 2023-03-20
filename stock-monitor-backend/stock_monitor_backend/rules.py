@@ -36,5 +36,5 @@ def asr_rule(ticker: str) -> Decision:
     if current_price < sell_price:
         decision_action = Action.SELL
 
-    exp_msg = f"Current price is {current_price:,.2f} and sell price is {sell_price:,.2f} \U000027A1 {decision_action}"
+    exp_msg = f"Current price is {current_price:,.2f} and sell price is {sell_price:,.2f}"
     return Decision(ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg)

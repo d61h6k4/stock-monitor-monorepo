@@ -1,3 +1,4 @@
+from textwrap import dedent
 from stock_monitor_backend.rules import Decision, Action
 
 
@@ -23,4 +24,4 @@ def telegramify(decision: Decision) -> str:
     """
     for sym in ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '}', '{', '.', '!']:
         template = template.replace(sym, f"\\{sym}")
-    return template
+    return dedent(template)
