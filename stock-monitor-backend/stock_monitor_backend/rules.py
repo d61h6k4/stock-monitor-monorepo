@@ -29,7 +29,7 @@ def asr_rule(ticker: str) -> Decision:
 
     rule = Rule(name="ASR",
                 description=f"ASR rule compares {ticker}'s current price with "
-                            "max price in the last 14 days minus 2 ATR. ")
+                            "max price in the last 14 days minus 2 ATR")
 
     decision_action = Action.HOLD
     if current_price < sell_price:
