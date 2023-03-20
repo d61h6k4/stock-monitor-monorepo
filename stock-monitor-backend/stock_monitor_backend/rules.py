@@ -16,6 +16,7 @@ class Rule(BaseModel):
 
 
 class Decision(BaseModel):
+    ticker: str
     rule: Rule
     action: Action
     explanation: str
@@ -28,7 +29,7 @@ def asr_rule(ticker: str) -> Decision:
     sell_price = best_price_in_period(stock.history) - 2 * last_atr(stock.history)
 
     rule = Rule(name="ASR",
-                description=f"ASR rule compares {ticker}'s current price with "
+                description=f"ASR rule compares ${ticker}'s current price with "
                             "max price in the last 14 days minus 2 ATR")
 
     decision_action = Action.HOLD
@@ -36,4 +37,4 @@ def asr_rule(ticker: str) -> Decision:
         decision_action = Action.SELL
 
     exp_msg = f"Current price is {current_price:,.2f} and sell price is {sell_price:,.2f} \U000027A1 {decision_action}"
-    return Decision(rule=rule, action=decision_action, explanation=exp_msg)
+    return Decision(ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg)
