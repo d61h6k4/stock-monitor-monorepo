@@ -22,5 +22,5 @@ def telegramify(decision: Decision) -> str:
     ###### {decision.rule.description}
     """
     for sym in ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '}', '{', '.', '!']:
-        template = template.repalce(sym, f"\\{sym}")
+        template = template.replace(sym, f"\\{sym}")
     return template
