@@ -22,8 +22,9 @@ def telegram_escape(text: str) -> str:
 def telegramify(decision: Decision) -> str:
     template = f"""
     **${decision.ticker} {emojify(decision.action)} \U000027A1 by {decision.rule.name}**
-    \\> {telegram_escape(decision.explanation)}
-    __{telegram_escape(decision.rule.description)}__
+    ||{telegram_escape(decision.explanation)}||
+    _{telegram_escape(decision.rule.description)}_
+    #robotsopinion
     """
 
     return dedent(template)
