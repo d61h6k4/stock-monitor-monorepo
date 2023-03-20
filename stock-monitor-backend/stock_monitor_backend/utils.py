@@ -12,8 +12,8 @@ def emojify(a: Action) -> str:
 
 
 def telegramify(decision: Decision) -> str:
-    description = decision.rule.description.replace('.', '\\.')
-    explanation = decision.explanation.replace('.', '\\.')
+    description = decision.rule.description.replace('.', ',')
+    explanation = decision.explanation.replace('.', ',')
     return (f"Rule {decision.rule.name} \U000027A1 {emojify(decision.action)}.\n\n"
             f"<sup>{explanation}</sup>"
             f"<sup><sub>{description}</sub></sup>")
