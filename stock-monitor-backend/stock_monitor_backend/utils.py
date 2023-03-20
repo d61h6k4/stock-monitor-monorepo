@@ -5,11 +5,11 @@ from stock_monitor_backend.rules import Decision, Action
 def emojify(a: Action) -> str:
     match a:
         case Action.SELL:
-            return f"**sell** \U0001F4C9"
+            return f"\U0001F4C9 **sell** \U0001F4B8"
         case Action.HOLD:
-            return "hold"
+            return "\U0001F7F0 **hold** \U0001F4B0"
         case Action.BUY:
-            return "buy \U0001F4C8"
+            return "\U0001F4C8 **buy** \U0001F911"
 
 
 def telegram_escape(text: str) -> str:
@@ -24,7 +24,7 @@ def telegramify(decision: Decision) -> str:
     **${decision.ticker} {emojify(decision.action)} \U000027A1 by {decision.rule.name}**
     ||{telegram_escape(decision.explanation)}||
     _{telegram_escape(decision.rule.description)}_
-    #robotsopinion
+    \U0001F916 \\#robotsopinion
     """
 
     return dedent(template)
