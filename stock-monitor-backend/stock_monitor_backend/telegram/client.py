@@ -3,6 +3,10 @@ from typing import Optional, Sequence
 from pydantic import BaseModel, Field
 from requests import Session
 
+from structlog import get_logger
+
+logger = get_logger()
+
 
 class User(BaseModel):
     """User object.
@@ -102,6 +106,10 @@ class TelegramClient:
         r.raise_for_status()
 
     def send_message(self, chat_id: int, text: str):
+        payload = {"chat_id": chat_id, "text": text, "parse_mode": "MarkdownV2"}
         r = self.session.post(url=f"{self._telegram_api_url}/sendMessage",
-                              data={"chat_id": chat_id, "text": text, "parse_mode": "MarkdownV2"})
+                              data=payload)
+        if r.status_code != 200:
+            logger.critical(f"sendMessage with {payload} failed with {r.status_code} {r.content}")
+
         r.raise_for_status()
