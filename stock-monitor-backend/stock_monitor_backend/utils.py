@@ -12,16 +12,18 @@ def emojify(a: Action) -> str:
             return "buy \U0001F4C8"
 
 
+def telegram_escape(text: str) -> str:
+    for sym in ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '}', '{', '.', '!']:
+        text = text.replace(sym, f"\\{sym}")
+
+    return text
+
+
 def telegramify(decision: Decision) -> str:
     template = f"""
-    ${decision.ticker} {emojify(decision.action)} \U000027A1 by {decision.rule.name}
-
-
-    ##### {decision.explanation}
-
-
-    ###### {decision.rule.description}
+    **${decision.ticker} {emojify(decision.action)} \U000027A1 by {decision.rule.name}**
+    \\> {telegram_escape(decision.explanation)}
+    __{telegram_escape(decision.rule.description)}__
     """
-    for sym in ['_', '*', '[', ']', '(', ')', '~', '`', '>', '#', '+', '-', '=', '|', '}', '{', '.', '!']:
-        template = template.replace(sym, f"\\{sym}")
+
     return dedent(template)
