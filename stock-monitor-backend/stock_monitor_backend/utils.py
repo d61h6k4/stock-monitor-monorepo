@@ -5,11 +5,11 @@ from stock_monitor_backend.rules import Decision, Action
 def emojify(a: Action) -> str:
     match a:
         case Action.SELL:
-            return f"\U0001F4C9 **sell** \U0001F4B8"
+            return r"\U0001F4C9 **sell** \U0001F4B8"
         case Action.HOLD:
-            return "\U0001F7F0 **hold** \U0001F4B0"
+            return r"\U0001F7F0 **hold** \U0001F4B0"
         case Action.BUY:
-            return "\U0001F4C8 **buy** \U0001F911"
+            return r"\U0001F4C8 **buy** \U0001F911"
 
 
 def telegram_escape(text: str) -> str:
