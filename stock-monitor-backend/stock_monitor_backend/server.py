@@ -8,8 +8,8 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from structlog import get_logger
 
-from stock_monitor_backend.math import best_price_in_period, last_atr
-from stock_monitor_backend.models import Stock
+from stock_monitor_backend.utils import telegramify
+from stock_monitor_backend.rules import asr_rule
 from stock_monitor_backend.telegram import TelegramClient, Update
 
 
@@ -25,33 +25,6 @@ class CustomRasaBotMessage(BaseModel):
 
 class RasaBotMessage(BaseModel):
     custom: CustomRasaBotMessage
-
-
-class Action(str, Enum):
-    BUY = "buy"
-    HOLD = "hold"
-    SELL = "sell"
-
-
-class Decision(BaseModel):
-    action: Action
-    explanation: str
-
-
-def asr_rule(ticker: str) -> Decision:
-    stock = Stock(ticker_name=ticker, period="2y", interval="1d")
-
-    current_price = stock.history["Close"].last(offset="1D").max()
-    sell_price = best_price_in_period(stock.history) - 2 * last_atr(stock.history)
-
-    exp_msg = (f"ASR rule compares {ticker}'s current price with "
-               "max price in the last 14 days minus 2 ATR. ")
-    decision_action = Action.HOLD
-    if current_price < sell_price:
-        decision_action = Action.SELL
-
-    exp_msg += f"Current price = {current_price}), Sell price = {sell_price}) => {decision_action}"
-    return Decision(action=decision_action, explanation=exp_msg)
 
 
 def create_app(telegram_bot_token: str) -> FastAPI:
@@ -75,8 +48,9 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     async def bot(r: RasaBotMessage):
         match r.custom.name:
             case BotAction.ASR_REMINDER:
+                text = telegramify(asr_rule(r.custom.entities['ticker']))
                 telegram_client.send_message(chat_id=111874928,
-                                             text=asr_rule(r.custom.entities['ticker']).explanation)
+                                             text=text)
             case _:
                 logger.debug(r)
         return {"message": 'ok'}
