@@ -1,30 +1,10 @@
-from functools import wraps
+"""Sends notifications to the clients."""
 
 from stock_monitor_backend.rules import Decision
 from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_backend.utils import telegramify
 
 TELEGRAM = "telegram"
-
-
-def is_user_exists(method):
-    @wraps(method)
-    def _impl(self, user, *args, **kwargs):
-        if user not in self._users_to_chats:
-            raise ValueError(f"Given user {user} is unknown.")
-        return method(self, user, *args, **kwargs)
-
-    return _impl
-
-
-def is_client_exists(method):
-    @wraps(method)
-    def _impl(self, *args, **kwargs):
-        if TELEGRAM not in self._clients:
-            raise ValueError("Telegram client hasn't been registered in Notification center yet.")
-        return method(self, *args, **kwargs)
-
-    return _impl
 
 
 class NotificationCenter:
@@ -36,9 +16,10 @@ class NotificationCenter:
     def add_telegram(self, client: TelegramClient):
         self._clients[TELEGRAM] = client
 
-    @is_client_exists
-    @is_user_exists
     def send_unique_decision(self, user: str, decision: Decision):
+        self.check_user_exists(user)
+        self.check_client_exists(TELEGRAM)
+
         if user not in self._users_last_messages:
             self._users_last_messages[user] = {}
         if decision.ticker not in self._users_last_messages[user]:
@@ -49,3 +30,11 @@ class NotificationCenter:
                                                  text=text)
 
             self._users_last_messages[user][decision.ticker] = decision.action
+
+    def check_user_exists(self, user: str):
+        if user not in self._users_to_chats:
+            raise ValueError(f"Given user {user} is unknown.")
+
+    def check_client_exists(self, client: str):
+        if client not in self._clients:
+            raise ValueError("Telegram client hasn't been registered in Notification center yet.")
