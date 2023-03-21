@@ -51,7 +51,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     async def bot(r: RasaBotMessage):
         match r.custom.name:
             case BotAction.ASR_REMINDER:
-                notify.send_unique_decision(asr_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", asr_rule(r.custom.entities['ticker']))
             case _:
                 logger.debug(r)
         return {"message": 'ok'}

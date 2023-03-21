@@ -1,5 +1,7 @@
 """Sends notifications to the clients."""
 
+from typing import Self
+
 from stock_monitor_backend.rules import Decision
 from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_backend.utils import telegramify
@@ -8,15 +10,19 @@ TELEGRAM = "telegram"
 
 
 class NotificationCenter:
-    def __init__(self) -> None:
+    """Sends notifications."""
+    def __init__(self: Self) -> None:
+        """Constructor."""
         self._clients = {}
         self._users_to_chats = {"dbihbka": 111874928}
         self._users_last_messages = {}
 
-    def add_telegram(self, client: TelegramClient):
+    def add_telegram(self: Self, client: TelegramClient) -> None:
+        """Add telegram as one of the channels to send notifications."""
         self._clients[TELEGRAM] = client
 
-    def send_unique_decision(self, user: str, decision: Decision):
+    def send_unique_decision(self: Self, user: str, decision: Decision) -> None:
+        """Checks uniqness of the given decision and sends it to the user."""
         self.check_user_exists(user)
         self.check_client_exists(TELEGRAM)
 
@@ -31,10 +37,14 @@ class NotificationCenter:
 
             self._users_last_messages[user][decision.ticker] = decision.action
 
-    def check_user_exists(self, user: str):
+    def check_user_exists(self: Self, user: str) -> None:
+        """Checks the given `user` is known."""
         if user not in self._users_to_chats:
-            raise ValueError(f"Given user {user} is unknown.")
+            err_msg = f"Given user {user} is unknown."
+            raise ValueError(err_msg)
 
-    def check_client_exists(self, client: str):
+    def check_client_exists(self:Self, client: str) -> None:
+        """Checks the given `client` is known."""
         if client not in self._clients:
-            raise ValueError("Telegram client hasn't been registered in Notification center yet.")
+            err_msg = "Telegram client hasn't been registered in Notification center yet."
+            raise ValueError(err_msg)

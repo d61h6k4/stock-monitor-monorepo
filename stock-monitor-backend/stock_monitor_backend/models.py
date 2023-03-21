@@ -31,6 +31,7 @@ class Stock(BaseModel):
     history: DataFrame = DataFrame()
 
     class Config:
+        """Allow DataFrame."""
         arbitrary_types_allowed = True
 
     @validator("period")
