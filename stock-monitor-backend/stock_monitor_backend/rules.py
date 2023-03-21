@@ -1,3 +1,5 @@
+"""Collections of rules."""
+
 from enum import Enum
 
 from pydantic import BaseModel
@@ -7,17 +9,20 @@ from stock_monitor_backend.models import Stock
 
 
 class Action(str, Enum):
+    """Enumerate possible of actions of rules."""
     BUY = "buy"
     HOLD = "hold"
     SELL = "sell"
 
 
 class Rule(BaseModel):
+    """Rule object."""
     name: str
     description: str
 
 
 class Decision(BaseModel):
+    """Decision object."""
     ticker: str
     rule: Rule
     action: Action
@@ -25,6 +30,7 @@ class Decision(BaseModel):
 
 
 def asr_rule(ticker: str) -> Decision:
+    """ASR rule."""
     stock = Stock(ticker_name=ticker, period="2y", interval="1d")
 
     current_price = stock.history["Close"].last(offset="1D").max()

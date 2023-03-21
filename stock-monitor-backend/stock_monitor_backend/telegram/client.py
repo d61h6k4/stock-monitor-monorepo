@@ -1,4 +1,5 @@
-from typing import Optional
+"""Telegram client implementation."""
+from typing import Optional, Self
 from uuid import uuid4
 
 from pydantic import BaseModel, Field
@@ -94,22 +95,30 @@ class Update(BaseModel):
 
 
 class TelegramClient:
-    def __init__(self, token: str) -> None:
+    """Telegram client object."""
+
+    def __init__(self: Self, token: str) -> None:
+        """Constructor."""
         self._telegram_api_url = f"https://api.telegram.org/bot{token}"
         self.secret_token = uuid4().hex
         self.session = Session()
 
-    def set_webhook(self):
+    def set_webhook(self: Self) -> None:
+        """Sets webhook.
+
+        Configures where Telegram server can send update messages.
+        """
         r = self.session.post(url=f"{self._telegram_api_url}/setWebhook",
                               data={"url": "https://lochaufwallstrasse.de/api/telegram/webhook",
                                     "secret_token": self.secret_token})
         r.raise_for_status()
 
-    def send_message(self, chat_id: int, text: str):
+    def send_message(self: Self, chat_id: int, text: str) -> None:
+        """Sends message."""
         payload = {"chat_id": chat_id, "text": text, "parse_mode": "MarkdownV2"}
         r = self.session.post(url=f"{self._telegram_api_url}/sendMessage",
                               data=payload)
-        if r.status_code != 200:
+        if not r.ok:
             logger.critical(f"sendMessage with {payload} failed with {r.status_code} {r.content}")
 
         r.raise_for_status()

@@ -1,3 +1,4 @@
+"""Backend server."""
 from collections.abc import Mapping
 from enum import Enum
 from typing import Annotated, Any
@@ -19,11 +20,13 @@ class BotAction(str, Enum):
 
 
 class CustomRasaBotMessage(BaseModel):
+    """Rasa's bot message JSON format."""
     name: BotAction
     entities: Mapping[str, Any]
 
 
 class RasaBotMessage(BaseModel):
+    """Rasa's bot message."""
     custom: CustomRasaBotMessage
 
 
@@ -37,18 +40,20 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     notify.add_telegram(telegram_client)
 
     @app.exception_handler(RequestValidationError)
-    async def validation_exception_handler(request: Request, exc: RequestValidationError):
+    async def validation_exception_handler(request: Request, exc: RequestValidationError) -> JSONResponse:
         exc_str = f'{exc}'.replace('\n', ' ').replace('   ', ' ')
         logger.error(f"{request.headers=}: {exc_str}")
         content = {'status_code': 10422, 'message': exc_str, 'data': None}
         return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
     @app.get("/")
-    async def root():
-        return {"message": "Hello World"}
+    async def root() -> Mapping[str, str]:
+        """ROot."""
+        return {"message": "stock monitor backend"}
 
     @app.post("/rasa/webhook")
-    async def bot(r: RasaBotMessage):
+    async def rasa_webhook(r: RasaBotMessage) -> Mapping[str, str]:
+        """Listens to rasa's messages."""
         match r.custom.name:
             case BotAction.ASR_REMINDER:
                 notify.send_unique_decision("dbihbka", asr_rule(r.custom.entities['ticker']))
@@ -58,7 +63,8 @@ def create_app(telegram_bot_token: str) -> FastAPI:
 
     @app.post("/telegram/webhook")
     async def telegram_webhook(update: Update,
-                               x_telegram_bot_api_secret_token: Annotated[str | None, Header()] = None):
+                               x_telegram_bot_api_secret_token: Annotated[str | None, Header()] = None) -> bool:
+        """Listens to telegram's messages."""
         if x_telegram_bot_api_secret_token != telegram_client.secret_token:
             logger.warning("Secret token is violated. "
                            f"{x_telegram_bot_api_secret_token} != {telegram_client.secret_token}")
@@ -70,7 +76,8 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     return app
 
 
-def main():
+def main() -> None:
+    """Runner."""
     import os
 
     import uvicorn
