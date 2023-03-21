@@ -3,7 +3,7 @@ from collections.abc import Mapping
 from enum import Enum
 from typing import Annotated, Any
 
-from fastapi import Depends, FastAPI, Header, Request, status
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -64,8 +64,9 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     async def verify_telegram_bot_api_secret_token(x_telegram_bot_api_secret_token: Annotated[str, Header()]) -> None:
         """Checks X-Telegram-Bot-Api-Secret-Token."""
         if x_telegram_bot_api_secret_token != telegram_client.secret_token:
-            logger.warning("Secret token is violated. "
+            logger.critical("Secret token is invliad. "
                            f"{x_telegram_bot_api_secret_token} != {telegram_client.secret_token}")
+            raise HTTPException(status_code=400, detail="X-Telegram-Bot-Api-Secret-Token is invalid.")
 
     @app.post("/telegram/webhook", dependencies=[Depends(verify_telegram_bot_api_secret_token)])
     async def telegram_webhook(update: Update) -> bool:
