@@ -1,5 +1,6 @@
 from textwrap import dedent
-from stock_monitor_backend.rules import Decision, Action
+
+from stock_monitor_backend.rules import Action, Decision
 
 
 def emojify(a: Action) -> str:

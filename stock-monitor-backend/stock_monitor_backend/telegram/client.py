@@ -1,8 +1,8 @@
+from typing import Optional
 from uuid import uuid4
-from typing import Optional, Sequence
+
 from pydantic import BaseModel, Field
 from requests import Session
-
 from structlog import get_logger
 
 logger = get_logger()
@@ -16,14 +16,14 @@ class User(BaseModel):
     user_id: int = Field(alias="id")
     is_bot: bool
     first_name: str
-    last_name: Optional[str]
-    username: Optional[str]
-    language_code: Optional[str]
-    is_premium: Optional[bool]
-    added_to_attachment_menu: Optional[bool]
-    can_join_groups: Optional[bool]
-    can_read_all_group_messages: Optional[bool]
-    supports_inline_queries: Optional[bool]
+    last_name: str | None
+    username: str | None
+    language_code: str | None
+    is_premium: bool | None
+    added_to_attachment_menu: bool | None
+    can_join_groups: bool | None
+    can_read_all_group_messages: bool | None
+    supports_inline_queries: bool | None
 
 
 class Chat(BaseModel):
@@ -33,11 +33,11 @@ class Chat(BaseModel):
     """
     chat_id: int = Field(alias="id")
     chat_type: str = Field(alias="type")
-    title: Optional[str]
-    username: Optional[str]
-    first_name: Optional[str]
-    last_name: Optional[str]
-    is_forum: Optional[bool]
+    title: str | None
+    username: str | None
+    first_name: str | None
+    last_name: str | None
+    is_forum: bool | None
 
 
 class Message(BaseModel):
@@ -46,26 +46,26 @@ class Message(BaseModel):
     See: https://core.telegram.org/bots/api#message
     """
     message_id: int
-    message_thread_id: Optional[int]
-    from_user: Optional[User] = Field(alias="from")
-    sender_chat: Optional[Chat]
+    message_thread_id: int | None
+    from_user: User | None = Field(alias="from")
+    sender_chat: Chat | None
     date: int
     chat: Chat
-    forward_from: Optional[User]
-    forward_from_chat: Optional[Chat]
-    forward_from_message_id: Optional[int]
-    forward_signature: Optional[str]
-    forward_sender_name: Optional[str]
-    forward_date: Optional[int]
-    is_topic_message: Optional[bool]
-    is_automatic_forward: Optional[bool]
+    forward_from: User | None
+    forward_from_chat: Chat | None
+    forward_from_message_id: int | None
+    forward_signature: str | None
+    forward_sender_name: str | None
+    forward_date: int | None
+    is_topic_message: bool | None
+    is_automatic_forward: bool | None
     reply_to_message: Optional["Message"]
-    via_bot: Optional[User]
-    edit_date: Optional[int]
-    has_protected_content: Optional[bool]
-    media_group_id: Optional[str]
-    author_signature: Optional[str]
-    text: Optional[str]
+    via_bot: User | None
+    edit_date: int | None
+    has_protected_content: bool | None
+    media_group_id: str | None
+    author_signature: str | None
+    text: str | None
     # entities: Optional[Sequence[MessageEntity]]
     # animation: Optional[Animation]
     # audio: Optional[Audio]
@@ -87,14 +87,14 @@ class Update(BaseModel):
     See: https://core.telegram.org/bots/api#update
     """
     update_id: int
-    message: Optional[Message]
-    edited_message: Optional[Message]
-    channel_post: Optional[Message]
-    edited_channel_post: Optional[Message]
+    message: Message | None
+    edited_message: Message | None
+    channel_post: Message | None
+    edited_channel_post: Message | None
 
 
 class TelegramClient:
-    def __init__(self, token: str):
+    def __init__(self, token: str) -> None:
         self._telegram_api_url = f"https://api.telegram.org/bot{token}"
         self.secret_token = uuid4().hex
         self.session = Session()

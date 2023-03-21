@@ -8,9 +8,9 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from structlog import get_logger
 
-from stock_monitor_backend.utils import telegramify
+from stock_monitor_backend.notifyer import NotificationCenter
 from stock_monitor_backend.rules import asr_rule
-from stock_monitor_backend.telegram import TelegramClient, Update
+from stock_monitor_backend.telegram.client import TelegramClient, Update
 
 
 class BotAction(str, Enum):
@@ -31,7 +31,10 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     """Creates and web server based on the FastAPI."""
     app = FastAPI()
     logger = get_logger()
+
     telegram_client = TelegramClient(token=telegram_bot_token)
+    notify = NotificationCenter()
+    notify.add_telegram(telegram_client)
 
     @app.exception_handler(RequestValidationError)
     async def validation_exception_handler(request: Request, exc: RequestValidationError):
@@ -44,13 +47,11 @@ def create_app(telegram_bot_token: str) -> FastAPI:
     async def root():
         return {"message": "Hello World"}
 
-    @app.post("/bot")
+    @app.post("/rasa/webhook")
     async def bot(r: RasaBotMessage):
         match r.custom.name:
             case BotAction.ASR_REMINDER:
-                text = telegramify(asr_rule(r.custom.entities['ticker']))
-                telegram_client.send_message(chat_id=111874928,
-                                             text=text)
+                notify.send_unique_decision(asr_rule(r.custom.entities['ticker']))
             case _:
                 logger.debug(r)
         return {"message": 'ok'}
