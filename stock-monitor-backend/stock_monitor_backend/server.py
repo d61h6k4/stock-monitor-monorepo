@@ -63,7 +63,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
 
     @app.post("/telegram/webhook")
     async def telegram_webhook(update: Update,
-                               x_telegram_bot_api_secret_token: Annotated[str | None, Header()] = None) -> bool:
+                               x_telegram_bot_api_secret_token: Annotated[str, Header()]) -> bool:
         """Listens to telegram's messages."""
         if x_telegram_bot_api_secret_token != telegram_client.secret_token:
             logger.warning("Secret token is violated. "
