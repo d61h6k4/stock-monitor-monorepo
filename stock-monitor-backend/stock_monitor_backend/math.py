@@ -8,10 +8,6 @@ def average_true_range(df: DataFrame, p: int = 5) -> Series:
 
     First, we calculate the true range, then we take the moving average of our true
     range value for the average true range.
-
-    Args:
-      df - data as a pandas dataframe
-      p - the number of periods we use to smooth
     """
     assert isinstance(df.index, DatetimeIndex)
     assert "High" in df.columns
