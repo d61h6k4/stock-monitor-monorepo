@@ -65,7 +65,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         """Checks X-Telegram-Bot-Api-Secret-Token."""
         if x_telegram_bot_api_secret_token != telegram_client.secret_token:
             logger.critical("Secret token is invliad. "
-                           f"{x_telegram_bot_api_secret_token} != {telegram_client.secret_token}")
+                            f"{x_telegram_bot_api_secret_token} != {telegram_client.secret_token}")
             raise HTTPException(status_code=400, detail="X-Telegram-Bot-Api-Secret-Token is invalid.")
 
     @app.post("/telegram/webhook", dependencies=[Depends(verify_telegram_bot_api_secret_token)])
