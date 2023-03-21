@@ -32,7 +32,7 @@ class RasaBotMessage(BaseModel):
 
 def create_app(telegram_bot_token: str) -> FastAPI:
     """Creates and web server based on the FastAPI."""
-    app = FastAPI()
+    app = FastAPI(openapi_url="/api/openapi.json")
     logger = get_logger()
 
     telegram_client = TelegramClient(token=telegram_bot_token)
