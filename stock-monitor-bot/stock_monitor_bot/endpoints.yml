@@ -40,3 +40,8 @@ action_endpoint:
 #  username: username
 #  password: password
 #  queue: queue
+tracker_store:
+    type: SQL
+    dialect: "sqlite"  # the dialect used to interact with the db
+    url: "sqlite:////home/ubuntu/rasa.db"  # (optional) host of the sql db, e.g. "localhost"
+    db: "rasa"  # path to your db
