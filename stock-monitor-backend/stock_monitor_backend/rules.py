@@ -58,8 +58,8 @@ def mad_rule(ticker: str) -> Decision:
     mad = moving_average_distance(stock.history, 21, 50)
 
     rule = Rule(name="MAD",
-                description=f"MAD rule takes the moving average price of the last 21 days"
-                            "against ma of the last 50 days and compares threshold")
+                description=f"MAD rule takes the moving average price of the last 21 days "
+                            "over the last 50 days and compares with threshold (1.05 and 0.95)")
 
     decision_action = Action.HOLD
     if mad > 1.05:
