@@ -59,8 +59,7 @@ def mad_rule(ticker: str) -> Decision:
 
     rule = Rule(name="MAD",
                 description=f"MAD rule takes the moving average price of the last 21 days"
-                            "against ma of the last 50 days and compares "
-                            "it with 1.05 (buy) or 0.95 (sell)")
+                            "against ma of the last 50 days and compares threshold")
 
     decision_action = Action.HOLD
     if mad > 1.05:
@@ -68,5 +67,5 @@ def mad_rule(ticker: str) -> Decision:
     elif mad < 0.95:
         decision_action = Action.SELL
 
-    exp_msg = f"Current price is {current_price:,.2f} and MAD is {mad:.2f}."
+    exp_msg = f"Current price is {current_price:,.2f} and MAD is {mad:,.2f}."
     return Decision(ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg)
