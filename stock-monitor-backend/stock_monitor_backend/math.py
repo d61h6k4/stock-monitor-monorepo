@@ -29,3 +29,15 @@ def best_price_in_period(df: DataFrame, p: int = 14) -> float:
     """Best price in the given period."""
     assert "Close" in df.columns
     return df["Close"].last(offset=f"{p}D").max()
+
+
+def moving_average(df: DataFrame, p: int) -> Series:
+    """Moving average in p days."""
+    assert "Close" in df.columns
+    return df["Close"].rolling(p).mean()
+
+
+def moving_average_distance(df: DataFrame, fast_ma: int, slow_ma: int) -> float:
+    """Moving average in p days."""
+    assert "Close" in df.columns
+    return moving_average(df, fast_ma).last(offset="1D").max() / moving_average(df, slow_ma).last(offset="1D").max()

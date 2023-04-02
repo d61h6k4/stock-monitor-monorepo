@@ -157,7 +157,7 @@ class ActionReactToWatchListReminder(Action):
 
     def name(self) -> str:
         """Returns name of the action to use as a key to register."""
-        return "action_react_to_wathclist_reminder"
+        return "action_react_to_watchlist_reminder"
 
     async def run(
         self,
