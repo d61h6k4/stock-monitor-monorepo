@@ -8,8 +8,14 @@ intents:
     - ask_set_asr_reminder
     - asr_reminder
     - ask_unset_asr_reminder
+    - ask_set_watchlist_reminder
+    - watchlist_reminder
+    - ask_unset_watchlist_reminder
 
 actions:
     - action_set_asr_reminder
     - action_react_to_asr_reminder
     - action_unset_asr_reminder
+    - action_set_watchlist_reminder
+    - action_react_to_watchlist_reminder
+    - action_unset_watchlist_reminder

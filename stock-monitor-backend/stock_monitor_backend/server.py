@@ -17,6 +17,7 @@ from stock_monitor_backend.telegram.client import TelegramClient, Update
 class BotAction(str, Enum):
     """Supported action names."""
     ASR_REMINDER = "action_react_to_asr_reminder"
+    WATCHLIST_REMINDER = "action_react_to_watchlist_reminder"
 
 
 class CustomRasaBotMessage(BaseModel):

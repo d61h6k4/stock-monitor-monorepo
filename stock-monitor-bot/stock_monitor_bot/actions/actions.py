@@ -45,6 +45,22 @@ def create_asr_reminder(ticker: str, seconds: float) -> ReminderScheduled:
                              )
 
 
+def create_watchlist_reminder_name(ticker: str) -> str:
+    """Creates a name of an WatchList reminder event."""
+    return f"watchlist_reminder_for_{ticker}"
+
+
+def create_watchlist_reminder(ticker: str, seconds: float) -> ReminderScheduled:
+    """Creates an watch list reminder event."""
+    return ReminderScheduled("watchlist_reminder",
+                             trigger_date_time=datetime.now() + timedelta(seconds=float(seconds)),
+                             entities=[{"entity": "ticker", "value": ticker},
+                                       {"entity": "seconds", "value": seconds}],
+                             name=create_watchlist_reminder_name(ticker),
+                             kill_on_user_message=False,
+                             )
+
+
 class ActionSetASRReminder(Action):
     """Schedules a reminder of checking the `ticker` in `timedelta` minutes."""
 
@@ -111,3 +127,71 @@ class ActionUnsetASRReminder(Action):
                      "entities": {"ticker": ticker}})
 
         return [ReminderCancelled(name=create_asr_reminder_name(ticker))]
+
+
+class ActionSetWatchListReminder(Action):
+    """Schedules a reminder of checking the `ticker` in `timedelta` minutes."""
+
+    def name(self) -> str:
+        """Returns name of the action to use as a key to register."""
+        return "action_set_watchlist_reminder"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Sequence[EventType]:
+        ticker = get_ticker(tracker)
+        seconds = get_seconds(tracker)
+
+        LOGGER.info({"name": self.name(),
+                     "entities": {"ticker": ticker,
+                                  "seconds": seconds}})
+
+        return [create_watchlist_reminder(ticker, seconds)]
+
+
+class ActionReactToWatchListReminder(Action):
+    """Checks Watch list sell rule for the given ticker and resets reminder."""
+
+    def name(self) -> str:
+        """Returns name of the action to use as a key to register."""
+        return "action_react_to_wathclist_reminder"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Sequence[EventType]:
+        ticker = get_ticker(tracker)
+        seconds = get_seconds(tracker)
+
+        dispatcher.utter_message(
+            json_message={"name": self.name(),
+                          "entities": {"ticker": ticker,
+                                       "seconds": seconds},
+                          })
+        return [create_watchlist_reminder(ticker, seconds)]
+
+
+class ActionUnsetWatchListReminder(Action):
+    """Removes Watch list reminder."""
+
+    def name(self) -> str:
+        """Returns name of the action to use as a key to register."""
+        return "action_unset_watchlist_reminder"
+
+    async def run(
+        self,
+        dispatcher: CollectingDispatcher,
+        tracker: Tracker,
+        domain: DomainDict,
+    ) -> Sequence[EventType]:
+        ticker = get_ticker(tracker)
+
+        LOGGER.info({"name": self.name(),
+                     "entities": {"ticker": ticker}})
+
+        return [ReminderCancelled(name=create_watchlist_reminder_name(ticker))]
