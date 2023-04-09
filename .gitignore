@@ -130,3 +130,4 @@ dmypy.json
 stock-monitor-bot/.rasa
 stock-monitor-bot/models
 stock-monitor-backend/yfinance.cache
+stock-monitor-backend/cot.cache

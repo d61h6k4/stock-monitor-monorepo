@@ -41,3 +41,24 @@ def moving_average_distance(df: DataFrame, fast_ma: int, slow_ma: int) -> float:
     """Moving average in p days."""
     assert "Close" in df.columns
     return moving_average(df, fast_ma).last(offset="1D").max() / moving_average(df, slow_ma).last(offset="1D").max()
+
+
+def cot_index(df: DataFrame, p: int) -> Series:
+    """Returns COT index.
+
+    100 * (net - min_net) / (max_net - min_net), max and min within period.
+    """
+    cdf = df[["Report_Date_as_MM_DD_YYYY", "Comm_Positions_Long_All", "Comm_Positions_Short_All"]] \
+        .set_index("Report_Date_as_MM_DD_YYYY").sort_index()
+    cdf["net"] = cdf["Comm_Positions_Long_All"] - cdf["Comm_Positions_Short_All"]
+    windo_df = cdf["net"].rolling(f"{p}d")
+
+    return (100 * (cdf["net"] - windo_df.min()) / (windo_df.max() - windo_df.min())).rename("cot_index")
+
+
+def cot_move_index(df: DataFrame, p: int) -> Series:
+    """Returns COT move index.
+
+    COT index change week to week.
+    """
+    return cot_index(df, p).diff().rename("cot_move_index")

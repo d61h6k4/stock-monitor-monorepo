@@ -1,24 +1,24 @@
 import pytest
 
 from stock_monitor_backend.notifyer import NotificationCenter
-from stock_monitor_backend.rules import Decision, Rule, Action
+from stock_monitor_backend.rules import Action, Decision, Rule
 from stock_monitor_backend.utils import telegramify
 
 
 class ClientMock:
-    def __init__(self):
+    def __init__(self) -> None:
         self.messages = []
 
     def send_message(self, chat_id, text):
         self.messages.append({"chat_id": chat_id, "text": text})
 
 
-@pytest.fixture
+@pytest.fixture()
 def client_mock() -> ClientMock:
     return ClientMock()
 
 
-@pytest.fixture
+@pytest.fixture()
 def notifyer_mock() -> NotificationCenter:
     notifyer = NotificationCenter()
     return notifyer
@@ -44,7 +44,7 @@ def test_donot_sends_duplicate_message(notifyer_mock: NotificationCenter, client
                         rule=Rule(name="rule1", description="Test rule"),
                         action=Action.HOLD,
                         explanation="Test")
-    text = telegramify(decision)
+    telegramify(decision)
     notifyer_mock.send_unique_decision("dbihbka", decision)
     notifyer_mock.send_unique_decision("dbihbka", decision)
 

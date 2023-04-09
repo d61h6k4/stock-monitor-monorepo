@@ -1,14 +1,26 @@
-import pytest
 import numpy as np
+import pytest
+from pandas import DataFrame, read_pickle
 
-from stock_monitor_backend.math import average_true_range, last_atr, best_price_in_period, moving_average, \
-    moving_average_distance
-from pandas import read_pickle, DataFrame
+from stock_monitor_backend.math import (
+    average_true_range,
+    best_price_in_period,
+    cot_index,
+    cot_move_index,
+    last_atr,
+    moving_average,
+    moving_average_distance,
+)
 
 
-@pytest.fixture
+@pytest.fixture()
 def goog_history(shared_datadir) -> DataFrame:
-    yield read_pickle(shared_datadir / "goog.history.pkl")
+    return read_pickle(shared_datadir / "goog.history.pkl")
+
+
+@pytest.fixture()
+def cot_palladium_history(shared_datadir) -> DataFrame:
+    return read_pickle(shared_datadir / "cot.palladium.pkl")
 
 
 def test_average_true_range(goog_history: DataFrame):
@@ -30,3 +42,12 @@ def test_moving_average(goog_history: DataFrame):
 
 def test_moving_average_distance(goog_history: DataFrame):
     assert moving_average_distance(goog_history, 21, 50) < 1.0
+
+
+def test_cot_index(cot_palladium_history: DataFrame):
+    assert np.allclose(cot_index(cot_palladium_history, 42).last(offset="21d").values, [96.85621, 86.63838, 55.13733])
+
+
+def test_cot_move_index(cot_palladium_history: DataFrame):
+    assert np.allclose(cot_move_index(cot_palladium_history, 42).last(offset="21d").values,
+                       [12.39564, -10.21783, -31.5010])
