@@ -70,10 +70,11 @@ async def on_cot(q: Q):
         df = cot.commercials_by_names_or_codes(cot.history,
                                                names=[n.replace('_', ' ') for n in set(q.args.cot_form_names)],
                                                codes=[int(c) for c in set(q.args.cot_form_codes)])
-        cdf = cot_index(df, 3).to_frame(name="cot_index") \
-            .join(cot_move_index(df, 3).to_frame(name="cot_move_index")) \
+        cdf = cot_index(df, q.args.cot_form_period).to_frame(name="cot_index") \
+            .join(cot_move_index(df, q.args.cot_form_period).to_frame(name="cot_move_index")) \
             .join(cot_net_position(df).to_frame(name="net")) \
             .dropna()
+
         open_close_color = condition("5 < datum.cot_index && datum.cot_index < 90",
                                      value("#06982d"),
                                      value("#ae1325"))
