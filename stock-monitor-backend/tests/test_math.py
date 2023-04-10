@@ -7,6 +7,7 @@ from stock_monitor_backend.math import (
     best_price_in_period,
     cot_index,
     cot_move_index,
+    cot_net_position,
     last_atr,
     moving_average,
     moving_average_distance,
@@ -44,10 +45,14 @@ def test_moving_average_distance(goog_history: DataFrame):
     assert moving_average_distance(goog_history, 21, 50) < 1.0
 
 
+def test_cot_net_position(cot_palladium_history: DataFrame):
+    assert np.allclose(cot_net_position(cot_palladium_history).values[-1], 6968)
+
+
 def test_cot_index(cot_palladium_history: DataFrame):
-    assert np.allclose(cot_index(cot_palladium_history, 42).last(offset="21d").values, [96.85621, 86.63838, 55.13733])
+    assert np.allclose(cot_index(cot_palladium_history, 42).values[-3:], [99.03491343, 96.4235027, 93.74112972])
 
 
 def test_cot_move_index(cot_palladium_history: DataFrame):
-    assert np.allclose(cot_move_index(cot_palladium_history, 42).last(offset="21d").values,
-                       [12.39564, -10.21783, -31.5010])
+    assert np.allclose(cot_move_index(cot_palladium_history, 42).values[-3:],
+                       [5.7195572, -2.61141073, -2.68237298])

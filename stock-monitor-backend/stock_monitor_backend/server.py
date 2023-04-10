@@ -3,15 +3,19 @@ from collections.abc import Mapping
 from enum import Enum
 from typing import Annotated, Any
 
-from fastapi import Depends, FastAPI, Header, HTTPException, Request, status
+from fastapi import Depends, FastAPI, Header, HTTPException, Request, WebSocket, WebSocketDisconnect, status
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
+from h2o_lightwave import wave_serve
+from h2o_lightwave_web import web_directory
 from pydantic import BaseModel
 from structlog import get_logger
 
 from stock_monitor_backend.notifyer import NotificationCenter
 from stock_monitor_backend.rules import asr_rule, mad_rule
 from stock_monitor_backend.telegram.client import TelegramClient, Update
+from stock_monitor_backend.wave import serve
 
 
 class BotAction(str, Enum):
@@ -47,11 +51,6 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         content = {'status_code': 10422, 'message': exc_str, 'data': None}
         return JSONResponse(content=content, status_code=status.HTTP_422_UNPROCESSABLE_ENTITY)
 
-    @app.get("/")
-    async def root() -> Mapping[str, str]:
-        """ROot."""
-        return {"message": "stock monitor backend"}
-
     @app.post("/rasa/webhook")
     async def rasa_webhook(r: RasaBotMessage) -> Mapping[str, str]:
         """Listens to rasa's messages."""
@@ -77,7 +76,18 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         logger.debug(update)
         return True
 
+    @app.websocket("/_s/")
+    async def ws(ws: WebSocket):
+        try:
+            await ws.accept()
+            await wave_serve(serve, ws.send_text, ws.receive_text)
+            await ws.close()
+        except WebSocketDisconnect as e:
+            logger.info(f"Client disconnected. {repr(e)}")
+
     telegram_client.set_webhook()
+
+    app.mount("/webui", StaticFiles(directory=web_directory, html=True), name="/webui")
     return app
 
 

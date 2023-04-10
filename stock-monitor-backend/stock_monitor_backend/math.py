@@ -43,22 +43,27 @@ def moving_average_distance(df: DataFrame, fast_ma: int, slow_ma: int) -> float:
     return moving_average(df, fast_ma).last(offset="1D").max() / moving_average(df, slow_ma).last(offset="1D").max()
 
 
-def cot_index(df: DataFrame, p: int) -> Series:
+def cot_net_position(df: DataFrame) -> DataFrame:
+    """Returns Net position of commercials."""
+    cdf = df[["Report_Date_as_MM_DD_YYYY", "Comm_Positions_Long_All", "Comm_Positions_Short_All"]] \
+        .set_index(DatetimeIndex(df["Report_Date_as_MM_DD_YYYY"]).to_period("w")) \
+        .groupby(level=0).sum(numeric_only=True)
+    return cdf["Comm_Positions_Long_All"] - cdf["Comm_Positions_Short_All"]
+
+
+def cot_index(df: DataFrame, p: int) -> DataFrame:
     """Returns COT index.
 
     100 * (net - min_net) / (max_net - min_net), max and min within period.
     """
-    cdf = df[["Report_Date_as_MM_DD_YYYY", "Comm_Positions_Long_All", "Comm_Positions_Short_All"]] \
-        .set_index("Report_Date_as_MM_DD_YYYY").sort_index()
-    cdf["net"] = cdf["Comm_Positions_Long_All"] - cdf["Comm_Positions_Short_All"]
-    windo_df = cdf["net"].rolling(f"{p}d")
-
-    return (100 * (cdf["net"] - windo_df.min()) / (windo_df.max() - windo_df.min())).rename("cot_index")
+    cdf = cot_net_position(df)
+    windo_df = cdf.rolling(p)
+    return (100.0 * (cdf - windo_df.min()) / (windo_df.max() - windo_df.min()))
 
 
-def cot_move_index(df: DataFrame, p: int) -> Series:
+def cot_move_index(df: DataFrame, p: int) -> DataFrame:
     """Returns COT move index.
 
     COT index change week to week.
     """
-    return cot_index(df, p).diff().rename("cot_move_index")
+    return cot_index(df, p).diff()
