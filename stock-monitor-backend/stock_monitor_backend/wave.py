@@ -26,6 +26,7 @@ async def on_cot(q: Q):
     if q.args.cot_form_reset_form:
         q.args.cot_form_since = None
         q.args.cot_form_names = None
+        q.args.cot_form_codes = None
         q.args.cot_form_period = None
         q.args.cot_form_ticker = None
         q.args.cot_form_ready = False
@@ -52,7 +53,7 @@ async def on_cot(q: Q):
                                                       set(tuple(x) for x in
                                                           default_cot.history[["Market_and_Exchange_Names",
                                                                                "CFTC_Commodity_Code"]].values)
-                                                  ], values=(q.args.cot_form_names or []), required=False),
+                                                  ], values=(q.args.cot_form_codes or []), required=False),
                                       ui.slider(name="cot_form_period", label="Rolling window size (weeks)", min=1,
                                                 max=3 * 365 // 7, step=1, value=(q.args.cot_form_period or 26)),
                                       ui.textbox(name="cot_form_ticker", label="Stock ticker",
