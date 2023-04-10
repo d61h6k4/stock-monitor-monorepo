@@ -87,7 +87,7 @@ def create_app(telegram_bot_token: str) -> FastAPI:
 
     telegram_client.set_webhook()
 
-    app.mount("/webui", StaticFiles(directory=web_directory, html=True), name="/webui")
+    app.mount("/", StaticFiles(directory=web_directory, html=True), name="/")
     return app
 
 
