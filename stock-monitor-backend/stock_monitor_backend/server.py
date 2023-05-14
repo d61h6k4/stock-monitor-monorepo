@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from structlog import get_logger
 
 from stock_monitor_backend.notifyer import NotificationCenter
-from stock_monitor_backend.rules import asr_rule, mad_rule
+from stock_monitor_backend.rules import asr_rule, mad_rule, macd_rule, rsi_rule, adx_rule
 from stock_monitor_backend.telegram.client import TelegramClient, Update
 from stock_monitor_backend.wave import serve
 
@@ -57,6 +57,9 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         match r.custom.name:
             case BotAction.ASR_REMINDER:
                 notify.send_unique_decision("dbihbka", asr_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", macd_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", rsi_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", adx_rule(r.custom.entities['ticker']))
             case BotAction.WATCHLIST_REMINDER:
                 notify.send_unique_decision("dbihbka", mad_rule(r.custom.entities['ticker']))
             case _:

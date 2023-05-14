@@ -11,6 +11,7 @@ from stock_monitor_backend.math import (
     last_atr,
     moving_average,
     moving_average_distance,
+    adx
 )
 
 
@@ -56,3 +57,7 @@ def test_cot_index(cot_palladium_history: DataFrame):
 def test_cot_move_index(cot_palladium_history: DataFrame):
     assert np.allclose(cot_move_index(cot_palladium_history, 42).values[-3:],
                        [5.7195572, -2.61141073, -2.68237298])
+
+
+def test_adx(goog_history: DataFrame):
+    assert adx(goog_history).shape[0] == goog_history.shape[0]

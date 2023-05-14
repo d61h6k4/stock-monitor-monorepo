@@ -1,5 +1,5 @@
 """Collection of math funtions."""
-
+import pandas as pd
 from pandas import DataFrame, DatetimeIndex, Series
 
 
@@ -67,3 +67,50 @@ def cot_move_index(df: DataFrame, p: int) -> Series:
     COT index change week to week.
     """
     return cot_index(df, p).diff()
+
+
+def macd(df: DataFrame) -> Series:
+    """Returns MACD values.
+
+    https://www.investopedia.com/terms/m/macd.asp
+    """
+    assert "Close" in df.columns
+    return df["Close"].ewm(alpha=1. / 12.).mean() - df["Close"].ewm(alpha=1. / 26.).mean()
+
+
+def rsi(df: DataFrame) -> Series:
+    """Returns RSI values.
+
+    https://www.investopedia.com/terms/r/rsi.asp
+    """
+    assert "Close" in df.columns
+    gain = df["Close"].pct_change().clip(lower=0.0)
+    average_gain = (gain.ewm(alpha=1. / 14.).mean())
+    loss = df["Close"].pct_change().clip(upper=0.0) * -1.0
+    average_loss = loss.ewm(alpha=1. / 14.).mean()
+    return 100 - (100 / (1.0 + average_gain / average_loss)).fillna(0.0)
+
+
+def adx(df: DataFrame) -> DataFrame:
+    """Returns ADX, +DI and -DI
+
+    https://www.investopedia.com/terms/a/adx.asp
+    """
+
+    assert isinstance(df.index, DatetimeIndex)
+    assert "High" in df.columns
+    assert "Low" in df.columns
+    assert "Close" in df.columns
+
+    pdm = df["High"].diff().clip(lower=0.0)
+    ndm = df["Low"].diff().clip(upper=0.0)
+    atr = average_true_range(df, p=14)
+
+    pdi = 100 * (pdm.ewm(alpha=1 / 14.).mean() / atr)
+    ndi = abs(100 * (ndm.ewm(alpha=1 / 14.).mean() / atr))
+    dx = (abs(pdi - ndi) / abs(pdi + ndi)) * 100
+    adx_smooth = (((dx.shift(1) * (14. - 1)) + dx) / 14.).ewm(alpha=1 / 14.).mean()
+
+    return pd.concat([pdi, ndi, adx_smooth], axis=1) \
+        .rename(columns={0: "+di", 1: "-di", 2: "adx"}) \
+        .fillna(0.0)
