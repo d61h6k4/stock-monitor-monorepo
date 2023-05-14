@@ -11,6 +11,7 @@ TELEGRAM = "telegram"
 
 class NotificationCenter:
     """Sends notifications."""
+
     def __init__(self: Self) -> None:
         """Constructor."""
         self._clients = {}
@@ -29,13 +30,15 @@ class NotificationCenter:
         if user not in self._users_last_messages:
             self._users_last_messages[user] = {}
         if decision.ticker not in self._users_last_messages[user]:
-            self._users_last_messages[user][decision.ticker] = None
-        if self._users_last_messages[user][decision.ticker] != decision.action:
+            self._users_last_messages[user][decision.ticker] = {}
+        if decision.rule.name not in self._users_last_messages[user][decision.ticker]:
+            self._users_last_messages[user][decision.ticker][decision.rule.name] = None
+        if self._users_last_messages[user][decision.ticker][decision.rule.name] != decision.action:
             text = telegramify(decision)
             self._clients[TELEGRAM].send_message(chat_id=self._users_to_chats[user],
                                                  text=text)
 
-            self._users_last_messages[user][decision.ticker] = decision.action
+            self._users_last_messages[user][decision.ticker][decision.rule.name] = decision.action
 
     def check_user_exists(self: Self, user: str) -> None:
         """Checks the given `user` is known."""
@@ -43,7 +46,7 @@ class NotificationCenter:
             err_msg = f"Given user {user} is unknown."
             raise ValueError(err_msg)
 
-    def check_client_exists(self:Self, client: str) -> None:
+    def check_client_exists(self: Self, client: str) -> None:
         """Checks the given `client` is known."""
         if client not in self._clients:
             err_msg = "Telegram client hasn't been registered in Notification center yet."
