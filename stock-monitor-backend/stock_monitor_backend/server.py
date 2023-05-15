@@ -62,6 +62,9 @@ def create_app(telegram_bot_token: str) -> FastAPI:
                 notify.send_unique_decision("dbihbka", adx_rule(r.custom.entities['ticker']))
             case BotAction.WATCHLIST_REMINDER:
                 notify.send_unique_decision("dbihbka", mad_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", macd_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", rsi_rule(r.custom.entities['ticker']))
+                notify.send_unique_decision("dbihbka", adx_rule(r.custom.entities['ticker']))
             case _:
                 logger.debug(r)
         return {"message": 'ok'}
