@@ -4,7 +4,7 @@ from enum import Enum
 
 from pydantic import BaseModel
 
-from stock_monitor_backend.math import best_price_in_period, last_atr, moving_average_distance, macd, rsi, adx
+from stock_monitor_backend.math import adx, best_price_in_period, last_atr, macd, moving_average_distance, rsi
 from stock_monitor_backend.models import Stock
 
 
@@ -88,7 +88,7 @@ def macd_rule(ticker: str) -> Decision:
     rule = Rule(name="MACD",
                 description="Moving average convergence/divergence (MACD, or MAC-D) is a "
                             "trend-following momentum indicator that shows the relationship "
-                            "between two exponential moving averages (EMAs) of a security’s price. "
+                            "between two exponential moving averages (EMAs) of a security`s price. "
                             "The MACD line is calculated by subtracting the 26-period EMA from "
                             "the 12-period EMA. The result of that calculation is the MACD line. "
                             "A nine-day EMA of the MACD line is called the signal line, which is "
@@ -104,8 +104,7 @@ def macd_rule(ticker: str) -> Decision:
 
 
 def rsi_rule(ticker: str) -> Decision:
-    """RSI rule.
-    """
+    """RSI rule."""
     stock = Stock(ticker_name=ticker, period="2y", interval="1d")
 
     current_price = stock.history["Close"].last(offset="1D").max()
@@ -129,8 +128,7 @@ def rsi_rule(ticker: str) -> Decision:
 
 
 def adx_rule(ticker: str) -> Decision:
-    """ADX rule.
-    """
+    """ADX rule."""
     stock = Stock(ticker_name=ticker, period="2y", interval="1d")
 
     current_price = stock.history["Close"].last(offset="1D").max()
@@ -153,10 +151,7 @@ def adx_rule(ticker: str) -> Decision:
 
     decision_action = Action.HOLD
     if adx_value > 25:
-        if positive_di_value > negative_di_value:
-            decision_action = Action.BUY
-        else:
-            decision_action = Action.SELL
+        decision_action = Action.BUY if positive_di_value > negative_di_value else Action.SELL
 
     exp_msg = f"Current price is {current_price:,.2f}, ADX = {adx_value:,.1f}, +DI = {positive_di_value:,.1f}, -DI = {negative_di_value:,.1f}."
     return Decision(ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg)

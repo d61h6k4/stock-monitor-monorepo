@@ -3,6 +3,7 @@ import pytest
 from pandas import DataFrame, read_pickle
 
 from stock_monitor_backend.math import (
+    adx,
     average_true_range,
     best_price_in_period,
     cot_index,
@@ -11,7 +12,6 @@ from stock_monitor_backend.math import (
     last_atr,
     moving_average,
     moving_average_distance,
-    adx
 )
 
 

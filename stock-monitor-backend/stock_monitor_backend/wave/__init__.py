@@ -5,10 +5,13 @@ from h2o_lightwave import Q, handle_on, on, ui
 
 from stock_monitor_backend.math import cot_index, cot_move_index, cot_net_position
 from stock_monitor_backend.models import COT, Stock
+from stock_monitor_backend.wave import report
 
 _CARD_REGISTER = {
-    "cot": ["form", "plot"],
+    "cot": ["form", "cot_stock_chart", "cot_net_chart", "cot_index_chart", "cot_move_index_chart"],
+    "report": ["form", "stock_graph", "rules_graph"],
     "about": [],
+    None: []
 }
 
 
@@ -155,6 +158,16 @@ async def on_about(q: Q):
     q.client.tab = "about"
 
 
+@on("#report")
+async def on_report(q: Q):
+    if q.client.tab != "report":
+        await clean_tab(q)
+    q.client.tab = "report"
+
+    await report.render(q)
+    await q.page.save()
+
+
 # Lig callback function.
 async def serve(q: Q):
     q.page['header'] = ui.header_card(
@@ -164,6 +177,7 @@ async def serve(q: Q):
         icon='Money',
         nav=[
             ui.nav_group('Menu', items=[
+                ui.nav_item(name="#report", label="Report"),
                 ui.nav_item(name='#cot', label='COT'),
             ]),
             ui.nav_group('Help', items=[
@@ -174,9 +188,6 @@ async def serve(q: Q):
         color="card"
     )
 
-    if not await handle_on(q):
-        q.client.tab = "cot"
-        await on_cot(q)
-
+    await handle_on(q)
     # Send the UI changes to the browser.
     await q.page.save()

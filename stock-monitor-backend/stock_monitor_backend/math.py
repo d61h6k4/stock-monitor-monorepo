@@ -92,11 +92,10 @@ def rsi(df: DataFrame) -> Series:
 
 
 def adx(df: DataFrame) -> DataFrame:
-    """Returns ADX, +DI and -DI
+    """Returns ADX, +DI and -DI.
 
     https://www.investopedia.com/terms/a/adx.asp
     """
-
     assert isinstance(df.index, DatetimeIndex)
     assert "High" in df.columns
     assert "Low" in df.columns

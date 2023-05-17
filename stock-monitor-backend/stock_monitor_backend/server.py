@@ -13,7 +13,7 @@ from pydantic import BaseModel
 from structlog import get_logger
 
 from stock_monitor_backend.notifyer import NotificationCenter
-from stock_monitor_backend.rules import asr_rule, mad_rule, macd_rule, rsi_rule, adx_rule
+from stock_monitor_backend.rules import adx_rule, asr_rule, macd_rule, mad_rule, rsi_rule
 from stock_monitor_backend.telegram.client import TelegramClient, Update
 from stock_monitor_backend.wave import serve
 
