@@ -82,7 +82,6 @@ async def render(q: Q):
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
-                                                                          y_scale="quantile",
                                                                           y="={{intl net notation='compact' compactDisplay='short'}}",
                                                                           y_nice=True,
                                                                           color="#06982d")
@@ -106,7 +105,6 @@ async def render(q: Q):
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
-                                                                          y_scale="quantile",
                                                                           y="={{intl cot_move_index notation='compact' compactDisplay='short'}}",
                                                                           y_nice=True,
                                                                           color="#06982d")
