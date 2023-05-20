@@ -1,10 +1,9 @@
 import pandas as pd
-from h2o_lightwave import Q, data, ui
+from h2o_lightwave import Q, ui
 
+from stock_monitor_backend.math import adx, macd, rsi
 from stock_monitor_backend.models import Stock
-from stock_monitor_backend.math import adx, rsi, macd
-
-from stock_monitor_backend.wave.common import preprocess_dataframe, dataframe_to_data, stock_graph
+from stock_monitor_backend.wave.common import dataframe_to_data, preprocess_dataframe, stock_graph
 
 
 def rules_graph(stock):

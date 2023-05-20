@@ -1,4 +1,4 @@
-from h2o_lightwave import Q, data, ui
+from h2o_lightwave import data, ui
 
 
 def preprocess_dataframe(df):

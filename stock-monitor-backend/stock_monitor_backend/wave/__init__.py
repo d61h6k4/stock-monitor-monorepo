@@ -1,11 +1,8 @@
-from datetime import datetime
 
-from altair import Y2, Axis, Chart, Scale, X, Y, condition, value
+
 from h2o_lightwave import Q, handle_on, on, ui
 
-from stock_monitor_backend.math import cot_index, cot_move_index, cot_net_position
-from stock_monitor_backend.models import COT, Stock
-from stock_monitor_backend.wave import report, cot
+from stock_monitor_backend.wave import cot, report
 
 _CARD_REGISTER = {
     "cot": ["form", "stock_graph", "cot_net"],

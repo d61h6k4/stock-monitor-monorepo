@@ -1,10 +1,10 @@
 from datetime import datetime
 
 from h2o_lightwave import Q, ui
-from stock_monitor_backend.models import COT, Stock
-from stock_monitor_backend.math import cot_index, cot_move_index, cot_net_position
 
-from stock_monitor_backend.wave.common import stock_graph, dataframe_to_data, preprocess_dataframe
+from stock_monitor_backend.math import cot_index, cot_move_index, cot_net_position
+from stock_monitor_backend.models import COT, Stock
+from stock_monitor_backend.wave.common import dataframe_to_data, preprocess_dataframe, stock_graph
 
 
 async def render(q: Q):
@@ -78,7 +78,7 @@ async def render(q: Q):
                                              ui.text_l("Commercial Net position"),
                                              ui.visualization(name="cot_net",
                                                               data=cot_net_data,
-                                                              height="150px",
+                                                              height="120px",
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
@@ -90,7 +90,7 @@ async def render(q: Q):
                                              ui.text_l("COT Index"),
                                              ui.visualization(name="cot_index",
                                                               data=cot_net_data,
-                                                              height="150px",
+                                                              height="120px",
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
@@ -102,7 +102,7 @@ async def render(q: Q):
                                              ui.text_l("COT Move Index"),
                                              ui.visualization(name="cot_move_index",
                                                               data=cot_net_data,
-                                                              height="150px",
+                                                              height="120px",
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
