@@ -4,63 +4,17 @@ from h2o_lightwave import Q, data, ui
 from stock_monitor_backend.models import Stock
 from stock_monitor_backend.math import adx, rsi, macd
 
-
-def preprocess_dataframe(df):
-    new_df = df.reset_index()
-    new_df["Date"] = new_df["Date"].apply(lambda el: el.isoformat(timespec="minutes"))
-
-    return new_df
-
-
-def color_stock_dataframe(df):
-    df["Color"] = df[["Open", "Close"]].apply(lambda el: "green" if el["Open"] < el["Close"] else "red",
-                                              axis=1)
-    return df
-
-
-def dataframe_to_data(df):
-    return data(df.columns.to_list(), df.shape[0], rows=df.values.tolist(), pack=True)
-
-
-def stock_graph(stock):
-    graph_data = dataframe_to_data(
-        color_stock_dataframe(
-            preprocess_dataframe(stock.history))[
-            ["Date", "Low", "High", "Open", "Close", "Color", "Volume"]])
-    return ui.form_card(
-        box='1 3 11 5',
-        items=[
-            ui.text_xl(stock.ticker_name),
-            ui.visualization(
-                name='stock',
-                height="260px",
-                data=graph_data,
-                plot=ui.plot(
-                    [ui.mark(type='schema', x_scale='time', x='=Date', y_q1="=Open", y_q2="=Open", y_q3='=Close',
-                             y1="=Low",
-                             y2="=High", y_nice=True, color="=Color", color_range="#06982d #ae1325",
-                             color_domain=["green", "red"])])), ui.visualization(
-                name='volume',
-                height="100px",
-                data=graph_data,
-                plot=ui.plot(
-                    [ui.mark(type='interval', x_scale='time', x='=Date',
-                             y_scale="quantile",
-                             y="={{intl Volume notation='compact' compactDisplay='short'}}",
-                             color="=Color",
-                             y_nice=True,
-                             color_range="#06982d #ae1325",
-                             color_domain=["green", "red"])
-                     ]))
-        ]
-    )
+from stock_monitor_backend.wave.common import preprocess_dataframe, dataframe_to_data, stock_graph
 
 
 def rules_graph(stock):
     adx_df = preprocess_dataframe(adx(stock.history).stack()).rename(columns={"level_1": "kind", 0: "value"})
     adx_data = dataframe_to_data(adx_df)
 
-    rsi_df = preprocess_dataframe(rsi(stock.history))
+    rsi_df = preprocess_dataframe(
+        rsi(stock.history).to_frame(name="rsi")
+        .assign(buy=lambda _: 30.0, sell=lambda _: 70.0)
+        .stack()).rename(columns={"level_1": "kind", 0: "value"})
     rsi_data = dataframe_to_data(rsi_df)
 
     macd_line = macd(stock.history)
@@ -90,6 +44,10 @@ def rules_graph(stock):
                             color_range="#06982d #ae1325 #008FD3",
                             color_domain=["+di", "-di", "adx"]),
                 ])),
+            ui.text_s("""The ADX, negative directional indicator (-DI), and positive directional indicator (+DI)
+                         are momentum indicators. The ADX helps investors determine trend strength,
+                         while -DI and +DI help determine trend direction. The ADX identifies a strong trend when
+                         the ADX is over 25 and a weak trend when the ADX is below 20."""),
             ui.text_m("RSI"),
             ui.visualization(
                 name="RSI",
@@ -98,11 +56,15 @@ def rules_graph(stock):
                 plot=ui.plot([
                     ui.mark(type="line",
                             x="=Date",
-                            y="=Close",
+                            y="=value",
                             x_scale="time",
                             y_nice=True,
-                            color="#008FD3")
+                            color="=kind",
+                            color_range="#06982d #ae1325 #008FD3",
+                            color_domain=["buy", "sell", "rsi"])
                 ])),
+            ui.text_s("""RSI values of 70 or above indicate that a security is becoming overbought or overvalued.
+                         An RSI reading of 30 or below indicates an oversold or undervalued condition."""),
             ui.text_m("MACD"),
             ui.visualization(
                 name="MACD",
@@ -117,7 +79,13 @@ def rules_graph(stock):
                             color="=kind",
                             color_range="#06982d #ae1325",
                             color_domain=["macd", "signal"])
-                ]))
+                ])),
+            ui.text_s("""The MACD line is calculated by subtracting the 26-period EMA from the 12-period EMA.
+                         The result of that calculation is the MACD line. A nine-day EMA of the MACD line is
+                         called the signal line, which is then plotted on top of the MACD line, which can
+                         function as a trigger for buy or sell signals. Traders may buy the security when the
+                         MACD line crosses above the signal line and sell—or short—the security when the MACD
+                         line crosses below the signal line."""),
         ]
     )
 
