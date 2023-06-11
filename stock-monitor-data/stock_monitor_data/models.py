@@ -45,7 +45,8 @@ class Stock(BaseModel):
     period: str
     interval: str
     history: DataFrame = DataFrame()
-    business_summary: str | None = None
+    business_summary: str = "NO DATA"
+    market_cap: float = 0.0
     expectation: Expectation | None = None
     description: str = ""
 
@@ -91,7 +92,13 @@ class Stock(BaseModel):
     def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
         """Extract business summary."""
         ticker = Ticker(values["ticker_name"], session=session)
-        return ticker.get_info().get("longBusinessSummary", "NO DATA")
+        return ticker.get_info().get("longBusinessSummary", business_summary)
+
+    @validator("market_cap", always=True)
+    def set_market_cap(cls: "Stock", market_cap: float, values: Mapping[str, str]) -> float:
+        """Extract market cap."""
+        ticker = Ticker(values["ticker_name"], session=session)
+        return ticker.get_info().get("marketCap", market_cap)
 
 
 class COT(BaseModel):
