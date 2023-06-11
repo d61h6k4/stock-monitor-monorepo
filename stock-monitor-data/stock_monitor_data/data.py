@@ -687,7 +687,7 @@ def ideas(period: str, interval: str):
 
     def yield_per_day(x):
         y = (x.expectation.price - x.history.iloc[-1]["Open"]) / x.history.iloc[-1]["Open"] * 100.0
-        d = (x.expectation.date - x.last_date).days
+        d = 1
         return y / d
 
     return reversed(sorted(ideas, key=yield_per_day))

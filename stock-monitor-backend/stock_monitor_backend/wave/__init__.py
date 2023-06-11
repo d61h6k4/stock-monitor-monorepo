@@ -1,11 +1,12 @@
 from h2o_lightwave import Q, handle_on, on, ui
 
-from stock_monitor_backend.wave import cot, report, portfolio
+from stock_monitor_backend.wave import cot, report, portfolio, ideas
 
 _CARD_REGISTER = {
     "cot": ["form", "stock_graph", "cot_net"],
     "report": ["form", "stock_graph", "rules_graph"],
     "portfolio": ["weights_graph"],
+    "ideas": [],
     "about": [],
     None: []
 }
@@ -53,6 +54,16 @@ async def on_portfolio(q: Q):
     await q.page.save()
 
 
+@on("#ideas")
+async def on_ideas(q: Q):
+    if q.client.tab != "ideas":
+        await clean_tab(q)
+    q.client.tab = "ideas"
+
+    await ideas.render(q)
+    await q.page.save()
+
+
 # Lig callback function.
 async def serve(q: Q):
     q.page['header'] = ui.header_card(
@@ -65,6 +76,7 @@ async def serve(q: Q):
                 ui.nav_item(name="#report", label="Report"),
                 ui.nav_item(name='#cot', label='COT'),
                 ui.nav_item(name='#portfolio', label='Portfolio'),
+                ui.nav_item(name='#ideas', label='Ideas'),
             ]),
             ui.nav_group('Help', items=[
                 ui.nav_item(name='#about', label='About'),
