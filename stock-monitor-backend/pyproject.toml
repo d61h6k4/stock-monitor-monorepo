@@ -23,7 +23,7 @@ websockets = "^11.0.1"
 # requests-cache fails
 urllib3 = "<2"
 pyportfolioopt = "^1.5.5"
-stock-monitor-data = {path = "../stock-monitor-data"}
+stock-monitor-data = {path = "../stock-monitor-data", develop=true}
 
 
 [tool.poetry.group.dev.dependencies]
@@ -33,7 +33,7 @@ pytest-datadir = "^1.4.1"
 
 [tool.poetry.scripts]
 serve = "stock_monitor_backend.server:main"
-temp = "stock_monitor_backend.position_sizing:get_weights"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
