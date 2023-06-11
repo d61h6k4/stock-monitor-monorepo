@@ -698,9 +698,11 @@ def portfolio(period: str, interval: str):
     for ticker_name in ["TGNA", "CEG", "SOMA.V", "TM.V", "FTAI", "CRNT", "ATLX", "FIP", "CBD", "SCHW", "AMKR"]:
         buy_date = None
         description = None
+        expectation = None
         if ticker_name == "TGNA":
             buy_date = datetime(2022, 12, 1, tzinfo=timezone.utc)
             description = "Arbitrage"
+            expectation = Expectation(price=21, date=datetime(2023, 12, 15, tzinfo=timezone.utc), confidence=0.7)
         elif ticker_name == "CEG":
             buy_date = datetime(2022, 12, 6, tzinfo=timezone.utc)
             description = """Constellation Energy Corporation, formerly Constellation Newholdco, Inc., is a clean
@@ -710,29 +712,36 @@ def portfolio(period: str, interval: str):
                              Utility, energy.
                              See CEG in Ideas.
                           """
+            expectation = Expectation(price=115, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.7)
         elif ticker_name == "SOMA.V":
             buy_date = datetime(2023, 4, 17, tzinfo=timezone.utc)
             description = r"""Imagine you can invest in gold as a safe haven, but with the characteristics of an exponential tech stock.
                               If Soma Gold proves they have the resources, it could simply expand annual production from 36K to 75K.
                              """
+            expectation = Expectation(price=6, date=datetime(2024, 12, 31, tzinfo=timezone.utc), confidence=0.01)
         elif ticker_name == "TM.V":
             buy_date = datetime(2023, 4, 17, tzinfo=timezone.utc)
             description = r"""Trigon Metals Inc. (TM) is a Canadian exploration, development, and mining company focused on copper
                                 and silver assets in Africa."""
+            expectation = Expectation(price=1.5, date=datetime(2024, 12, 31, tzinfo=timezone.utc), confidence=0.01)
         elif ticker_name == "FTAI":
             buy_date = datetime(2023, 4, 17, tzinfo=timezone.utc)
             description = r"""Aircraft and engine lessor that has gone through a major transformation from a complex “mess” of
                               assets to a pure-play aviation company."""
+            expectation = Expectation(price=94, date=datetime(2027, 12, 31, tzinfo=timezone.utc), confidence=0.3)
         elif ticker_name == "CRNT":
             buy_date = datetime(2023, 4, 20, tzinfo=timezone.utc)
             description = r"""Vendor for global wireless network operators specializing in backhaul solutions. Shareholders have
                                 recently rejected a hostile takeover by peer \$AVNW at \$3.8/share. Renewed talks between AVNW and CRNT
                                 present the potential for near-term upside realization."""
+            expectation = Expectation(price=3.08, date=datetime(2023, 11, 15, tzinfo=timezone.utc), confidence=0.7)
         elif ticker_name == "ATLX":
             buy_date = datetime(2023, 4, 24, tzinfo=timezone.utc)
             description = r"""Meme stock, lithium :P"""
+            expectation = Expectation(price=25, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.1)
         elif ticker_name == "FIP":
             buy_date = datetime(2023, 5, 1, tzinfo=timezone.utc)
+            expectation = Expectation(price=7, date=datetime(2023, 8, 1, tzinfo=timezone.utc), confidence=0.7)
             description = r"""Recent spin-off from \$FTAI with 4 infrastructure assets: 3 energy terminals and a railroad business.
                                 EBITDA is set to increase from \$140m today to \$250m in the next 12-18 months. FPI`s Jefferson terminal
                                 is now on cusp of generating strong earnings. Transtar railroad earnings have been consistently increasing
@@ -740,21 +749,25 @@ def portfolio(period: str, interval: str):
                                 Downside is well protected at current share price levels."""
         elif ticker_name == "CBD":
             buy_date = datetime(2023, 5, 4, tzinfo=timezone.utc)
+            expectation = Expectation(price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.7)
             description = r"""CBD is a Brazilian holding company that is spinning off its Colombian grocery chain, Grupo Exito,
                               in the second quarter of 2023. """
         elif ticker_name == "SCHW":
             buy_date = datetime(2023, 5, 16, tzinfo=timezone.utc)
+            expectation = Expectation(price=80, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.7)
             description = r"""SCHW unfairly sold off following the SVB fallout."""
         elif ticker_name == "AMKR":
             buy_date = datetime(2023, 5, 18, tzinfo=timezone.utc)
+            expectation = Expectation(price=87, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.7)
             description = r"""Semiconductor assembly services provider - the world`s most wonderfully boring businesses to own.
                                 At 9x earnings and shifting into higher margin services. For a semi business, it has very low
                                 cyclicality and low capex needs, and yet is delivering above-industry revenue growth with 3 year CAGR of 20%."""
 
         assert buy_date is not None
         assert description is not None
+        assert expectation is not None
         res.append(Stock(ticker_name=ticker_name, period=period, interval=interval, buy_date=buy_date,
-                         description=description))
+                         description=description, expectation=expectation))
 
     return res
 

@@ -33,7 +33,7 @@ pytest-datadir = "^1.4.1"
 
 [tool.poetry.scripts]
 serve = "stock_monitor_backend.server:main"
-
+temp = "stock_monitor_backend.position_sizing:get_weights"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

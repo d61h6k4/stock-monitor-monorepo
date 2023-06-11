@@ -37,6 +37,7 @@ cot_session = CachedLimiterSession(
 class Expectation(BaseModel):
     price: float
     date: datetime
+    confidence: float = 1.0
 
 
 class Stock(BaseModel):
