@@ -734,7 +734,7 @@ def portfolio(period: str, interval: str):
             description = r"""Vendor for global wireless network operators specializing in backhaul solutions. Shareholders have
                                 recently rejected a hostile takeover by peer \$AVNW at \$3.8/share. Renewed talks between AVNW and CRNT
                                 present the potential for near-term upside realization."""
-            expectation = Expectation(price=3.08, date=datetime(2023, 11, 15, tzinfo=timezone.utc), confidence=0.5)
+            expectation = Expectation(price=3.08, date=datetime(2023, 11, 15, tzinfo=timezone.utc), confidence=0.8)
         elif ticker_name == "ATLX":
             buy_date = datetime(2023, 4, 24, tzinfo=timezone.utc)
             description = r"""Meme stock, lithium :P"""
@@ -749,7 +749,7 @@ def portfolio(period: str, interval: str):
                                 Downside is well protected at current share price levels."""
         elif ticker_name == "CBD":
             buy_date = datetime(2023, 5, 4, tzinfo=timezone.utc)
-            expectation = Expectation(price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.5)
+            expectation = Expectation(price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.7)
             description = r"""CBD is a Brazilian holding company that is spinning off its Colombian grocery chain, Grupo Exito,
                               in the second quarter of 2023. """
         elif ticker_name == "SCHW":
@@ -758,7 +758,7 @@ def portfolio(period: str, interval: str):
             description = r"""SCHW unfairly sold off following the SVB fallout."""
         elif ticker_name == "AMKR":
             buy_date = datetime(2023, 5, 18, tzinfo=timezone.utc)
-            expectation = Expectation(price=87, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.5)
+            expectation = Expectation(price=87, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.8)
             description = r"""Semiconductor assembly services provider - the world`s most wonderfully boring businesses to own.
                                 At 9x earnings and shifting into higher margin services. For a semi business, it has very low
                                 cyclicality and low capex needs, and yet is delivering above-industry revenue growth with 3 year CAGR of 20%."""
