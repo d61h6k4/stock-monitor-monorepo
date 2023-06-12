@@ -5,8 +5,8 @@ from stock_monitor_backend.wave import cot, report, portfolio, ideas
 _CARD_REGISTER = {
     "cot": ["form", "stock_graph", "cot_net"],
     "report": ["form", "stock_graph", "rules_graph"],
-    "portfolio": ["weights_graph"],
-    "ideas": [],
+    "portfolio": portfolio._CARD_REGISTER,
+    "ideas": ideas._CARD_REGISTER,
     "about": [],
     None: []
 }

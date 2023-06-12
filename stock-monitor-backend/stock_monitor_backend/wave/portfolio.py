@@ -26,6 +26,9 @@ def weights_graph():
     )
 
 
+_CARD_REGISTER = ["weights_graph", "bl_weights_graph"]
+
+
 async def render(q: Q):
     q.page["weights_graph"] = weights_graph()
     q.page["bl_weights_graph"] = bl_weights_graph()
