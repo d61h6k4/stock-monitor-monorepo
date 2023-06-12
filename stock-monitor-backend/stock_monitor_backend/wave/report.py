@@ -26,7 +26,7 @@ def rules_graph(stock):
     macd_data = dataframe_to_data(macd_df)
 
     return ui.form_card(
-        box="1 10 11 5",
+        box="1 9 11 5",
         items=[
             ui.text_m("ADX"),
             ui.visualization(
@@ -103,5 +103,5 @@ async def render(q: Q):
     if q.args.stock_form_ready:
         stock = Stock(ticker_name=q.args.ticker, period="6mo", interval="1d")
 
-        q.page["stock_graph"] = stock_graph(stock, box='1 3 11 7', with_summary=True)
+        q.page["stock_graph"] = stock_graph(stock, box='1 3 11 6', with_summary=True)
         q.page["rules_graph"] = rules_graph(stock)
