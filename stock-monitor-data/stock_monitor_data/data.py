@@ -702,7 +702,7 @@ def portfolio(period: str, interval: str):
         if ticker_name == "TGNA":
             buy_date = datetime(2022, 12, 1, tzinfo=timezone.utc)
             description = "Arbitrage"
-            expectation = Expectation(price=21, date=datetime(2023, 12, 15, tzinfo=timezone.utc), confidence=0.7)
+            expectation = Expectation(price=21, date=datetime(2023, 12, 15, tzinfo=timezone.utc), confidence=0.75)
         elif ticker_name == "CEG":
             buy_date = datetime(2022, 12, 6, tzinfo=timezone.utc)
             description = """Constellation Energy Corporation, formerly Constellation Newholdco, Inc., is a clean
@@ -718,12 +718,12 @@ def portfolio(period: str, interval: str):
             description = r"""Imagine you can invest in gold as a safe haven, but with the characteristics of an exponential tech stock.
                               If Soma Gold proves they have the resources, it could simply expand annual production from 36K to 75K.
                              """
-            expectation = Expectation(price=6, date=datetime(2024, 12, 31, tzinfo=timezone.utc), confidence=0.01)
+            expectation = Expectation(price=6, date=datetime(2033, 12, 31, tzinfo=timezone.utc), confidence=0.01)
         elif ticker_name == "TM.V":
             buy_date = datetime(2023, 4, 17, tzinfo=timezone.utc)
             description = r"""Trigon Metals Inc. (TM) is a Canadian exploration, development, and mining company focused on copper
                                 and silver assets in Africa."""
-            expectation = Expectation(price=1.5, date=datetime(2024, 12, 31, tzinfo=timezone.utc), confidence=0.01)
+            expectation = Expectation(price=1.5, date=datetime(2033, 12, 31, tzinfo=timezone.utc), confidence=0.01)
         elif ticker_name == "FTAI":
             buy_date = datetime(2023, 4, 17, tzinfo=timezone.utc)
             description = r"""Aircraft and engine lessor that has gone through a major transformation from a complex “mess” of
@@ -734,7 +734,7 @@ def portfolio(period: str, interval: str):
             description = r"""Vendor for global wireless network operators specializing in backhaul solutions. Shareholders have
                                 recently rejected a hostile takeover by peer \$AVNW at \$3.8/share. Renewed talks between AVNW and CRNT
                                 present the potential for near-term upside realization."""
-            expectation = Expectation(price=3.08, date=datetime(2023, 11, 15, tzinfo=timezone.utc), confidence=0.8)
+            expectation = Expectation(price=3.08, date=datetime(2023, 11, 15, tzinfo=timezone.utc), confidence=0.5)
         elif ticker_name == "ATLX":
             buy_date = datetime(2023, 4, 24, tzinfo=timezone.utc)
             description = r"""Meme stock, lithium :P"""
@@ -749,7 +749,7 @@ def portfolio(period: str, interval: str):
                                 Downside is well protected at current share price levels."""
         elif ticker_name == "CBD":
             buy_date = datetime(2023, 5, 4, tzinfo=timezone.utc)
-            expectation = Expectation(price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.7)
+            expectation = Expectation(price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.5)
             description = r"""CBD is a Brazilian holding company that is spinning off its Colombian grocery chain, Grupo Exito,
                               in the second quarter of 2023. """
         elif ticker_name == "SCHW":
@@ -758,7 +758,7 @@ def portfolio(period: str, interval: str):
             description = r"""SCHW unfairly sold off following the SVB fallout."""
         elif ticker_name == "AMKR":
             buy_date = datetime(2023, 5, 18, tzinfo=timezone.utc)
-            expectation = Expectation(price=87, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.8)
+            expectation = Expectation(price=87, date=datetime(2023, 12, 31, tzinfo=timezone.utc), confidence=0.95)
             description = r"""Semiconductor assembly services provider - the world`s most wonderfully boring businesses to own.
                                 At 9x earnings and shifting into higher margin services. For a semi business, it has very low
                                 cyclicality and low capex needs, and yet is delivering above-industry revenue growth with 3 year CAGR of 20%."""
