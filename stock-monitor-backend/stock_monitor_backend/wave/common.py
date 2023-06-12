@@ -43,7 +43,8 @@ def stock_graph(stock, box='1 3 11 5'):
                              y_nice=True,
                              color="=Color",
                              color_range="#06982d #ae1325",
-                             color_domain=["green", "red"])])), ui.visualization(
+                             color_domain=["green", "red"])])),
+            ui.visualization(
                 name='volume',
                 height="100px",
                 data=graph_data,
@@ -55,6 +56,7 @@ def stock_graph(stock, box='1 3 11 5'):
                              y_nice=True,
                              color_range="#06982d #ae1325",
                              color_domain=["green", "red"])
-                     ]))
+                     ])),
+            ui.text_s(stock.business_summary),
         ]
     )

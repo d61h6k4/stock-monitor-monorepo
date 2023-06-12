@@ -681,8 +681,15 @@ def ideas(period: str, interval: str):
                                    To be clear, this is a 2 to 5 years investment story (no real catalyst for a quick re-rating on the horizon):
                                    the attractiveness of MMK packaging business models remains intact, but the full-realisation of the underlying
                                    potential of the investments in acquired and organic growth will require time.
-                                   [Source](https://mrmarketmiscalculates.substack.com/p/mayr-melnhof-karton-ag?token=eyJ1c2VyX2lkIjoxODk0ODI4NSwicG9zdF9pZCI6MTI3MDYyMzY3LCJpYXQiOjE2ODYzMTIyODMsImV4cCI6MTY4ODkwNDI4MywiaXNzIjoicHViLTU5NzUyNyIsInN1YiI6InBvc3QtcmVhY3Rpb24ifQ.S_QngJnYFMAcCo_bk5RC8ugwpf5Cybcg7VV1xOzIbvE&utm_source=substack&utm_medium=email)
+                                   [Source](https://mrmarketmiscalculates.substack.com/p/mayr-melnhof-karton-ag)
                    """),
+             Stock(ticker_name="UD.MI", period=period, interval=interval,
+                   expectation=Expectation(price=80, date=datetime(2028, 1, 15, tzinfo=timezone.utc)),
+                   description=r"""With a market cap below €125 million, Unidata is trading at a significant discount compared to the traded peers.
+                                   Our play in Unidata is for the long term. During these years they will continue to build the fibre network which
+                                   is expensive to build and significantly decreases the margins, but once it is finished, the operating leverage
+                                   will play by their side, being the operator it is easy to make even better margins while gaining scale.
+                                   [Source](https://moram.substack.com/p/moram-unidata-investment-thesis-jadestone?utm_source=substack&utm_medium=email)"""),
              ]
 
     def yield_per_day(x):
