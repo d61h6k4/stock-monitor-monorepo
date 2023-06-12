@@ -754,7 +754,7 @@ def portfolio(period: str, interval: str):
                               in the second quarter of 2023. """
         elif ticker_name == "SCHW":
             buy_date = datetime(2023, 5, 16, tzinfo=timezone.utc)
-            expectation = Expectation(price=80, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.5)
+            expectation = Expectation(price=80, date=datetime(2024, 9, 15, tzinfo=timezone.utc), confidence=0.5)
             description = r"""SCHW unfairly sold off following the SVB fallout."""
         elif ticker_name == "AMKR":
             buy_date = datetime(2023, 5, 18, tzinfo=timezone.utc)
