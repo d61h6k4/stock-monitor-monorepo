@@ -32,6 +32,7 @@ def idea_stock_graph(stock, box='1 3 11 5'):
                              y2="={{intl High notation='compact' compactDisplay='short'}}",
                              y_min=y_min,
                              y_max=max(y_max, stock.expectation.price * 1.05),
+                             y_scale="log",
                              color="=Color",
                              color_range="#06982d #ae1325",
                              color_domain=["green", "red"]),
