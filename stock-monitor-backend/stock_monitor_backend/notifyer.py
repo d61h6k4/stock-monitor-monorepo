@@ -2,6 +2,9 @@
 
 from typing import Self
 
+import json
+
+from pathlib import Path
 from stock_monitor_backend.rules import Decision
 from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_backend.utils import telegramify
@@ -16,7 +19,11 @@ class NotificationCenter:
         """Constructor."""
         self._clients = {}
         self._users_to_chats = {"dbihbka": 111874928}
+
         self._users_last_messages = {}
+        self._resource = Path(".notifyer.json")
+        if self._resource.exists():
+            self._users_last_messages = json.loads(self._resource.read_text())
 
     def add_telegram(self: Self, client: TelegramClient) -> None:
         """Add telegram as one of the channels to send notifications."""
@@ -51,3 +58,11 @@ class NotificationCenter:
         if client not in self._clients:
             err_msg = "Telegram client hasn't been registered in Notification center yet."
             raise ValueError(err_msg)
+
+    def persist(self) -> None:
+        """Persist the data to the disk."""
+
+        if self._resource.exists():
+            self._resource.unlink()
+
+        self._resource.write_text(json.dumps(self._users_last_messages))

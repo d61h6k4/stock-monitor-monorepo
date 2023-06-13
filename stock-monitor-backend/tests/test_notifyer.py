@@ -67,3 +67,18 @@ def test_sends_different_message(notifyer_mock: NotificationCenter, client_mock:
 
     assert len(client_mock.messages) == 2
     assert client_mock.messages[1]["text"] == text
+
+
+def test_load_save(notifyer_mock: NotificationCenter, client_mock: ClientMock):
+    notifyer_mock.add_telegram(client_mock)
+
+    decision = Decision(ticker="GOOG",
+                        rule=Rule(name="rule1", description="Test rule"),
+                        action=Action.HOLD,
+                        explanation="Test")
+
+    notifyer_mock.send_unique_decision("dbihbka", decision)
+    notifyer_mock.persist()
+    other_notifyer = NotificationCenter()
+
+    assert notifyer_mock._users_last_messages == other_notifyer._users_last_messages

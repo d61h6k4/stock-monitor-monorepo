@@ -91,6 +91,10 @@ def create_app(telegram_bot_token: str) -> FastAPI:
         except WebSocketDisconnect as e:
             logger.info(f"Client disconnected. {repr(e)}")
 
+    @app.on_event("shutdown")
+    def on_shutdown():
+        notify.persist()
+
     telegram_client.set_webhook()
 
     app.mount("/", StaticFiles(directory=web_directory, html=True), name="/")
