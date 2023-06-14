@@ -14,6 +14,7 @@ requests = "^2.31.0"
 requests-cache = "^1.0.1"
 requests-ratelimiter = "^0.4.0"
 yfinance = "^0.2.20"
+tqdm = "^4.65.0"
 
 
 [tool.poetry.group.dev.dependencies]
