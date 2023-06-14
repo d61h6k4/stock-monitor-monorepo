@@ -30,7 +30,7 @@ def get_portfolio_views() -> Mapping[str, float]:
         expected_excess = (s.expectation.price - current_price) / current_price
         time_penalty = (s.expectation.date - datetime.now(tz=timezone.utc)).days
 
-        return expected_excess / time_penalty
+        return expected_excess / np.log(time_penalty + 1)
 
     return {s.ticker_name: _view(s)
             for s in portfolio("5y", "1d")}
