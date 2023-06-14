@@ -31,7 +31,7 @@ tqdm = "^4.65.0"
 ruff = "^0.0.257"
 pytest = "^7.2.2"
 pytest-datadir = "^1.4.1"
-stock-monitor-data = {path = "../stock-monitor-data", develop = true}
+stock-monitor-data = {path = "../stock-monitor-data"}
 
 [tool.poetry.scripts]
 serve = "stock_monitor_backend.server:main"
