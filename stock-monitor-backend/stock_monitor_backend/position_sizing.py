@@ -28,7 +28,7 @@ def get_portfolio_views() -> Mapping[str, float]:
     def _view(s: Stock) -> float:
         current_price = s.history["Close"].last(offset="1d").max()
         expected_excess = (s.expectation.price - current_price) / current_price
-        time_penalty = (s.expectation.date - datetime.now(tz=timezone.utc)).days / 66.
+        time_penalty = (s.expectation.date - datetime.now(tz=timezone.utc)).days
 
         return expected_excess / time_penalty
 
