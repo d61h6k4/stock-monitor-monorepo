@@ -21,7 +21,7 @@ class NotificationCenter:
         self._users_to_chats = {"dbihbka": 111874928}
 
         self._users_last_messages = {}
-        self._resource = Path(".notifyer.json")
+        self._resource = Path.home() / Path(".notifyer.json")
         if self._resource.exists():
             self._users_last_messages = json.loads(self._resource.read_text())
 

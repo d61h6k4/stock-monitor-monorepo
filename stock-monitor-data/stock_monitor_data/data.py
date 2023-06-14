@@ -690,6 +690,35 @@ def ideas(period: str, interval: str):
                                    is expensive to build and significantly decreases the margins, but once it is finished, the operating leverage
                                    will play by their side, being the operator it is easy to make even better margins while gaining scale.
                                    [Source](https://moram.substack.com/p/moram-unidata-investment-thesis-jadestone?utm_source=substack&utm_medium=email)"""),
+             Stock(ticker_name="LMN.SW", period=period, interval=interval,
+                   expectation=Expectation(price=55, date=datetime(2025, 12, 15, tzinfo=timezone.utc)),
+                   description=r"""The governance overhang has been cleared as Lastminute has settled the issue of
+                                   misused COVID funds and paid back the amount to the Swiss authorities. The company
+                                   now has a new CEO and a completely new Board of Directors. This makes the stock
+                                   investable again for investors. Reaching 2019 travel volumes at the current
+                                   price/mix level should result in a meaningful upside to estimates. LMN is trading
+                                   at an attractive valuation relative to itself and to peers. On my 2023 and 2024
+                                   EBITDA numbers, LMN is trading at 4.2x and 3.3x. Adjusting out capitalized software,
+                                   LMN is at ~4.5x 2024 EBITDA. The company is undergoing a strategic review that could
+                                   lead to a sale. I believe that the latest trading update (Q1 2023) had some signs
+                                   pointing to this scenario.
+                                   [Source](https://www.clarksquarecapital.com/p/lastminutecom-lmnsw)
+                   """),
+             Stock(ticker_name="ADM.L", period=period, interval=interval,
+                   expectation=Expectation(price=3100, date=datetime(2025, 12, 15, tzinfo=timezone.utc)),
+                   description=r"""Shares are at 14.8x 2019 EPS and 40% down from peak. 2022 inflation may hit
+                                   near-term profitability, likely moderately. Price hikes since 2022 mean
+                                   long-term margins are secure. 2023 year-to-date datapoints show positive
+                                   sector trends.
+                                   [Source](https://librariancapital.substack.com/p/admiral-6-fall-after-citi-downgrade)
+                   """),
+             Stock(ticker_name="CNX", period=period, interval=interval,
+                   expectation=Expectation(price=160, date=datetime(2030, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""They define success as generating and growing FCF per share, 30% of the
+                                   company has been bought back in 2.5 years, and the Chairman wrote The Outsiders.
+                                   Is CNX one of THOSE companies?
+                                   [Source](https://www.wsgresearch.com/p/cnx-an-outsider-in-the-making)
+                   """),
              ]
 
     def yield_per_day(x):

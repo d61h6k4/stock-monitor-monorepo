@@ -19,6 +19,9 @@ yfinance = "^0.2.20"
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.272"
 
+[tool.poetry.scripts]
+monitor = "stock_monitor_data.bin.monitor:main"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

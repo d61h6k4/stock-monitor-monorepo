@@ -35,7 +35,6 @@ stock-monitor-data = {path = "../stock-monitor-data", develop = true}
 
 [tool.poetry.scripts]
 serve = "stock_monitor_backend.server:main"
-monitor = "stock_monitor_backend.monitor:main"
 
 [build-system]
 requires = ["poetry-core"]
