@@ -1479,7 +1479,7 @@ full = ["httpx (>=0.22.0)", "itsdangerous", "jinja2", "python-multipart", "pyyam
 
 [[package]]
 name = "stock-monitor-data"
-version = "0.1.7"
+version = "0.1.9"
 description = ""
 optional = false
 python-versions = ">=3.10,<4"
@@ -1492,6 +1492,7 @@ pydantic = "^1.10.9"
 requests = "^2.31.0"
 requests-cache = "^1.0.1"
 requests-ratelimiter = "^0.4.0"
+tqdm = "^4.65.0"
 yfinance = "^0.2.20"
 
 [package.source]
@@ -1834,4 +1835,4 @@ requests = ">=2.26"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.15"
-content-hash = "686ac5bf2236d8c83fe744ee643bccf3e8a645716f3adaedd2e4cc57083bb1ce"
+content-hash = "09ad33028b935cef7728b6d591df7654b1ecfdb989098305fa1b0831c15a3215"

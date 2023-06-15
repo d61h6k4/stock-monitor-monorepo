@@ -5,7 +5,7 @@ from typing import Self
 import json
 
 from pathlib import Path
-from stock_monitor_backend.rules import Decision
+from stock_monitor_backend.rules import Action, Decision
 from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_backend.utils import telegramify
 
@@ -23,7 +23,12 @@ class NotificationCenter:
         self._users_last_messages = {}
         self._resource = Path.home() / Path(".notifyer.json")
         if self._resource.exists():
-            self._users_last_messages = json.loads(self._resource.read_text())
+            for user, values in json.loads(self._resource.read_text()).items():
+                self._users_last_messages[user] = {}
+                for ticker, t_values in values.items():
+                    self._users_last_messages[user][ticker] = {}
+                    for rule, state in t_values.items():
+                        self._users_last_messages[user][ticker][rule] = Action.from_string(state)
 
     def add_telegram(self: Self, client: TelegramClient) -> None:
         """Add telegram as one of the channels to send notifications."""

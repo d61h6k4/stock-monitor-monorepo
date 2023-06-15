@@ -14,6 +14,18 @@ class Action(str, Enum):
     HOLD = "hold"
     SELL = "sell"
 
+    @staticmethod
+    def from_string(s: str) -> "Action":
+        match s:
+            case "buy":
+                return Action.BUY
+            case "hold":
+                return Action.HOLD
+            case "sell":
+                return Action.SELL
+            case _:
+                raise ValueError(s)
+
 
 class Rule(BaseModel):
     """Rule object."""

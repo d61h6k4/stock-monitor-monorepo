@@ -8,7 +8,7 @@ packages = [{include = "stock_monitor_backend"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
-fastapi = "^0.95.0"
+fastapi = "^0.97.0"
 uvicorn = {version = "^0.21.1", extras = ["standard"]}
 structlog = "^22.3.0"
 requests = "^2.28.2"
@@ -31,7 +31,7 @@ tqdm = "^4.65.0"
 ruff = "^0.0.257"
 pytest = "^7.2.2"
 pytest-datadir = "^1.4.1"
-stock-monitor-data = {path = "../stock-monitor-data"}
+
 
 [tool.poetry.scripts]
 serve = "stock_monitor_backend.server:main"
