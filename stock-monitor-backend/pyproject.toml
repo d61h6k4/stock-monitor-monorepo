@@ -23,7 +23,7 @@ websockets = "^11.0.1"
 # requests-cache fails
 urllib3 = "<2"
 pyportfolioopt = "^1.5.5"
-stock-monitor-data = {path = "../stock-monitor-data"}
+stock-monitor-data = {path = "../stock-monitor-data", develop=true}
 tqdm = "^4.65.0"
 
 
