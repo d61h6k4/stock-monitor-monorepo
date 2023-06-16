@@ -731,7 +731,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "CEG", "SOMA.V", "TM.V", "FTAI", "CRNT", "ATLX", "CBD", "SCHW", "AMKR"]:
+    for ticker_name in ["TGNA", "CEG", "SOMA.V", "TM.V", "FTAI", "CRNT", "ATLX", "CBD", "SCHW", "AMKR", "FGH"]:
         buy_date = None
         description = None
         expectation = None
@@ -798,6 +798,12 @@ def portfolio(period: str, interval: str):
             description = r"""Semiconductor assembly services provider - the world`s most wonderfully boring businesses to own.
                                 At 9x earnings and shifting into higher margin services. For a semi business, it has very low
                                 cyclicality and low capex needs, and yet is delivering above-industry revenue growth with 3 year CAGR of 20%."""
+        elif ticker_name == "FGH":
+            buy_date = datetime(2023, 6, 16, tzinfo=timezone.utc)
+            expectation = Expectation(price=10, date=datetime(2025, 6, 15, tzinfo=timezone.utc)),
+            description = r"""The current value of the investments, cash, and real estate can be ballparked between ~\$81.7M-\$90.7M,
+                          the book value sits at ~\$42.7M and the market cap is \$34M. Sum-of-the-parts story has been the stable
+                          thesis for the better part of a year and a half now and hasn`t worked yet. So, the question begs, will it ever?"""
 
         assert buy_date is not None
         assert description is not None
