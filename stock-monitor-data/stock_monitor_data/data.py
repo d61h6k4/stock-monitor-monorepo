@@ -839,6 +839,13 @@ def portfolio(period: str, interval: str):
             description = r"""The current value of the investments, cash, and real estate can be ballparked between ~\$81.7M-\$90.7M,
                           the book value sits at ~\$42.7M and the market cap is \$34M. Sum-of-the-parts story has been the stable
                           thesis for the better part of a year and a half now and hasn`t worked yet. So, the question begs, will it ever?"""
+        elif ticker_name == "MMK.VI":
+            buy_date = datetime(2023, 6, 16, tzinfo=timezone.utc)
+            expectation = Expectation(price=193, date=datetime(2024, 1, 15, tzinfo=timezone.utc), confidence=0.5)
+            description = r"""Therefore, MMK can be confidently considered between fairly valued to somewhat undervalued
+                          (definitely not overvalued in my opinion). Assuming a “normalised” 9x multiple of EBITDA,
+                          in a transaction with a strategic buyer MMK could be worth up to \€193 (+41% potential upside)
+                          on 2023 consensus numbers."""
 
         assert buy_date is not None
         assert description is not None
