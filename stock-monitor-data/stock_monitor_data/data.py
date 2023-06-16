@@ -719,6 +719,14 @@ def ideas(period: str, interval: str):
                                    Is CNX one of THOSE companies?
                                    [Source](https://www.wsgresearch.com/p/cnx-an-outsider-in-the-making)
                    """),
+             Stock(ticker_name="CRDA.L", period=period, interval=interval,
+                   expectation=Expectation(price=8000, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""Shares are 47% down from peak after a profit warning last week. Weak 2023 due to
+                                   post-COVID factors like customer destocking. P/E is at 28x on trough EPS that
+                                   assumes little growth from 2020. Future growth is to be driven by new businesses.
+                                   At 5,526p, we see 47% upside (16.7% p.a.) by end of 2025. Buy
+                                   [Source](https://librariancapital.substack.com/p/croda-cheapest-since-2020-as-sales)
+                   """),
              ]
 
     def yield_per_day(x):
