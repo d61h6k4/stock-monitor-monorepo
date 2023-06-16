@@ -727,6 +727,33 @@ def ideas(period: str, interval: str):
                                    At 5,526p, we see 47% upside (16.7% p.a.) by end of 2025. Buy
                                    [Source](https://librariancapital.substack.com/p/croda-cheapest-since-2020-as-sales)
                    """),
+             Stock(ticker_name="WOLF", period=period, interval=interval,
+                   expection=Expectation(price=100, date=datetime(2027, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""Wolfspeed is an interesting company to have a look at for several reasons.
+                                   One, this is a pure play on silicon carbide, one of the highest growth areas
+                                   in semiconductors. Two, Wolfspeed is vertically integrated across the entire
+                                   silicon carbide value chain, from crystal growing, to wafer fabrication, to
+                                   semiconductor manufacturing, while boasting strong market shares in each of
+                                   these. Three, the shares are now trading at their lowest level in three years.
+                                   [Source](https://www.techfund.one/p/wolfspeed-the-vertically-integrated)
+                   """),
+             Stock(ticker_name="MXCHF", period=period, interval=interval,
+                   expectation=Expectation(price=5, date=datetime(2030, 1, 15, tzinfo=timezone.utc)),
+                   description=r"""**Positives**: The company is very well diversified both geographically and across
+                                   their 5 business segments.  Steady growth likely, with potential for significant
+                                   growth is some businesses such as Fluorspar. **Negatives**: The company operates
+                                   in highly competitive, cyclical markets. Global commodity prices can significantly
+                                   impact margins. Balance sheet is leveraged increasing risk and potential losses to
+                                   equity holders in a downturn.
+                                   [Source](https://latamstocks.substack.com/p/orbia-latam-stocks-investment-analysis)
+                   """),
+             Stock(ticker_name="THO", period=period, interval=interval,
+                   expecation=Expectation(price=123, date=datetime(2032, 1, 15, tzinfo=timezone.utc)),
+                   description=r"""It operates in an industry where the demand is steady and growing.
+                                   It’s difficult to see that people will stop choosing to go on cost-effective
+                                   holidays in nature. In the past 20 years, the market has grown steadily by about 5%.
+                                   [Source](https://sleepwellinvestments.substack.com/p/thor-industries-rv-monopoly-at-the)
+                   """),
              ]
 
     def yield_per_day(x):
