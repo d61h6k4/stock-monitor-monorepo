@@ -1,11 +1,13 @@
+from typing import Mapping
+from datetime import datetime, timezone
+
 import numpy as np
 import pandas as pd
-from datetime import datetime
-from datetime import timezone
 from pypfopt import black_litterman
+from pypfopt.efficient_frontier import EfficientFrontier
+
 from stock_monitor_data.data import portfolio
 from stock_monitor_data.models import Stock
-from typing import Mapping
 
 
 def get_market_prices() -> pd.Series:
@@ -24,21 +26,31 @@ def get_portfolio_market_cap() -> Mapping[str, float]:
             for s in portfolio("2y", "1d")}
 
 
+def desired_stock_price_velocity(s: Stock) -> float:
+    current_price = s.history["Close"].last(offset="1d").max()
+    expected_excess = (s.expectation.price - current_price) / current_price
+    time_penalty = (s.expectation.date - datetime.now(tz=timezone.utc)).days
+    assert time_penalty > 0, s.ticker_name
+    return expected_excess / float(time_penalty)
+
+
 def get_portfolio_views() -> Mapping[str, float]:
     def _view(s: Stock) -> float:
-        current_price = s.history["Close"].last(offset="1d").max()
-        expected_excess = (s.expectation.price - current_price) / current_price
-        time_penalty = (s.expectation.date - datetime.now(tz=timezone.utc)).days
-
-        return expected_excess / np.log(time_penalty + 1)
+        return 92.0 * desired_stock_price_velocity(s)  # price of a stock in 3 months
 
     return {s.ticker_name: _view(s)
             for s in portfolio("2y", "1d")}
 
 
-def get_portfolio_view_confidences() -> Mapping[str, float]:
-    confidences = pd.Series({s.ticker_name: s.expectation.confidence for s in portfolio("2y", "1d")})
-    return confidences
+def get_portfolio_view_confidences() -> pd.Series:
+    def _weighted_confidence(s: Stock):
+        price_velocity = desired_stock_price_velocity(s)
+        price_velocity_volatility = s.history["Close"].pct_change().std()
+        weight = np.ceil(price_velocity / price_velocity_volatility)
+
+        return s.expectation.confidence / weight
+
+    return pd.Series({s.ticker_name: _weighted_confidence(s) for s in portfolio("2y", "1d")})
 
 
 def get_weights():
@@ -51,7 +63,8 @@ def get_weights():
                                              omega="idzorek",
                                              view_confidences=get_portfolio_view_confidences(),
                                              risk_aversion=delta)
-
     bl.bl_weights(risk_aversion=delta)
-    return bl.clean_weights(rounding=2)
-
+    rets = bl.bl_returns()
+    ef = EfficientFrontier(rets, cov_matrix)
+    ef.max_sharpe()
+    return ef.clean_weights(rounding=2), bl.clean_weights(rounding=2)

@@ -1,6 +1,7 @@
 from h2o_lightwave import Q, ui
 from stock_monitor_data.data import ideas
-from stock_monitor_backend.wave.common import dataframe_to_data, preprocess_dataframe, color_stock_dataframe
+
+from stock_monitor_backend.wave.common import color_stock_dataframe, dataframe_to_data, preprocess_dataframe
 
 _CARD_REGISTER = []
 

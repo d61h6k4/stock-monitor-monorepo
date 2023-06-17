@@ -1,6 +1,6 @@
 from h2o_lightwave import Q, handle_on, on, ui
 
-from stock_monitor_backend.wave import cot, report, portfolio, ideas
+from stock_monitor_backend.wave import cot, ideas, portfolio, report
 
 _CARD_REGISTER = {
     "cot": ["form", "stock_graph", "cot_net"],

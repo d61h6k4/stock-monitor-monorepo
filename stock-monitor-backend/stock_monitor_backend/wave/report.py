@@ -1,8 +1,8 @@
 import pandas as pd
 from h2o_lightwave import Q, ui
+from stock_monitor_data.models import Stock
 
 from stock_monitor_backend.math import adx, macd, rsi
-from stock_monitor_data.models import Stock
 from stock_monitor_backend.wave.common import dataframe_to_data, preprocess_dataframe, stock_graph
 
 

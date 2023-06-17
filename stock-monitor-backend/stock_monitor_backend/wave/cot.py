@@ -1,9 +1,9 @@
 from datetime import datetime
 
 from h2o_lightwave import Q, ui
+from stock_monitor_data.models import COT, Stock
 
 from stock_monitor_backend.math import cot_index, cot_move_index, cot_net_position
-from stock_monitor_data.models import COT, Stock
 from stock_monitor_backend.wave.common import dataframe_to_data, preprocess_dataframe, stock_graph
 
 

@@ -1,9 +1,11 @@
-from h2o_lightwave import Q, ui, data
+from h2o_lightwave import Q, data, ui
+
 from stock_monitor_backend.position_sizing import get_weights
 
 
 def bl_weights_graph():
-    weights = sorted([(k, v * 100) for k, v in get_weights().items()], key=lambda x: x[1])
+    _, bl_weights = get_weights()
+    weights = sorted([(k, v * 100) for k, v in bl_weights.items()], key=lambda x: x[1])
 
     return ui.plot_card(
         box="1 7 11 5",
@@ -14,13 +16,12 @@ def bl_weights_graph():
 
 
 def weights_graph():
-    weights = sorted([(k, max(0, v) * 100) for k, v in get_weights().items()], key=lambda x: x[1])
-    sum_weights = sum([v[1] for v in weights])
-    weights = [(v[0], 100.0 * v[1] / sum_weights) for v in weights]
+    ef_weights, _ = get_weights()
+    weights = sorted([(k, max(0, v) * 100) for k, v in ef_weights.items()], key=lambda x: x[1])
 
     return ui.plot_card(
         box="1 2 11 5",
-        title="Portfolio weights",
+        title="Portfolio weights (max Sharpe ratio)",
         data=data("ticker weight", len(weights), rows=weights),
         plot=ui.plot([ui.mark(type="interval", x="=weight", y="=ticker", y_min=0, y_nice=True)])
     )

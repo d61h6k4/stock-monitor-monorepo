@@ -1,10 +1,9 @@
 """Sends notifications to the clients."""
 
+import json
+from pathlib import Path
 from typing import Self
 
-import json
-
-from pathlib import Path
 from stock_monitor_backend.rules import Action, Decision
 from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_backend.utils import telegramify
@@ -66,7 +65,6 @@ class NotificationCenter:
 
     def persist(self) -> None:
         """Persist the data to the disk."""
-
         if self._resource.exists():
             self._resource.unlink()
 

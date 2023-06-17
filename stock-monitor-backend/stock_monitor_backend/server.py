@@ -1,5 +1,5 @@
 """Backend server."""
-from typing import Mapping
+from collections.abc import Mapping
 from enum import Enum
 from typing import Annotated, Any
 
