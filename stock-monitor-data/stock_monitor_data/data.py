@@ -754,6 +754,16 @@ def ideas(period: str, interval: str):
                                    holidays in nature. In the past 20 years, the market has grown steadily by about 5%.
                                    [Source](https://sleepwellinvestments.substack.com/p/thor-industries-rv-monopoly-at-the)
                    """),
+             Stock(ticker_name="UNTC", period=period, interval=interval,
+                   expectation=Expectation(price=74, date=datetime(2024, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""Economic prospects have improved due to tightening rig market conditions, leading to
+                                   higher day rates and increased operating leverage.The new interim CEO, Phil Frohlich,
+                                   Managing Partner of Prescott Capital Management and the company's largest shareholder
+                                   with a 37% stake, is expected to drive shareholder value.The company also recently
+                                   implemented a variable dividend program with an initial quarterly dividend payment
+                                   of \$2.50/share (20% current yield) in Q2 2023.
+                                   [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-17)
+                   """),
              ]
 
     def yield_per_day(x):
