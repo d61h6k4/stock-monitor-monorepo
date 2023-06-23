@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from pypfopt import black_litterman
 from pypfopt.efficient_frontier import EfficientFrontier
+from pypfopt.objective_functions import L2_reg
 
 from stock_monitor_data.data import portfolio
 from stock_monitor_data.models import Stock
@@ -66,5 +67,6 @@ def get_weights():
     bl.bl_weights(risk_aversion=delta)
     rets = bl.bl_returns()
     ef = EfficientFrontier(rets, cov_matrix)
+    ef.add_objective(L2_reg)
     ef.max_sharpe()
     return ef.clean_weights(rounding=2), bl.clean_weights(rounding=2)
