@@ -173,7 +173,9 @@ class COT(BaseModel):
             codes = []
 
         return_columns = ["Market_and_Exchange_Names", "CFTC_Commodity_Code", "Report_Date_as_MM_DD_YYYY",
-                          "Comm_Positions_Long_All", "Comm_Positions_Short_All"]
+                          "Comm_Positions_Long_All", "Comm_Positions_Short_All", "Open_Interest_All",
+                          "NonComm_Positions_Long_All", "NonComm_Positions_Short_All", "NonRept_Positions_Long_All",
+                          "NonRept_Positions_Short_All"]
         return df[return_columns].query("Market_and_Exchange_Names == @names or CFTC_Commodity_Code == @codes")
 
 
