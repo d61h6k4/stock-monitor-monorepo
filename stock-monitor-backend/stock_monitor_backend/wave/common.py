@@ -19,7 +19,7 @@ def dataframe_to_data(df):
 
 
 def stock_graph(stock, box='1 3 11 5', with_summary=False):
-    assert not stock.history.empty(), stock.ticker_name
+    assert not stock.history.empty, stock.ticker_name
     graph_data = dataframe_to_data(
         color_stock_dataframe(
             preprocess_dataframe(stock.history))[

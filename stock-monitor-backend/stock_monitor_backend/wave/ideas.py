@@ -7,7 +7,7 @@ _CARD_REGISTER = []
 
 
 def idea_stock_graph(stock, box='1 3 11 5'):
-    assert not stock.history.empty(), stock.ticker_name
+    assert not stock.history.empty, stock.ticker_name
 
     y_min = stock.history["Low"].min() * 0.95
     y_max = stock.history["High"].max() * 1.05
