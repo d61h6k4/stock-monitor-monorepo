@@ -764,7 +764,7 @@ def ideas(period: str, interval: str):
                                    of \$2.50/share (20% current yield) in Q2 2023.
                                    [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-17)
                    """),
-             Stock(ticker_name="VLC", period=period, interval=interval,
+             Stock(ticker_name="VMC", period=period, interval=interval,
                    expectation=Expectation(price=300, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
                    description=r"""The industry is certainly cyclical, though the businesses that are more closely tied
                                    to public projects enjoy far more predictable demand. Around 35-40% of demand for the
