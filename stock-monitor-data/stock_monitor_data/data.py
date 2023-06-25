@@ -838,15 +838,10 @@ def ideas(period: str, interval: str):
                                    such as Lockheed, into their guidance.
                                    [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
                    """),
-             
+
              ]
 
-    def yield_per_day(x):
-        y = (x.expectation.price - x.history.iloc[-1]["Open"]) / x.history.iloc[-1]["Open"] * 100.0
-        d = 1
-        return y / d
-
-    return reversed(sorted(ideas, key=yield_per_day))
+    return ideas
 
 
 def portfolio(period: str, interval: str):
