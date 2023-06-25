@@ -43,20 +43,36 @@ def moving_average_distance(df: DataFrame, fast_ma: int, slow_ma: int) -> float:
     return moving_average(df, fast_ma).last(offset="1D").max() / moving_average(df, slow_ma).last(offset="1D").max()
 
 
-def cot_net_position(df: DataFrame) -> Series:
+def cot_net_position(df: DataFrame) -> DataFrame:
     """Returns Net position of commercials."""
-    cdf = df[["Report_Date_as_MM_DD_YYYY", "Comm_Positions_Long_All", "Comm_Positions_Short_All"]] \
+    cdf = df[["Report_Date_as_MM_DD_YYYY", "Comm_Positions_Long_All", "Comm_Positions_Short_All",
+              "NonComm_Positions_Long_All", "NonComm_Positions_Short_All", "NonRept_Positions_Long_All",
+              "NonRept_Positions_Short_All"]] \
         .set_index(DatetimeIndex(df["Report_Date_as_MM_DD_YYYY"]).to_period("w")) \
         .groupby(level=0).sum(numeric_only=True)
-    return cdf["Comm_Positions_Long_All"] - cdf["Comm_Positions_Short_All"]
+
+    cdf["commercials"] = cdf["Comm_Positions_Long_All"] - cdf["Comm_Positions_Short_All"]
+    cdf["funds"] = cdf["NonComm_Positions_Long_All"] - cdf["NonComm_Positions_Short_All"]
+    cdf["small traders"] = cdf["NonRept_Positions_Long_All"] - cdf["NonRept_Positions_Short_All"]
+
+    cdf.drop(columns=["Comm_Positions_Long_All", "Comm_Positions_Short_All",
+                      "NonComm_Positions_Long_All", "NonComm_Positions_Short_All",
+                      "NonRept_Positions_Long_All",
+                      "NonRept_Positions_Short_All"], inplace=True)
+    return cdf.stack() \
+        .reset_index() \
+        .rename(columns={"level_1": "cot_type", 0: "net"}) \
+        .set_index("Report_Date_as_MM_DD_YYYY")
 
 
-def cot_index(df: DataFrame, p: int) -> Series:
+def cot_index(df: DataFrame, p: int, traders: str = "commercials") -> Series:
     """Returns COT index.
 
     100 * (net - min_net) / (max_net - min_net), max and min within period.
     """
-    net = cot_net_position(df)
+    assert traders in ["commercials", "funds", "small traders"]
+
+    net = cot_net_position(df).query("cot_type == @traders")["net"]
     windo_df = net.rolling(p, 1)
     return 100.0 * ((net - windo_df.min()) / (windo_df.max() - windo_df.min()))
 

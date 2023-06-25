@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stock-monitor-data"
-version = "0.1.11"
+version = "0.1.12"
 description = ""
 authors = ["d61h6k4 <ddbihbka@gmail.com>"]
 readme = "README.md"
@@ -15,10 +15,13 @@ requests-cache = "^1.0.1"
 requests-ratelimiter = "^0.4.0"
 yfinance = "^0.2.20"
 tqdm = "^4.65.0"
+xlrd = "^2.0.1"
+urllib3 = "<2.0"
 
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.0.272"
+pytest = "^7.4.0"
 
 [tool.poetry.scripts]
 monitor = "stock_monitor_data.bin.monitor:main"

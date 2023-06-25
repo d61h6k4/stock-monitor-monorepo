@@ -54,9 +54,10 @@ async def render(q: Q):
         df = cot.commercials_by_names_or_codes(cot.history,
                                                names=[n.replace('_', ' ') for n in set(q.args.cot_form_names)],
                                                codes=[int(c) for c in set(q.args.cot_form_codes)])
+
+        net_df = cot_net_position(df)
         cdf = cot_index(df, q.args.cot_form_period).to_frame(name="cot_index") \
             .join(cot_move_index(df, q.args.cot_form_period).to_frame(name="cot_move_index")) \
-            .join(cot_net_position(df).to_frame(name="net")) \
             .dropna()
         if q.args.cot_form_ticker:
             stock_df = Stock(ticker_name=q.args.cot_form_ticker, period="5y", interval="1wk")
@@ -69,26 +70,33 @@ async def render(q: Q):
             cdf = cdf.to_timestamp().reset_index()
             cot_chart_start = 2
 
-        cot_net_data = dataframe_to_data(
+        net_data = dataframe_to_data(preprocess_dataframe(
+            net_df.to_timestamp().reset_index().rename(columns={"Report_Date_as_MM_DD_YYYY": "Date"})
+            [["Date", "net", "cot_type"]]
+            .set_index("Date")))
+        cot_data = dataframe_to_data(
             preprocess_dataframe(cdf.rename(columns={"Report_Date_as_MM_DD_YYYY": "Date"})
-                                 [["Date", "net", "cot_index", "cot_move_index"]]
+                                 [["Date", "cot_index", "cot_move_index"]]
                                  .set_index("Date")))
-        q.page["cot_net"] = ui.form_card(box=f"4 {cot_chart_start} -1 6",
+        q.page["cot_net"] = ui.form_card(box=f"4 {cot_chart_start} -1 7",
                                          items=[
-                                             ui.text_l("Commercial Net position"),
+                                             ui.text_l("Net position"),
                                              ui.visualization(name="cot_net",
-                                                              data=cot_net_data,
-                                                              height="120px",
+                                                              data=net_data,
+                                                              height="180px",
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
                                                                           y="={{intl net notation='compact' compactDisplay='short'}}",
                                                                           y_nice=True,
-                                                                          color="#06982d")
+                                                                          color="=cot_type",
+                                                                          color_range="#E33946 #0B64C0 #FBFE56",
+                                                                          color_domain=["commercials", "funds",
+                                                                                        "small traders"])
                                                               ])),
                                              ui.text_l("COT Index"),
                                              ui.visualization(name="cot_index",
-                                                              data=cot_net_data,
+                                                              data=cot_data,
                                                               height="120px",
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
@@ -96,18 +104,18 @@ async def render(q: Q):
                                                                           y_scale="quantile",
                                                                           y="={{intl cot_index notation='compact' compactDisplay='short'}}",
                                                                           y_nice=True,
-                                                                          color="#06982d")
+                                                                          color="#E33946")
                                                               ])),
                                              ui.text_l("COT Move Index"),
                                              ui.visualization(name="cot_move_index",
-                                                              data=cot_net_data,
+                                                              data=cot_data,
                                                               height="120px",
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
                                                                           y="={{intl cot_move_index notation='compact' compactDisplay='short'}}",
                                                                           y_nice=True,
-                                                                          color="#06982d")
+                                                                          color="#E33946")
                                                               ])),
 
                                          ])

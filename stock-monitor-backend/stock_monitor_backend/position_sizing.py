@@ -1,4 +1,4 @@
-from typing import Mapping
+from collections.abc import Mapping
 from datetime import datetime, timezone
 
 import numpy as np
@@ -6,7 +6,6 @@ import pandas as pd
 from pypfopt import black_litterman
 from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt.objective_functions import L2_reg
-
 from stock_monitor_data.data import portfolio
 from stock_monitor_data.models import Stock
 
@@ -68,5 +67,6 @@ def get_weights():
     rets = bl.bl_returns()
     ef = EfficientFrontier(rets, cov_matrix)
     ef.add_objective(L2_reg)
-    ef.max_sharpe()
+    ef.max_quadratic_utility(risk_aversion=delta)
+    
     return ef.clean_weights(rounding=2), bl.clean_weights(rounding=2)
