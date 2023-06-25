@@ -764,6 +764,81 @@ def ideas(period: str, interval: str):
                                    of \$2.50/share (20% current yield) in Q2 2023.
                                    [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-17)
                    """),
+             Stock(ticker_name="VLC", period=period, interval=interval,
+                   expectation=Expectation(price=300, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""The industry is certainly cyclical, though the businesses that are more closely tied
+                                   to public projects enjoy far more predictable demand. Around 35-40% of demand for the
+                                   large industry players comes from the more stable publicly-funded projects.
+                                   [Source](https://eaglepointcapital.substack.com/p/rock-pits)
+                   """),
+             Stock(ticker_name="MLM", period=period, interval=interval,
+                   expectation=Expectation(price=500, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""The industry is certainly cyclical, though the businesses that are more closely tied
+                                   to public projects enjoy far more predictable demand. Around 35-40% of demand for the
+                                   large industry players comes from the more stable publicly-funded projects.
+                                   [Source](https://eaglepointcapital.substack.com/p/rock-pits)
+                   """),
+             Stock(ticker_name="STHO", period=period, interval=interval,
+                   expectation=Expectation(price=34, date=datetime(2027, 8, 15, tzinfo=timezone.utc)),
+                   description=r"""Sub \$200m market cap spin-off resulting from the merger of iStar and Safehold
+                                   (SAFE). The company primarily holds non-ground lease-related commercial real
+                                   estate assets and has a mandate to monetize these holdings through development
+                                   or asset sales. STHO holds \$320m SAFE shares, \$238m of debt, real estate and
+                                   land development assets valued at \$337m (book value). \$50m of cash on the
+                                   balance sheet is intended to cover four years' worth of expenses related to
+                                   the management agreement with iStar, which manages STHO. If the property assets
+                                   are successfully monetized at book value, Star Holdings would be worth \$34/share
+                                   (140% upside). Downside looks somewhat protected as at current stock prices the
+                                   property assets could be sold at just 30% book value to break even. Two primary
+                                   assets of Star Holdings, Asbury Park and Magnolia Green, account for 80% of the
+                                   property value. Completed properties in Asbury Park have shown strong demand
+                                   while significant progress has already been made in terms of lot sales and
+                                   contracts in Magnolia Green.
+                                   [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)"""),
+             Stock(ticker_name="DWL.L", period=period, interval=interval,
+                   expectation=Expectation(price=150, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""As the former GKN auto and powder metallurgy business, DWL was acquired by
+                                  Melrose in 2018, restructured, and spun off. This spin-off has resulted in the
+                                  undervaluation of DWL, creating an attractive investment opportunity. DWL boasts a
+                                  conservative balance sheet, a strong management team, and the potential for
+                                  substantial margin expansion. Company has a strong global position both with
+                                  ICE and EV vehicles and should benefit from an expected recovery in the auto industry.
+                                  DWL is a world leader in driveline components for automobiles and is also the
+                                  #1 player globally in sinter and the second-largest player in powder metallurgy.
+                                  Both segments have undergone substantial operational restructurings in recent years.
+                                  Management is committed to 10% operating margins for Driveline segment at 2019 auto
+                                  production levels (current margins sit around 5.5%). Company promises similar
+                                  operating improvements in the Powder Metallurgy segment where EBIT margins could
+                                  expand from 10% to 14%. Management's targets look achievable due to Melrose's
+                                  excellent track record of creating shareholder value through its spin-offs.
+                                  Melrose stock and associated spins have historically returned 1700% since their
+                                  first acquisition, 10x the FTSE.
+                                  [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
+                   """),
+             Stock(ticker_name="SPR", period=period, interval=interval,
+                   expectation=Expectation(price=80, date=datetime(2026, 6, 15, tzinfo=timezone.utc)),
+                   description=r"""Primary supplier for Boeing 737 MAX fuselage and also does business with Airbus on
+                                   wings. With a solid outlook for 2025 and a backlog of \$37bn, SPR is
+                                   well-positioned to benefit from a robust demand for commercial aircraft. The recent
+                                   quality issue and the slow ramp-up of the Boeing supply chain have caused the stock
+                                   price to decline, presenting an opportunistic entry point. These issues are
+                                   manageable and do not pose a significant threat to the company's future prospects.
+                                   The recent setback with quality issues, involving two fasteners on the fuselage,
+                                   led to a temporary and minor halt in production. This problem was not a safety
+                                   concern and has now been addressed, with repairs expected to be completed by July.
+                                   While the ramp-up of the Boeing supply chain has been slow, similar challenges
+                                   have been faced in the past during the 787 production period. The demand for
+                                   commercial aircraft is strong, with Boeing receiving new orders for the MAX and
+                                   Airbus growing its backlog. As production levels increase, Spirit is expected to
+                                   generate significant cash flow. Meanwhile, Spirit has a substantial cash reserve
+                                   of $568m and a debt profile that can be refinanced as it matures (most of Spirit's
+                                   bonds are currently trading at par). Labor contract negotiations also represent a
+                                   near-term challenge. However, an outcome is soon expected and management has
+                                   factored in wage increases similar to those agreed upon by other industry players,
+                                   such as Lockheed, into their guidance.
+                                   [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
+                   """),
+             
              ]
 
     def yield_per_day(x):
