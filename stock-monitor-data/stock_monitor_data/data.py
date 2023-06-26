@@ -838,7 +838,23 @@ def ideas(period: str, interval: str):
                                    such as Lockheed, into their guidance.
                                    [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
                    """),
-
+             Stock(ticker_name="ARCO", period=period, interval=interval,
+                   expectation=Expectation(price=15, date=datetime(2027, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""The opportunity to gain exposure to South America with a defensive approach.
+                                   This is, having a clear view on what is the dynamics affecting the company
+                                   (trends on food and labor inflation, customer demand, etc.), and limiting
+                                   the country risk that would have investing in only one country of Latin America or the Caribbean.
+                                   The strength of McDonald’s brand and the disparity in valuations with other public restaurant chains.
+                                   [Source](https://moram.substack.com/p/moram-arcos-dorados-arco-investment)
+                   """),
+             Stock(ticker_name="APR.WA", period=period, interval=interval,
+                   expectation=Expectation(price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
+                                   works well in any economic environment but especially in times of economic downturns.
+                                   When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
+                                   the age of the vehicle fleet, resulting in the need for more maintenance.
+                                   [Source](https://moram.eu/investment-thesis-competition/autopartner/)
+                   """),
              ]
 
     return ideas
