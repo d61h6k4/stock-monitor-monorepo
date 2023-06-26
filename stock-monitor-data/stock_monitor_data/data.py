@@ -857,7 +857,7 @@ def ideas(period: str, interval: str):
                    """),
              ]
 
-    return ideas
+    return reversed(ideas)
 
 
 def portfolio(period: str, interval: str):
@@ -1147,4 +1147,21 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
               description="Market Cap: 7B. Forward P/E: 4.06x. P/B: 0.37x. Dividend: 9.96%"),
         Stock(ticker_name="YPF", period=period, interval=interval,
               description="""Market Cap: 4B. Forward P/E: 19.52x. P/B: 0.34x. Dividend: 1.92%"""),
+        Stock(ticker_name="XES", period=period, interval=interval,
+              description="""S&P Oil & Gas Equipment & Services Select Industry Index"""),
+    ]
+
+
+def crypto(period, interval) -> list[Stock]:
+    return [
+        Stock(ticker_name="HUT", period=period, interval=interval,
+              description="""Crypto miner."""),
+        Stock(ticker_name="COIN", period=period, interval=interval,
+              description="""Coinbase."""),
+        Stock(ticker_name="GBTC", period=period, interval=interval,
+              description="""Tip of the hat to the acid man Hugh Hendry for this idea, but the Grayscale Bitcoin Trust
+                             (GBTC) is trading at a 31% discount to NAV. And with Blackrock’s recent approval for a
+                             BTC ETF and GBTC’s lawsuit against the SEC for the seemingly arbitrary blocking of its
+                             ETF. It’s becoming increasingly probable they get greenlighted and this gap to NAV gets
+                             closed.."""),
     ]
