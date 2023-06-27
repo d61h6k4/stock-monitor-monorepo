@@ -944,7 +944,7 @@ def portfolio(period: str, interval: str):
                           on 2023 consensus numbers."""
         elif ticker_name == "APR.WA":
             buy_date = datetime(2023, 6, 27, tzinfo=timezone.utc)
-            expectation=Expectation(price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc), confidence=0.3),
+            expectation=Expectation(price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc), confidence=0.3)
             description=r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
                             works well in any economic environment but especially in times of economic downturns.
                             When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
