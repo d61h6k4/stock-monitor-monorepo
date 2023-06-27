@@ -862,7 +862,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "AMKR"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "AMKR", "APR.WA"]:
         buy_date = None
         description = None
         expectation = None
@@ -942,6 +942,13 @@ def portfolio(period: str, interval: str):
                           (definitely not overvalued in my opinion). Assuming a “normalised” 9x multiple of EBITDA,
                           in a transaction with a strategic buyer MMK could be worth up to \€193 (+41% potential upside)
                           on 2023 consensus numbers."""
+        elif ticker_name == "APR.WA":
+            buy_date = datetime(2023, 6, 27, tzinfo=timezone.utc)
+            expectation=Expectation(price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc), confidence=0.3),
+            description=r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
+                            works well in any economic environment but especially in times of economic downturns.
+                            When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
+                            the age of the vehicle fleet, resulting in the need for more maintenance."""
 
         assert buy_date is not None
         assert description is not None
