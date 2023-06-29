@@ -944,8 +944,8 @@ def portfolio(period: str, interval: str):
                           on 2023 consensus numbers."""
         elif ticker_name == "APR.WA":
             buy_date = datetime(2023, 6, 27, tzinfo=timezone.utc)
-            expectation=Expectation(price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc), confidence=0.3)
-            description=r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
+            expectation = Expectation(price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc), confidence=0.3)
+            description = r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
                             works well in any economic environment but especially in times of economic downturns.
                             When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
                             the age of the vehicle fleet, resulting in the need for more maintenance."""
@@ -1156,6 +1156,8 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
               description="""Market Cap: 4B. Forward P/E: 19.52x. P/B: 0.34x. Dividend: 1.92%"""),
         Stock(ticker_name="XES", period=period, interval=interval,
               description="""S&P Oil & Gas Equipment & Services Select Industry Index"""),
+        Stock(ticker_name="CNQ", period=period, interval=interval,
+              description="""Canadian Natural Resources Limited"""),
     ]
 
 
@@ -1171,4 +1173,15 @@ def crypto(period, interval) -> list[Stock]:
                              BTC ETF and GBTC’s lawsuit against the SEC for the seemingly arbitrary blocking of its
                              ETF. It’s becoming increasingly probable they get greenlighted and this gap to NAV gets
                              closed.."""),
+    ]
+
+
+def etfs(period, interval) -> list[Stock]:
+    return [
+        Stock(ticker_name="JPXN", period=period, interval=interval,
+              description="""Japan."""),
+        Stock(ticker_name="DAX", period=period, interval=interval,
+              description="""Germany."""),
+        Stock(ticker_name="SPY", period=period, interval=interval,
+              description="""USA."""),
     ]

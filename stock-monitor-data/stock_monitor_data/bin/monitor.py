@@ -2,7 +2,7 @@ import requests
 import json
 
 from tqdm import tqdm
-from stock_monitor_data.data import ideas, portfolio, oil_and_gas_stocks, crypto, vix_stocks
+from stock_monitor_data.data import ideas, portfolio, oil_and_gas_stocks, crypto, vix_stocks, etfs
 
 _BOT_URL = "https://lochaufwallstrasse.de/bot/conversations/dbihbka/trigger_intent?output_channel=callback"
 
@@ -49,6 +49,9 @@ def main():
         watch(stock)
 
     for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
+        watch(stock)
+
+    for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing VIX..."):
         watch(stock)
 
 
