@@ -1,5 +1,5 @@
 """Collection of the data models."""
-import shutil
+import io
 import tempfile
 import zipfile
 from typing import Mapping, Sequence
@@ -129,20 +129,13 @@ class COT(BaseModel):
                          values: Mapping[str, int]) -> DataFrame:
         """Downloads the data."""
 
-        def download_file(url, destination_dir):
-            local_filename = destination_dir / url.split('/')[-1]
-            with cot_session.get(url, stream=False) as r, open(local_filename, 'wb') as f:
-                shutil.copyfileobj(r.raw, f)
-
-            return local_filename
-
         def load_combine_reports_per_year(year: int) -> DataFrame:
             with tempfile.TemporaryDirectory() as temp_dir:
                 temp_dir = Path(temp_dir)
-                path_to_zip_file = download_file(f"https://www.cftc.gov/files/dea/history/dea_com_xls_{year}.zip",
-                                                 temp_dir)
+                zip_file_url = f"https://www.cftc.gov/files/dea/history/dea_com_xls_{year}.zip"
+                r = cot_session.get(zip_file_url)
 
-                with zipfile.ZipFile(path_to_zip_file, 'r') as zip_ref:
+                with zipfile.ZipFile(io.BytesIO(r.content)) as zip_ref:
                     zip_ref.extractall(temp_dir / "data")
 
                 return pd.read_excel(temp_dir / "data/annualof.xls")
