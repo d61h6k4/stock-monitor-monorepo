@@ -36,23 +36,23 @@ def monitor(stock):
 
 
 def main():
-    # for idea in tqdm(ideas(period="3mo", interval="1d"), desc="Processing ideas..."):
-    #     watch(idea)
+    for idea in tqdm(ideas(period="3mo", interval="1d"), desc="Processing ideas..."):
+        watch(idea)
 
     for stock in tqdm(portfolio(period="3mo", interval="1d"), desc="Processing portfolio..."):
         monitor(stock)
 
-    # for stock in tqdm(oil_and_gas_stocks(period="3mo", interval="1d"), desc="Processing Oil&Gas..."):
-    #     watch(stock)
-    #
-    # for stock in tqdm(crypto(period="3mo", interval="1d"), desc="Processing Crypto..."):
-    #     watch(stock)
-    #
-    # for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
-    #     watch(stock)
-    #
-    # for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing VIX..."):
-    #     watch(stock)
+    for stock in tqdm(oil_and_gas_stocks(period="3mo", interval="1d"), desc="Processing Oil&Gas..."):
+        watch(stock)
+
+    for stock in tqdm(crypto(period="3mo", interval="1d"), desc="Processing Crypto..."):
+        watch(stock)
+
+    for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
+        watch(stock)
+
+    for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing VIX..."):
+        watch(stock)
 
 
 if __name__ == "__main__":
