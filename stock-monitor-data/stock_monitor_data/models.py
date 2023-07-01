@@ -131,7 +131,7 @@ class COT(BaseModel):
 
         def download_file(url, destination_dir):
             local_filename = destination_dir / url.split('/')[-1]
-            with cot_session.get(url, stream=True) as r, open(local_filename, 'wb') as f:
+            with cot_session.get(url, stream=False) as r, open(local_filename, 'wb') as f:
                 shutil.copyfileobj(r.raw, f)
 
             return local_filename
