@@ -397,7 +397,7 @@ def ideas(period: str, interval: str):
                                    [Source](https://twitter.com/InvestSpecial/status/1644625210794995713)
                    """),
              Stock(ticker_name="SOMA.V", period=period, interval=interval,
-                   expectation=Expectation(price=6, date=datetime(2024, 12, 31, tzinfo=timezone.utc)),
+                   expectation=Expectation(price=6, date=datetime(2033, 12, 31, tzinfo=timezone.utc)),
                    description=r"""Imagine you can invest in gold as a safe haven, but with the characteristics of an exponential tech stock.
                                    If Soma Gold proves they have the resources, it could simply expand annual production from 36K to 75K.
                                    This growth is already permitted and should give us a 10 bagger. I believe Soma Gold is going to be
@@ -409,7 +409,7 @@ def ideas(period: str, interval: str):
                                    [Source](https://twitter.com/GoldForecast/status/1646418350996705283)
                   """),
              Stock(ticker_name="TM.V", period=period, interval=interval,
-                   expectation=Expectation(price=1.5, date=datetime(2024, 12, 31, tzinfo=timezone.utc)),
+                   expectation=Expectation(price=1.5, date=datetime(2033, 12, 31, tzinfo=timezone.utc)),
                    description=r"""Trigon Metals Inc. (TM:TSXV) is a Canadian exploration, development, and mining company focused on copper
                                    and silver assets in Africa. Trigon`s current priority is the restart of its flagship project, the Kombat
                                    Mine in Namibia. The Kombat Mine was once one of the largest copper producers in Namibia having historically
@@ -855,6 +855,49 @@ def ideas(period: str, interval: str):
                                    the age of the vehicle fleet, resulting in the need for more maintenance.
                                    [Source](https://moram.eu/investment-thesis-competition/autopartner/)
                    """),
+             Stock(ticker_name="FGF", period=period, interval=interval,
+                   expectation=Expectation(price=20, date=datetime(2033, 6, 15, tzinfo=timezone.utc)),
+                   description=r"""It’s a fool's game to try and guess how much growth we are looking at exactly but
+                                   I wouldn’t be surprised if they are able to double the number of contracts over
+                                   the next 2-3 years and bring in enough capital to achieve that number. This division
+                                   has a ton of potential and each new contract is a piece of evidence supporting
+                                   that thesis. The same can be said for the investments. The sponsor economics of
+                                   raising SPACs is a lucrative business and if the company can continue to
+                                   leverage their platform, I don’t see how money earned from the reinsurance division
+                                   can’t be put to work here or in their merchant banking partnerships.
+                                   But this doesn’t come without risk.
+                                   [Source](https://www.wsgresearch.com/p/fg-financial-a-hidden-spawner)
+                   """),
+             Stock(ticker_name="SBRE.L", period=period, interval=interval,
+                   expectation=Expectation(price=180, date=datetime(2025, 11, 30, tzinfo=timezone.utc)),
+                   description=r"""Sabre shares are at 7.4x 2019 EPS and 11.3x 2021 EPS
+                                   The sector’s 2022 earnings downturn was exceptional and cyclical
+                                   EPS can double this year and be back at 2021 level by 2024
+                                   At 135.6p, we see 35% upside (13.6% p.a.) by end of 2025
+                                   But this is not attractive enough and we have long-term concerns
+                                   [Source](https://librariancapital.substack.com/p/sabre-insurance-shares-halved-since)
+                   """),
+             Stock(ticker_name="WCN", period=period, interval=interval,
+                   expectation=Expectation(price=205, date=datetime(2026, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""Industry structure benefits incumbents: the waste disposal business in North America
+                                   is characterised by (a) high regulatory barriers (permits, extensive regulation) and
+                                   (b) high capital intensity (landfills require hefty upfront capital investment).
+                                   These features favour the landfills’ owners’ incumbents which, over time,
+                                   consolidate the industry, further improving their pricing power and returns on
+                                   capital.
+                                   [Source](https://investmentmarathon.substack.com/p/waste-connections-wcn-us)"""),
+             Stock(ticker_name="ATEX", period=period, interval=interval,
+                   expectation=Expectation(price=75, date=datetime(2028, 2, 15, tzinfo=timezone.utc)),
+                   description=r"""Shares today imply just ~\$.34 MHz/Pop, which is less than the company was trading
+                                   at before it received FCC approval a few years ago to execute this spectrum
+                                   transition and much less than ATEX has priced its spectrum (all 5 contracts
+                                   above \$1 MHz/Pop) in various signed contracts or comparable market transactions.
+                                   The business is uncorrelated with the general market and has a great balance sheet.
+                                   It will likely have contracted proceeds over just the next 2-3 years worth
+                                   significantly more than the current EV with multiples of upside
+                                   [Source](https://brightideas44.substack.com/p/unveiling-an-asymmetric-opportunity
+                   """),
+
              ]
 
     return reversed(ideas)
@@ -862,7 +905,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "AMKR", "APR.WA"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "AMKR", "APR.WA", "AMD"]:
         buy_date = None
         description = None
         expectation = None
@@ -949,6 +992,10 @@ def portfolio(period: str, interval: str):
                             works well in any economic environment but especially in times of economic downturns.
                             When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
                             the age of the vehicle fleet, resulting in the need for more maintenance."""
+        elif ticker_name == "AMD":
+            buy_date = datetime(2023, 6, 30, tzinfo=timezone.utc)
+            expectation = Expectation(price=170, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
+            description = r"""Based on news that MosaicAI successfully trained the MPT on AMD GPU."""
 
         assert buy_date is not None
         assert description is not None
@@ -1158,6 +1205,10 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
               description="""S&P Oil & Gas Equipment & Services Select Industry Index"""),
         Stock(ticker_name="CNQ", period=period, interval=interval,
               description="""Canadian Natural Resources Limited"""),
+        Stock(ticker_name="PREKF", period=period, interval=interval,
+              description="""[Source](https://specialsituationinvesting.substack.com/p/prairiesky-royalty-prekf)"""),
+        Stock(ticker_name="KIST.L", period=period, interval=interval,
+              description="""[Stock](https://hiddenvaluegems.com/on-markets-investing/tpost/hv3b9p62m1-hidden-sea-treasure-founder-led-european)"""),
     ]
 
 
@@ -1182,6 +1233,8 @@ def etfs(period, interval) -> list[Stock]:
               description="""Japan."""),
         Stock(ticker_name="DAX", period=period, interval=interval,
               description="""Germany."""),
-        Stock(ticker_name="SPY", period=period, interval=interval,
+        Stock(ticker_name="^SPX", period=period, interval=interval,
               description="""USA."""),
+        Stock(ticker_name="^IXIC", period=period, interval=interval,
+              description="""NASDAQ."""),
     ]

@@ -9,9 +9,9 @@ packages = [{include = "stock_monitor_data"}]
 [tool.poetry.dependencies]
 python = ">=3.10,<4"
 pandas = "^2.0.2"
-pydantic = "^1.10.9"
+pydantic = "^1.10.10"
 requests = "^2.31.0"
-requests-cache = "^1.0.1"
+requests-cache = "^1.1.0"
 requests-ratelimiter = "^0.4.0"
 yfinance = "^0.2.20"
 tqdm = "^4.65.0"

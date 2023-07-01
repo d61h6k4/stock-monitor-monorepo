@@ -11,7 +11,7 @@ from stock_monitor_data.models import Stock
 
 
 def get_market_prices() -> pd.Series:
-    return Stock(ticker_name="SPY", period="2y", interval="1d").history["Close"]
+    return Stock(ticker_name="^SPX", period="2y", interval="1d").history["Close"]
 
 
 def get_portfolio_prices() -> pd.DataFrame:
