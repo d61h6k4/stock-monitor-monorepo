@@ -897,6 +897,36 @@ def ideas(period: str, interval: str):
                                    significantly more than the current EV with multiples of upside
                                    [Source](https://brightideas44.substack.com/p/unveiling-an-asymmetric-opportunity
                    """),
+             Stock(ticker_name="MACK", period=period, interval=interval,
+                   expectation=Expectation(price=15, date=datetime(2024, 5, 15, tzinfo=timezone.utc)),
+                   description=r"""Special situation with the opportunity to earn a ~30% return over the next ~9
+                                   months with little risk. MACK is a shell company that owns a contingent milestone
+                                   payment related to the drug Onivyde, which it sold to Ipsen. The milestone
+                                   payment is contingent upon FDA approval for the treatment of metastatic pancreatic
+                                   ductal adenocarcinoma (mPDAC). This is an aggressive form of cancer with a short
+                                   median overall survival period. Ipsen has presented compelling phase III data
+                                   demonstrating the efficacy and safety of Onivyde in treating mPDAC, and intends to
+                                   submit a new drug application. Given the strong phase III data, FDA approval for
+                                   Onivyde's mPDAC treatment is expected to be a mere formality. Upon FDA approval,
+                                   MACK is entitled to a substantial cash payment of \$225m from Ipsen, which
+                                   translates to approximately \$15/share. MACK is controlled by a financially
+                                   sophisticated board that owns almost 29% of the stock. Management plans to return
+                                   this windfall cash to shareholders through special dividends.
+                                   [Source](https://ideahive.substack.com/p/vic-pitch-summaries-july-2)
+                   """),
+             Stock(ticker_name="STG.CO", period=period, inteval=interval,
+                   expectation=Expectation(price=133, date=datetime(2023, 2, 15, tzinfo=timezone.utc)),
+                   description=r"""STG is a relatively small company, with a current market capitalization of ~DKK9.85
+                                   billion (\$1.44 billion) and a current enterprise value of ~DKK14.16 billion
+                                   (\$2.07 billion). As a small cap, STG remains outside the purview of most investors.
+                                   Scandinavian Tobacco Group is headquartered in Copenhagen, Denmark, and is listed
+                                   under the ticker “STG” on the Nasdaq Copenhagen Stock Exchange, which further
+                                   restricts accessibility and interest. Cigars - especially premium handmade cigars -
+                                   are completely ignored by most investors and analysts, even those focused on the
+                                   tobacco industry. This niche isn’t just an afterthought; it receives practically
+                                   no thought.
+                                   [Source](https://invariant.substack.com/p/scandinavian-tobacco-group-serial-acquirer)
+                   """),
 
              ]
 
