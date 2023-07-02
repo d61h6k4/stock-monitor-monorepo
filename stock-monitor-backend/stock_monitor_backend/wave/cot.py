@@ -84,6 +84,7 @@ async def render(q: Q):
                                              ui.visualization(name="cot_net",
                                                               data=net_data,
                                                               height="180px",
+                                                              interactions=['brush'],
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
@@ -98,6 +99,7 @@ async def render(q: Q):
                                              ui.visualization(name="cot_index",
                                                               data=cot_data,
                                                               height="120px",
+                                                              interactions=['brush'],
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',
@@ -110,6 +112,7 @@ async def render(q: Q):
                                              ui.visualization(name="cot_move_index",
                                                               data=cot_data,
                                                               height="120px",
+                                                              interactions=['brush'],
                                                               plot=ui.plot([
                                                                   ui.mark(type="interval", x_scale='time',
                                                                           x='=Date',

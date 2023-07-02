@@ -27,7 +27,7 @@ session = CachedLimiterSession(
 )
 
 cot_session = CachedLimiterSession(
-    expire_after=7 * 24 * 3600,
+    expire_after=24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
     backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "cot.cache")),
