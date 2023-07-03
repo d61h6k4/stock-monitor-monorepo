@@ -10,6 +10,7 @@ import pandas as pd
 from pandas import DataFrame
 from pydantic import BaseModel, validator
 from requests import Session
+from requests.exceptions import HTTPError
 from requests_cache import CacheMixin, SQLiteCache
 from requests_ratelimiter import LimiterMixin, MemoryQueueBucket
 from yfinance import Ticker
@@ -87,19 +88,28 @@ class Stock(BaseModel):
         assert history.empty
 
         ticker = Ticker(values["ticker_name"], session=session)
-        return ticker.history(period=values["period"], interval=values["interval"])
+        try:
+            return ticker.history(period=values["period"], interval=values["interval"])
+        except HTTPError as e:
+            raise ValueError(f"Ticker {values['ticker_name']} doesn't exist.") from e
 
     @validator("business_summary", always=True)
     def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
         """Extract business summary."""
         ticker = Ticker(values["ticker_name"], session=session)
-        return ticker.get_info().get("longBusinessSummary", business_summary)
+        try:
+            return ticker.get_info().get("longBusinessSummary", business_summary)
+        except HTTPError as e:
+            raise ValueError(f"Ticker {values['ticker_name']} doesn't exist.") from e
 
     @validator("market_cap", always=True)
     def set_market_cap(cls: "Stock", market_cap: float, values: Mapping[str, str]) -> float:
         """Extract market cap."""
         ticker = Ticker(values["ticker_name"], session=session)
-        return ticker.get_info().get("marketCap", market_cap)
+        try:
+            return ticker.get_info().get("marketCap", market_cap)
+        except HTTPError as e:
+            raise ValueError(f"Ticker {values['ticker_name']} doesn't exist.") from e
 
 
 class COT(BaseModel):
