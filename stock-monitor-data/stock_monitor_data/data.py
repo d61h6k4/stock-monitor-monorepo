@@ -914,7 +914,7 @@ def ideas(period: str, interval: str):
                                    this windfall cash to shareholders through special dividends.
                                    [Source](https://ideahive.substack.com/p/vic-pitch-summaries-july-2)
                    """),
-             Stock(ticker_name="STG.CO", period=period, inteval=interval,
+             Stock(ticker_name="STG.CO", period=period, interval=interval,
                    expectation=Expectation(price=133, date=datetime(2023, 2, 15, tzinfo=timezone.utc)),
                    description=r"""STG is a relatively small company, with a current market capitalization of ~DKK9.85
                                    billion (\$1.44 billion) and a current enterprise value of ~DKK14.16 billion
