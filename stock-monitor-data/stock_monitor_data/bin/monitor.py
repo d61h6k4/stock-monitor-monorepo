@@ -51,7 +51,7 @@ def main():
     for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
         watch(stock)
 
-    for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing VIX..."):
+    for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing EFT..."):
         watch(stock)
 
 
