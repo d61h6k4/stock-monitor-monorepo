@@ -927,7 +927,30 @@ def ideas(period: str, interval: str):
                                    no thought.
                                    [Source](https://invariant.substack.com/p/scandinavian-tobacco-group-serial-acquirer)
                    """),
-
+             Stock(ticker_name="J4V.F", period=period, interval=interval,
+                   expectation=Expectation(price=10, date=datetime(2027, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""All in all, Vår is a very attractive investment opportunity right now.
+                                   With a dividend of 15-20% this year, that I expect to grow over the next years.
+                                   With the acquisition of Neptune Energy and multiple projects that will be
+                                   finished over the next years, I expect very good shareholder returns over the
+                                   long run. Notably the sentiment for European oil & gas producers is bad, but
+                                   even with all the headwinds the stock will still perform well. Now imagine,
+                                   that some of these headwinds could go away.
+                                   [Source](https://moderninvesting.substack.com/p/var-energi-norways-dividend-monster)
+                   """),
+             Stock(ticker_name="V", period=period, interval=interval,
+                   expectation=Expectation(price=400, date=datetime(2026, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""We believe Visa shares still offer the potential of a 20%+ annualized return
+                                   by September 2026, driven by an approximately 14% EPS CAGR and its P/E re-rating
+                                   from 30x to 35x. H1 FY23 results and management outlook imply Adjusted EPS will
+                                   grow by 14% in FY23. Transaction volume has already been disclosed for 2 of the
+                                   3 months in Q3 FY23, Q3 results should be in line with expectations, though there
+                                   may be some non-operational headwinds from currency and a tax hike in Brazil.
+                                   The U.S. consumer continues to be resilient. Visa’s “network of networks” strategy
+                                   means it is well-placed against any new entrants, and the biggest risks to Visa are
+                                   likely from governments.
+                                   [Source](https://librariancapital.substack.com/p/visa-up-15-year-to-date-with-more)
+                   """),
              ]
 
     return reversed(ideas)
