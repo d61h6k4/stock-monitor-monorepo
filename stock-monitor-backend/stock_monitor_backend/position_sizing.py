@@ -67,6 +67,6 @@ def get_weights():
     rets = bl.bl_returns()
     ef = EfficientFrontier(rets, cov_matrix)
     ef.add_objective(L2_reg)
-    ef.max_quadratic_utility(risk_aversion=delta)
+    ef.max_sharpe()
     
     return ef.clean_weights(rounding=2), bl.clean_weights(rounding=2)
