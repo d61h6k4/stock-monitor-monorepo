@@ -951,6 +951,18 @@ def ideas(period: str, interval: str):
                                    likely from governments.
                                    [Source](https://librariancapital.substack.com/p/visa-up-15-year-to-date-with-more)
                    """),
+             Stock(ticker_name="GRVY", period=period, interval=interval,
+                   expectation=Expectation(price=180, date=datetime(2026, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""Gravity’s sales and profit growth accelerated in Q4 2022 with the launch of
+                                   Ragnarok Origin in Taiwan/HK. I expect that the momentum in top-line and EBIT
+                                   will continue as the company releases RO in SE Asia and globally. GRVY’s valuation
+                                   is extremely asymmetric. GRVY is currently trading at ~2.0x ‘24 EBITDA or a +35% FCF
+                                   yield, but the downside is limited by the company’s net cash balance (\$50+ net
+                                   cash/share vs. \$72 current price). The company’s growing cash pile provides for
+                                   significant optionality through possible repurchases, dividends, or thoughtful M&A.
+                                   The company’s game pipeline could provide valuable diversification of earnings and
+                                   further upside if the company develops another hit game.
+                                   [Source](https://www.clarksquarecapital.com/p/gravity-co-grvy)"""),
              ]
 
     return reversed(ideas)
