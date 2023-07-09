@@ -750,7 +750,7 @@ def ideas(period: str, interval: str):
              Stock(ticker_name="THO", period=period, interval=interval,
                    expectation=Expectation(price=123, date=datetime(2032, 1, 15, tzinfo=timezone.utc)),
                    description=r"""It operates in an industry where the demand is steady and growing.
-                                   It’s difficult to see that people will stop choosing to go on cost-effective
+                                   It`s difficult to see that people will stop choosing to go on cost-effective
                                    holidays in nature. In the past 20 years, the market has grown steadily by about 5%.
                                    [Source](https://sleepwellinvestments.substack.com/p/thor-industries-rv-monopoly-at-the)
                    """),
@@ -844,7 +844,7 @@ def ideas(period: str, interval: str):
                                    This is, having a clear view on what is the dynamics affecting the company
                                    (trends on food and labor inflation, customer demand, etc.), and limiting
                                    the country risk that would have investing in only one country of Latin America or the Caribbean.
-                                   The strength of McDonald’s brand and the disparity in valuations with other public restaurant chains.
+                                   The strength of McDonald`s brand and the disparity in valuations with other public restaurant chains.
                                    [Source](https://moram.substack.com/p/moram-arcos-dorados-arco-investment)
                    """),
              Stock(ticker_name="APR.WA", period=period, interval=interval,
@@ -857,21 +857,21 @@ def ideas(period: str, interval: str):
                    """),
              Stock(ticker_name="FGF", period=period, interval=interval,
                    expectation=Expectation(price=20, date=datetime(2033, 6, 15, tzinfo=timezone.utc)),
-                   description=r"""It’s a fool's game to try and guess how much growth we are looking at exactly but
-                                   I wouldn’t be surprised if they are able to double the number of contracts over
+                   description=r"""It`s a fool's game to try and guess how much growth we are looking at exactly but
+                                   I wouldn`t be surprised if they are able to double the number of contracts over
                                    the next 2-3 years and bring in enough capital to achieve that number. This division
                                    has a ton of potential and each new contract is a piece of evidence supporting
                                    that thesis. The same can be said for the investments. The sponsor economics of
                                    raising SPACs is a lucrative business and if the company can continue to
-                                   leverage their platform, I don’t see how money earned from the reinsurance division
-                                   can’t be put to work here or in their merchant banking partnerships.
-                                   But this doesn’t come without risk.
+                                   leverage their platform, I don`t see how money earned from the reinsurance division
+                                   can`t be put to work here or in their merchant banking partnerships.
+                                   But this doesn`t come without risk.
                                    [Source](https://www.wsgresearch.com/p/fg-financial-a-hidden-spawner)
                    """),
              Stock(ticker_name="SBRE.L", period=period, interval=interval,
                    expectation=Expectation(price=180, date=datetime(2025, 11, 30, tzinfo=timezone.utc)),
                    description=r"""Sabre shares are at 7.4x 2019 EPS and 11.3x 2021 EPS
-                                   The sector’s 2022 earnings downturn was exceptional and cyclical
+                                   The sector`s 2022 earnings downturn was exceptional and cyclical
                                    EPS can double this year and be back at 2021 level by 2024
                                    At 135.6p, we see 35% upside (13.6% p.a.) by end of 2025
                                    But this is not attractive enough and we have long-term concerns
@@ -882,7 +882,7 @@ def ideas(period: str, interval: str):
                    description=r"""Industry structure benefits incumbents: the waste disposal business in North America
                                    is characterised by (a) high regulatory barriers (permits, extensive regulation) and
                                    (b) high capital intensity (landfills require hefty upfront capital investment).
-                                   These features favour the landfills’ owners’ incumbents which, over time,
+                                   These features favour the landfills` owners` incumbents which, over time,
                                    consolidate the industry, further improving their pricing power and returns on
                                    capital.
                                    [Source](https://investmentmarathon.substack.com/p/waste-connections-wcn-us)"""),
@@ -923,7 +923,7 @@ def ideas(period: str, interval: str):
                                    under the ticker “STG” on the Nasdaq Copenhagen Stock Exchange, which further
                                    restricts accessibility and interest. Cigars - especially premium handmade cigars -
                                    are completely ignored by most investors and analysts, even those focused on the
-                                   tobacco industry. This niche isn’t just an afterthought; it receives practically
+                                   tobacco industry. This niche isn`t just an afterthought; it receives practically
                                    no thought.
                                    [Source](https://invariant.substack.com/p/scandinavian-tobacco-group-serial-acquirer)
                    """),
@@ -946,23 +946,24 @@ def ideas(period: str, interval: str):
                                    grow by 14% in FY23. Transaction volume has already been disclosed for 2 of the
                                    3 months in Q3 FY23, Q3 results should be in line with expectations, though there
                                    may be some non-operational headwinds from currency and a tax hike in Brazil.
-                                   The U.S. consumer continues to be resilient. Visa’s “network of networks” strategy
+                                   The U.S. consumer continues to be resilient. Visa`s “network of networks” strategy
                                    means it is well-placed against any new entrants, and the biggest risks to Visa are
                                    likely from governments.
                                    [Source](https://librariancapital.substack.com/p/visa-up-15-year-to-date-with-more)
                    """),
              Stock(ticker_name="GRVY", period=period, interval=interval,
                    expectation=Expectation(price=180, date=datetime(2026, 9, 15, tzinfo=timezone.utc)),
-                   description=r"""Gravity’s sales and profit growth accelerated in Q4 2022 with the launch of
+                   description=r"""Gravity`s sales and profit growth accelerated in Q4 2022 with the launch of
                                    Ragnarok Origin in Taiwan/HK. I expect that the momentum in top-line and EBIT
-                                   will continue as the company releases RO in SE Asia and globally. GRVY’s valuation
-                                   is extremely asymmetric. GRVY is currently trading at ~2.0x ‘24 EBITDA or a +35% FCF
-                                   yield, but the downside is limited by the company’s net cash balance (\$50+ net
-                                   cash/share vs. \$72 current price). The company’s growing cash pile provides for
+                                   will continue as the company releases RO in SE Asia and globally. GRVY`s valuation
+                                   is extremely asymmetric. GRVY is currently trading at ~2.0x `24 EBITDA or a +35% FCF
+                                   yield, but the downside is limited by the company`s net cash balance (\$50+ net
+                                   cash/share vs. \$72 current price). The company`s growing cash pile provides for
                                    significant optionality through possible repurchases, dividends, or thoughtful M&A.
-                                   The company’s game pipeline could provide valuable diversification of earnings and
+                                   The company`s game pipeline could provide valuable diversification of earnings and
                                    further upside if the company develops another hit game.
                                    [Source](https://www.clarksquarecapital.com/p/gravity-co-grvy)"""),
+
              ]
 
     return reversed(ideas)
@@ -970,7 +971,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "AMKR", "APR.WA", "AMD"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "APR.WA", "AMD"]:
         buy_date = None
         description = None
         expectation = None
@@ -1285,9 +1286,9 @@ def crypto(period, interval) -> list[Stock]:
               description="""Coinbase."""),
         Stock(ticker_name="GBTC", period=period, interval=interval,
               description="""Tip of the hat to the acid man Hugh Hendry for this idea, but the Grayscale Bitcoin Trust
-                             (GBTC) is trading at a 31% discount to NAV. And with Blackrock’s recent approval for a
-                             BTC ETF and GBTC’s lawsuit against the SEC for the seemingly arbitrary blocking of its
-                             ETF. It’s becoming increasingly probable they get greenlighted and this gap to NAV gets
+                             (GBTC) is trading at a 31% discount to NAV. And with Blackrock`s recent approval for a
+                             BTC ETF and GBTC`s lawsuit against the SEC for the seemingly arbitrary blocking of its
+                             ETF. It`s becoming increasingly probable they get greenlighted and this gap to NAV gets
                              closed.."""),
     ]
 
@@ -1302,4 +1303,17 @@ def etfs(period, interval) -> list[Stock]:
               description="""USA."""),
         Stock(ticker_name="^IXIC", period=period, interval=interval,
               description="""NASDAQ."""),
+        Stock(ticker_name="FXI", period=period, interval=interval,
+              description="""China Large Cap."""),
+        Stock(ticker_name="ERUS", period=period, interval=interval,
+              description="""Russia."""),
+        Stock(ticker_name="XOP", period=period, interval=interval,
+              description="""SPDR S&P Oil & Gas Exploration & Production ETF."""),
+        Stock(ticker_name="XLE", period=period, interval=interval,
+              description="""Energy Select Sector SPDR Fund."""),
+        Stock(ticker_name="EWZ", period=period, interval=interval,
+              description="""Brazil."""),
+        Stock(ticker_name="GXG", period=period, interval=interval,
+              description="""Colombia."""),
+
     ]

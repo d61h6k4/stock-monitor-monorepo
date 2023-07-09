@@ -2,7 +2,7 @@
 import io
 import tempfile
 import zipfile
-from typing import Mapping, Sequence
+from collections.abc import Mapping, Sequence
 from datetime import datetime
 from pathlib import Path
 
@@ -91,7 +91,8 @@ class Stock(BaseModel):
         try:
             return ticker.history(period=values["period"], interval=values["interval"])
         except HTTPError as e:
-            raise ValueError(f"Ticker {values['ticker_name']} doesn't exist.") from e
+            msg = f"Ticker {values['ticker_name']} doesn't exist."
+            raise ValueError(msg) from e
 
     @validator("business_summary", always=True)
     def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
@@ -100,7 +101,8 @@ class Stock(BaseModel):
         try:
             return ticker.get_info().get("longBusinessSummary", business_summary)
         except HTTPError as e:
-            raise ValueError(f"Ticker {values['ticker_name']} doesn't exist.") from e
+            msg = f"Ticker {values['ticker_name']} doesn't exist."
+            raise ValueError(msg) from e
 
     @validator("market_cap", always=True)
     def set_market_cap(cls: "Stock", market_cap: float, values: Mapping[str, str]) -> float:
@@ -109,7 +111,8 @@ class Stock(BaseModel):
         try:
             return ticker.get_info().get("marketCap", market_cap)
         except HTTPError as e:
-            raise ValueError(f"Ticker {values['ticker_name']} doesn't exist.") from e
+            msg = f"Ticker {values['ticker_name']} doesn't exist."
+            raise ValueError(msg) from e
 
 
 class COT(BaseModel):
