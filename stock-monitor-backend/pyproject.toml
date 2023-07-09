@@ -8,7 +8,7 @@ packages = [{include = "stock_monitor_backend"}]
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.15"
-fastapi = "^0.97.0"
+fastapi = "^0.100.0"
 uvicorn = {version = "^0.21.1", extras = ["standard"]}
 structlog = "^22.3.0"
 requests = "^2.28.2"
