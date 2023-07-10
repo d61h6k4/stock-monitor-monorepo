@@ -1315,5 +1315,7 @@ def etfs(period, interval) -> list[Stock]:
               description="""Brazil."""),
         Stock(ticker_name="GXG", period=period, interval=interval,
               description="""Colombia."""),
+        Stock(ticker_name="MSOS", period=period, interval=interval,
+              description="""Canabis."""),
 
     ]
