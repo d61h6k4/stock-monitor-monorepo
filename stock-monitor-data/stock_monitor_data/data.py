@@ -971,7 +971,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "APR.WA", "AMD"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "APR.WA", "AMD", "PSK.TO"]:
         buy_date = None
         description = None
         expectation = None
@@ -1062,6 +1062,10 @@ def portfolio(period: str, interval: str):
             buy_date = datetime(2023, 6, 30, tzinfo=timezone.utc)
             expectation = Expectation(price=170, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
             description = r"""Based on news that MosaicAI successfully trained the MPT on AMD GPU."""
+        elif ticker_name == "PSK.TO":
+            buy_date = datetime(2023, 7, 10, tzinfo=timezone.utc)
+            expectation = Expectation(price=35, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
+            description = r"""Play with Oil."""
 
         assert buy_date is not None
         assert description is not None
@@ -1271,7 +1275,7 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
               description="""S&P Oil & Gas Equipment & Services Select Industry Index"""),
         Stock(ticker_name="CNQ", period=period, interval=interval,
               description="""Canadian Natural Resources Limited"""),
-        Stock(ticker_name="PREKF", period=period, interval=interval,
+        Stock(ticker_name="PSK.TO", period=period, interval=interval,
               description="""[Source](https://specialsituationinvesting.substack.com/p/prairiesky-royalty-prekf)"""),
         Stock(ticker_name="KIST.L", period=period, interval=interval,
               description="""[Stock](https://hiddenvaluegems.com/on-markets-investing/tpost/hv3b9p62m1-hidden-sea-treasure-founder-led-european)"""),
