@@ -24,18 +24,18 @@ class Monitor:
 
     def start(self):
         logger.info("Start monitoring ...")
-        # for idea in tqdm(ideas(period="3mo", interval="1d"), desc="Processing ideas..."):
-        #     self.watch(idea)
+        for idea in tqdm(ideas(period="3mo", interval="1d"), desc="Processing ideas..."):
+            self.watch(idea)
         for stock in tqdm(portfolio(period="3mo", interval="1d"), desc="Processing portfolio..."):
             self.monitor(stock)
-        # for stock in tqdm(oil_and_gas_stocks(period="3mo", interval="1d"), desc="Processing Oil&Gas..."):
-        #     self.watch(stock)
-        # for stock in tqdm(crypto(period="3mo", interval="1d"), desc="Processing Crypto..."):
-        #     self.watch(stock)
-        # for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
-        #     self.watch(stock)
-        # for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing ETF..."):
-        #     self.watch(stock)
+        for stock in tqdm(oil_and_gas_stocks(period="3mo", interval="1d"), desc="Processing Oil&Gas..."):
+            self.watch(stock)
+        for stock in tqdm(crypto(period="3mo", interval="1d"), desc="Processing Crypto..."):
+            self.watch(stock)
+        for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
+            self.watch(stock)
+        for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing ETF..."):
+            self.watch(stock)
 
     def notify(self, stock):
         self.notifier.send_unique_decision("dbihbka", asr_rule(stock.ticker_name))
