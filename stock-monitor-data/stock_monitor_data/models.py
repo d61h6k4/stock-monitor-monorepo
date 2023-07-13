@@ -1,5 +1,6 @@
 """Collection of the data models."""
 import io
+import logging
 import tempfile
 import zipfile
 from collections.abc import Mapping, Sequence
@@ -14,6 +15,8 @@ from requests.exceptions import HTTPError
 from requests_cache import CacheMixin, SQLiteCache
 from requests_ratelimiter import LimiterMixin, MemoryQueueBucket
 from yfinance import Ticker
+
+logger = logging.getLogger(__name__)
 
 
 class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
@@ -101,8 +104,8 @@ class Stock(BaseModel):
         try:
             return ticker.get_info().get("longBusinessSummary", business_summary)
         except HTTPError as e:
-            msg = f"Ticker {values['ticker_name']} doesn't exist."
-            raise ValueError(msg) from e
+            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {repr(e)}")
+            return business_summary
 
     @validator("market_cap", always=True)
     def set_market_cap(cls: "Stock", market_cap: float, values: Mapping[str, str]) -> float:
@@ -111,8 +114,8 @@ class Stock(BaseModel):
         try:
             return ticker.get_info().get("marketCap", market_cap)
         except HTTPError as e:
-            msg = f"Ticker {values['ticker_name']} doesn't exist."
-            raise ValueError(msg) from e
+            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {repr(e)}")
+            return 1.0
 
 
 class COT(BaseModel):
