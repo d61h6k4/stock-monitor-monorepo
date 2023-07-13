@@ -65,7 +65,7 @@ def main():
     notify.add_telegram(telegram_client)
 
     try:
-        Monitor(notifier=notify, monitor_timedelta=15)
+        Monitor(notifier=notify)
     except BaseException as e:
         notify.persist()
         logger.error(repr(e))
