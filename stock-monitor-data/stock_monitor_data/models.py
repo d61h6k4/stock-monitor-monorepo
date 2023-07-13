@@ -30,6 +30,13 @@ session = CachedLimiterSession(
     backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "yfinance.cache")),
 )
 
+slow_session = CachedLimiterSession(
+    expire_after=30 * 24 * 3600,
+    per_second=0.9,
+    bucket_class=MemoryQueueBucket,
+    backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "yfinance.cache")),
+)
+
 cot_session = CachedLimiterSession(
     expire_after=24 * 3600,
     per_second=0.9,
@@ -100,7 +107,7 @@ class Stock(BaseModel):
     @validator("business_summary", always=True)
     def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
         """Extract business summary."""
-        ticker = Ticker(values["ticker_name"], session=session)
+        ticker = Ticker(values["ticker_name"], session=slow_session)
         try:
             return ticker.get_info().get("longBusinessSummary", business_summary)
         except HTTPError as e:
@@ -110,7 +117,7 @@ class Stock(BaseModel):
     @validator("market_cap", always=True)
     def set_market_cap(cls: "Stock", market_cap: float, values: Mapping[str, str]) -> float:
         """Extract market cap."""
-        ticker = Ticker(values["ticker_name"], session=session)
+        ticker = Ticker(values["ticker_name"], session=slow_session)
         try:
             return ticker.get_info().get("marketCap", market_cap)
         except HTTPError as e:

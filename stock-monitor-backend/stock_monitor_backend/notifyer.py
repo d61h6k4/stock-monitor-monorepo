@@ -69,3 +69,4 @@ class NotificationCenter:
             self._resource.unlink()
 
         self._resource.write_text(json.dumps(self._users_last_messages))
+        

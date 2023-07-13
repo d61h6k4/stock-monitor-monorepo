@@ -22,9 +22,6 @@ xlrd = "^2.0.1"
 ruff = "^0.0.272"
 pytest = "^7.4.0"
 
-[tool.poetry.scripts]
-monitor = "stock_monitor_data.bin.monitor:main"
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"

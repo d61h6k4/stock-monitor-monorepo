@@ -108,6 +108,7 @@ class TelegramClient:
 
         Configures where Telegram server can send update messages.
         """
+
         r = self.session.post(url=f"{self._telegram_api_url}/setWebhook",
                               data={"url": "https://lochaufwallstrasse.de/api/telegram/webhook",
                                     "secret_token": self.secret_token})

@@ -33,6 +33,7 @@ pytest-datadir = "^1.4.1"
 
 [tool.poetry.scripts]
 serve = "stock_monitor_backend.server:main"
+monitor = "stock_monitor_backend.monitor:main"
 
 [build-system]
 requires = ["poetry-core"]
