@@ -963,7 +963,50 @@ def ideas(period: str, interval: str):
                                    The company`s game pipeline could provide valuable diversification of earnings and
                                    further upside if the company develops another hit game.
                                    [Source](https://www.clarksquarecapital.com/p/gravity-co-grvy)"""),
-
+             Stock(ticker_name="SFE.L", period=period, interval=interval,
+                   expectation=Expectation(price=34, date=datetime(2025, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""This company might be a true hidden gem, relatively uncovered by investment
+                                   professionals. The company’s new management in place since 2018 has shown great
+                                   ability and has done a superb job ensuring efficient operations management,
+                                   showing sound capital allocation skills. I would not be surprised if Safestyle
+                                   UK plc’s capitalization multiplies by 6X in 5 years.
+                                   [Source](https://valuefocusinvesting.substack.com/p/safestyle-uk-plc?)"""),
+             Stock(ticker_name="MODG", period=period, interval=interval,
+                   expectation=Expectation(price=40, date=datetime(2028, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""Topgolf Callaway Brands is a leading golf company that provides golf
+                                   entertainment experiences, designs and manufactures golf equipment, and
+                                   sells golf and active lifestyle apparel and other accessories through
+                                   its family of brand names.
+                                   [Source](https://eloyfernandez.substack.com/p/topgolf-callaway-brands)
+                   """),
+             Stock(ticker_name="SONY", period=period, interval=interval,
+                   expectation=Expectation(price=200, date=datetime(2027, 5, 15, tzinfo=timezone.utc)),
+                   description=r"""Sony is a wonderful business trading at a reasonable price.
+                                   The company is exposed to some of the strongest structural growth trends
+                                   within entertainment and tech. Regarding investor perception, whilst Sony is
+                                   comfortably out of the doghouse phase of circa 10 years ago, the company has
+                                   a lot of further runway to increase its recognition as a truly leading global
+                                   tech and entertainment major, and (buzzword!) as a leading “metaverse” play.
+                                   [Source](https://insiderideas.substack.com/p/free-post-sony-group-6758-jp)
+                   """),
+             Stock(ticker_name="7J4.F", period=period, interval=interval,
+                   expectation=Expectation(price=100, date=datetime(2025, 5, 14, tzinfo=timezone.utc)),
+                   description=r"""Clasquin is operating in the global freight forwarding industry. It is a pure
+                                   play asset lite freight forwarding company. Clasquin has only 2.31 million shares
+                                   outstanding and we havent seen any dilution since the IPO in 2006. The founder owns
+                                   41.4% of the shares. This is a microcap with a total market value of 180 million
+                                   and an enterprise value of 159 million (net cash of 21 million) - based on 2022
+                                   year end results before the 2023 acquisition of Timar.
+                                   [Source](https://wintergems.substack.com/p/clasquin-epaalcla-a-french-microcap)
+                   """),
+             Stock(ticker_name="BELFB", period=period, interval=interval,
+                   expectation=Expectation(price=83, date=datetime(2024, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""The thesis here is straightforward, just like AstroNova, we believe Bel Fuse’s
+                                   EBITDA is going to expand materially over the coming years, from \$83M in 2022
+                                   (\$100M LTM) to \$120M in 2024, and we also don’t think \$140M is out of the cards
+                                   for 2025.
+                                   [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64aeb0347a63bf404bec0f6f/1689169973044/Atai+Capital+-+Q2-2023+Letter.pdf)
+                   """),
              ]
 
     return reversed(ideas)
