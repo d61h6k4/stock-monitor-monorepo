@@ -1037,6 +1037,18 @@ def ideas(period: str, interval: str):
                                    the 1H23 report in September.
                                    [Source](https://moram.substack.com/p/moram-italian-wine-brands-iwbmi-investment)
                    """),
+             Stock(ticker_name="VNRX", period=period, interval=interval,
+                   expectation=Expectation(price=10, date=datetime(2028, 3, 14, tzinfo=timezone.utc)),
+                   description=r"""Did you know more dogs are diagnosed with cancer in the United States than humans?
+                                   Most dogs are diagnosed when it's too late - when physical signs are present.
+                                   In Q1 2023 \$VNRX is launching the first LOW COST screening test to detect cancer in dogs.
+                                   [Source](https://twitter.com/GalahadCapital/status/1595478489569939456)
+                   """),
+             Stock(ticker_name="BAYN.DE", period=period, interval=interval,
+                   expectation=Expectation(price=80, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""Bayer definitely has it’s fair amount of problems. But over the last year the company
+                                   has shown signs of a possible turnaround.
+                                   [Source](https://moderninvesting.substack.com/p/bayer-the-ultimate-turnaround)"""),
              ]
 
     return reversed(ideas)
