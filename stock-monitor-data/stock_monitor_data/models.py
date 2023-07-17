@@ -34,7 +34,7 @@ slow_session = CachedLimiterSession(
     expire_after=30 * 24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "yfinance.cache")),
+    backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "yfinance.slow.cache")),
 )
 
 cot_session = CachedLimiterSession(

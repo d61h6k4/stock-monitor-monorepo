@@ -1007,6 +1007,36 @@ def ideas(period: str, interval: str):
                                    for 2025.
                                    [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64aeb0347a63bf404bec0f6f/1689169973044/Atai+Capital+-+Q2-2023+Letter.pdf)
                    """),
+             Stock(ticker_name="7906.T", period=period, interval=interval,
+                   expectation=Expectation(price=2109, date=datetime(2025, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""Strong growth in revenues: 15% CGAR 2019-2023.
+                                   The compound annual rate of the stock price (5y) is around 16%.
+                                   Recognizable brand in the badminton and tennis universes.
+                                   Geographic expansion plans in big markets such as India and the U.S.A.
+                                   Excellent management team, with the Yoneyama Family around 19% of shares.
+                                   [Source](https://eloyfernandez.substack.com/p/yonex)
+                   """),
+             Stock(ticker_name="DLA", period=period, interval=interval,
+                   expectation=Expectation(price=20, date=datetime(2025, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""Delta Apparel (DLA, \$77m market cap) has faced challenges due to the
+                                   COVID bullwhip effect. Despite short-term setbacks like high-cost inventory,
+                                   the company shows strong growth potential. It has two main segments: Salt Life,
+                                   a cultish brand popular among outdoorsy individuals in the Southeast U.S., and
+                                   Delta Group, consisting of a commoditized active wear business, and DTG2GO,
+                                   a digital printing specialist.
+                                   [Source](https://ideahive.substack.com/p/new-investment-ideas-july-16)
+                   """),
+             Stock(ticker_name="IWB.MI", period=period, interval=interval,
+                   expectation=Expectation(price=34.5, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""We consider IWB to be a fantastic business, well-managed, with a strong alignment
+                                   of interests between management and shareholders. Additionally, their capital-light
+                                   business model provides flexibility, and the new long-term supply contract with
+                                   Barbanera Family is expected to reduce the cost of goods sold from now on (last
+                                   year's cost was unusually high due to weather). In our opinion, there is a very
+                                   attractive upside with short-term catalysts, particularly with the release of
+                                   the 1H23 report in September.
+                                   [Source](https://moram.substack.com/p/moram-italian-wine-brands-iwbmi-investment)
+                   """),
              ]
 
     return reversed(ideas)
