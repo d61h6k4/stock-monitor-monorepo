@@ -15,7 +15,7 @@ def color_stock_dataframe(df):
 
 
 def dataframe_to_data(df):
-    return data(df.columns.to_list(), df.shape[0], rows=df.values.tolist(), pack=True)
+    return data(df.columns.to_list(), df.shape[0], rows=df.fillna(0.0).values.tolist(), pack=True)
 
 
 def stock_graph(stock, box='1 3 11 5', with_summary=False):
