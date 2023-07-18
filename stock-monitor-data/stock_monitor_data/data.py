@@ -1049,6 +1049,13 @@ def ideas(period: str, interval: str):
                    description=r"""Bayer definitely has it’s fair amount of problems. But over the last year the company
                                    has shown signs of a possible turnaround.
                                    [Source](https://moderninvesting.substack.com/p/bayer-the-ultimate-turnaround)"""),
+             Stock(ticker_name="8881.T", period=period, interval=interval,
+                   expectation=Expectation(price=1000, date=datetime(2025, 9, 15, tzinfo=timezone.utc)),
+                   description=r"""Value trap or not?
+                                   low institutional ownership, no analyst coverage since 2010, and only one mention
+                                   on social media (that I'm aware of). risks of an economic downturn
+                                   [Source](https://themikrokap.substack.com/p/adventures-in-the-value-trap-land)
+                   """),
              ]
 
     return reversed(ideas)

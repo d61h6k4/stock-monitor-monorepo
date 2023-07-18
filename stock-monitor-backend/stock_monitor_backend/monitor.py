@@ -12,7 +12,7 @@ logger = get_logger(__name__)
 
 
 class Monitor:
-    def __init__(self, notifier, monitor_timedelta=3600, watch_timedelta=43200):
+    def __init__(self, notifier, monitor_timedelta=3600, watch_timedelta=21600):
         self.monitor_timedelta = monitor_timedelta
         self.watch_timedelta = watch_timedelta
 
