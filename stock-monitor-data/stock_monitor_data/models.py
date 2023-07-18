@@ -111,7 +111,7 @@ class Stock(BaseModel):
         try:
             return ticker.get_info().get("longBusinessSummary", business_summary)
         except HTTPError as e:
-            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {repr(e)}")
+            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
             return business_summary
 
     @validator("market_cap", always=True)
@@ -121,7 +121,7 @@ class Stock(BaseModel):
         try:
             return ticker.get_info().get("marketCap", market_cap)
         except HTTPError as e:
-            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {repr(e)}")
+            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
             return 1.0
 
 

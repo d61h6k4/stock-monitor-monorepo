@@ -966,10 +966,10 @@ def ideas(period: str, interval: str):
              Stock(ticker_name="SFE.L", period=period, interval=interval,
                    expectation=Expectation(price=34, date=datetime(2025, 9, 15, tzinfo=timezone.utc)),
                    description=r"""This company might be a true hidden gem, relatively uncovered by investment
-                                   professionals. The company’s new management in place since 2018 has shown great
+                                   professionals. The company`s new management in place since 2018 has shown great
                                    ability and has done a superb job ensuring efficient operations management,
                                    showing sound capital allocation skills. I would not be surprised if Safestyle
-                                   UK plc’s capitalization multiplies by 6X in 5 years.
+                                   UK plc`s capitalization multiplies by 6X in 5 years.
                                    [Source](https://valuefocusinvesting.substack.com/p/safestyle-uk-plc?)"""),
              Stock(ticker_name="MODG", period=period, interval=interval,
                    expectation=Expectation(price=40, date=datetime(2028, 9, 15, tzinfo=timezone.utc)),
@@ -1001,9 +1001,9 @@ def ideas(period: str, interval: str):
                    """),
              Stock(ticker_name="BELFB", period=period, interval=interval,
                    expectation=Expectation(price=83, date=datetime(2024, 9, 15, tzinfo=timezone.utc)),
-                   description=r"""The thesis here is straightforward, just like AstroNova, we believe Bel Fuse’s
+                   description=r"""The thesis here is straightforward, just like AstroNova, we believe Bel Fuse`s
                                    EBITDA is going to expand materially over the coming years, from \$83M in 2022
-                                   (\$100M LTM) to \$120M in 2024, and we also don’t think \$140M is out of the cards
+                                   (\$100M LTM) to \$120M in 2024, and we also don`t think \$140M is out of the cards
                                    for 2025.
                                    [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64aeb0347a63bf404bec0f6f/1689169973044/Atai+Capital+-+Q2-2023+Letter.pdf)
                    """),
@@ -1046,7 +1046,7 @@ def ideas(period: str, interval: str):
                    """),
              Stock(ticker_name="BAYN.DE", period=period, interval=interval,
                    expectation=Expectation(price=80, date=datetime(2025, 3, 15, tzinfo=timezone.utc)),
-                   description=r"""Bayer definitely has it’s fair amount of problems. But over the last year the company
+                   description=r"""Bayer definitely has it`s fair amount of problems. But over the last year the company
                                    has shown signs of a possible turnaround.
                                    [Source](https://moderninvesting.substack.com/p/bayer-the-ultimate-turnaround)"""),
              Stock(ticker_name="8881.T", period=period, interval=interval,
@@ -1370,7 +1370,11 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
         Stock(ticker_name="PSK.TO", period=period, interval=interval,
               description="""[Source](https://specialsituationinvesting.substack.com/p/prairiesky-royalty-prekf)"""),
         Stock(ticker_name="KIST.L", period=period, interval=interval,
-              description="""[Stock](https://hiddenvaluegems.com/on-markets-investing/tpost/hv3b9p62m1-hidden-sea-treasure-founder-led-european)"""),
+              description="""[Source](https://hiddenvaluegems.com/on-markets-investing/tpost/hv3b9p62m1-hidden-sea-treasure-founder-led-european)"""),
+        Stock(ticker_name="JOY.TO", period=period, interval=interval,
+              description=r"""[Initial idea](https://bisoninterests.substack.com/p/alex-verge-is-bringing-his-winning)
+                              [Update](https://bisoninterests.substack.com/p/100-million-alberta-power-generation)
+             """),
     ]
 
 
