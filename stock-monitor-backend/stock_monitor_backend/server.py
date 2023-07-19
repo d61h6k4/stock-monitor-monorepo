@@ -43,4 +43,4 @@ def main() -> None:
     """Runner."""
     import uvicorn
 
-    uvicorn.run("stock_monitor_backend.server:create_app", workers=2, lifespan="on", factory=True)
+    uvicorn.run("stock_monitor_backend.server:create_app", workers=2, lifespan="on", log_level="info")

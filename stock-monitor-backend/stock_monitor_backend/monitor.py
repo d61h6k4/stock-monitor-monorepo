@@ -57,12 +57,14 @@ class Monitor:
 
 def main():
     import os
+    import signal
 
     telegram_bot_token = os.environ.get("TELEGRAM_BOT_TOKEN")
     assert telegram_bot_token, "Missing TELEGRAM_BOT_TOKEN"
     telegram_client = TelegramClient(token=telegram_bot_token)
     notify = NotificationCenter()
     notify.add_telegram(telegram_client)
+    signal.signal(signal.SIGTERM, lambda sig, frame: notify.persist())
 
     try:
         Monitor(notifier=notify)

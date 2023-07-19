@@ -2,12 +2,14 @@
 
 import json
 from pathlib import Path
+from structlog import get_logger
 from typing import Self
 
 from stock_monitor_backend.rules import Action, Decision
 from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_backend.utils import telegramify
 
+logger = get_logger(__name__)
 TELEGRAM = "telegram"
 
 
@@ -28,6 +30,8 @@ class NotificationCenter:
                     self._users_last_messages[user][ticker] = {}
                     for rule, state in t_values.items():
                         self._users_last_messages[user][ticker][rule] = Action.from_string(state)
+        else:
+            logger.warn("Resource doesn't exist.", resource=self._resource)
 
     def add_telegram(self: Self, client: TelegramClient) -> None:
         """Add telegram as one of the channels to send notifications."""
@@ -69,4 +73,4 @@ class NotificationCenter:
             self._resource.unlink()
 
         self._resource.write_text(json.dumps(self._users_last_messages))
-        
+        logger.info("Data saved succesfully as a resource", resource=self._resource)
