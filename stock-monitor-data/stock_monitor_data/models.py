@@ -56,7 +56,6 @@ class Stock(BaseModel):
     ticker_name: str
     period: str
     interval: str
-    history: DataFrame = DataFrame()
     business_summary: str = "NO DATA"
     market_cap: float = 0.0
     expectation: Expectation | None = None
@@ -90,19 +89,21 @@ class Stock(BaseModel):
 
         return interval
 
-    @validator("history", always=True)
-    def download_history(cls: "Stock",
-                         history: DataFrame,
-                         values: Mapping[str, str]) -> DataFrame:
+    @property
+    def history(self) -> DataFrame:
         """Downloads history data."""
-        assert history.empty
+        history = self.__dict__.get("history")
+        if history is None:
 
-        ticker = Ticker(values["ticker_name"], session=session)
-        try:
-            return ticker.history(period=values["period"], interval=values["interval"])
-        except HTTPError as e:
-            msg = f"Ticker {values['ticker_name']} doesn't exist."
-            raise ValueError(msg) from e
+            ticker = Ticker(values["ticker_name"], session=session)
+            try:
+                history = ticker.history(period=values["period"], interval=values["interval"])
+            except HTTPError as e:
+                msg = f"Ticker {values['ticker_name']} doesn't exist."
+                raise ValueError(msg) from e
+            
+            self.__dict__["history"] = history
+        return history
 
     @validator("business_summary", always=True)
     def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
