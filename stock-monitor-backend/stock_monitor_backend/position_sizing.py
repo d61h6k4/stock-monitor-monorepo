@@ -4,6 +4,7 @@ from datetime import datetime, timezone
 import numpy as np
 import pandas as pd
 from pypfopt import black_litterman
+from pypfopt import risk_models
 from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt.objective_functions import L2_reg
 from stock_monitor_data.data import portfolio
@@ -54,9 +55,10 @@ def get_portfolio_view_confidences() -> pd.Series:
 
 
 def get_weights():
-    cov_matrix = get_portfolio_prices().cov()
+    shrunk_covariance = risk_models.CovarianceShrinkage(get_portfolio_prices()).shrunk_covariance()
+
     delta = black_litterman.market_implied_risk_aversion(get_market_prices())
-    bl = black_litterman.BlackLittermanModel(cov_matrix=cov_matrix,
+    bl = black_litterman.BlackLittermanModel(cov_matrix=shrunk_covariance,
                                              absolute_views=get_portfolio_views(),
                                              pi="market",
                                              market_caps=get_portfolio_market_cap(),
@@ -65,8 +67,8 @@ def get_weights():
                                              risk_aversion=delta)
     bl.bl_weights(risk_aversion=delta)
     rets = bl.bl_returns()
-    ef = EfficientFrontier(rets, cov_matrix)
+    ef = EfficientFrontier(rets, shrunk_covariance)
     ef.add_objective(L2_reg)
     ef.max_sharpe()
-    
+
     return ef.clean_weights(rounding=2), bl.clean_weights(rounding=2)
