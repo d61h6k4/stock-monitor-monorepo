@@ -1063,7 +1063,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "ATLX", "APR.WA", "AMD", "PSK.TO"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "AMD", "PSK.TO"]:
         buy_date = None
         description = None
         expectation = None
