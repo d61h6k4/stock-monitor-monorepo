@@ -17,9 +17,10 @@ def get_market_prices() -> pd.Series:
 
 def get_portfolio_prices() -> pd.DataFrame:
     prices = []
-    for s in portfolio("2y", "1d"):
+    for s in portfolio("3mo", "1d"):
         prices.append(s.history.rename(columns={"Close": s.ticker_name})[s.ticker_name])
-    return pd.concat(prices, axis=1).fillna(0.0)
+
+    return pd.concat(prices, axis=1)
 
 
 def get_portfolio_market_cap() -> Mapping[str, float]:
@@ -55,7 +56,7 @@ def get_portfolio_view_confidences() -> pd.Series:
 
 
 def get_weights():
-    shrunk_covariance = risk_models.CovarianceShrinkage(get_portfolio_prices()).shrunk_covariance()
+    shrunk_covariance = risk_models.CovarianceShrinkage(get_portfolio_prices()).ledoit_wolf()
 
     delta = black_litterman.market_implied_risk_aversion(get_market_prices())
     bl = black_litterman.BlackLittermanModel(cov_matrix=shrunk_covariance,
