@@ -1160,7 +1160,7 @@ def portfolio(period: str, interval: str):
                             the age of the vehicle fleet, resulting in the need for more maintenance."""
         elif ticker_name == "AMD":
             buy_date = datetime(2023, 6, 30, tzinfo=timezone.utc)
-            expectation = Expectation(price=170, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
+            expectation = Expectation(price=130, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
             description = r"""Based on news that MosaicAI successfully trained the MPT on AMD GPU."""
         elif ticker_name == "PSK.TO":
             buy_date = datetime(2023, 7, 10, tzinfo=timezone.utc)
