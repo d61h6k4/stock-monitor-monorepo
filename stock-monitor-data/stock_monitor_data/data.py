@@ -1375,6 +1375,9 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
               description=r"""[Initial idea](https://bisoninterests.substack.com/p/alex-verge-is-bringing-his-winning)
                               [Update](https://bisoninterests.substack.com/p/100-million-alberta-power-generation)
              """),
+        Stock(ticker_name="OXY", period=period, interval=interval,
+              description=r"""Buffet's choice.
+                              [Source](https://eaglepointcapital.substack.com/p/occidental-what-does-buffett-see)"""),
     ]
 
 

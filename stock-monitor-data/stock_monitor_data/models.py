@@ -105,6 +105,10 @@ class Stock(BaseModel):
             self.__dict__["history"] = history
         return history
 
+    @history.setter
+    def history(self, df: DataFrame):
+        self.__dict__["history"] = df
+
     @validator("business_summary", always=True)
     def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
         """Extract business summary."""
