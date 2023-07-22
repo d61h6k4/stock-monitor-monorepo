@@ -1056,6 +1056,14 @@ def ideas(period: str, interval: str):
                                    on social media (that I'm aware of). risks of an economic downturn
                                    [Source](https://themikrokap.substack.com/p/adventures-in-the-value-trap-land)
                    """),
+             Stock(ticker_name="AAF.L", period=period, interval=interval,
+                   expectation=Expectation(price=150, date=datetime(2027, 3, 15, tzinfo=timezone.utc)),
+                   description=r"""We think the company’s valuation suffers from what we call “lazy grouping bias”
+                                   — investors seem to value it like a traditional telecom company with low growth,
+                                   stiff competition, and high capex needs. But it’s growth profile and returns on
+                                   capital (even after depreciation) show that it is nothing like a mature
+                                   Western telecom firm.
+                                   [Source](https://www.biremecapital.com/cio-corner/airtel-africa)""")
              ]
 
     return reversed(ideas)
