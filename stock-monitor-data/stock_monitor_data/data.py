@@ -1386,6 +1386,9 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
         Stock(ticker_name="OXY", period=period, interval=interval,
               description=r"""Buffet's choice.
                               [Source](https://eaglepointcapital.substack.com/p/occidental-what-does-buffett-see)"""),
+        Stock(ticker_name="NRP", period=period, interval=interval,
+              description=r"""Coal is not going anywhere.
+                              [Source](https://specialsituationinvesting.substack.com/p/coals-resilient-future-nrp)"""),
     ]
 
 
