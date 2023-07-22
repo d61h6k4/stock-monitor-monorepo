@@ -95,11 +95,11 @@ class Stock(BaseModel):
         history = self.__dict__.get("history")
         if history is None:
 
-            ticker = Ticker(values["ticker_name"], session=session)
+            ticker = Ticker(self.ticker_name, session=session)
             try:
-                history = ticker.history(period=values["period"], interval=values["interval"])
+                history = ticker.history(period=self.period, interval=self.interval)
             except HTTPError as e:
-                msg = f"Ticker {values['ticker_name']} doesn't exist."
+                msg = f"Ticker {self.ticker_name} doesn't exist."
                 raise ValueError(msg) from e
             
             self.__dict__["history"] = history
