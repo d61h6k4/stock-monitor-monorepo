@@ -1063,7 +1063,15 @@ def ideas(period: str, interval: str):
                                    stiff competition, and high capex needs. But it’s growth profile and returns on
                                    capital (even after depreciation) show that it is nothing like a mature
                                    Western telecom firm.
-                                   [Source](https://www.biremecapital.com/cio-corner/airtel-africa)""")
+                                   [Source](https://www.biremecapital.com/cio-corner/airtel-africa)"""),
+             Stock(ticker_name="KIND-SDB.ST", period=period, interval=interval,
+                   expectation=Expectation(price=158, date=datetime(2024, 1, 15, tzinfo=timezone.utc)),
+                   description=r"""Kindred (KINDSDB, \$2.7bn market cap) is an online B2C sports betting and
+                                   iGaming operator, primarily operating in regulated markets in continental Europe
+                                   and the Nordics. Thesis revolves around the likelihood of Kindred being sold
+                                   to a strategic acquirer in the next 3-6 months
+                                   [Source](https://ideahive.substack.com/p/new-investment-ideas-july-23)
+                   """),
              ]
 
     return reversed(ideas)
