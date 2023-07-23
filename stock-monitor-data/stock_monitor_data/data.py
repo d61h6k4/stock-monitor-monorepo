@@ -1079,7 +1079,7 @@ def ideas(period: str, interval: str):
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "AMD", "PSK.TO"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "AMD", "PSK.TO", "VGIT"]:
         buy_date = None
         description = None
         expectation = None
@@ -1174,6 +1174,10 @@ def portfolio(period: str, interval: str):
             buy_date = datetime(2023, 7, 10, tzinfo=timezone.utc)
             expectation = Expectation(price=35, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
             description = r"""Play with Oil."""
+        elif ticker_name == "VGIT":
+              buy_date = datetime(2023, 7, 21, tzinfo=timezone.utc)
+              expectation = Expectation(price=65, date=datetime(2023, 12, 15, tzinfo=timezone.utc), confidence=1.0)
+              description = r"""Tresuries."""
 
         assert buy_date is not None
         assert description is not None
