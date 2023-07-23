@@ -1172,7 +1172,7 @@ def portfolio(period: str, interval: str):
             description = r"""Based on news that MosaicAI successfully trained the MPT on AMD GPU."""
         elif ticker_name == "PSK.TO":
             buy_date = datetime(2023, 7, 10, tzinfo=timezone.utc)
-            expectation = Expectation(price=35, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.3)
+            expectation = Expectation(price=35, date=datetime(2023, 9, 15, tzinfo=timezone.utc), confidence=0.1)
             description = r"""Play with Oil."""
         elif ticker_name == "VGIT":
               buy_date = datetime(2023, 7, 21, tzinfo=timezone.utc)
