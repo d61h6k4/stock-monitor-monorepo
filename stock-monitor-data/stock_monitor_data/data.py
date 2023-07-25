@@ -1679,6 +1679,7 @@ def ideas(period: str, interval: str):
         Stock(
             ticker_name="THX.V",
             period=period,
+            interval=interval,
             expectation=Expectation(
                 price=1.0, date=datetime(2027, 3, 15, tzinfo=timezone.utc)
             ),
