@@ -5,8 +5,21 @@ from tqdm import tqdm
 
 from stock_monitor_backend.notifyer import NotificationCenter
 from stock_monitor_backend.telegram.client import TelegramClient
-from stock_monitor_data.data import crypto, etfs, ideas, oil_and_gas_stocks, portfolio, vix_stocks
-from stock_monitor_backend.rules import adx_rule, asr_rule, macd_rule, mad_rule, rsi_rule
+from stock_monitor_data.data import (
+    crypto,
+    etfs,
+    ideas,
+    oil_and_gas_stocks,
+    portfolio,
+    vix_stocks,
+)
+from stock_monitor_backend.rules import (
+    adx_rule,
+    asr_rule,
+    macd_rule,
+    mad_rule,
+    rsi_rule,
+)
 
 logger = get_logger(__name__)
 
@@ -24,15 +37,26 @@ class Monitor:
 
     def start(self):
         logger.info("Start monitoring ...")
-        for idea in tqdm(ideas(period="3mo", interval="1d"), desc="Processing ideas..."):
+        for idea in tqdm(
+            ideas(period="3mo", interval="1d"), desc="Processing ideas..."
+        ):
             self.watch(idea)
-        for stock in tqdm(portfolio(period="3mo", interval="1d"), desc="Processing portfolio..."):
+        for stock in tqdm(
+            portfolio(period="3mo", interval="1d"), desc="Processing portfolio..."
+        ):
             self.monitor(stock)
-        for stock in tqdm(oil_and_gas_stocks(period="3mo", interval="1d"), desc="Processing Oil&Gas..."):
+        for stock in tqdm(
+            oil_and_gas_stocks(period="3mo", interval="1d"),
+            desc="Processing Oil&Gas...",
+        ):
             self.watch(stock)
-        for stock in tqdm(crypto(period="3mo", interval="1d"), desc="Processing Crypto..."):
+        for stock in tqdm(
+            crypto(period="3mo", interval="1d"), desc="Processing Crypto..."
+        ):
             self.watch(stock)
-        for stock in tqdm(vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."):
+        for stock in tqdm(
+            vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."
+        ):
             self.watch(stock)
         for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing ETF..."):
             self.watch(stock)
@@ -71,4 +95,3 @@ def main():
     except BaseException as e:
         notify.persist()
         logger.error(repr(e))
-        
