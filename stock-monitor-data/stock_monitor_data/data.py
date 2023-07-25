@@ -1734,7 +1734,7 @@ def portfolio(period: str, interval: str):
             buy_date = datetime(2023, 4, 17, tzinfo=timezone.utc)
             description = r"""Trigon Metals Inc. (TM) is a Canadian exploration, development, and mining company focused on copper
                                 and silver assets in Africa."""
-            Expectation(
+            expectation = Expectation(
                 price=0.6,
                 date=datetime(25, 12, 31, tzinfo=timezone.utc),
                 confidence=0.5,
@@ -1860,9 +1860,9 @@ def portfolio(period: str, interval: str):
             )
             description = r"""Tresuries."""
 
-        assert buy_date is not None
-        assert description is not None
-        assert expectation is not None
+        assert buy_date is not None, f"No buy_date for {ticker_name}"
+        assert description is not None, f"No description for {ticker_name}"
+        assert expectation is not None, f"No expectation for {ticker_name}"
         res.append(
             Stock(
                 ticker_name=ticker_name,
