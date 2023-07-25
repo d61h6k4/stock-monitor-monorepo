@@ -1736,7 +1736,7 @@ def portfolio(period: str, interval: str):
                                 and silver assets in Africa."""
             expectation = Expectation(
                 price=0.6,
-                date=datetime(25, 12, 31, tzinfo=timezone.utc),
+                date=datetime(2025, 12, 31, tzinfo=timezone.utc),
                 confidence=0.5,
             )
         elif ticker_name == "FTAI":
