@@ -1687,6 +1687,18 @@ def ideas(period: str, interval: str):
                             [Source](https://twitter.com/YellowLabLife/status/1683461221687623680)
             """,
         ),
+        Stock(
+            ticker_name="RTX",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=120, date=datetime(2026, 8, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""The structural growth drivers behind RTX, particularly the long-term growth
+                            in global passenger air travel and rising national defense budgets, remain
+                            powerful and should continue to drive strong underlying earnings growth.
+                            [Source](https://librariancapital.substack.com/p/rtx-faqs-on-powdered-metal-issue)""",
+        ),
     ]
 
     return reversed(ideas)
