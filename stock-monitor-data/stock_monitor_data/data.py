@@ -1699,6 +1699,20 @@ def ideas(period: str, interval: str):
                             powerful and should continue to drive strong underlying earnings growth.
                             [Source](https://librariancapital.substack.com/p/rtx-faqs-on-powdered-metal-issue)""",
         ),
+        Stock(
+            ticker_name="NETI",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=20, date=datetime(2025, 9, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Green energy transistion, Eneti announced a merger with Cadeler, another WTIV company
+                            based out of Copenhagen, in June of this year. With the deal months away from closing,
+                            the combined company is poised to be by far the most dominant player in an industry
+                            with various tailwinds.
+                            [Source](https://breeleycapital.substack.com/p/eneti-and-cadeler-offshore-oppurtunity)
+                            """,
+        ),
     ]
 
     return reversed(ideas)
