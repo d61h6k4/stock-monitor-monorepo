@@ -1,0 +1,13 @@
+[Unit]
+Description=stock monitor backend server
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=ubuntu
+ExecStart=python3.11 -m poetry run --directory /home/ubuntu/stock-monitor-monorepo/stock-monitor-backend serve
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,14 @@
+[Unit]
+Description=stock monitor
+After=network.target 
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=ubuntu
+Environment="TELEGRAM_BOT_TOKEN=<telegram-bot-token>"
+ExecStart=python3.11 -m poetry run --directory /home/ubuntu/stock-monitor-monorepo/stock-monitor-backend monitor
+
+[Install]
+WantedBy=multi-user.target
