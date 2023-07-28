@@ -1713,6 +1713,22 @@ def ideas(period: str, interval: str):
                             [Source](https://breeleycapital.substack.com/p/eneti-and-cadeler-offshore-oppurtunity)
                             """,
         ),
+        Stock(
+            ticker_name="MSFT",
+            period=period,
+            interval=interval,
+            expectation=Exception(
+                price=420, date=datetime(2026, 7, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""There are signs of deceleration in some of Microsoft’s businesses, but mostly attributable
+                            to temporary and/or cyclical macro factors. A more material concern is the near-term
+                            cashflow headwinds from both an accelerated CapEx program and higher scheduled payments 
+                            of the transition tax from the 2017 tax cut, but we expect these to be temporary.
+                            At \$337.77, Microsoft shares have a 34.4x P/E and a 1.9% Free Cash Flow Yield relative 
+                            to FY23. Our forecasts indicate a total return of 44% (13.5% annualized) by June 2026. Buy.
+                            [Source](https://librariancapital.substack.com/p/microsoft-strong-fy23-finish-but)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
