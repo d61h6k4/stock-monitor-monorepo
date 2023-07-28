@@ -1321,13 +1321,14 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=27, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+                price=40, date=datetime(2025, 1, 15, tzinfo=timezone.utc)
             ),
             description=r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
-                                   works well in any economic environment but especially in times of economic downturns.
-                                   When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
-                                   the age of the vehicle fleet, resulting in the need for more maintenance.
-                                   [Source](https://moram.eu/investment-thesis-competition/autopartner/)
+                            works well in any economic environment but especially in times of economic downturns.
+                            When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
+                            the age of the vehicle fleet, resulting in the need for more maintenance.
+                            [Source](https://moram.eu/investment-thesis-competition/autopartner/)
+                            [Source](https://lukewolgram.substack.com/p/a-new-long-idea-auto-partner-sa)
                    """,
         ),
         Stock(
@@ -1717,7 +1718,7 @@ def ideas(period: str, interval: str):
             ticker_name="MSFT",
             period=period,
             interval=interval,
-            expectation=Exception(
+            expectation=Expectation(
                 price=420, date=datetime(2026, 7, 15, tzinfo=timezone.utc)
             ),
             description=r"""There are signs of deceleration in some of Microsoft’s businesses, but mostly attributable
@@ -1727,6 +1728,23 @@ def ideas(period: str, interval: str):
                             At \$337.77, Microsoft shares have a 34.4x P/E and a 1.9% Free Cash Flow Yield relative 
                             to FY23. Our forecasts indicate a total return of 44% (13.5% annualized) by June 2026. Buy.
                             [Source](https://librariancapital.substack.com/p/microsoft-strong-fy23-finish-but)
+                        """,
+        ),
+        Stock(
+            ticker_name="BES.V",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=0.15, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Braille Battery has shown consistent growth over the last four years, growing at a
+                            56% CAGR. We expect this to continue as BES expands internationally and optimizes
+                            its manufacturing facility. BES is planning to launch a residential backup power
+                            system FYQ2/24, followed by its whole home energy storage system. Braille’s systems
+                            will be the most cost-efficient in the market. BES recently purchased the exclusive
+                            rights for Firebulb Technology, which is the industry’s first passive fire detection
+                            system. This will be a key differentiator for Electrafy systems.
+                            [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/7798d81a-11da-6e00-90b1-f1d6a27089ea/20230727_Atrium_BES_Operational_Update.pdf)
                         """,
         ),
     ]
@@ -1869,9 +1887,9 @@ def portfolio(period: str, interval: str):
         elif ticker_name == "APR.WA":
             buy_date = datetime(2023, 6, 27, tzinfo=timezone.utc)
             expectation = Expectation(
-                price=27,
-                date=datetime(2025, 3, 15, tzinfo=timezone.utc),
-                confidence=0.3,
+                price=40,
+                date=datetime(2025, 1, 15, tzinfo=timezone.utc),
+                confidence=0.5,
             )
             description = r"""The independent aftermarket (IAM) industry has an anti-cyclical component that generally
                             works well in any economic environment but especially in times of economic downturns.
