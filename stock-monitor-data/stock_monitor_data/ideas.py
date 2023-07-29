@@ -1690,6 +1690,19 @@ def ideas(period: str, interval: str):
                             [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/7798d81a-11da-6e00-90b1-f1d6a27089ea/20230727_Atrium_BES_Operational_Update.pdf)
                         """,
         ),
+        Stock(
+            ticker_name="CHTR",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=600, date=datetime(2026, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""EBITDA margin should expand again in H2, revenue growth should accelerate further as
+                            benefits from the current CapEx program materializes more fully, and CapEx normalizing
+                            from 2026 will help FCF significantly
+                            [Source](https://librariancapital.substack.com/p/charter-continuing-to-turn-the-corner)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
