@@ -1309,11 +1309,12 @@ def ideas(period: str, interval: str):
                 price=15, date=datetime(2027, 3, 15, tzinfo=timezone.utc)
             ),
             description=r"""The opportunity to gain exposure to South America with a defensive approach.
-                                   This is, having a clear view on what is the dynamics affecting the company
-                                   (trends on food and labor inflation, customer demand, etc.), and limiting
-                                   the country risk that would have investing in only one country of Latin America or the Caribbean.
-                                   The strength of McDonald`s brand and the disparity in valuations with other public restaurant chains.
-                                   [Source](https://moram.substack.com/p/moram-arcos-dorados-arco-investment)
+                            This is, having a clear view on what is the dynamics affecting the company
+                            (trends on food and labor inflation, customer demand, etc.), and limiting
+                            the country risk that would have investing in only one country of Latin
+                            America or the Caribbean. The strength of McDonald`s brand and the disparity
+                            in valuations with other public restaurant chains.
+                            [Source](https://moram.substack.com/p/moram-arcos-dorados-arco-investment)
                    """,
         ),
         Stock(
@@ -2260,6 +2261,14 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
             interval=interval,
             description=r"""Coal is not going anywhere.
                               [Source](https://specialsituationinvesting.substack.com/p/coals-resilient-future-nrp)""",
+        ),
+        Stock(
+            ticker_name="CQP",
+            period=period,
+            interval=interval,
+            description=r"""LNG.
+                              [Source](https://specialsituationinvesting.substack.com/p/cheniere-energy-partners-cqp)
+                            """,
         ),
     ]
 
