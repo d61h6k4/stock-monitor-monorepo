@@ -1,14 +1,12 @@
-from collections.abc import Mapping
+from typing import Mapping
 from datetime import datetime, timezone
 
 import numpy as np
 import pandas as pd
-from pypfopt import black_litterman
-from pypfopt import risk_models
+from pypfopt import black_litterman, risk_models
 from pypfopt.efficient_frontier import EfficientFrontier
 from pypfopt.objective_functions import L2_reg
-from stock_monitor_data.data import portfolio
-from stock_monitor_data.models import Stock
+from stock_monitor_data import Stock, portfolio
 
 
 def get_market_prices() -> pd.Series:

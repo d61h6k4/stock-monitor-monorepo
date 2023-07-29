@@ -3,7 +3,7 @@
 from enum import Enum
 
 from pydantic import BaseModel
-from stock_monitor_data.models import Stock
+from stock_monitor_data import Stock
 
 from stock_monitor_backend.math import adx, best_price_in_period, last_atr, macd, moving_average_distance, rsi
 

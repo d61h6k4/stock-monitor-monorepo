@@ -5,13 +5,12 @@ from tqdm import tqdm
 
 from stock_monitor_backend.notifyer import NotificationCenter
 from stock_monitor_backend.telegram.client import TelegramClient
-from stock_monitor_data.data import (
+from stock_monitor_data import (
     crypto,
     etfs,
     ideas,
     oil_and_gas_stocks,
     portfolio,
-    vix_stocks,
 )
 from stock_monitor_backend.rules import (
     adx_rule,
@@ -52,10 +51,6 @@ class Monitor:
             self.watch(stock)
         for stock in tqdm(
             crypto(period="3mo", interval="1d"), desc="Processing Crypto..."
-        ):
-            self.watch(stock)
-        for stock in tqdm(
-            vix_stocks(period="3mo", interval="1d"), desc="Processing VIX..."
         ):
             self.watch(stock)
         for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing ETF..."):

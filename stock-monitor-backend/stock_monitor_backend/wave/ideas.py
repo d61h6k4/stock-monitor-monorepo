@@ -1,5 +1,5 @@
 from h2o_lightwave import Q, ui
-from stock_monitor_data.data import ideas
+from stock_monitor_data import ideas
 
 from stock_monitor_backend.wave.common import color_stock_dataframe, dataframe_to_data, preprocess_dataframe
 
