@@ -66,4 +66,22 @@ def etfs(period, interval) -> list[Stock]:
             interval=interval,
             description="""Canabis.""",
         ),
+        Stock(
+            ticker_name="VGIT",
+            period=period,
+            interval=interval,
+            description="""Treasuries.""",
+        ),
+        Stock(
+            ticker_name="TUR",
+            period=period,
+            interval=interval,
+            description="""Turkey.""",
+        ),
+        Stock(
+            ticker_name="VNM",
+            period=period,
+            interval=interval,
+            description="""Vietnam.""",
+        ),
     ]

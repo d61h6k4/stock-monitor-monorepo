@@ -4,7 +4,7 @@ from stock_monitor_data.models import Stock, Expectation
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "AMD", "PSK.TO", "VGIT"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "AMD", "PSK.TO"]:
         buy_date = None
         description = None
         expectation = None
