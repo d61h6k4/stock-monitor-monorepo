@@ -1703,6 +1703,32 @@ def ideas(period: str, interval: str):
                             [Source](https://librariancapital.substack.com/p/charter-continuing-to-turn-the-corner)
                         """,
         ),
+        Stock(
+            ticker_name="S85.SI",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=1.029, date=datetime(2027, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Straco Corporation Limited is a Singapore-based company of tourist attractions in
+                            Singapore and China. The Company operates through two segments: Aquariums and
+                            Observation Wheel. Recovery from COVID in China.
+                            [Source](https://eloyfernandez.substack.com/p/straco-corp)
+                        """,
+        ),
+        Stock(
+            ticker_name="EDAC.MI",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=43, date=datetime(2027, 1, 15, tzinfo=timezone)
+            ),
+            description=r"""EdiliziAcrobatica is a fast growing company with a dominant market position in the
+                            industry of facades. Founder led business with high insider ownership. Expansion
+                            into Spain, France, UAE, Nepal, etc. should be a massive boost for revenues.
+                            [Source](https://moderninvesting.substack.com/p/ediliziacrobatica-italys-compounding)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
