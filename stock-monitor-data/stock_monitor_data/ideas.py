@@ -1721,7 +1721,7 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=43, date=datetime(2027, 1, 15, tzinfo=timezone)
+                price=43, date=datetime(2027, 1, 15, tzinfo=timezone.utc)
             ),
             description=r"""EdiliziAcrobatica is a fast growing company with a dominant market position in the
                             industry of facades. Founder led business with high insider ownership. Expansion
