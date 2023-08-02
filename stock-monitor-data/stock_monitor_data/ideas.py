@@ -463,16 +463,16 @@ def ideas(period: str, interval: str):
                 price=4.5, date=datetime(2023, 12, 31, tzinfo=timezone.utc)
             ),
             description=r"""Relatively mediocre business, however, it is cheap on all metrics. Trades at 7x EBIT, slightly above net
-                                   current assets. Well-protected downside and meaningful potential upside.The company manufactures/sells
-                                   single-use protective apparel products and building supply products. Net cash balance sheet and rational
-                                   capital allocation strategy. Uses all FCF to buy back stock, S/O declined from 27m in 2006 to 13m today.
-                                   Shares might skyrocket on the next viral outbreak, as has already happened due to H1N1 in 2009 and COVID in 2020.
-                                   Attractive M&A target for both financial and strategic buyers.Shares might skyrocket on the next viral outbreak,
-                                   as has already happened due to H1N1 in 2009 and COVID in 2020. Attractive M&A target for both financial and
-                                   strategic buyers. EV/sales at 0.52x, EV/EBIT is 6.8x, and EV/NOPAT is 8.6x.
-                                   NCAV per share is \$3.77 (1.14x) and TBVPS is \$4.85 (0.89x). Exp. gain: TBVPS is set to compound at 8%
-                                   annually in the absence of any viral outbreaks.
-                                   [Source](https://twitter.com/InvestSpecial/status/1643537169309483008)""",
+                            current assets. Well-protected downside and meaningful potential upside.The company manufactures/sells
+                            single-use protective apparel products and building supply products. Net cash balance sheet and rational
+                            capital allocation strategy. Uses all FCF to buy back stock, S/O declined from 27m in 2006 to 13m today.
+                            Shares might skyrocket on the next viral outbreak, as has already happened due to H1N1 in 2009 and COVID in 2020.
+                            Attractive M&A target for both financial and strategic buyers.Shares might skyrocket on the next viral outbreak,
+                            as has already happened due to H1N1 in 2009 and COVID in 2020. Attractive M&A target for both financial and
+                            strategic buyers. EV/sales at 0.52x, EV/EBIT is 6.8x, and EV/NOPAT is 8.6x.
+                            NCAV per share is \$3.77 (1.14x) and TBVPS is \$4.85 (0.89x). Exp. gain: TBVPS is set to compound at 8%
+                            annually in the absence of any viral outbreaks.
+                            [Source](https://twitter.com/InvestSpecial/status/1643537169309483008)""",
         ),
         Stock(
             ticker_name="AUE.SI",
