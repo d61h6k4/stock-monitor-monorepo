@@ -165,7 +165,7 @@ def portfolio(period: str, interval: str):
             buy_date = datetime(2023, 8, 2, tzinfo=timezone.utc)
             expectation=Expectation(
                 price=4.5, date=datetime(2023, 12, 31, tzinfo=timezone.utc),
-                confidence=0.2
+                confidence=0.8
             )
             description = "See for more in ideas."
 
