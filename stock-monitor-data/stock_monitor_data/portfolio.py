@@ -4,7 +4,7 @@ from stock_monitor_data.models import Stock, Expectation
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "AMD", "PSK.TO"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "PSK.TO"]:
         buy_date = None
         description = None
         expectation = None
@@ -145,18 +145,10 @@ def portfolio(period: str, interval: str):
                             works well in any economic environment but especially in times of economic downturns.
                             When, due to a crisis, the sale of new vehicles decreases, this causes an increase in
                             the age of the vehicle fleet, resulting in the need for more maintenance."""
-        elif ticker_name == "AMD":
-            buy_date = datetime(2023, 6, 30, tzinfo=timezone.utc)
-            expectation = Expectation(
-                price=130,
-                date=datetime(2023, 9, 15, tzinfo=timezone.utc),
-                confidence=0.3,
-            )
-            description = r"""Based on news that MosaicAI successfully trained the MPT on AMD GPU."""
         elif ticker_name == "PSK.TO":
             buy_date = datetime(2023, 7, 10, tzinfo=timezone.utc)
             expectation = Expectation(
-                price=35,
+                price=30,
                 date=datetime(2023, 9, 15, tzinfo=timezone.utc),
                 confidence=0.1,
             )
