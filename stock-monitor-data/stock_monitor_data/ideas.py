@@ -1729,6 +1729,21 @@ def ideas(period: str, interval: str):
                             [Source](https://moderninvesting.substack.com/p/ediliziacrobatica-italys-compounding)
                         """,
         ),
+        Stock(
+            ticker_name="MINDP",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=8.0, date=datetime(2023, 12, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Weird divident play.
+                            On top of this, you have the \$2.25 that will be paid out annually as dividends
+                            going forward, about a 30% yield at current levels. Not a bad payment while you
+                            wait for the larger upside. Lastly, by holding the preferred shares for the longer
+                            term you can clip off a very safe and respectable 9% coupon as a terminal value.
+                            [Source](https://breeleycapital.substack.com/p/mind-technology-preferred-one-to)
+                          """,
+        ),
     ]
 
     return reversed(ideas)
