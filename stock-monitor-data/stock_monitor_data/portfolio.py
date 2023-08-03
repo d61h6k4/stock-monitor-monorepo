@@ -12,8 +12,8 @@ def portfolio(period: str, interval: str):
             buy_date = datetime(2022, 12, 1, tzinfo=timezone.utc)
             description = "Arbitrage"
             expectation = Expectation(
-                price=21,
-                date=datetime(2023, 12, 15, tzinfo=timezone.utc),
+                price=24,
+                date=datetime(2024, 11, 15, tzinfo=timezone.utc),
                 confidence=0.75,
             )
         elif ticker_name == "CEG":
