@@ -39,8 +39,18 @@ def portfolio(period: str, interval: str):
 
     res = []
     for ticker in chain.from_iterable(
-        (ideas(period, interval), oil_and_gas_stocks(period, interval))
+        [ideas(period, interval), oil_and_gas_stocks(period, interval)]
     ):
         if ticker.ticker_name in tickers:
-            res.append(ticker.copy(update=tickers[ticker.ticker_name]))
+            new_expectation = ticker.expectation.model_copy(
+                update={"confidence": tickers[ticker.ticker_name]["confidence"]}
+            )
+            res.append(
+                ticker.model_copy(
+                    update={
+                        "expectation": new_expectation,
+                        "buy_date": tickers[ticker.ticker_name]["buy_date"],
+                    }
+                )
+            )
     return res
