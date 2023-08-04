@@ -38,7 +38,9 @@ def portfolio(period: str, interval: str):
     }
 
     res = []
-    for ticker in chain.from_iterable((ideas, oil_and_gas_stocks)):
+    for ticker in chain.from_iterable(
+        (ideas(period, interval), oil_and_gas_stocks(period, interval))
+    ):
         if ticker.ticker_name in tickers:
             res.append(ticker.copy(update=tickers[ticker.ticker_name]))
     return res
