@@ -4,7 +4,7 @@ from stock_monitor_data.models import Stock, Expectation
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "PSK.TO", "APT"]:
+    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "PSK.TO", "APT", "ANTM.JK", "S85.SI"]:
         buy_date = None
         description = None
         expectation = None
@@ -163,11 +163,30 @@ def portfolio(period: str, interval: str):
             description = r"""Tresuries."""
         elif ticker_name == "APT":
             buy_date = datetime(2023, 8, 2, tzinfo=timezone.utc)
-            expectation=Expectation(
-                price=4.5, date=datetime(2023, 12, 31, tzinfo=timezone.utc),
-                confidence=0.5
+            expectation = Expectation(
+                price=4.5,
+                date=datetime(2023, 12, 31, tzinfo=timezone.utc),
+                confidence=0.5,
             )
             description = "See for more in ideas."
+        elif ticker_name == "ANTM.JK":
+            buy_date = datetime(2023, 8, 3, tzinfo=timezone.utc)
+            expectation = Expectation(
+                price=2700,
+                date=datetime(2025, 3, 15, tzinfo=timezone.utc),
+                confidence=0.5,
+            )
+            description = "Comodity."
+        elif ticker_name == "S85.SI":
+            buy_date = datetime(2023, 8, 3, tzinfo=timezone.utc)
+            expectation = (
+                Expectation(
+                    price=1.029,
+                    date=datetime(2027, 1, 15, tzinfo=timezone.utc),
+                    confidence=0.5,
+                ),
+            )
+            description = "China reopening."
 
         assert buy_date is not None, f"No buy_date for {ticker_name}"
         assert description is not None, f"No description for {ticker_name}"
