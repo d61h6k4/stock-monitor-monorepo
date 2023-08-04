@@ -4,7 +4,16 @@ from stock_monitor_data.models import Stock, Expectation
 
 def portfolio(period: str, interval: str):
     res = []
-    for ticker_name in ["TGNA", "SOMA.V", "TM.V", "APR.WA", "PSK.TO", "APT", "ANTM.JK", "S85.SI"]:
+    for ticker_name in [
+        "TGNA",
+        "SOMA.V",
+        "TM.V",
+        "APR.WA",
+        "PSK.TO",
+        "APT",
+        "ANTM.JK",
+        "S85.SI",
+    ]:
         buy_date = None
         description = None
         expectation = None
@@ -179,12 +188,10 @@ def portfolio(period: str, interval: str):
             description = "Comodity."
         elif ticker_name == "S85.SI":
             buy_date = datetime(2023, 8, 3, tzinfo=timezone.utc)
-            expectation = (
-                Expectation(
-                    price=1.029,
-                    date=datetime(2027, 1, 15, tzinfo=timezone.utc),
-                    confidence=0.5,
-                ),
+            expectation = Expectation(
+                price=1.029,
+                date=datetime(2027, 1, 15, tzinfo=timezone.utc),
+                confidence=0.5,
             )
             description = "China reopening."
 
