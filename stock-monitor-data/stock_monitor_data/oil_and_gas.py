@@ -1,4 +1,6 @@
-from stock_monitor_data.models import Stock
+from datetime import datetime, timezone
+
+from stock_monitor_data.models import Expectation, Stock
 
 
 def oil_and_gas_stocks(period, interval) -> list[Stock]:
@@ -55,6 +57,9 @@ def oil_and_gas_stocks(period, interval) -> list[Stock]:
             ticker_name="PSK.TO",
             period=period,
             interval=interval,
+            expectation=Expectation(
+                price=30, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
             description="""[Source](https://specialsituationinvesting.substack.com/p/prairiesky-royalty-prekf)""",
         ),
         Stock(

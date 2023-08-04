@@ -30,7 +30,7 @@ def desired_stock_price_velocity(s: Stock) -> float:
     current_price = s.history["Close"].last(offset="1d").max()
     expected_excess = (s.expectation.price - current_price) / current_price
     time_penalty = (s.expectation.date - datetime.now(tz=timezone.utc)).days
-    assert time_penalty > 0, s.ticker_name
+    assert time_penalty > 0, s
     return expected_excess / float(time_penalty)
 
 

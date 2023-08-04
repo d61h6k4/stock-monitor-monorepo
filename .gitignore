@@ -131,3 +131,4 @@ stock-monitor-bot/.rasa
 stock-monitor-bot/models
 */yfinance.cache
 */cot.cache
+**/*.cache

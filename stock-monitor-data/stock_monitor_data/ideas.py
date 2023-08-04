@@ -565,7 +565,7 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=0.6, date=datetime(25, 12, 31, tzinfo=timezone.utc)
+                price=0.6, date=datetime(2025, 12, 31, tzinfo=timezone.utc)
             ),
             description=r"""Trigon Metals Inc. (TM:TSXV) is a Canadian exploration, development, and mining company focused on copper
                             and silver assets in Africa. Trigon`s current priority is the restart of its flagship project, the Kombat
@@ -908,11 +908,11 @@ def ideas(period: str, interval: str):
                 price=2700, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
             ),
             description=r"""Our initial target range for ANTAM is between IDR 2,700-3,200 (currently at IDR 1,935). In our bull case,
-                                   our view is that the stock could double over the next 2-3 years. Factors driving business growth are strong
-                                   macro and fundamental demand for nickel and gold products, as well as stable to increasing commodity prices.
-                                   We are seeing surging demand for EV battery materials from manufacturers in China and ASEAN; a flourishing
-                                   EV supply chain in Indonesia will complement this.
-                                   [Source](https://www.pyramidsandpagodas.com/p/aneka-tambang-antmjk-indonesian-nickel?utm_source=substack&utm_medium=email)""",
+                            our view is that the stock could double over the next 2-3 years. Factors driving business growth are strong
+                            macro and fundamental demand for nickel and gold products, as well as stable to increasing commodity prices.
+                            We are seeing surging demand for EV battery materials from manufacturers in China and ASEAN; a flourishing
+                            EV supply chain in Indonesia will complement this.
+                            [Source](https://www.pyramidsandpagodas.com/p/aneka-tambang-antmjk-indonesian-nickel?utm_source=substack&utm_medium=email)""",
         ),
         Stock(
             ticker_name="MAU.PA",
@@ -1301,11 +1301,11 @@ def ideas(period: str, interval: str):
                 price=180, date=datetime(2025, 11, 30, tzinfo=timezone.utc)
             ),
             description=r"""Sabre shares are at 7.4x 2019 EPS and 11.3x 2021 EPS
-                                   The sector`s 2022 earnings downturn was exceptional and cyclical
-                                   EPS can double this year and be back at 2021 level by 2024
-                                   At 135.6p, we see 35% upside (13.6% p.a.) by end of 2025
-                                   But this is not attractive enough and we have long-term concerns
-                                   [Source](https://librariancapital.substack.com/p/sabre-insurance-shares-halved-since)
+                            The sector`s 2022 earnings downturn was exceptional and cyclical
+                            EPS can double this year and be back at 2021 level by 2024
+                            At 135.6p, we see 35% upside (13.6% p.a.) by end of 2025
+                            But this is not attractive enough and we have long-term concerns
+                            [Source](https://librariancapital.substack.com/p/sabre-insurance-shares-halved-since)
                    """,
         ),
         Stock(

@@ -25,7 +25,7 @@ def portfolio(period: str, interval: str):
         },
         "PSK.TO": {
             "buy_date": datetime(2023, 7, 10, tzinfo=timezone.utc),
-            "confidence": 0.1,
+            "confidence": 0.3,
         },
         "APT": {
             "buy_date": datetime(2023, 8, 2, tzinfo=timezone.utc),
@@ -42,6 +42,7 @@ def portfolio(period: str, interval: str):
         [ideas(period, interval), oil_and_gas_stocks(period, interval)]
     ):
         if ticker.ticker_name in tickers:
+            assert ticker.expectation, ticker
             new_expectation = ticker.expectation.model_copy(
                 update={"confidence": tickers[ticker.ticker_name]["confidence"]}
             )
