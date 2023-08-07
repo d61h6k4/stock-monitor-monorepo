@@ -1,6 +1,6 @@
-from itertools import chain
 from datetime import datetime, timezone
-from stock_monitor_data.models import Stock, Expectation
+from itertools import chain
+
 from stock_monitor_data.ideas import ideas
 from stock_monitor_data.oil_and_gas import oil_and_gas_stocks
 
