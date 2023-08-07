@@ -21,7 +21,7 @@ def weights_graph():
 
     return ui.plot_card(
         box="1 2 11 5",
-        title="Portfolio weights (max Sharpe ratio)",
+        title="Portfolio weights (min volatility)",
         data=data("ticker weight", len(weights), rows=weights),
         plot=ui.plot([ui.mark(type="interval", x="=weight", y="=ticker", y_min=0, y_nice=True)])
     )

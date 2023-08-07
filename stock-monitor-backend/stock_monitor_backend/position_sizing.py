@@ -68,6 +68,6 @@ def get_weights():
     rets = bl.bl_returns()
     ef = EfficientFrontier(rets, shrunk_covariance)
     ef.add_objective(L2_reg)
-    ef.max_sharpe()
+    ef.min_volatility()
 
     return ef.clean_weights(rounding=2), bl.clean_weights(rounding=2)
