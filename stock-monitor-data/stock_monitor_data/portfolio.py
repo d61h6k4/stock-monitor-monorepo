@@ -31,8 +31,8 @@ def portfolio(period: str, interval: str):
             "buy_date": datetime(2023, 8, 2, tzinfo=timezone.utc),
             "confidence": 0.5,
         },
-        "ANTM.JK": {
-            "buy_date": datetime(2023, 8, 3, tzinfo=timezone.utc),
+        "FIP": {
+            "buy_date": datetime(2023, 8, 9, tzinfo=timezone.utc),
             "confidence": 0.5,
         },
     }
