@@ -96,7 +96,7 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=7, date=datetime(2023, 6, 1, tzinfo=timezone.utc)
+                price=7, date=datetime(2024, 6, 15, tzinfo=timezone.utc)
             ),
             description=r"""Recent spin-off from \$FTAI with 4 infrastructure assets: 3 energy terminals and a
                                   railroad business. EBITDA is set to increase from \$140m today to \$250m in the next
