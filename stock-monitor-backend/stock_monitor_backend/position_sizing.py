@@ -10,7 +10,7 @@ from stock_monitor_data import Stock, portfolio
 
 
 def get_market_prices() -> pd.Series:
-    return Stock(ticker_name="^SPX", period="2y", interval="1d").history["Close"]
+    return Stock(ticker_name="^SPX", period="1y", interval="1d").history["Close"]
 
 
 def get_portfolio_prices() -> pd.DataFrame:
@@ -22,8 +22,7 @@ def get_portfolio_prices() -> pd.DataFrame:
 
 
 def get_portfolio_market_cap() -> Mapping[str, float]:
-    return {s.ticker_name: s.market_cap
-            for s in portfolio("2y", "1d")}
+    return {s.ticker_name: s.market_cap for s in portfolio("2y", "1d")}
 
 
 def desired_stock_price_velocity(s: Stock) -> float:
@@ -38,8 +37,7 @@ def get_portfolio_views() -> Mapping[str, float]:
     def _view(s: Stock) -> float:
         return 92.0 * desired_stock_price_velocity(s)  # price of a stock in 3 months
 
-    return {s.ticker_name: _view(s)
-            for s in portfolio("2y", "1d")}
+    return {s.ticker_name: _view(s) for s in portfolio("2y", "1d")}
 
 
 def get_portfolio_view_confidences() -> pd.Series:
@@ -50,20 +48,29 @@ def get_portfolio_view_confidences() -> pd.Series:
 
         return s.expectation.confidence / weight
 
-    return pd.Series({s.ticker_name: _weighted_confidence(s) for s in portfolio("2y", "1d")})
+    return pd.Series(
+        {s.ticker_name: _weighted_confidence(s) for s in portfolio("2y", "1d")}
+    )
 
 
 def get_weights():
-    shrunk_covariance = risk_models.CovarianceShrinkage(get_portfolio_prices()).ledoit_wolf()
+    risk_free_rate = 0.045  # Rate of borrowing money. Today is 4.5%
+    shrunk_covariance = risk_models.CovarianceShrinkage(
+        get_portfolio_prices()
+    ).ledoit_wolf()
 
-    delta = black_litterman.market_implied_risk_aversion(get_market_prices())
-    bl = black_litterman.BlackLittermanModel(cov_matrix=shrunk_covariance,
-                                             absolute_views=get_portfolio_views(),
-                                             pi="market",
-                                             market_caps=get_portfolio_market_cap(),
-                                             omega="idzorek",
-                                             view_confidences=get_portfolio_view_confidences(),
-                                             risk_aversion=delta)
+    delta = black_litterman.market_implied_risk_aversion(
+        get_market_prices(), risk_free_rate=risk_free_rate
+    )
+    bl = black_litterman.BlackLittermanModel(
+        cov_matrix=shrunk_covariance,
+        absolute_views=get_portfolio_views(),
+        pi="market",
+        market_caps=get_portfolio_market_cap(),
+        omega="idzorek",
+        view_confidences=get_portfolio_view_confidences(),
+        risk_aversion=delta,
+    )
     bl.bl_weights(risk_aversion=delta)
     rets = bl.bl_returns()
     ef = EfficientFrontier(rets, shrunk_covariance)
