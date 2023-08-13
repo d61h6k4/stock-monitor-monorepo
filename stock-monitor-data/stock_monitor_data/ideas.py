@@ -1788,6 +1788,21 @@ def ideas(period: str, interval: str):
                             [Source](https://moderninvesting.substack.com/p/1-fertilizer-market)
                         """,
         ),
+        Stock(
+            ticker_name="TRT.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=100, date=datetime(2023, 12, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""turnaround after years of losses with the help of a highly profitable license 
+                            deal by new management. A substantial part of the current market cap is backed 
+                            by future cashflows of this license deal that will be used to maximize shareholder 
+                            value via buybacks and investments in a controlled manner in highly promising & 
+                            patented SAW technology
+                            [Source](https://underfollowedstocks.substack.com/p/transense)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
