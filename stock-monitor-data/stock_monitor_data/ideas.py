@@ -1744,18 +1744,50 @@ def ideas(period: str, interval: str):
                             [Source](https://breeleycapital.substack.com/p/mind-technology-preferred-one-to)
                           """,
         ),
-        Stock(ticker_name="KDP",
-              period=period,
-              interval=interval,
-              expectation=Expectation(price=47, date=datetime(2025, 1, 15, tzinfo=timezone.utc)),
-              description=r"""KDP is now a much cleaner story and the fundamental outlook is looking very 
+        Stock(
+            ticker_name="KDP",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=47, date=datetime(2025, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""KDP is now a much cleaner story and the fundamental outlook is looking very 
                               promising. Coffee has begun its rebound and represents an early stage-margin 
                               recovery story on track for a major 2H inflection. Increased emphasis is being 
                               placed on the profitability of K-Cups where historically the priority has been 
                               market share at the expense of margins.
                               [Source](https://acrobat.adobe.com/id/urn:aaid:sc:VA6C2:cee563c1-084f-4c18-ab0f-ebbab6335ef9)
                               [Update](https://acrobat.adobe.com/id/urn:aaid:sc:VA6C2:f3d5f190-415b-4400-a193-5492f1bf38fe)
-                           """),
+                           """,
+        ),
+        Stock(
+            ticker_name="ATT.WA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=50, date=datetime(2025, 8, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""For global live, Fertilizers are close to as important as water. Over the last 
+                            75 years the human population has tripled. While the output of for example corn 
+                            has grown by 450%, the land area used for farming corn hasn’t gone up at all ! 
+                            This is the result of more efficient farming and importantly fertilizers.
+                            [Source](https://moderninvesting.substack.com/p/1-fertilizer-market)
+                        """,
+        ),
+        Stock(
+            ticker_name="MOS",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=80, date=datetime(2025, 8, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""For global live, Fertilizers are close to as important as water. Over the last 
+                            75 years the human population has tripled. While the output of for example corn 
+                            has grown by 450%, the land area used for farming corn hasn’t gone up at all ! 
+                            This is the result of more efficient farming and importantly fertilizers.
+                            [Source](https://moderninvesting.substack.com/p/1-fertilizer-market)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
