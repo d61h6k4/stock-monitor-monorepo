@@ -1803,6 +1803,36 @@ def ideas(period: str, interval: str):
                             [Source](https://underfollowedstocks.substack.com/p/transense)
                         """,
         ),
+        Stock(
+            ticker_name="FXPO.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=140, date=datetime(2025, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""In conclusion, Ferrexpo presents a compelling investment opportunity given its 
+                            strong financial performance, competitive advantages, and attractive valuation. 
+                            While the geopolitical risks associated with its operations in Ukraine are a concern, 
+                            we believe that a contrarian may see Ferrexpo with potential upside. If geopolitical 
+                            tensions ease, Ferrexpo's financial performance could improve significantly from 
+                            currently depressed levels. Iron ore prices may also recover over time as demand 
+                            rebalances with supply, particularly with the rebuilding needs in Ukraine.
+                            [Source](https://gilescapital.substack.com/p/our-new-investment-idea-ferrexpo)
+                        """,
+        ),
+        Stock(
+            ticker_name="RELL",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=40, date=datetime(2027, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""There will likely be significant volatility in the share price of Richardson 
+                            in the short term, notably on/around the next two earnings reports.
+                            Since 2024 it should get better.
+                            [Source](https://thefondinvestor.substack.com/p/richardson-electronics-rell)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
