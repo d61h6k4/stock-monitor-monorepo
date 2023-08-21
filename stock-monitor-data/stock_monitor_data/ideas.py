@@ -1833,6 +1833,95 @@ def ideas(period: str, interval: str):
                             [Source](https://thefondinvestor.substack.com/p/richardson-electronics-rell)
                         """,
         ),
+        Stock(
+            ticker_name="EL",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=234, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""We believe EL is a great business with the valuation of a mediocre one. 
+                            At \$156.59, relative to CY19 earnings (which do not include subsequent growth), 
+                            shares are at 25.6x Non-GAAP EPS and have a 2.7% Free Cash Flow (“FCF”) Yield; 
+                            relative to FY22 (which somewhat over-earned), the Non-GAAP P/E is 21.2x and the 
+                            FCF Yield is 3.0%. Our updated forecasts show a total return of 49% 
+                            (15.3% annualized) by June 2026; the actual annualized return may turn out to be 
+                            higher, should EL shares re-rate upwards early once signs of recovery become visible.
+                            [Source](https://librariancapital.substack.com/p/estee-lauder-near-covid-19-low-after)
+                        """,
+        ),
+        Stock(
+            ticker_name="HFG.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=1400, date=datetime(2027, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Hilton Food Group (HFG-L) presents an opportunity to buy a steadily-growing white-label 
+                            meat and seafood supplier at a 40%+ discount to its historical EV/EBITDA multiple. HFG’s 
+                            share price plummeted in 2022 as the company’s multi-customer segment (18% of revenues) 
+                            was forced to issue two profit warnings due to spiking seafood prices following the Russian 
+                            fish exports ban. The market seems to have overreacted as HFG's market cap dropped more than 
+                            £500m on a £26m temporary profit reduction.
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-5)
+                        """,
+        ),
+        Stock(
+            ticker_name="ASML",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=700, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""The semiconductor industry is expected to grow at a CAGR of +9% between 2020-2030E. 
+                            I believe ASML is one of the potential beneficiaries of the growing semiconductor industry. 
+                            [Source](https://www.from100kto1m.com/p/asml-holding-asml-deep-dive)
+                        """,
+        ),
+        Stock(
+            ticker_name="BAR.BR",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=50, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Today’s company is Barco (€1.8bn market cap), a Belgian technology company with a focus on 
+                            imaging technology. This is a high-quality, well-financed, cool company with a positive 
+                            outlook for the next years. The shares are currently on sale due to a few specific reasons, 
+                            providing an attractive opportunity into an original thesis at a heavily discounted price. 
+                            Not often does decent size quality + growth + strong balance sheet trade at a large discount. 
+                            As Barco continues to perform and the current uncertainty subsides, the share price should 
+                            rerate back. A normalisation of the multiple on growing earnings indicates >100% upside 
+                            over the next 2/3 years.
+                            [Source](https://toffcap.substack.com/p/barco)
+                        """,
+        ),
+        Stock(
+            ticker_name="VEEE",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=3.0, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Twin Vee PowerCats (\$VEEE) is a company that manufactures recreational power sport boats 
+                            and has been in operation for over 25 years. However, it went public recently (August 2021), 
+                            raising \$18 MM to finance its growth. Subsequently, it spun off one of its three business 
+                            lines, electric boats (Forza X1 \$FRZA), in August 2022, raising \$15 MM.
+                            [Source](https://moram.substack.com/p/twin-vee-and-forza-x1-analysis-veee)""",
+        ),
+        Stock(
+            ticker_name="FRZA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=3.0, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Twin Vee PowerCats (\$VEEE) is a company that manufactures recreational power sport boats 
+                            and has been in operation for over 25 years. However, it went public recently (August 2021), 
+                            raising \$18 MM to finance its growth. Subsequently, it spun off one of its three business 
+                            lines, electric boats (Forza X1 \$FRZA), in August 2022, raising \$15 MM.
+                            [Source](https://moram.substack.com/p/twin-vee-and-forza-x1-analysis-veee)""",
+        ),
     ]
 
     return reversed(ideas)
