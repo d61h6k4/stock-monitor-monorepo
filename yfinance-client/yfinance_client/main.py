@@ -2,10 +2,9 @@ import json
 import logging
 from argparse import ArgumentParser
 from datetime import datetime
-from itertools import chain
 from pathlib import Path
 
-from kafka import KafkaProducer
+
 from rich.logging import RichHandler
 from rich import progress
 
@@ -52,10 +51,26 @@ def parse_args():
 
 
 def main():
+    from kafka import KafkaProducer
+    from kafka.admin import KafkaAdminClient, NewTopic
+
     logging.basicConfig(handlers=[RichHandler()])
     logger = logging.getLogger("yfinance-client-cli")
 
     args = parse_args()
+
+    admin_client = KafkaAdminClient(
+        bootstrap_servers=args.kafka_bootstrap_servers,
+        client_id="yfinance-client-producer",
+    )
+    topics = ["events"]
+    # Check if topics already exist first
+    existing_topics = admin_client.list_topics()
+    for topic in topics:
+        if topic not in existing_topics:
+            admin_client.create_topics(
+                [NewTopic(topic, num_partitions=1, replication_factor=1)]
+            )
 
     if args.storage.exists():
         db = json.loads(args.storage.read_text())
@@ -90,16 +105,17 @@ def main():
     ) as pgs:
         process_stocks_task = pgs.add_task("[green]Processing stocks:", total=None)
         for stock in stocks():
-            events = [get_ticker_events(symbol=stock.ticker_name)]
             if stock.ticker_name not in db:
-                events.append(
-                    get_ticker_history_events(symbol=stock.ticker_name)
+                events = get_ticker_history_events(
+                    symbol=stock.ticker_name, period="1y"
                 )
+            else:
+                events = get_ticker_events(symbol=stock.ticker_name)
 
             process_events_task = pgs.add_task(
                 f"Processing {stock.ticker_name}", total=None
             )
-            for event in chain.from_iterable(reversed(events)):
+            for event in events:
                 send_event(event)
                 pgs.update(process_events_task)
             pgs.update(process_events_task, visible=False)
