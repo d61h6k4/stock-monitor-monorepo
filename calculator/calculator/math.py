@@ -89,3 +89,89 @@ class AverageDirectionalIndex:
 
     def __call__(self, flow: Dataflow):
         flow.stateful_map("Calculate ADX", self.builder, self.mapper)
+
+
+class MACD:
+    """Moving Average Convergence/Divergence.
+
+    https://www.investopedia.com/terms/m/macd.asp
+    """
+
+    def __init__(self):
+        self.alpha_9 = 2.0 / (9.0 + 1.0)
+        self.alpha_12 = 2.0 / (12.0 + 1.0)
+        self.alpha_26 = 2.0 / (26.0 + 1.0)
+
+    @staticmethod
+    def builder() -> State:
+        return {}
+
+    def mapper(self, state: State, current: KV) -> Tuple[KV, KV]:
+        c_ma_12 = exponential_moving_average(
+            self.alpha_12, current["close"], state.get("close_ma_12", current["close"])
+        )
+        c_ma_26 = exponential_moving_average(
+            self.alpha_26, current["close"], state.get("close_ma_26", current["close"])
+        )
+        macd = c_ma_12 - c_ma_26
+
+        macd_signal = exponential_moving_average(
+            self.alpha_9, macd, state.get("macd_signal", macd)
+        )
+
+        current.update(
+            {
+                "close_ma_12": c_ma_12,
+                "close_ma_26": c_ma_26,
+                "macd": macd,
+                "macd_signal": macd_signal,
+            }
+        )
+        return current, current
+
+    def __call__(self, flow: Dataflow):
+        flow.stateful_map("Calculate MACD", self.builder, self.mapper)
+
+
+class RSI:
+    """Relative Strength Index.
+
+    https://www.investopedia.com/terms/r/rsi.asp
+    """
+
+    def __init__(self) -> None:
+        self.alpha = 2.0 / (14.0 + 1.0)
+
+    @staticmethod
+    def builder() -> State:
+        return {}
+
+    def mapper(self, state: State, current: KV) -> Tuple[KV, KV]:
+        close_prev = state.get("close", current["close"])
+        pct_change = (current["close"] - close_prev) / close_prev
+
+        gain = pct_change if pct_change > 0 else 0.0
+        loss = -1.0 * pct_change if pct_change < 0 else 0.0
+
+        gain_ma = exponential_moving_average(
+            self.alpha, gain, state.get("gain_ma", gain)
+        )
+        loss_ma = exponential_moving_average(
+            self.alpha, loss, state.get("loss_ma", gain)
+        )
+
+        if loss_ma > 0:
+            rsi = 100.0 - (100.0 / (1.0 + gain_ma / loss_ma))
+        else:
+            rsi = 100.0
+        current.update(
+            {
+                "gain_ma": gain_ma,
+                "loss_ma": loss_ma,
+                "rsi": rsi,
+            }
+        )
+        return current, current
+
+    def __call__(self, flow: Dataflow):
+        flow.stateful_map("Calculate RSI", self.builder, self.mapper)

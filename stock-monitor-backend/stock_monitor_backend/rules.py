@@ -112,7 +112,7 @@ def macd_rule(ticker: str) -> Decision:
 
     current_price = stock.history["Close"].last(offset="1D").max()
     macd_line = macd(stock.history)
-    signal_line = macd_line.ewm(alpha=1.0 / 9.0).mean()
+    signal_line = macd_line.ewm(alpha=2.0 / 10.0).mean()
 
     macd_value = macd_line.last(offset="1d").max()
     signal_value = signal_line.last(offset="1d").max()

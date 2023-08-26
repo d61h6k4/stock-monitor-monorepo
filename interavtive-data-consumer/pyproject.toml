@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "interavtive-data-consumer"
+version = "0.1.0"
+description = ""
+authors = ["Danila <ddbihbka@gmail.com>"]
+readme = "README.md"
+packages = [{include = "interavtive_data_consumer"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+bytewax = "^0.16.2"
+confluent-kafka = "^2.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -6,7 +6,7 @@ from bytewax.dataflow import Dataflow
 from bytewax.testing import TestingInput, TestingOutput, run_main
 from yfinance import Ticker
 
-from calculator.math import AverageTrueRange, AverageDirectionalIndex
+from calculator.math import AverageTrueRange, AverageDirectionalIndex, MACD, RSI
 
 
 @pytest.fixture
@@ -94,3 +94,23 @@ def test_adx_smoke(msft_flow):
     assert all((x >= 0 for x in pdis))
     assert all((x >= 0 for x in ndis))
     assert all((x >= 0 for x in adxs))
+
+
+def test_macd_smoke(msft_flow):
+    MACD()(msft_flow)
+
+    results = []
+    msft_flow.output("out", TestingOutput(results))
+
+    run_main(msft_flow)
+    assert results
+
+
+def test_rsi_smoke(msft_flow):
+    RSI()(msft_flow)
+
+    results = []
+    msft_flow.output("out", TestingOutput(results))
+
+    run_main(msft_flow)
+    assert results

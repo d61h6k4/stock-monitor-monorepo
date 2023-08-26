@@ -2,7 +2,7 @@ import os
 from bytewax.connectors.kafka import KafkaInput, KafkaOutput
 from bytewax.dataflow import Dataflow
 from bytewax.window import EventClockConfig, TumblingWindow
-from calculator.math import AverageTrueRange, AverageDirectionalIndex
+from calculator.math import AverageTrueRange, AverageDirectionalIndex, MACD, RSI
 
 BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:19092").split(",")
 KAFKA_INPUT_TOPICS = os.getenv("KAFKA_INPUT_TOPICS", "events").split(",")
@@ -59,6 +59,8 @@ def calculate_features():
 
     AverageTrueRange(p=14)(flow)
     AverageDirectionalIndex(p=14)(flow)
+    MACD()(flow)
+    RSI()(flow)
 
     def serialize_with_key(key__payload):
         key, payload = key__payload

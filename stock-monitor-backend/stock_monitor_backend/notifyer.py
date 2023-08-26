@@ -2,8 +2,9 @@
 
 import json
 from pathlib import Path
-from structlog import get_logger
 from typing import Self
+
+from structlog import get_logger
 
 from stock_monitor_backend.rules import Action, Decision
 from stock_monitor_backend.telegram.client import TelegramClient
@@ -29,7 +30,9 @@ class NotificationCenter:
                 for ticker, t_values in values.items():
                     self._users_last_messages[user][ticker] = {}
                     for rule, state in t_values.items():
-                        self._users_last_messages[user][ticker][rule] = Action.from_string(state)
+                        self._users_last_messages[user][ticker][
+                            rule
+                        ] = Action.from_string(state)
         else:
             logger.warn("Resource doesn't exist.", resource=self._resource)
 
@@ -48,12 +51,18 @@ class NotificationCenter:
             self._users_last_messages[user][decision.ticker] = {}
         if decision.rule.name not in self._users_last_messages[user][decision.ticker]:
             self._users_last_messages[user][decision.ticker][decision.rule.name] = None
-        if self._users_last_messages[user][decision.ticker][decision.rule.name] != decision.action:
+        if (
+            self._users_last_messages[user][decision.ticker][decision.rule.name]
+            != decision.action
+        ):
             text = telegramify(decision)
-            self._clients[TELEGRAM].send_message(chat_id=self._users_to_chats[user],
-                                                 text=text)
+            self._clients[TELEGRAM].send_message(
+                chat_id=self._users_to_chats[user], text=text
+            )
 
-            self._users_last_messages[user][decision.ticker][decision.rule.name] = decision.action
+            self._users_last_messages[user][decision.ticker][
+                decision.rule.name
+            ] = decision.action
 
     def check_user_exists(self: Self, user: str) -> None:
         """Checks the given `user` is known."""
@@ -64,7 +73,9 @@ class NotificationCenter:
     def check_client_exists(self: Self, client: str) -> None:
         """Checks the given `client` is known."""
         if client not in self._clients:
-            err_msg = "Telegram client hasn't been registered in Notification center yet."
+            err_msg = (
+                "Telegram client hasn't been registered in Notification center yet."
+            )
             raise ValueError(err_msg)
 
     def persist(self) -> None:

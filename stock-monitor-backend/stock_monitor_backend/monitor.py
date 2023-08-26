@@ -1,10 +1,5 @@
-from structlog import get_logger
-
 from sched import scheduler
-from tqdm import tqdm
 
-from stock_monitor_backend.notifyer import NotificationCenter
-from stock_monitor_backend.telegram.client import TelegramClient
 from stock_monitor_data import (
     crypto,
     etfs,
@@ -12,13 +7,19 @@ from stock_monitor_data import (
     oil_and_gas_stocks,
     portfolio,
 )
+from structlog import get_logger
+from tqdm import tqdm
+
+from stock_monitor_backend.notifyer import NotificationCenter
 from stock_monitor_backend.rules import (
+    Action,
     adx_rule,
     asr_rule,
     macd_rule,
     mad_rule,
     rsi_rule,
 )
+from stock_monitor_backend.telegram.client import TelegramClient
 
 logger = get_logger(__name__)
 
@@ -56,21 +57,25 @@ class Monitor:
         for stock in tqdm(etfs(period="3mo", interval="1d"), desc="Processing ETF..."):
             self.watch(stock)
 
-    def notify(self, stock):
-        self.notifier.send_unique_decision("dbihbka", asr_rule(stock.ticker_name))
-        self.notifier.send_unique_decision("dbihbka", macd_rule(stock.ticker_name))
-        self.notifier.send_unique_decision("dbihbka", rsi_rule(stock.ticker_name))
-        self.notifier.send_unique_decision("dbihbka", adx_rule(stock.ticker_name))
-        self.notifier.send_unique_decision("dbihbka", mad_rule(stock.ticker_name))
+    def notify(self, stock, actions):
+        for rule in [
+            asr_rule(stock.ticker_name),
+            macd_rule(stock.ticker_name),
+            rsi_rule(stock.ticker_name),
+            adx_rule(stock.ticker_name),
+            mad_rule(stock.ticker_name),
+        ]:
+            if rule.action in actions:
+                self.notifier.send_unique_decision("dbihbka", rule)
 
     def watch(self, stock):
         logger.info(f"Watching {stock.ticker_name}...")
-        self.s.enter(self.watch_timedelta, 1, self.notify, (stock,))
+        self.s.enter(self.watch_timedelta, 1, self.notify, (stock, {Action.BUY}))
         self.s.enter(self.watch_timedelta, 2, self.watch, (stock,))
 
     def monitor(self, stock):
         logger.info(f"Monitoring {stock.ticker_name}...")
-        self.s.enter(self.monitor_timedelta, 1, self.notify, (stock,))
+        self.s.enter(self.monitor_timedelta, 1, self.notify, (stock, {Action.SELL}))
         self.s.enter(self.monitor_timedelta, 2, self.monitor, (stock,))
 
 

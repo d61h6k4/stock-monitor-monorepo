@@ -1922,6 +1922,23 @@ def ideas(period: str, interval: str):
                             lines, electric boats (Forza X1 \$FRZA), in August 2022, raising \$15 MM.
                             [Source](https://moram.substack.com/p/twin-vee-and-forza-x1-analysis-veee)""",
         ),
+        Stock(
+            ticker_name="AMZN",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=160, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""At the end of the day, my investment in the name rests on the track record of the company 
+                            being able to: 
+                            1) Offer each customer an asymmetric value proposition
+                            2) Reinvest their own cash flow into their operation at high rates of return
+                            3) Spawn higher margin businesses from the launching pad of their retail operation
+                            When it comes to my own expectations for the company, coming out of this massive Capex 
+                            cycle I expect these investments to begin to bare fruit and for OCF to surpass $100B by 
+                            the end of 2026. This would mean a growth rate of ~17.9% a year, I think it’s doable.
+                            [Source](https://www.wsgresearch.com/p/amazon-musings)""",
+        ),
     ]
 
     return reversed(ideas)
