@@ -28,8 +28,11 @@ def rules_graph(stock):
     signal_line = macd_line.ewm(alpha=2.0 / 10.0).mean()
     macd_df = preprocess_dataframe(
         pd.concat(
-            [macd_line, signal_line],
-            keys=["macd", "signal"],
+            [
+                (macd_line - signal_line).clip(lower=0.0),
+                (macd_line - signal_line).clip(upper=0.0),
+            ],
+            keys=["macd+", "macd-"],
         )
         .reset_index()
         .rename(columns={"level_0": "kind"})
@@ -49,14 +52,14 @@ def rules_graph(stock):
                 plot=ui.plot(
                     [
                         ui.mark(
-                            type="line",
+                            type="interval",
                             x="=Date",
                             y="=Close",
                             x_scale="time",
                             y_nice=True,
                             color="=kind",
                             color_range="#06982d #ae1325",
-                            color_domain=["macd", "signal"],
+                            color_domain=["macd+", "macd-"],
                         )
                     ]
                 ),
