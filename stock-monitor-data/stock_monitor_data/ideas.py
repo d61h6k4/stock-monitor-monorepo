@@ -1939,6 +1939,19 @@ def ideas(period: str, interval: str):
                             the end of 2026. This would mean a growth rate of ~17.9% a year, I think it’s doable.
                             [Source](https://www.wsgresearch.com/p/amazon-musings)""",
         ),
+        Stock(
+            ticker_name="XPOF",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=34, date=datetime(2023, 12, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""There’s an old saying, “Insiders sell for a lot of reasons, but they only buy for one 
+                            reason (they think the stock is going up).” And it very well might be these small, 
+                            short-swing insider buys are the exception that prove the rule (or I guess saying in 
+                            this case).
+                            [Source](https://www.yetanothervalueblog.com/p/weekend-thoughts-xpofs-insider-buy)""",
+        ),
     ]
 
     return reversed(ideas)
