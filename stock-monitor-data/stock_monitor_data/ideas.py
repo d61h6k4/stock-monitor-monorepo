@@ -460,7 +460,7 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=4.5, date=datetime(2023, 12, 31, tzinfo=timezone.utc)
+                price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc)
             ),
             description=r"""Relatively mediocre business, however, it is cheap on all metrics. Trades at 7x EBIT, slightly above net
                             current assets. Well-protected downside and meaningful potential upside.The company manufactures/sells
@@ -1951,6 +1951,15 @@ def ideas(period: str, interval: str):
                             short-swing insider buys are the exception that prove the rule (or I guess saying in 
                             this case).
                             [Source](https://www.yetanothervalueblog.com/p/weekend-thoughts-xpofs-insider-buy)""",
+        ),
+        Stock(
+            ticker_name="TGNA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=21, date=datetime(2024, 11, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""US president election.""",
         ),
     ]
 

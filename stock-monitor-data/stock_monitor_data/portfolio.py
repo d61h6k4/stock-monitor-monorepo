@@ -23,10 +23,6 @@ def portfolio(period: str, interval: str):
             "buy_date": datetime(2023, 6, 27, tzinfo=timezone.utc),
             "confidence": 0.3,
         },
-        "PSK.TO": {
-            "buy_date": datetime(2023, 7, 10, tzinfo=timezone.utc),
-            "confidence": 0.3,
-        },
         "APT": {
             "buy_date": datetime(2023, 8, 2, tzinfo=timezone.utc),
             "confidence": 0.5,
@@ -54,4 +50,8 @@ def portfolio(period: str, interval: str):
                     }
                 )
             )
+
+    assert len(res) == len(tickers), set(t.ticker_name for t in res).difference(
+        set(tickers.keys())
+    )
     return res
