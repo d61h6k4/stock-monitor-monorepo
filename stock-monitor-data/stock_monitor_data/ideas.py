@@ -1961,6 +1961,62 @@ def ideas(period: str, interval: str):
             ),
             description=r"""US president election.""",
         ),
+        Stock(
+            ticker_name="DGE.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=5420, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Diageo shares have now fallen 18% since 2021 year-end. FY23 results showed solid growth 
+                            in sales and earnings. U.S. inventories have normalized; demand is healthy. Adjusted 
+                            EBIT should grow at 6-9% annually as targeted. We see 62% total return (19.1% p.a.) 
+                            by June 2026. Buy
+                            [Source](https://librariancapital.substack.com/p/diageo-shares-fell-again-after-fy23)
+                        """,
+        ),
+        Stock(
+            ticker_name="SENEA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=110, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""You can currently purchase shares of a profitable, market-leading consumer staples business 
+                            below 40% of (tangible) book value and below net current asset value. Unlike most net-nets, 
+                            this one has compounded book value per share at nearly 10% per year for the past 20 years, 
+                            and the business has gotten better over the past few years aŌer a major compeƟtor pulled 
+                            out of the market. The stock has no sell-side coverage and has recently experienced forced 
+                            selling due to its removal from an index.
+                            [Source](https://drive.google.com/file/d/1wAm1w3eEZCHCfY-e1Lzu0gvyGW7uN4KL/view)
+                        """,
+        ),
+        Stock(
+            ticker_name="CNO.V",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=15, date=datetime(2033, 3, 14, tzinfo=timezone.utc)
+            ),
+            description=r"""While the company is tiny, they are a leader in SPS and cryomilling technology and have spent 
+                        the last decade building both technical expertise and a network of relationships with leading 
+                        National Laboratories, venture-backed startups, and Fortune 500 companies via research and 
+                        development projects.
+                        [Source](https://whiteoutcapital.com/writeups/california-nanotechnologies)
+                    """,
+        ),
+        Stock(
+        ticker_name="AZEK",
+        period=period,
+        interval=interval,
+        expectation=Expectation(price=42.50, date=datetime(2024, 3, 15, tzinfo=timezone.utc)),
+        description=r"""AZEK is a well-managed maker of composite decking and exteriors that continues to have a 
+                        tailwind as more buyers shift to composite materials from wood products Conversion from 
+                        wood was strong in the past five years and there’s solid runway left that could make for 
+                        strong cash flow in the next five years.
+                        [Source](https://capitalincentives.substack.com/p/azek-azek)
+                    """
+        )
     ]
 
     return reversed(ideas)
