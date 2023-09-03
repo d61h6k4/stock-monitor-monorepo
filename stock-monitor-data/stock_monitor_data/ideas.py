@@ -2006,17 +2006,63 @@ def ideas(period: str, interval: str):
                     """,
         ),
         Stock(
-        ticker_name="AZEK",
-        period=period,
-        interval=interval,
-        expectation=Expectation(price=42.50, date=datetime(2024, 3, 15, tzinfo=timezone.utc)),
-        description=r"""AZEK is a well-managed maker of composite decking and exteriors that continues to have a 
+            ticker_name="AZEK",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=42.50, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""AZEK is a well-managed maker of composite decking and exteriors that continues to have a 
                         tailwind as more buyers shift to composite materials from wood products Conversion from 
                         wood was strong in the past five years and there’s solid runway left that could make for 
                         strong cash flow in the next five years.
                         [Source](https://capitalincentives.substack.com/p/azek-azek)
-                    """
-        )
+                    """,
+        ),
+        Stock(
+            ticker_name="VOLUE.OL",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=34, date=datetime(2025, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Volue gives us the opportunity to profit fron the energy transmission not 
+                            only in Europe but in the entire world. The company has a strong market position, 
+                            which is proven by there large clients. With high recurring revenues and strong 
+                            growth.
+                            [Source](https://moderninvesting.substack.com/p/volue-asa-profiting-from-european)
+                        """,
+        ),
+        Stock(
+            ticker_name="EHAB",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=24, date=datetime(2024, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Several recent developments suggest that the company sale is likely. EHAB has recently 
+                            come under pressure from activist AREX Capital which has been pushing the company to start 
+                            a strategic review and initiate a sale process. While the activist’s board nominees have 
+                            since been rejected, the company has recently announced plans to launch a strategic 
+                            review, indicating that the management might be open to a transaction. 
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-7)
+                        """,
+        ),
+        Stock(
+            ticker_name="RI.PA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=296, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""As with other Spirits stocks, we believe the current weakness in PR shares is due to 
+                            investor fears of a deceleration in sector growth, made worse by volatile quarterly 
+                            growth rates that followed unusual inventory moves last year. In PR’s case, management 
+                            is expecting sales to decline in both the U.S. and China in Q1 FY24, but to show 
+                            positive growth for the full year. 
+                            [Source](https://librariancapital.substack.com/p/pernod-ricard-near-52-week-low-after)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
