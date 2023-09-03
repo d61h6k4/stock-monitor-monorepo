@@ -80,7 +80,7 @@ def idea_stock_graph(stock, box="1 3 11 5"):
 async def render(q: Q):
     for ix, stock in enumerate(ideas(period="6mo", interval="1d")):
         graph = ui.form_card(
-            box=f"1 {2 + 2 * ix} 11 6",
+            box=f"1 {2 + 2 * ix} 11 2",
             items=[ui.text_xl(stock.ticker_name), ui.text_s(stock.description)],
         )
         q.page[f"stock_graph_{ix}"] = graph
