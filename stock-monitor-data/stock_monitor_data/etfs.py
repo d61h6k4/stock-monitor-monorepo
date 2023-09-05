@@ -4,7 +4,7 @@ from stock_monitor_data.models import Stock
 def etfs(period, interval) -> list[Stock]:
     return [
         Stock(
-            ticker_name="JPXN",
+            ticker_name="EWJ",
             period=period,
             interval=interval,
             description="""Japan.""",
