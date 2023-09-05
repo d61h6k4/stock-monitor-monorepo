@@ -2063,6 +2063,19 @@ def ideas(period: str, interval: str):
                             [Source](https://librariancapital.substack.com/p/pernod-ricard-near-52-week-low-after)
                         """,
         ),
+        Stock(
+            ticker_name="PFSW",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=8, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""PFSweb - The ongoing strategic review at the e-commerce order fulfillment services 
+                            provider is likely to culminate in a potential company sale as indicated by the 
+                            management's clear focus on this outcome.
+                            [Source](https://twitter.com/ideahive/status/1698612475451621631)
+                        """
+        ),
     ]
 
     return reversed(ideas)
