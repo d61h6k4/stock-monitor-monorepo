@@ -23,14 +23,6 @@ def portfolio(period: str, interval: str):
             "buy_date": datetime(2023, 6, 27, tzinfo=timezone.utc),
             "confidence": 0.3,
         },
-        "APT": {
-            "buy_date": datetime(2023, 8, 2, tzinfo=timezone.utc),
-            "confidence": 0.5,
-        },
-        "FIP": {
-            "buy_date": datetime(2023, 8, 9, tzinfo=timezone.utc),
-            "confidence": 0.5,
-        },
         "PFSW": {
             "buy_date": datetime(2023, 9, 5, tzinfo=timezone.utc),
             "confidence": 0.5,
