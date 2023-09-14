@@ -2074,7 +2074,20 @@ def ideas(period: str, interval: str):
                             provider is likely to culminate in a potential company sale as indicated by the 
                             management's clear focus on this outcome.
                             [Source](https://twitter.com/ideahive/status/1698612475451621631)
-                        """
+                        """,
+        ),
+        Stock(
+            ticker_name="APN.WA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=30, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Aplisens is a Poland industrial sensor manufacturer trading at the Warsaw Stock 
+                            Exchange (WSE:APN) who has seen a surge of sales in 2022 and 2023 (first 6 months) 
+                            which has translated into an even higher increase in profits.
+                            [Source](https://wintergems.substack.com/p/apn-aplisens-a-growing-industrial)
+                        """,
         ),
     ]
 
