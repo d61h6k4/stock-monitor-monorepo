@@ -2153,6 +2153,22 @@ def ideas(period: str, interval: str):
                             [Source](https://ideahive.substack.com/p/actionable-investment-ideas-9)
               """,
         ),
+        Stock(
+            ticker_name="SPR.WA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=792, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""But Spyrosoft is also not without problems, in their last earnings report (H1 2023), 
+                            we saw revenues rise 47%, but EBITDA margins dropped to 8% as a result of higher 
+                            investments and higher salaries. So the most important factor to consider in our assumption 
+                            is the margin. If I do the above calculation with 14% margins it will look out of this 
+                            world. But if I do them with 7% it will look pretty bad. Another risk is that the dilation 
+                            is getting out of hand and that shareholders basically throw money down a black hole.
+                            [Source](https://moderninvesting.substack.com/p/the-most-valuable-resource-in-the)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
