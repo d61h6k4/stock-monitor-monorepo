@@ -2089,6 +2089,70 @@ def ideas(period: str, interval: str):
                             [Source](https://wintergems.substack.com/p/apn-aplisens-a-growing-industrial)
                         """,
         ),
+        Stock(
+            ticker_name="NESN.SW",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=150, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Over the years, NESN has generally been outperforming the S&P 500 up till 2020. 
+                            Since then, the share price has underperformed the index by around 100%-pts due 
+                            to an after-effect of the recent pandemic i.e. 1) record-level commodities prices, 
+                            2) a decline in consumer sentiment and 3) ongoing supply chain disruptions.  Even 
+                            then, I believe it is a good time to accumulate while the valuation seems to be 
+                            attractive. Especially if I aim to invest and hold for the long term.
+                            [Source](https://intvestor.substack.com/p/nestle-deep-dive)
+                        """,
+        ),
+        Stock(
+            ticker_name="ERA.PA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=80, date=datetime(2024, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""The biggest driver of growth for Eramet however will be the energy transition and in 
+                            particular the battery metals it mines. Both nickel and lithium play an important part 
+                            in battery manufacturing and thus the electric vehicle market. According to Goldman Sachs, 
+                            global electric vehicle sales will jump to 73 million units by 2040 which compares to 
+                            around 2 million for 2020. Electric vehicles will make up close to 61% of vehicles globally.
+                            [Source](https://www.porchester.info/eramet-03092023)
+                        """,
+        ),
+        Stock(
+            ticker_name="EYE",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=30, date=datetime(2024, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""A recent short-term price dislocation at National Vision presents an opportunity to buy 
+                            one of the leading eyewear retailers at a discount to its intrinsic value. EYE shares have 
+                            plummeted over 30% since Walmart announced plans to end its shop-in-shops partnership with 
+                            National Vision, accounting for 10% of EYE’s EBITDA. The market seems to have overreacted 
+                            as the actual EBITDA loss is likely to be lower.
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-9)
+                        """,
+        ),
+        Stock(
+            ticker_name="CNS.MI",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=7, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""The opportunity to invest at a low valuation exists as CNS shares plummeted c. 20% in 
+                            Dec’22 driven by a cut in 2023 topline growth guidance (31-44% vs 46-51% sales CAGR 
+                            for 2021-2024 guided previously). The market seems to have overreacted as the guidance 
+                            cut was primarily due to delays and supply chain shortages as opposed to any structural 
+                            changes in the market. CNS is likely to continue displaying solid growth going forward 
+                            due to increasing number of orders, as indicated by bookings growing 72% in Q1’23 
+                            year-over-year. Other potential growth drivers include the expansion in the UK, a 
+                            larger production facility in Italy and numerous R&D projects.
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-9)
+              """,
+        ),
     ]
 
     return reversed(ideas)
