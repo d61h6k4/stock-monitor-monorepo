@@ -2169,6 +2169,22 @@ def ideas(period: str, interval: str):
                             [Source](https://moderninvesting.substack.com/p/the-most-valuable-resource-in-the)
                         """,
         ),
+        Stock(
+            ticker_name="ALTO",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=7, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Alto Ingredients (ALTO) - Commodity ethanol producer that might get sold at a significant 
+                            premium to current share price levels in the near-term. Activist Raper Capital has recently 
+                            sent a letter to the company, pushing the management to explore a transaction. The sale 
+                            seems likely given that the company lacks the liquidity to pull off the large ongoing 
+                            transformation away from commodity ethanol towards higher-margin and value-added proteins 
+                            and alcohols.
+                            [Source](https://twitter.com/ideahive/status/1704058834514255958?s=12&t=QZ4ZwBXk6T2ciRZLXv-_Iw)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
