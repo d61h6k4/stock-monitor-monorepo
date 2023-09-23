@@ -1,11 +1,12 @@
 ---
-version: "3.7"
-name: redpanda-quickstart
+version: "3.9"
+name: stock-monitor
 networks:
-  redpanda_network:
+  sm_network:
     driver: bridge
 volumes:
   redpanda-0: null
+  pgdata: null
 services:
   redpanda-0:
     command:
@@ -38,7 +39,7 @@ services:
     volumes:
       - redpanda-0:/var/lib/redpanda/data
     networks:
-      - redpanda_network
+      - sm_network
     ports:
       - 18081:18081
       - 18082:18082
@@ -48,7 +49,7 @@ services:
     container_name: redpanda-console
     image: docker.redpanda.com/redpandadata/console:v2.3.0
     networks:
-      - redpanda_network
+      - sm_network
     entrypoint: /bin/sh
     command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
     environment:
@@ -64,6 +65,63 @@ services:
             enabled: true
             urls: ["http://redpanda-0:9644"]
     ports:
-      - 8080:8080
+      - 18080:8080
     depends_on:
       - redpanda-0
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGUSER: ${POSTGRES_USER}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - sm_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 28080:8080
+    networks:
+      - sm_network
+
+  features:
+    build:
+      context: etl 
+      dockerfile: Dockerfile
+    command: etl.features:calculate_features\(\)
+    restart: always
+    environment:
+      BOOTSTRAP_SERVERS: ${BOOTSTRAP_SERVERS}
+    depends_on:
+      - redpanda-0
+    networks:
+      - sm_network
+  
+  consumers:
+    build:
+      context: etl
+      dockerfile: Dockerfile
+    command: etl.consumers:sink_to_db\(\)
+    restart: always
+    environment:
+      BOOTSTRAP_SERVERS: ${BOOTSTRAP_SERVERS}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_HOST: ${POSTGRES_HOST}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_DB: ${POSTGRES_DB}
+    depends_on:
+      db:
+        condition: service_healthy
+
+    networks:
+      - sm_network

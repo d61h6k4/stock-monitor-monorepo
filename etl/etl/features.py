@@ -1,20 +1,18 @@
 import os
+
 from bytewax.connectors.kafka import KafkaInput, KafkaOutput
 from bytewax.dataflow import Dataflow
 from bytewax.window import EventClockConfig, TumblingWindow
-from calculator.math import AverageTrueRange, AverageDirectionalIndex, MACD, RSI
 
-BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:19092").split(",")
-KAFKA_INPUT_TOPICS = os.getenv("KAFKA_INPUT_TOPICS", "events").split(",")
-KAFKA_OUTPUT_TOPIC = os.getenv("KAFKA_OUTPUT_TOPIC", "features")
+from etl.math import MACD, RSI, AverageDirectionalIndex, AverageTrueRange
 
 
-def prepare_output_topic():
+def prepare_output_topic(bootstrap_servers, kafka_output_topic):
     from confluent_kafka.admin import AdminClient, NewTopic
 
-    admin_client = AdminClient({"bootstrap.servers": BOOTSTRAP_SERVERS[0]})
+    admin_client = AdminClient({"bootstrap.servers": bootstrap_servers[0]})
     fs = admin_client.create_topics(
-        [NewTopic(KAFKA_OUTPUT_TOPIC, num_partitions=1, replication_factor=1)],
+        [NewTopic(kafka_output_topic, num_partitions=1, replication_factor=1)],
         validate_only=False,
     )
     for topic, f in fs.items():
@@ -29,7 +27,13 @@ def calculate_features():
     import json
     from datetime import datetime, timedelta, timezone
 
-    prepare_output_topic()
+    BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:19092").split(",")
+    KAFKA_INPUT_TOPICS = os.getenv("KAFKA_INPUT_TOPICS", "events").split(",")
+    KAFKA_OUTPUT_TOPIC = os.getenv("KAFKA_OUTPUT_TOPIC", "features")
+
+    prepare_output_topic(
+        bootstrap_servers=BOOTSTRAP_SERVERS, kafka_output_topic=KAFKA_OUTPUT_TOPIC
+    )
 
     flow = Dataflow()
     flow.input(
@@ -52,7 +56,7 @@ def calculate_features():
         EventClockConfig(lambda e: e["date"], wait_for_system_duration=timedelta(0)),
         TumblingWindow(
             length=timedelta(days=1),
-            align_to=datetime(2023, 7, 17, tzinfo=timezone.utc),
+            align_to=datetime(1950, 7, 17, tzinfo=timezone.utc),
         ),
     )
     flow.map(lambda kv: (kv[0], kv[1][0]))

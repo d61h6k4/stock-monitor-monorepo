@@ -31,12 +31,6 @@ def etfs(period, interval) -> list[Stock]:
             description="""China Large Cap.""",
         ),
         Stock(
-            ticker_name="ERUS",
-            period=period,
-            interval=interval,
-            description="""Russia.""",
-        ),
-        Stock(
             ticker_name="XOP",
             period=period,
             interval=interval,

@@ -54,7 +54,6 @@ def main():
     from kafka import KafkaProducer
     from kafka.admin import KafkaAdminClient, NewTopic
 
-    logging.basicConfig(handlers=[RichHandler()])
     logger = logging.getLogger("yfinance-client-cli")
 
     args = parse_args()
@@ -107,7 +106,7 @@ def main():
         for stock in stocks():
             if stock.ticker_name not in db:
                 events = get_ticker_history_events(
-                    symbol=stock.ticker_name, period="1y"
+                    symbol=stock.ticker_name, period="max"
                 )
             else:
                 events = get_ticker_events(symbol=stock.ticker_name)
@@ -117,14 +116,16 @@ def main():
             )
             for event in events:
                 send_event(event)
-                pgs.update(process_events_task)
+                pgs.advance(process_events_task)
             pgs.update(process_events_task, visible=False)
 
             db[stock.ticker_name] = {"last_update": datetime.today().isoformat()}
-            pgs.update(process_stocks_task)
+            pgs.advance(process_stocks_task)
 
     args.storage.write_text(json.dumps(db))
+    logger.info(f"Dump info about processed tickers to {args.storage}")
 
 
 if __name__ == "__main__":
+    logging.basicConfig(handlers=[RichHandler()], level=logging.ERROR)
     main()

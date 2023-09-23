@@ -1,15 +1,14 @@
 [tool.poetry]
-name = "interavtive-data-consumer"
+name = "etl"
 version = "0.1.0"
 description = ""
 authors = ["Danila <ddbihbka@gmail.com>"]
 readme = "README.md"
-packages = [{include = "interavtive_data_consumer"}]
 
 [tool.poetry.dependencies]
-python = "^3.11"
-bytewax = "^0.16.2"
-confluent-kafka = "^2.2.0"
+python = "<3.13,>=3.11"
+bytewax = {extras = ["kafka"], version = "^0.17.1"}
+psycopg = {extras = ["binary"], version = "^3.1.11"}
 
 
 [build-system]
