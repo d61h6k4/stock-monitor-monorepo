@@ -27,21 +27,21 @@ session = CachedLimiterSession(
     expire_after=3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "yfinance.cache")),
+    backend=SQLiteCache("/cache/yfinance.cache"),
 )
 
 slow_session = CachedLimiterSession(
     expire_after=30 * 24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "yfinance.slow.cache")),
+    backend=SQLiteCache("/cache/yfinance.slow.cache"),
 )
 
 cot_session = CachedLimiterSession(
     expire_after=24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache(str(Path(__file__).parent.parent.resolve() / "cot.cache")),
+    backend=SQLiteCache("/cache/cot.cache"),
 )
 
 
@@ -53,6 +53,7 @@ class Expectation(BaseModel):
 
 class Stock(BaseModel):
     """Representation of the stock data model."""
+
     ticker_name: str
     period: str
     interval: str
@@ -63,16 +64,30 @@ class Stock(BaseModel):
 
     class Config:
         """Allow DataFrame."""
+
         arbitrary_types_allowed = True
 
     @validator("period")
     def is_valid_period_value(cls: "Stock", period: str) -> str:
         """Check the period value from predetermined set."""
-        valid_periods = {"1d", "5d", "1mo", "3mo", "6mo",
-                         "1y", "2y", "5y", "10y", "ytd", "max"}
+        valid_periods = {
+            "1d",
+            "5d",
+            "1mo",
+            "3mo",
+            "6mo",
+            "1y",
+            "2y",
+            "5y",
+            "10y",
+            "ytd",
+            "max",
+        }
         if period not in valid_periods:
-            msg = (f"Given period {period} is not valid. "
-                   f"Valid periods: {','.join(valid_periods)}")
+            msg = (
+                f"Given period {period} is not valid. "
+                f"Valid periods: {','.join(valid_periods)}"
+            )
             raise ValueError(msg)
 
         return period
@@ -80,11 +95,26 @@ class Stock(BaseModel):
     @validator("interval")
     def is_valid_interval_value(cls: "Stock", interval: str) -> str:
         """Checks the interval value from predetermined set."""
-        valid_intervals = {"1m", "2m", "5m", "15m", "30m", "60m",
-                           "90m", "1h", "1d", "5d", "1wk", "1mo", "3mo"}
+        valid_intervals = {
+            "1m",
+            "2m",
+            "5m",
+            "15m",
+            "30m",
+            "60m",
+            "90m",
+            "1h",
+            "1d",
+            "5d",
+            "1wk",
+            "1mo",
+            "3mo",
+        }
         if interval not in valid_intervals:
-            msg = (f"Given interval {interval} is not valid. "
-                   f"Valid intervals: {','.join(valid_intervals)}")
+            msg = (
+                f"Given interval {interval} is not valid. "
+                f"Valid intervals: {','.join(valid_intervals)}"
+            )
             raise ValueError(msg)
 
         return interval
@@ -94,14 +124,14 @@ class Stock(BaseModel):
         """Downloads history data."""
         history = self.__dict__.get("history")
         if history is None:
-
+            logger.debug("Loading history data for %s", self.ticker_name)
             ticker = Ticker(self.ticker_name, session=session)
             try:
                 history = ticker.history(period=self.period, interval=self.interval)
             except HTTPError as e:
                 msg = f"Ticker {self.ticker_name} doesn't exist."
                 raise ValueError(msg) from e
-            
+
             self.__dict__["history"] = history
         return history
 
@@ -110,33 +140,39 @@ class Stock(BaseModel):
         self.__dict__["history"] = df
 
     @validator("business_summary", always=True)
-    def set_business_summary(cls: "Stock", business_summary: str, values: Mapping[str, str]) -> str:
+    def set_business_summary(
+        cls: "Stock", business_summary: str, values: Mapping[str, str]
+    ) -> str:
         """Extract business summary."""
         ticker = Ticker(values["ticker_name"], session=slow_session)
         try:
             return ticker.get_info().get("longBusinessSummary", business_summary)
         except HTTPError as e:
-            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
+            logger.exception(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
             return business_summary
 
     @validator("market_cap", always=True)
-    def set_market_cap(cls: "Stock", market_cap: float, values: Mapping[str, str]) -> float:
+    def set_market_cap(
+        cls: "Stock", market_cap: float, values: Mapping[str, str]
+    ) -> float:
         """Extract market cap."""
         ticker = Ticker(values["ticker_name"], session=slow_session)
         try:
             return ticker.get_info().get("marketCap", market_cap)
         except HTTPError as e:
-            logger.error(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
+            logger.exception(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
             return 1.0
 
 
 class COT(BaseModel):
     """Representation of the Commitment of traders data."""
+
     since: int
     history: DataFrame = DataFrame()
 
     class Config:
         """Allow DataFrame."""
+
         arbitrary_types_allowed = True
 
     @validator("since")
@@ -152,15 +188,17 @@ class COT(BaseModel):
         return since
 
     @validator("history", always=True)
-    def download_history(cls: "COT",
-                         history: DataFrame,
-                         values: Mapping[str, int]) -> DataFrame:
+    def download_history(
+        cls: "COT", history: DataFrame, values: Mapping[str, int]
+    ) -> DataFrame:
         """Downloads the data."""
 
         def load_combine_reports_per_year(year: int) -> DataFrame:
             with tempfile.TemporaryDirectory() as temp_dir:
                 temp_dir = Path(temp_dir)
-                zip_file_url = f"https://www.cftc.gov/files/dea/history/dea_com_xls_{year}.zip"
+                zip_file_url = (
+                    f"https://www.cftc.gov/files/dea/history/dea_com_xls_{year}.zip"
+                )
                 r = cot_session.get(zip_file_url)
 
                 with zipfile.ZipFile(io.BytesIO(r.content)) as zip_ref:
@@ -181,8 +219,11 @@ class COT(BaseModel):
         return load_combine_reports_since_year(values["since"])
 
     @staticmethod
-    def commercials_by_names_or_codes(df: DataFrame, names: Sequence[str] | None = None,
-                                      codes: Sequence[int] | None = None) -> DataFrame:
+    def commercials_by_names_or_codes(
+        df: DataFrame,
+        names: Sequence[str] | None = None,
+        codes: Sequence[int] | None = None,
+    ) -> DataFrame:
         """Returns commercials data from `df`."""
         assert names or codes, "Function requires to be provided or names or codes."
         assert "Comm_Positions_Long_All" in df.columns
@@ -193,16 +234,27 @@ class COT(BaseModel):
         if not codes:
             codes = []
 
-        return_columns = ["Market_and_Exchange_Names", "CFTC_Commodity_Code", "Report_Date_as_MM_DD_YYYY",
-                          "Comm_Positions_Long_All", "Comm_Positions_Short_All", "Open_Interest_All",
-                          "NonComm_Positions_Long_All", "NonComm_Positions_Short_All", "NonRept_Positions_Long_All",
-                          "NonRept_Positions_Short_All"]
-        return df[return_columns].query("Market_and_Exchange_Names == @names or CFTC_Commodity_Code == @codes")
+        return_columns = [
+            "Market_and_Exchange_Names",
+            "CFTC_Commodity_Code",
+            "Report_Date_as_MM_DD_YYYY",
+            "Comm_Positions_Long_All",
+            "Comm_Positions_Short_All",
+            "Open_Interest_All",
+            "NonComm_Positions_Long_All",
+            "NonComm_Positions_Short_All",
+            "NonRept_Positions_Long_All",
+            "NonRept_Positions_Short_All",
+        ]
+        return df[return_columns].query(
+            "Market_and_Exchange_Names == @names or CFTC_Commodity_Code == @codes"
+        )
 
 
 class Arbitrage(BaseModel):
     class Config:
         """Allow DataFrame."""
+
         arbitrary_types_allowed = True
 
     target: Stock

@@ -1,0 +1,10 @@
+[Unit]
+Description=Syncthing monitoring
+Requires=produce.service
+
+[Timer]
+Unit=produce.service
+OnCalendar=*-*-* 4:00:00
+
+[Install]
+WantedBy=timers.target

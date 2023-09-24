@@ -1,16 +1,15 @@
 [tool.poetry]
-name = "etl"
+name = "crm"
 version = "0.1.0"
 description = ""
 authors = ["Danila <ddbihbka@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "<3.13,>=3.11"
-bytewax = {extras = ["kafka"], version = "^0.17.1"}
+python = "^3.11"
 psycopg = {extras = ["binary"], version = "^3.1.11"}
-pydantic = "^2.3.0"
-requests = "^2.31.0"
+stock-monitor-data = {path = "../stock-monitor-data"}
+rich = "^13.5.3"
 
 
 [build-system]

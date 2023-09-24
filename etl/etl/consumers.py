@@ -22,8 +22,8 @@ class SQLSink(StatelessSink):
             cursor.execute(
                 """CREATE TABLE IF NOT EXISTS history (
                     record_id SERIAL PRIMARY KEY,
-                    symbol VARCHAR(10) NOT NULL,
-                    date TEXT,
+                    symbol VARCHAR(12) NOT NULL,
+                    date DATE,
                     open REAL,
                     high REAL,
                     low REAL,

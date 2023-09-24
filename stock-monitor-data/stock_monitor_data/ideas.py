@@ -40,19 +40,20 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=3.08, date=datetime(2023, 5, 31, tzinfo=timezone.utc)
+                price=3.08, date=datetime(2024, 5, 31, tzinfo=timezone.utc)
             ),
             description=r"""Vendor for global wireless network operators specializing in backhaul solutions.
-                                  Shareholders have recently rejected a hostile takeover by peer \$AVNW at \$3.8/share.
-                                  Renewed talks between AVNW and CRNT present the potential for near-term upside
-                                  realization. While \$AVNW is the leader in NA backhaul, CRNT is now encroaching on
-                                  its territory, having secured contracts with every NA Tier 1 operator. AVNW used a
-                                  difficult equity market environment to try to opportunistically scoop up an
-                                  undervalued asset.Post proxy fight CRNT management is forced to drive shareholder
-                                  value.Trades near its historical 1x book value floor. Failed takeover attempt at
-                                  \$3.08/share in Aug`22. Management`s internal value estimate of \$5/share.
-                                  **Exp. gain: +70% to\$3.08+**
-                                  [Source](https://twitter.com/InvestSpecial/status/1610585909128302593)""",
+                            Shareholders have recently rejected a hostile takeover by peer \$AVNW at \$3.8/share.
+                            Renewed talks between AVNW and CRNT present the potential for near-term upside
+                            realization. While \$AVNW is the leader in NA backhaul, CRNT is now encroaching on
+                            its territory, having secured contracts with every NA Tier 1 operator. AVNW used a
+                            difficult equity market environment to try to opportunistically scoop up an
+                            undervalued asset.Post proxy fight CRNT management is forced to drive shareholder
+                            value.Trades near its historical 1x book value floor. Failed takeover attempt at
+                            \$3.08/share in Aug`22. Management`s internal value estimate of \$5/share.
+                            **Exp. gain: +70% to\$3.08+**
+                            [Source](https://twitter.com/InvestSpecial/status/1610585909128302593)
+                        """,
         ),
         Stock(
             ticker_name="AMKR",
@@ -113,19 +114,20 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=11, date=datetime(2023, 5, 31, tzinfo=timezone.utc)
+                price=11, date=datetime(2024, 5, 31, tzinfo=timezone.utc)
             ),
             description=r"""Provider of outsourced human capital management services/software with multiple
-                                  upcoming event catalysts. Steady business, with 3-5 year contracts, 15-year average
-                                  customer life, and 97% rev retention. Comp set is performing very well in the stock
-                                  market.Stock was down 20% after a botched secondary offering. However, Bill Foley
-                                  pulled out from selling. His lack of participation in the secondary was extremely
-                                  telling. His number two, Rick Massey, subsequently bought \$840k of stock around
-                                  current levelsPeers \$WTW and \$G with similar expected growth and financial profiles
-                                  trade at 11x-11.5x 1-year forward EBITDA.
-                                  At this multiple \$ALIT is worth \$10.5-11.0/share today.
-                                  **Exp. gain: +20% to \$11/share.**
-                                  [Source](https://twitter.com/InvestSpecial/status/1613508259154984962)""",
+                            upcoming event catalysts. Steady business, with 3-5 year contracts, 15-year average
+                            customer life, and 97% rev retention. Comp set is performing very well in the stock
+                            market.Stock was down 20% after a botched secondary offering. However, Bill Foley
+                            pulled out from selling. His lack of participation in the secondary was extremely
+                            telling. His number two, Rick Massey, subsequently bought \$840k of stock around
+                            current levelsPeers \$WTW and \$G with similar expected growth and financial profiles
+                            trade at 11x-11.5x 1-year forward EBITDA.
+                            At this multiple \$ALIT is worth \$10.5-11.0/share today.
+                            **Exp. gain: +20% to \$11/share.**
+                            [Source](https://twitter.com/InvestSpecial/status/1613508259154984962)
+                        """,
         ),
         Stock(
             ticker_name="ZIMV",
@@ -149,48 +151,51 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=140, date=datetime(2023, 5, 31, tzinfo=timezone.utc)
+                price=140, date=datetime(2024, 5, 31, tzinfo=timezone.utc)
             ),
             description=r"""**What does BJ do?** The business is a discount wholesale club like Costco but
-                                   focused on a more middle-class income demographic (Costco tends to skew higher
-                                   income). BJ`s charges an annual membership fee of \$55 to \$110 and delivers
-                                   extreme savings of 30% on average compared to traditional grocery and general
-                                   merchandise stores. This is a strong value proposition for a family that shops
-                                   once or twice per month for household essentials.
-                                   **Why is it a good bet?** Discount retailers tend to outperform during
-                                   recessionary periods as well as inflationary periods when consumers are looking
-                                   for bargains. During the 2008/2009 recession, discounters such as Dollar General
-                                   posted strong sales comps. We studied several discount retail concepts this summer
-                                   and determined that BJ`s presents the best longterm opportunity
-                                   **Why does the opportunity exist?** With just 226 store units compared to Costco`s
-                                   847 units, BJ`s has a significant opportunity to grow its store base and is
-                                   currently accelerating new unit openings
-                                   **What`s the prize if you`re right?** Investors appreciate the quality of the
-                                   wholesale club model and have awarded Costco a 32x price-to-earnings multiple.
-                                   Despite BJ`s being a `Costco clone`, its stock only trades for 17.5x earnings -
-                                   a near 50% discount(!). [Source](https://macro-ops.com)""",
+                            focused on a more middle-class income demographic (Costco tends to skew higher
+                            income). BJ`s charges an annual membership fee of \$55 to \$110 and delivers
+                            extreme savings of 30% on average compared to traditional grocery and general
+                            merchandise stores. This is a strong value proposition for a family that shops
+                            once or twice per month for household essentials.
+                            **Why is it a good bet?** Discount retailers tend to outperform during
+                            recessionary periods as well as inflationary periods when consumers are looking
+                            for bargains. During the 2008/2009 recession, discounters such as Dollar General
+                            posted strong sales comps. We studied several discount retail concepts this summer
+                            and determined that BJ`s presents the best longterm opportunity
+                            **Why does the opportunity exist?** With just 226 store units compared to Costco`s
+                            847 units, BJ`s has a significant opportunity to grow its store base and is
+                            currently accelerating new unit openings
+                            **What`s the prize if you`re right?** Investors appreciate the quality of the
+                            wholesale club model and have awarded Costco a 32x price-to-earnings multiple.
+                            Despite BJ`s being a `Costco clone`, its stock only trades for 17.5x earnings -
+                            a near 50% discount(!).
+                            [Source](https://macro-ops.com)
+                        """,
         ),
         Stock(
             ticker_name="HLS.TO",
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=25, date=datetime(2023, 5, 31, tzinfo=timezone.utc)
+                price=25, date=datetime(2024, 5, 31, tzinfo=timezone.utc)
             ),
             description=r"""Small cap Canadian pharma with shares near all-time lows and business fundamentals
-                                   finally inflecting to the positive. Investment case is mainly based on one of two
-                                   HLS`s drugs, Vascepa, that is in the initial stages of commercialization.
-                                   Vascepa is approved, clinically effective, and has reimbursement coverage
-                                   Pfizer Canada is the team pushing things forward for commercialization
-                                   Sales are growing 30%-40% QoQ and are only now approaching sufficient prescription
-                                   levels to break evenThe initial Vascepa commercialization difficulties were mainly
-                                   caused by Canada`s lengthy COVID lockdown.
-                                   Precedent drugs suggest management's estimate of 10% penetration is overly conservative
-                                   and that 20-40% levels could be reached.The already commercialized drug Clozaril alone
-                                   supports current HLS valuation, implying less than zero value for Vascepa.
-                                   With Vascepa roll-out, HLS is worth \$25/share.
-                                   **Exp. gain: +150% to \$25/share.**.
-                                   [Source](https://twitter.com/InvestSpecial/status/1615303074473451521)""",
+                            finally inflecting to the positive. Investment case is mainly based on one of two
+                            HLS`s drugs, Vascepa, that is in the initial stages of commercialization.
+                            Vascepa is approved, clinically effective, and has reimbursement coverage
+                            Pfizer Canada is the team pushing things forward for commercialization
+                            Sales are growing 30%-40% QoQ and are only now approaching sufficient prescription
+                            levels to break evenThe initial Vascepa commercialization difficulties were mainly
+                            caused by Canada`s lengthy COVID lockdown.
+                            Precedent drugs suggest management's estimate of 10% penetration is overly conservative
+                            and that 20-40% levels could be reached.The already commercialized drug Clozaril alone
+                            supports current HLS valuation, implying less than zero value for Vascepa.
+                            With Vascepa roll-out, HLS is worth \$25/share.
+                            **Exp. gain: +150% to \$25/share.**.
+                            [Source](https://twitter.com/InvestSpecial/status/1615303074473451521)
+                        """,
         ),
         Stock(
             ticker_name="APD",
@@ -212,23 +217,6 @@ def ideas(period: str, interval: str):
                                    paying much for the tremendous optionality around hydrogen, gasification, and carbon
                                    capture. **Exp. gain: +100% to $600/share in 5 years.**
                                    [Source](https://twitter.com/InvestSpecial/status/1618241155103064071)""",
-        ),
-        Stock(
-            ticker_name="CAL",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=40, date=datetime(2023, 6, 30, tzinfo=timezone.utc)
-            ),
-            description=r"""Diversified footwear retailer at 5x PE. Owns the Famous Footwear brand of stores
-                                   (870 stores). Equity is materially mispriced and generates significant free cash
-                                   flow. Q4 results are expected to be nicely above guidance as a normal seasonal
-                                   pattern recovers into Christmas. Set to fully repay its debt over the next 18 months.
-                                   Repurchased 7% of shares over last 3 quarters and has large remaining repo
-                                   authorization. Significant upside if CAL trades up to the mean of non-growth shoe
-                                   retailers. At PE of 7x-8x 2023, would be \$40 stock.
-                                   **Exp. gain: +85% to \$40/share.**
-                                   [Source](https://twitter.com/InvestSpecial/status/1620009107309699072)""",
         ),
         Stock(
             ticker_name="MIR",
@@ -342,21 +330,6 @@ def ideas(period: str, interval: str):
                                    adj. EBITDA. At 6x multiple would be worth $120/share.""",
         ),
         Stock(
-            ticker_name="DSEY",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=9, date=datetime(2023, 6, 30, tzinfo=timezone.utc)
-            ),
-            description=r"""Diversey is a provider of cleaning products and services to institutional customers such as hospitals,
-                                   hotels, and food and beverage producers. Stock is trading at a 50% discount from its Jan`22 levels due
-                                   to the compression of margins and a strong USD. Headwinds are expected to turn into tailwinds as margins
-                                   begin normalizing while the strong dollar seems to have topped. Plus DSEY operates a pretty sticky
-                                   business and has a scale advantage over its peers usually the #1 or #2 player in most markets.
-                                   Trades at 11x depressed 2022 EBITDA or 8x E2025 normalized EBITDA.
-                                   At 10-12x EBITDA multiple, stock is worth \$9-12/share.""",
-        ),
-        Stock(
             ticker_name="BTI",
             period=period,
             interval=interval,
@@ -396,18 +369,19 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=70, date=datetime(2023, 8, 1, tzinfo=timezone.utc)
+                price=70, date=datetime(2024, 8, 1, tzinfo=timezone.utc)
             ),
             description=r"""Wallgreens Boots Alliance - trades near all-time lows on virtually every metric. Fundamentals are
-                                   expected to inflect in the second half of FY23. Company`s YOY EPS trajectory is projected to flip
-                                   from about -31% in the first half, to 29% in the back-half. This will be driven by lower COVID headwinds,
-                                   improvements in WBA`s Healthcare business, the timing of reimbursements, and lower COGS. The company has
-                                   been transitioning under its new CEO into a multi-channel technology-driven healthcare provider and a
-                                   one-stop shop for all healthcare needs. This is expected to drive longer-term EPS growth in the 13-15% range.
-                                   Another catalyst is the potential sale of its large UK subsidiary Boots - rumors have been circulating
-                                   that it might get sold at the right price. Trades at an 8.1x PE for 2023 and 7.3x for 2024.
-                                   At historical discount levels (5-10%) would be \$70 stock.
-                                   [Source](https://twitter.com/InvestSpecial/status/1634143032609046530)""",
+                            expected to inflect in the second half of FY23. Company`s YOY EPS trajectory is projected to flip
+                            from about -31% in the first half, to 29% in the back-half. This will be driven by lower COVID headwinds,
+                            improvements in WBA`s Healthcare business, the timing of reimbursements, and lower COGS. The company has
+                            been transitioning under its new CEO into a multi-channel technology-driven healthcare provider and a
+                            one-stop shop for all healthcare needs. This is expected to drive longer-term EPS growth in the 13-15% range.
+                            Another catalyst is the potential sale of its large UK subsidiary Boots - rumors have been circulating
+                            that it might get sold at the right price. Trades at an 8.1x PE for 2023 and 7.3x for 2024.
+                            At historical discount levels (5-10%) would be \$70 stock.
+                            [Source](https://twitter.com/InvestSpecial/status/1634143032609046530)
+                        """,
         ),
         Stock(
             ticker_name="GPRE",
@@ -473,21 +447,6 @@ def ideas(period: str, interval: str):
                             NCAV per share is \$3.77 (1.14x) and TBVPS is \$4.85 (0.89x). Exp. gain: TBVPS is set to compound at 8%
                             annually in the absence of any viral outbreaks.
                             [Source](https://twitter.com/InvestSpecial/status/1643537169309483008)""",
-        ),
-        Stock(
-            ticker_name="AUE.SI",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=1.15, date=datetime(2023, 6, 30, tzinfo=timezone.utc)
-            ),
-            description=r"""An interesting special situation play with a very limited downside. Golden Energy and Resources
-                                   is a holding company of two publically listed coal subsidiaries. It is currently subject to a
-                                   takeover proposal by the controlling shareholder. Original lowball offer was raised by 17% after
-                                   Singaporean minority investor `watchdog` called for an improved bid. The amended offer was not
-                                   declared final and there is a decent chance it gets raised again. Buyer looks motivated to get the deal done.
-                                   Offer is expected to be raised to around 108-115 cents.
-                                   [Source](https://twitter.com/InvestSpecial/status/1642823074541182976)""",
         ),
         Stock(
             ticker_name="CEG",
@@ -660,37 +619,20 @@ def ideas(period: str, interval: str):
                   """,
         ),
         Stock(
-            ticker_name="SCHW",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=80, date=datetime(2023, 9, 15, tzinfo=timezone.utc)
-            ),
-            description=r"""SCHW unfairly sold off following the SVB fallout. Market's concerns are misplaced.
-                                   SCHW is unlikely to be required to raise cheap equity for regulatory reasons. 81% of deposits
-                                   are FDIC insured while the remaining 19% are easily covered by SCHW`s liquid securities portfolio.
-                                   Depositors are unlikely to flee. SCHW does not have a negative TBV after adjusting for taxation
-                                   on unrealized HTM losses and YTD gains. Set to earn \$4.5bn in an extreme scenario of a pure brokerage
-                                   (all deposits flee). Or \$8bn a year in another extreme of deposit sorting stopping today.
-                                   This compares to $\94bn market cap.
-                                   [Source](https://twitter.com/InvestSpecial/status/1651887289553780737)
-                   """,
-        ),
-        Stock(
             ticker_name="DEA",
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=17, date=datetime(2023, 8, 15, tzinfo=timezone.utc)
+                price=17, date=datetime(2024, 8, 15, tzinfo=timezone.utc)
             ),
-            description=r"""Cheap low-risk REIT that leases class A office properties to US govt agencies. The highest quality tenant in the world.
-                                   Low renewal risk and vacancy of only 1.2%. 8% dividend is sustainable. Much higher
-                                   return than treasuries, but with similar risk.Strong balance sheet with low-cost fixed-rate
-                                   debt with no significant near-term maturities. Debt/EV at 46%. Solid management with
-                                   longstanding relationships with various government agencies.Trades at 11.5x 2022 FFO and
-                                   12x E2023 FFO whilst offering an 8% dividend yield.
-                                   [Source](https://twitter.com/InvestSpecial/status/1651887289553780737)
-                   """,
+            description=r"""Cheap low-risk REIT that leases class A office properties to US govt agencies. The highest 
+                            quality tenant in the world. Low renewal risk and vacancy of only 1.2%. 8% dividend is 
+                            sustainable. Much higher return than treasuries, but with similar risk. Strong balance 
+                            sheet with low-cost fixed-rate debt with no significant near-term maturities. 
+                            Debt/EV at 46%. Solid management with longstanding relationships with various government 
+                            agencies. Trades at 11.5x 2022 FFO and 12x E2023 FFO whilst offering an 8% dividend yield.
+                            [Source](https://twitter.com/InvestSpecial/status/1651887289553780737)
+                        """,
         ),
         Stock(
             ticker_name="GB",
@@ -1368,18 +1310,18 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=133, date=datetime(2023, 2, 15, tzinfo=timezone.utc)
+                price=133, date=datetime(2025, 2, 15, tzinfo=timezone.utc)
             ),
             description=r"""STG is a relatively small company, with a current market capitalization of ~DKK9.85
-                                   billion (\$1.44 billion) and a current enterprise value of ~DKK14.16 billion
-                                   (\$2.07 billion). As a small cap, STG remains outside the purview of most investors.
-                                   Scandinavian Tobacco Group is headquartered in Copenhagen, Denmark, and is listed
-                                   under the ticker “STG” on the Nasdaq Copenhagen Stock Exchange, which further
-                                   restricts accessibility and interest. Cigars - especially premium handmade cigars -
-                                   are completely ignored by most investors and analysts, even those focused on the
-                                   tobacco industry. This niche isn`t just an afterthought; it receives practically
-                                   no thought.
-                                   [Source](https://invariant.substack.com/p/scandinavian-tobacco-group-serial-acquirer)
+                            billion (\$1.44 billion) and a current enterprise value of ~DKK14.16 billion
+                            (\$2.07 billion). As a small cap, STG remains outside the purview of most investors.
+                            Scandinavian Tobacco Group is headquartered in Copenhagen, Denmark, and is listed
+                            under the ticker “STG” on the Nasdaq Copenhagen Stock Exchange, which further
+                            restricts accessibility and interest. Cigars - especially premium handmade cigars -
+                            are completely ignored by most investors and analysts, even those focused on the
+                            tobacco industry. This niche isn`t just an afterthought; it receives practically
+                            no thought.
+                            [Source](https://invariant.substack.com/p/scandinavian-tobacco-group-serial-acquirer)
                    """,
         ),
         Stock(

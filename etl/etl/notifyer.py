@@ -6,11 +6,11 @@ from typing import Self
 
 from logging import getLogger
 
-from stock_monitor_backend.rules import Action, Decision
-from stock_monitor_backend.telegram.client import TelegramClient
-from stock_monitor_backend.utils import telegramify
+from etl.rules import Action, Decision
+from etl.telegram.client import TelegramClient
+from etl.utils import telegramify
 
-logger = get_logger(__name__)
+logger = getLogger(__name__)
 TELEGRAM = "telegram"
 
 
@@ -23,7 +23,7 @@ class NotificationCenter:
         self._users_to_chats = {"dbihbka": 111874928}
 
         self._users_last_messages = {}
-        self._resource = Path.home() / Path(".notifyer.json")
+        self._resource = Path("/cache/.notifyer.json")
         if self._resource.exists():
             for user, values in json.loads(self._resource.read_text()).items():
                 self._users_last_messages[user] = {}

@@ -16,8 +16,7 @@ RUN pip install poetry && poetry config virtualenvs.in-project true
 
 WORKDIR ${WORKDIR}
 
-COPY stock-monitor-data /stock-monitor-data
-COPY yfinance-client ${WORKDIR}
+COPY . ${WORKDIR}
 
 RUN poetry install --only main
 
@@ -30,5 +29,5 @@ WORKDIR ${WORKDIR}
 COPY --from=builder ${WORKDIR} .
 
 # App-specific settings:
-ENTRYPOINT [ "./.venv/bin/python", "-m", "yfinance_client" ]
-CMD [ "--kafka_bootstrap_servers=redpanda-0:9092", "--storage=/cache/.storage.json"]
+ENTRYPOINT [ "./.venv/bin/python", "-m", "streamlit" ]
+CMD [ "run", "frontend/ideas.py" ]

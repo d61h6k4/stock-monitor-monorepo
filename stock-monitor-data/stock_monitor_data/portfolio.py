@@ -19,16 +19,8 @@ def portfolio(period: str, interval: str):
             "buy_date": datetime(2023, 4, 17, tzinfo=timezone.utc),
             "confidence": 0.5,
         },
-        "APR.WA": {
-            "buy_date": datetime(2023, 6, 27, tzinfo=timezone.utc),
-            "confidence": 0.3,
-        },
-        "PFSW": {
-            "buy_date": datetime(2023, 9, 5, tzinfo=timezone.utc),
-            "confidence": 0.5,
-        },
-        "EHAB": {
-            "buy_date": datetime(2023, 9, 5, tzinfo=timezone.utc),
+        "J4V.F": {
+            "buy_date": datetime(2023, 9, 15, tzinfo=timezone.utc),
             "confidence": 0.5,
         },
     }

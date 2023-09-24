@@ -104,6 +104,10 @@ def main():
     ) as pgs:
         process_stocks_task = pgs.add_task("[green]Processing stocks:", total=None)
         for stock in stocks():
+            process_events_task = pgs.add_task(
+                f"Processing {stock.ticker_name}", total=None
+            )
+
             if stock.ticker_name not in db:
                 events = get_ticker_history_events(
                     symbol=stock.ticker_name, period="max"
@@ -111,9 +115,6 @@ def main():
             else:
                 events = get_ticker_events(symbol=stock.ticker_name)
 
-            process_events_task = pgs.add_task(
-                f"Processing {stock.ticker_name}", total=None
-            )
             for event in events:
                 send_event(event)
                 pgs.advance(process_events_task)
