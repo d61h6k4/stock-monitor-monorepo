@@ -2127,6 +2127,45 @@ def ideas(period: str, interval: str):
                             [Source](https://twitter.com/ideahive/status/1704058834514255958?s=12&t=QZ4ZwBXk6T2ciRZLXv-_Iw)
                         """,
         ),
+        Stock(
+            ticker_name="248070.KS",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=50000, date=datetime(2026, 9, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Solum is the worlds second largest provider of electronic shelf labels (ESL) which allow 
+                            retail store managers to update product information remotely. The company is currently 
+                            trading at 12x forward earnings - substantially below the 20-22x multiples for peers 
+                            E-Ink Holdings and SES-imagotag. The discount is largely explained by the fact that 
+                            Solum still generates two-thirds of its revenues from the mature and lower-margin 
+                            electronic components segment. However, Solum shares are expected to gradually re-rate 
+                            closer to peer multiples as the business mix continues to shift towards the 
+                            higher-margin/growth ESL segment (two-thirds of Solums 2023E operating income). 
+                            The ESL business seems to have plenty of growth runway as the recent partnership between 
+                            SES-imagotag and Walmart is expected to increase ESL penetration substantially above the 
+                            current 5%.
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-10)
+                        """,
+        ),
+        Stock(
+            ticker_name="MRL.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=10, date=datetime(2024, 11, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Marlowe is a high-quality recurring services/software roll-up available at a significant 
+                            discount to its peers and intrinsic value. The company currently trades at 8x run-rate 
+                            EBITDA compared to 15-20x peer multiples. The opportunity exists as MRL shares have 
+                            significantly de-rated since 2022 due to concerns about leverage, continuing one-off 
+                            restructuring costs and lack of free cash flow generation. The bears have argued that 
+                            Marlowes one-off acquisition restructuring costs are recurring and that the company will 
+                            not able to generate meaningful cash flows. However, both of these concerns are expected 
+                            to be disproved in the near-term.
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-10)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
