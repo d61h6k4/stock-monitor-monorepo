@@ -107,7 +107,9 @@ services:
       - redpanda-0
     networks:
       - sm_network
-  
+    volumes:
+      - cache:/cache
+      
   consumers:
     build:
       context: etl
@@ -123,9 +125,10 @@ services:
     depends_on:
       db:
         condition: service_healthy
-
     networks:
       - sm_network
+    volumes:
+      - cache:/cache
 
   monitor:
     build:

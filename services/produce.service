@@ -5,9 +5,7 @@ StartLimitIntervalSec=0
 Wants=produce.timer
 
 [Service]
-Type=simple
-Restart=always
-RestartSec=1
+Type=oneshot
 User=ubuntu
 ExecStart=make --directory /home/ubuntu/stock-monitor-monorepo produce
 
