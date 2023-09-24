@@ -34,7 +34,7 @@ class NotificationCenter:
                             rule
                         ] = Action.from_string(state)
         else:
-            logger.warn("Resource doesn't exist.", resource=self._resource)
+            logger.warn("Resource doesn't exist. %s", self._resource)
 
     def add_telegram(self: Self, client: TelegramClient) -> None:
         """Add telegram as one of the channels to send notifications."""
@@ -84,4 +84,4 @@ class NotificationCenter:
             self._resource.unlink()
 
         self._resource.write_text(json.dumps(self._users_last_messages))
-        logger.info("Data saved succesfully as a resource", resource=self._resource)
+        logger.info("Data saved succesfully as a resource %s", self._resource)
