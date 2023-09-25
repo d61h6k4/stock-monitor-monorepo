@@ -152,7 +152,6 @@ def show_ticker(ticker: Ticker):
             col_adx,
             col_macd,
             col_rsi,
-            col_dividends,
             col_market_cap,
         ) = st.columns(6)
 
@@ -182,9 +181,6 @@ def show_ticker(ticker: Ticker):
             elif ticker.rsi < 25:
                 rsi_color = "normal"
             st.metric("RSI", ticker.rsi, delta=ticker.rsi, delta_color=rsi_color)
-
-        with col_dividends:
-            st.metric("Last payed dividends amount", f"${numerize(ticker.dividends)}")
 
         with col_market_cap:
             st.metric("Market capitalization", f"${numerize(ticker.market_cap)}")
