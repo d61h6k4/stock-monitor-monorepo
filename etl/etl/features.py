@@ -2,7 +2,8 @@ import os
 
 from bytewax.connectors.kafka import KafkaInput, KafkaOutput
 from bytewax.dataflow import Dataflow
-from bytewax.window import EventClockConfig, TumblingWindow
+
+# from bytewax.window import EventClockConfig, TumblingWindow
 
 from etl.math import MACD, RSI, AverageDirectionalIndex, AverageTrueRange
 
@@ -51,15 +52,16 @@ def calculate_features():
 
     flow.map(deserialize)
 
-    flow.collect_window(
-        "sort_by_date",
-        EventClockConfig(lambda e: e["date"], wait_for_system_duration=timedelta(0)),
-        TumblingWindow(
-            length=timedelta(days=1),
-            align_to=datetime(1950, 7, 17, tzinfo=timezone.utc),
-        ),
-    )
-    flow.map(lambda kv: (kv[0], kv[1][0]))
+    # Sorting
+    # flow.collect_window(
+    #     "sort_by_date",
+    #     EventClockConfig(lambda e: e["date"], wait_for_system_duration=timedelta(0)),
+    #     TumblingWindow(
+    #         length=timedelta(days=1),
+    #         align_to=datetime(1950, 7, 17, tzinfo=timezone.utc),
+    #     ),
+    # )
+    # flow.map(lambda kv: (kv[0], kv[1][0]))
 
     AverageTrueRange(p=14)(flow)
     AverageDirectionalIndex(p=14)(flow)

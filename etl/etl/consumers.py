@@ -34,7 +34,8 @@ class SQLSink(StatelessSink):
                     adx REAL,
                     macd REAL,
                     macd_signal REAL,
-                    rsi REAL)
+                    rsi REAL,
+                    dividends REAL)
                 """
             )
             self.connection.commit()
@@ -67,7 +68,8 @@ class SQLSink(StatelessSink):
                         adx,
                         macd,
                         macd_signal,
-                        rsi
+                        rsi,
+                        dividends
                     )
                    VALUES (
                         %(symbol)s, 
@@ -82,7 +84,8 @@ class SQLSink(StatelessSink):
                         %(adx)s,
                         %(macd)s,
                         %(macd_signal)s,
-                        %(rsi)s
+                        %(rsi)s,
+                        %(dividends)s
                     )
                 """,
                 records,

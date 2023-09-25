@@ -29,4 +29,4 @@ COPY . ${WORKDIR}
 RUN poetry install --only main
 
 # App-specific settings:
-ENTRYPOINT [ "./.venv/bin/python", "-m", "bytewax.run" ]
+ENTRYPOINT [ "./entrypoint.sh" ]

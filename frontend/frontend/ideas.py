@@ -50,6 +50,7 @@ class Ticker(NamedTuple):
     macd: float = 0.0
     macd_signal: float = 0.0
     current_price: float = 0.0
+    dividends: float = 0.0
     score: float = 0.0
 
 
@@ -75,10 +76,13 @@ class RetrieveServicer:
 
 
 class FilterServicer:
-    def __init__(self, only_in_portfolio: bool) -> None:
+    def __init__(self, ticker_name: str, only_in_portfolio: bool) -> None:
+        self.ticker_name = ticker_name
         self.only_in_portfolio = only_in_portfolio
 
     def filter(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
+        if self.ticker_name is not None:
+            return [x for x in candidates if x.symbol == self.ticker_name]
         if self.only_in_portfolio:
             return [x for x in candidates if x.in_portfolio]
         return candidates
@@ -111,27 +115,29 @@ class ScoreServicer:
         enriched = []
         for candidate in canidates:
             df = self.conn.query(
-                """SELECT close, macd, rsi, adx, pdi, ndi, macd_signal 
+                """SELECT close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
                    FROM history 
                    WHERE symbol = :symbol 
                    ORDER BY date DESC LIMIT 1
                 """,
                 params={"symbol": candidate.symbol},
             )
-            assert df.shape[0] == 1, candidate
-            row = next(df.iterrows())[1]
 
-            enriched.append(
-                candidate._replace(
-                    current_price=row["close"],
-                    adx=row["adx"],
-                    macd=row["macd"],
-                    rsi=row["rsi"],
-                    pdi=row["pdi"],
-                    ndi=row["ndi"],
-                    macd_signal=row["macd_signal"],
+            if df.shape[0] == 1:
+                row = next(df.iterrows())[1]
+                enriched.append(
+                    candidate._replace(
+                        current_price=row["close"],
+                        adx=row["adx"],
+                        macd=row["macd"],
+                        rsi=row["rsi"],
+                        pdi=row["pdi"],
+                        ndi=row["ndi"],
+                        macd_signal=row["macd_signal"],
+                        dividends=row["dividends"],
+                    )
                 )
-            )
+
         return enriched
 
 
@@ -141,7 +147,15 @@ def show_ticker(ticker: Ticker):
         st.caption(ticker.business_summary)
         st.markdown(ticker.description)
 
-        col_forecast, col_adx, col_macd, col_rsi, col_market_cap = st.columns(5)
+        (
+            col_forecast,
+            col_adx,
+            col_macd,
+            col_rsi,
+            col_dividends,
+            col_market_cap,
+        ) = st.columns(6)
+
         with col_forecast:
             st.metric(
                 "Forecast",
@@ -168,6 +182,9 @@ def show_ticker(ticker: Ticker):
             elif ticker.rsi < 25:
                 rsi_color = "normal"
             st.metric("RSI", ticker.rsi, delta=ticker.rsi, delta_color=rsi_color)
+
+        with col_dividends:
+            st.metric("Last payed dividends amount", f"${numerize(ticker.dividends)}")
 
         with col_market_cap:
             st.metric("Market capitalization", f"${numerize(ticker.market_cap)}")
@@ -284,13 +301,15 @@ def main():
         show_history(conn, query_params["symbol"][0])
     else:
         with st.sidebar:
+            ticker_name = st.text_input("Ticker", max_chars=12)
             only_in_portfolio = st.toggle("Only portfolio stocks.")
 
         with st.spinner("Generating candidates..."):
             candidates = ScoreServicer(connection=conn).score(
-                FilterServicer(only_in_portfolio=only_in_portfolio).filter(
-                    RetrieveServicer(conn).retrieve()
-                )
+                FilterServicer(
+                    ticker_name=ticker_name,
+                    only_in_portfolio=only_in_portfolio,
+                ).filter(RetrieveServicer(conn).retrieve())
             )
 
         for candidate in candidates:

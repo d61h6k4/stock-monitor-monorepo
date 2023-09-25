@@ -89,7 +89,7 @@ def notify():
             ]
         ]
 
-    flow.flat_map(apply_rules)
+    flow.flat_map("apply_rules", apply_rules)
 
     class FilterWithPortfolioInfo:
         def __init__(self, db_host: str, db_user: str, db_name: str, db_password: str):
