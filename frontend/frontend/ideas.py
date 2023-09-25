@@ -153,7 +153,7 @@ def show_ticker(ticker: Ticker):
             col_macd,
             col_rsi,
             col_market_cap,
-        ) = st.columns(6)
+        ) = st.columns(5)
 
         with col_forecast:
             st.metric(
