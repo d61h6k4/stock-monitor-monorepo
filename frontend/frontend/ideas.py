@@ -77,12 +77,12 @@ class RetrieveServicer:
 
 class FilterServicer:
     def __init__(self, ticker_name: str, only_in_portfolio: bool) -> None:
-        self.ticker_name = ticker_name
+        self.ticker_name = ticker_name.upper()
         self.only_in_portfolio = only_in_portfolio
 
     def filter(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
-        if self.ticker_name is not None:
-            return [x for x in candidates if x.symbol == self.ticker_name]
+        if self.ticker_name:
+            return [x for x in candidates if x.symbol.upper() == self.ticker_name]
         if self.only_in_portfolio:
             return [x for x in candidates if x.in_portfolio]
         return candidates
