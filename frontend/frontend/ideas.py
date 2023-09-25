@@ -301,7 +301,7 @@ def main():
         show_history(conn, query_params["symbol"][0])
     else:
         with st.sidebar:
-            ticker_name = st.text_input("Ticker", value=None, max_chars=12)
+            ticker_name = st.text_input("Ticker", value="", max_chars=12)
             only_in_portfolio = st.toggle("Only portfolio stocks.")
 
         with st.spinner("Generating candidates..."):
