@@ -3,8 +3,6 @@ import os
 from bytewax.connectors.kafka import KafkaInput, KafkaOutput
 from bytewax.dataflow import Dataflow
 
-# from bytewax.window import EventClockConfig, TumblingWindow
-
 from etl.math import MACD, RSI, AverageDirectionalIndex, AverageTrueRange
 
 
@@ -26,7 +24,7 @@ def prepare_output_topic(bootstrap_servers, kafka_output_topic):
 
 def calculate_features():
     import json
-    from datetime import datetime, timedelta, timezone
+    from datetime import datetime, timezone
 
     BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:19092").split(",")
     KAFKA_INPUT_TOPICS = os.getenv("KAFKA_INPUT_TOPICS", "events").split(",")
@@ -51,17 +49,6 @@ def calculate_features():
         return item_v["symbol"], item_v
 
     flow.map(deserialize)
-
-    # Sorting
-    # flow.collect_window(
-    #     "sort_by_date",
-    #     EventClockConfig(lambda e: e["date"], wait_for_system_duration=timedelta(0)),
-    #     TumblingWindow(
-    #         length=timedelta(days=1),
-    #         align_to=datetime(1950, 7, 17, tzinfo=timezone.utc),
-    #     ),
-    # )
-    # flow.map(lambda kv: (kv[0], kv[1][0]))
 
     AverageTrueRange(p=14)(flow)
     AverageDirectionalIndex(p=14)(flow)
