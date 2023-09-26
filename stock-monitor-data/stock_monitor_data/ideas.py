@@ -2202,6 +2202,21 @@ def ideas(period: str, interval: str):
             ),
             description=r"""AI, Gaming boom.""",
         ),
+        Stock(
+            ticker_name="JEV.V",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=0.5, date=datetime(2025, 4, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Over the past month, Jericho Energy Ventures Inc. (JEV:TSXV, OTC:JROOF) has reported 
+                            several promising updates which reaffirm our investment thesis and target price. This 
+                            includes testing updates from H2U (portfolio company), an MOU between JEV’s EU partner, 
+                            Exogen and hydrogen supplier, Lhyfe SA, as well as, receiving a new patent for the DCC 
+                            boiler. 
+                            [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/020f637a-4276-e5c6-325a-5fdcb3cc0ef7/20230926_Atrium_JEV_Recent_Developments.pdf)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
