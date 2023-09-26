@@ -2166,6 +2166,42 @@ def ideas(period: str, interval: str):
                             [Source](https://ideahive.substack.com/p/actionable-investment-ideas-10)
                         """,
         ),
+        Stock(
+            ticker_name="GOOG",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=200, date=datetime(2024, 11, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Google - bet on AI, TPU""",
+        ),
+        Stock(
+            ticker_name="CRWD",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=200, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Crowd Strike - second (after MSFT) in cyber security.""",
+        ),
+        Stock(
+            ticker_name="TSLA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=400, date=datetime(2024, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""EV cars.""",
+        ),
+        Stock(
+            ticker_name="NVDA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=600, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""AI, Gaming boom.""",
+        ),
     ]
 
     return reversed(ideas)
