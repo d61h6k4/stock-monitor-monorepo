@@ -30,9 +30,14 @@ class NotificationCenter:
                 for ticker, t_values in values.items():
                     self._users_last_messages[user][ticker] = {}
                     for rule, state in t_values.items():
-                        self._users_last_messages[user][ticker][
-                            rule
-                        ] = Action.from_string(state)
+                        try:
+                            action = Action.from_string(state)
+                        except ValueError:
+                            logger.exception(
+                                f"Failed to read state of the {rule=} for {ticker=}"
+                            )
+                            action = Action.HOLD
+                        self._users_last_messages[user][ticker][rule] = action
         else:
             logger.warn("Resource doesn't exist. %s", self._resource)
 
