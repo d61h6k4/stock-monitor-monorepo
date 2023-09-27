@@ -4,6 +4,8 @@ from uuid import uuid4
 
 from pydantic import BaseModel, Field
 from requests import Session
+from requests.adapters import HTTPAdapter
+from urllib3.util import Retry
 from logging import getLogger
 
 logger = getLogger(__name__)
@@ -105,7 +107,20 @@ class TelegramClient:
         """Constructor."""
         self._telegram_api_url = f"https://api.telegram.org/bot{token}"
         self.secret_token = uuid4().hex
+
+        # Define the retry strategy
+        retry_strategy = Retry(
+            total=14,  # Maximum number of retries
+            backoff_factor=2,  # Exponential backoff factor (e.g., 2 means 1, 2, 4, 8 seconds, ...)
+            status_forcelist=[429, 500, 502, 503, 504],  # HTTP status codes to retry on
+        )
+        # Create an HTTP adapter with the retry strategy and mount it to session
+        adapter = HTTPAdapter(max_retries=retry_strategy)
+
+        # Create a new session object
         self.session = Session()
+        self.session.mount("http://", adapter)
+        self.session.mount("https://", adapter)
 
     def set_webhook(self: Self) -> None:
         """Sets webhook.
