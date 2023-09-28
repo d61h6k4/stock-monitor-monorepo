@@ -2217,6 +2217,21 @@ def ideas(period: str, interval: str):
                             [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/020f637a-4276-e5c6-325a-5fdcb3cc0ef7/20230926_Atrium_JEV_Recent_Developments.pdf)
                         """,
         ),
+        Stock(
+            ticker_name="GAN",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=3.0, date=datetime(2023, 12, 30, tzinfo=timezone.utc)
+            ),
+            description=r"""It would seem that the strategic review is progressing well and the company just needed 
+                            some additional time to carry it through to the finish line. Sega Sammy, quite likely to be 
+                            one of the interested parties, agreed to provide this financial flexibility. At the same 
+                            time, Sega ensured itself a juicy payoff on the loan in case it is not a winning party in 
+                            the bidding processes. In a sale scenario, I expect GAN to be worth $3-$5/share.
+                            [Source](https://www.specialsituationinvestments.com/2023/06/gan-limited-gan-company-sale-upside-tbd/)
+                        """,
+        ),
     ]
 
     return reversed(ideas)

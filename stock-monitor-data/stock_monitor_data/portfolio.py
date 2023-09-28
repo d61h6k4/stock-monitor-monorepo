@@ -27,6 +27,14 @@ def portfolio(period: str, interval: str):
             "buy_date": datetime(2023, 9, 25, tzinfo=timezone.utc),
             "confidence": 0.5,
         },
+        "APN.WA": {
+            "buy_date": datetime(2023, 9, 25, tzinfo=timezone.utc),
+            "confidence": 0.5,
+        },
+        "GAN": {
+            "buy_date": datetime(2023, 9, 28, tzinfo=timezone.utc),
+            "confidence": 0.5,
+        },
     }
 
     res = []

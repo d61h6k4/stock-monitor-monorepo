@@ -7,6 +7,8 @@ import altair as alt
 import streamlit as st
 from numerize.numerize import numerize
 
+from frontend.utils import escape_markdown
+
 
 def parse_args():
     parser = ArgumentParser()
@@ -145,7 +147,7 @@ def show_ticker(ticker: Ticker):
     with st.container():
         st.title(f"[{ticker.symbol}](/?symbol={ticker.symbol})")
         st.caption(ticker.business_summary)
-        st.markdown(ticker.description)
+        st.markdown(escape_markdown(ticker.description))
 
         (
             col_forecast,
@@ -308,10 +310,8 @@ def main():
                 ).filter(RetrieveServicer(conn).retrieve())
             )
 
-        for candidate in candidates[:30]:
-            show_ticker(candidate)
-        
-        for candidate in candidates[30:]:
+        # TODO(d61h6k4) Add pagination
+        for candidate in candidates:
             show_ticker(candidate)
 
 
