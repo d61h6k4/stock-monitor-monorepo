@@ -289,7 +289,7 @@ def main():
 
     args = parse_args()
     conn_info = f"postgresql://{args.postgres_user}:{args.postgres_password}@{args.postgres_host}:5432/{args.postgres_db}"
-    conn = st.experimental_connection("sql", url=conn_info)
+    conn = st.experimental_connection("sql", url=conn_info, ttl=timedelta(hours=1))
 
     query_params = st.experimental_get_query_params()
     if "symbol" in query_params:
@@ -308,7 +308,10 @@ def main():
                 ).filter(RetrieveServicer(conn).retrieve())
             )
 
-        for candidate in candidates:
+        for candidate in candidates[:30]:
+            show_ticker(candidate)
+        
+        for candidate in candidates[30:]:
             show_ticker(candidate)
 
 
