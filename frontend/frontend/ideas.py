@@ -113,32 +113,33 @@ class ScoreServicer:
             candidate._replace(score=predict(candidate)) for candidate in candidates
         ]
 
-    def _enrich(self, canidates: Sequence[Ticker]) -> Sequence[Ticker]:
-        enriched = []
-        for candidate in canidates:
-            df = self.conn.query(
-                """SELECT close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
-                   FROM history 
-                   WHERE symbol = :symbol 
-                   ORDER BY date DESC LIMIT 1
-                """,
-                params={"symbol": candidate.symbol},
-            )
+    def _enrich(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
+        symbols = {candidate.symbol: candidate for candidate in candidates}
+        df = self.conn.query(
+            """SELECT DISTINCT ON (symbol), date, close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
+               FROM history 
+               WHERE symbol IN :symbols 
+               ORDER BY symbol, date DESC
+            """,
+            params={"symbols": list(symbols.keys())},
+        )
+        print(df)
 
-            if df.shape[0] == 1:
-                row = next(df.iterrows())[1]
-                enriched.append(
-                    candidate._replace(
-                        current_price=row["close"],
-                        adx=row["adx"],
-                        macd=row["macd"],
-                        rsi=row["rsi"],
-                        pdi=row["pdi"],
-                        ndi=row["ndi"],
-                        macd_signal=row["macd_signal"],
-                        dividends=row["dividends"],
-                    )
+        enriched = []
+        for _, row in df.iterrows():
+            candidate = symbols[row["symbol"]]
+            enriched.append(
+                candidate._replace(
+                    current_price=row["close"],
+                    adx=row["adx"],
+                    macd=row["macd"],
+                    rsi=row["rsi"],
+                    pdi=row["pdi"],
+                    ndi=row["ndi"],
+                    macd_signal=row["macd_signal"],
+                    dividends=row["dividends"],
                 )
+            )
 
         return enriched
 
