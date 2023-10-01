@@ -121,7 +121,7 @@ class ScoreServicer:
                WHERE symbol IN :symbols 
                ORDER BY symbol, date DESC
             """,
-            params={"symbols": list(symbols.keys())},
+            params={"symbols": tuple(symbols.keys())},
         )
         print(df)
 
