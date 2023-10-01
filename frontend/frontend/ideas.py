@@ -316,7 +316,7 @@ def main():
 
         bottom_menu = st.columns((4, 1, 1))
         with bottom_menu[2]:
-            batch_size = st.selectbox("Page Size", options=[10, 20, 50])
+            batch_size = st.selectbox("Page Size", options=[3, 5, 10])
         with bottom_menu[1]:
             total_pages = (
                 int(len(candidates) / batch_size)
