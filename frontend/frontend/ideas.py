@@ -1,7 +1,7 @@
 import os
 from argparse import ArgumentParser
 from datetime import datetime, timedelta, timezone
-from typing import NamedTuple, Sequence
+from typing import Any, NamedTuple, Sequence
 
 import altair as alt
 import streamlit as st
@@ -143,8 +143,8 @@ class ScoreServicer:
         return enriched
 
 
-def show_ticker(ticker: Ticker):
-    with st.container():
+def show_ticker(container: Any, ticker: Ticker):
+    with container:
         st.title(f"[{ticker.symbol}](/?symbol={ticker.symbol})")
         st.caption(ticker.business_summary)
         st.markdown(escape_markdown(ticker.description))
@@ -311,8 +311,26 @@ def main():
             )
 
         # TODO(d61h6k4) Add pagination
-        for candidate in candidates:
-            show_ticker(candidate)
+        pagination = st.container()
+
+        bottom_menu = st.columns((4, 1, 1))
+        with bottom_menu[2]:
+            batch_size = st.selectbox("Page Size", options=[25, 50, 100])
+        with bottom_menu[1]:
+            total_pages = (
+                int(len(candidates) / batch_size)
+                if int(len(candidates) / batch_size) > 0
+                else 1
+            )
+            current_page = st.number_input(
+                "Page", min_value=1, max_value=total_pages, step=1
+            )
+        with bottom_menu[0]:
+            st.markdown(f"Page **{current_page}** of **{total_pages}** ")
+
+        start_index = (current_page - 1) * batch_size
+        for candidate in candidates[start_index : start_index + batch_size]:
+            show_ticker(pagination, candidate)
 
 
 main()
