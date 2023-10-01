@@ -116,7 +116,7 @@ class ScoreServicer:
     def _enrich(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
         symbols = {candidate.symbol: candidate for candidate in candidates}
         df = self.conn.query(
-            """SELECT DISTINCT ON (symbol), date, close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
+            """SELECT DISTINCT ON (symbol) symbol, date, close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
                FROM history 
                WHERE symbol IN :symbols 
                ORDER BY symbol, date DESC
