@@ -2232,6 +2232,121 @@ def ideas(period: str, interval: str):
                             [Source](https://www.specialsituationinvestments.com/2023/06/gan-limited-gan-company-sale-upside-tbd/)
                         """,
         ),
+        Stock(
+            ticker_name="TEP.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=2500, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Telecom Plus market themselves as Utility Warehouse - All of your home services in one 
+                            place, the 8th largest utility supplier in the UK. They supply households and small 
+                            businesses throughout the UK with a wide range of essential services under the Utility 
+                            Warehouse brand.  They supply broadband, mobile, energy and insurance.  The business 
+                            offers customers -Simplicity - just one simple bill for all your home services. Savings 
+                            - compared with the prices they were previously paying. Service - delivered by 
+                            award-winning UK-based support teams.
+                            [Source](https://cockneyrebel.substack.com/p/telecom-plus-tep)
+                        """,
+        ),
+        Stock(
+            ticker_name="SYNA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=100, date=datetime(2024, 5, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Synaptics next frontier of semiconductor growth could be quite fruitful though I have my 
+                            reservations the company can grow at a CAGR of 12% in the next five years. There’s going 
+                            to be a new business cycle for Synaptics (they experience them frequently) and higher stock 
+                            prices with that, at some point. The bear case is that Synaptics grows at a CAGR of 5% or 
+                            less and EBITDA margins fall back to the historical norm near 15%. The bull case scenario 
+                            would be that Synaptics realizes higher growth from its IoT portfolio and higher EBITDA 
+                            margins than 20%. 
+                            [Source](https://capitalincentives.substack.com/p/synaptics-syna)
+                        """,
+        ),
+        Stock(
+            ticker_name="ALCLA.PA",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=110, date=datetime(2024, 9, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Trades at a 30% discount to Peers its a microcap with lots of room left to grow both 
+                            geographically and in density including the Africa trading routes. Can do small bolt-on 
+                            acquisitions of local SMEs - too small for large cap. Addresses niches with pricing power 
+                            (high value items) Net profit should grow with scale faster than gross profit - G&A 
+                            overhead, new offices startup costs. Clasquin is finally reaching a certain scale. 
+                            Shareholder friendly (large payout dividends) and founder with 40%+ ownership 
+                            The balance sheet is pristine with a net cash balance of 3m (subtracting long term debt) 
+                            which should allow to do bolt-on acquisition.
+                            [Soruce](https://wintergems.substack.com/p/alcla-french-microcap-freight-forwarder)
+                        """,
+        ),
+        Stock(
+            ticker_name="YAK.V",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=2, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""So, in short, either MGG finds something interesting to acquire and transforms itself or 
+                            it will return capital. At the current share price we are only paying for roughly MGG’s 
+                            listed investment portfolio and not much for the rest. Furthermore, if you like uranium 
+                            and oil, you have a chance to gain exposure to the sector - and Kuppy's investment skills - 
+                            via YAK at roughly the prices of before the recent run-up.
+                            [Source](https://toffcap.substack.com/p/mongolia-growth-group)
+                        """,
+        ),
+        Stock(
+            ticker_name="CRDA.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=7000, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Shares has limited downside but potentially dramatic upside
+                            Customer de-stocking is industry-wide and one-off in nature
+                            Shares are at 24x 2023 EPS even if H1 weakness continues
+                            At 4,712p, base case is 58% upside (15.6% p.a.) by end of 2026
+                            IRR can be much higher if sentiment improves or a buyer emerges
+                            [Source](https://librariancapital.substack.com/p/croda-back-to-may-2020-levels-on)
+                        """,
+        ),
+        Stock(
+            ticker_name="LDB.MI",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=3, date=datetime(2024, 7, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Lindbergh’s services bring significant benefits to their customers’ productivity and reduce 
+                            their environmental impact. Unique positioning in the in-night in-boot delivery service 
+                            thanks to the proprietary technology platform that allows offering complementary services 
+                            to increase the productivity of technicians. High standing and loyal client portfolio of 
+                            multinational customers like Jungheinrich, Kion, Linde, Toyota, Kone, RICOH and 
+                            Still illiquid micro-cap with high insider ownership of 67 %. Revenues in H1 ‘23 +19.5 %, 
+                            EBIT +39.4%, Net Profit +40% successful (and faster than expected) turnaround of the 
+                            French subsidiary should further increase the overall margins in the coming years 
+                            EV/EBIT ‘23 of 10.3x, P/E of 11.6x  
+                            [Source](https://underfollowedstocks.substack.com/p/lindbergh)
+                        """,
+        ),
+        Stock(
+            ticker_name="SQM",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=70, date=datetime(2025, 5, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Even if the prices of lithium stayed at these levels (-70% from the highs), companies 
+                            like Albermarle or SQM are attractively priced and will have impressive growth over the 
+                            coming years. My personal favorite is SQM, since the company is returning capital to 
+                            shareholders. 
+                            [Source](https://moderninvesting.substack.com/p/lithium-betting-on-the-inevitable)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
