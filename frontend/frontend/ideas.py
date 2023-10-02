@@ -115,6 +115,9 @@ class ScoreServicer:
 
     def _enrich(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
         symbols = {candidate.symbol: candidate for candidate in candidates}
+        if not symbols:
+            return candidates
+
         df = self.conn.query(
             """SELECT DISTINCT ON (symbol) symbol, date, close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
                FROM history 
@@ -123,7 +126,6 @@ class ScoreServicer:
             """,
             params={"symbols": tuple(symbols.keys())},
         )
-        print(df)
 
         enriched = []
         for _, row in df.iterrows():
@@ -311,7 +313,6 @@ def main():
                 ).filter(RetrieveServicer(conn).retrieve())
             )
 
-        # TODO(d61h6k4) Add pagination
         pagination = st.container()
 
         bottom_menu = st.columns((4, 1, 1))
@@ -329,9 +330,11 @@ def main():
         with bottom_menu[0]:
             st.markdown(f"Page **{current_page}** of **{total_pages}** ")
 
-        start_index = (current_page - 1) * batch_size
-        for candidate in candidates[start_index : start_index + batch_size]:
-            show_ticker(pagination, candidate)
-
+        if total_pages > 0:
+            start_index = (current_page - 1) * batch_size
+            for candidate in candidates[start_index : start_index + batch_size]:
+                show_ticker(pagination, candidate)
+        else:
+            st.info("There is no ticker.", icon=":exclamation:")
 
 main()
