@@ -335,6 +335,7 @@ def main():
             for candidate in candidates[start_index : start_index + batch_size]:
                 show_ticker(pagination, candidate)
         else:
-            st.info("There is no ticker.", icon=":exclamation:")
+            with pagination:
+                st.info("There is no ticker.", icon=":exclamation:")
 
 main()
