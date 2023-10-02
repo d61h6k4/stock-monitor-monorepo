@@ -336,6 +336,6 @@ def main():
                 show_ticker(pagination, candidate)
         else:
             with pagination:
-                st.info("There is no ticker.", icon=":exclamation:")
+                st.info("There is no ticker.")
 
 main()
