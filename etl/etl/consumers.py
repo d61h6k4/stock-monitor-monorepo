@@ -15,27 +15,37 @@ class SQLSink(StatelessSink):
 
         self.connection = psycopg.connect(conn_info)
 
+        self.features = [
+            "open",
+            "high",
+            "low",
+            "close",
+            "volume",
+            "pdi",
+            "ndi",
+            "adx",
+            "macd",
+            "macd_signal",
+            "rsi",
+            "dividends",
+            "moving_average_50",
+            "moving_average_200",
+            "money_flow_index",
+            "swing_low",
+            "coppock_curve",
+        ]
+
         self.prepare_tables()
 
     def prepare_tables(self):
+        features_schema = ",".join([f"{f} REAL" for f in self.features])
         with self.connection.cursor() as cursor:
             cursor.execute(
-                """CREATE TABLE IF NOT EXISTS history (
+                f"""CREATE TABLE IF NOT EXISTS history (
                     record_id SERIAL PRIMARY KEY,
                     symbol VARCHAR(12) NOT NULL,
                     date DATE,
-                    open REAL,
-                    high REAL,
-                    low REAL,
-                    close REAL,
-                    volume REAL,
-                    pdi REAL,
-                    ndi REAL,
-                    adx REAL,
-                    macd REAL,
-                    macd_signal REAL,
-                    rsi REAL,
-                    dividends REAL)
+                    {features_schema})
                 """
             )
             self.connection.commit()
@@ -51,41 +61,21 @@ class SQLSink(StatelessSink):
             _, item = key__payload
             records.append(item)
 
+        names = ",".join(self.features)
+        values = ",".join([f"%({f})s" for f in self.features])
         with self.connection.cursor() as cursor:
             cursor.executemany(
-                """INSERT INTO 
+                f"""INSERT INTO 
                     history 
                     (
                         symbol, 
                         date, 
-                        open, 
-                        high, 
-                        low, 
-                        close, 
-                        volume,
-                        pdi, 
-                        ndi, 
-                        adx,
-                        macd,
-                        macd_signal,
-                        rsi,
-                        dividends
+                        {names}
                     )
                    VALUES (
                         %(symbol)s, 
                         %(date)s, 
-                        %(open)s, 
-                        %(high)s, 
-                        %(low)s, 
-                        %(close)s, 
-                        %(volume)s,
-                        %(pdi)s, 
-                        %(ndi)s, 
-                        %(adx)s,
-                        %(macd)s,
-                        %(macd_signal)s,
-                        %(rsi)s,
-                        %(dividends)s
+                        {values}
                     )
                 """,
                 records,

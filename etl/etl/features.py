@@ -3,7 +3,16 @@ import os
 from bytewax.connectors.kafka import KafkaInput, KafkaOutput
 from bytewax.dataflow import Dataflow
 
-from etl.math import MACD, RSI, AverageDirectionalIndex, AverageTrueRange
+from etl.math import (
+    MA,
+    MACD,
+    MFI,
+    RSI,
+    AverageDirectionalIndex,
+    AverageTrueRange,
+    CoppockCurve,
+    SwingLow,
+)
 
 
 def prepare_output_topic(bootstrap_servers, kafka_output_topic):
@@ -54,6 +63,11 @@ def calculate_features():
     AverageDirectionalIndex(p=14)(flow)
     MACD()(flow)
     RSI()(flow)
+    MA(window=50)(flow)
+    MA(window=200)(flow)
+    MFI()(flow)
+    SwingLow()(flow)
+    CoppockCurve()(flow)
 
     def serialize_with_key(key__payload):
         key, payload = key__payload

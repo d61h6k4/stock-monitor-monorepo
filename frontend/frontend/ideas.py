@@ -218,7 +218,21 @@ def show_history(connection: st.connections.SQLConnection, symbol: str):
         )
 
         bar = base.mark_bar().encode(alt.Y("open:Q"), alt.Y2("close:Q"))
-        chart = rule + bar
+
+        ma50 = base.mark_line(stroke="#61BFAD", strokeDash=[1, 5]).encode(
+            alt.Y("moving_average_50:Q"),
+            tooltip=[alt.Tooltip("moving_average_50", title="MA(50)")],
+        )
+        ma200 = base.mark_line(stroke="#167C80", strokeDash=[1, 5]).encode(
+            alt.Y("moving_average_200:Q"),
+            tooltip=[alt.Tooltip("moving_average_200", title="MA(200)")],
+        )
+
+        swing_low_line = base.mark_line(stroke="#ae1325", strokeDash=[1, 2]).encode(
+            y=alt.datum(df.tail(1)["swing_low"].values[0])
+        )
+
+        chart = rule + bar + ma50 + ma200 + swing_low_line
         volume_chart = base.mark_bar().encode(alt.Y("volume:Q"))
 
         return (chart, volume_chart)
@@ -275,6 +289,38 @@ def show_history(connection: st.connections.SQLConnection, symbol: str):
 
         return rsi_line + buy_line + sell_line
 
+    def mfi_chart():
+        base = alt.Chart(df).encode(alt.X("date:T", axis=alt.Axis(title=None)))
+
+        mfi_line = base.mark_line(stroke="#008FD3").encode(
+            alt.Y("money_flow_index:Q", axis=alt.Axis(title="MFI")),
+            tooltip=[alt.Tooltip("money_flow_index", title="MFI")],
+        )
+        buy_line = base.mark_line(stroke="#ae1325", strokeDash=[1, 2]).encode(
+            y=alt.datum(80.0)
+        )
+        sell_line = base.mark_line(stroke="#06982d", strokeDash=[1, 2]).encode(
+            y=alt.datum(20.0)
+        )
+
+        return mfi_line + buy_line + sell_line
+
+    def coppock_curve_chart():
+        open_close_color = alt.condition(
+            alt.datum.coppock_curve > 0,
+            alt.value("#06982d"),
+            alt.value("#ae1325"),
+        )
+
+        base = alt.Chart(df).encode(
+            alt.X("date:T", axis=alt.Axis(title=None)), color=open_close_color
+        )
+        bar = base.mark_bar().encode(
+            alt.Y("coppock_curve:Q", axis=alt.Axis(title="Coppock Curve"))
+        )
+
+        return bar
+
     chart, volume_chart = base_chart()
 
     with st.container():
@@ -286,6 +332,8 @@ def show_history(connection: st.connections.SQLConnection, symbol: str):
                 macd_chart().properties(height=100, width=1420),
                 adx_chart().properties(height=100, width=1420),
                 rsi_chart().properties(height=100, width=1420),
+                mfi_chart().properties(height=100, width=1420),
+                coppock_curve_chart().properties(height=100, width=1420),
             ),
             theme="streamlit",
             use_container_width=True,

@@ -9,7 +9,16 @@ from bytewax.dataflow import Dataflow
 from bytewax.outputs import DynamicOutput, StatelessSink
 from etl.notifyer import NotificationCenter
 from etl.telegram.client import TelegramClient
-from etl.rules import Action, Decision, adx_rule, macd_rule, rsi_rule
+from etl.rules import (
+    Action,
+    Decision,
+    adx_rule,
+    macd_rule,
+    rsi_rule,
+    mfi_rule,
+    swing_low_rule,
+    coppock_curve_rule,
+)
 
 
 class NotifierSink(StatelessSink):
@@ -86,6 +95,23 @@ def notify():
                     payload["adx"],
                 ),
                 rsi_rule(payload["symbol"], payload["close"], payload["rsi"]),
+                mfi_rule(
+                    payload["symbol"],
+                    current_price=payload["close"],
+                    pct_change=payload["pct_change"],
+                    mfi_value=payload["money_flow_index"],
+                    mfi_delta=payload["mfi_delta"],
+                ),
+                swing_low_rule(
+                    payload["symbol"],
+                    current_price=payload["close"],
+                    swing_low=payload["swing_low"],
+                ),
+                coppock_curve_rule(
+                    payload["symbol"],
+                    current_price=payload["close"],
+                    coppock_curve=payload["coppock_curve"],
+                ),
             ]
         ]
 
@@ -109,7 +135,6 @@ def notify():
                     cursor.execute("SELECT symbol FROM tickers WHERE in_portfolio")
                     self._portfolio = set((x[0] for x in cursor.fetchall()))
 
-                    assert "TGNA" in self._portfolio
                 self.last_update_time = datetime.now()
             return self._portfolio
 

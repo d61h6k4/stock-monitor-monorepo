@@ -1,7 +1,7 @@
+import heapq
 from typing import Any, Mapping, Tuple
 
 from bytewax.dataflow import Dataflow
-
 
 KV = Mapping[str, Any]
 State = KV
@@ -166,6 +166,7 @@ class RSI:
             rsi = 100.0
         current.update(
             {
+                "pct_change": pct_change,
                 "gain_ma": gain_ma,
                 "loss_ma": loss_ma,
                 "rsi": rsi,
@@ -175,3 +176,178 @@ class RSI:
 
     def __call__(self, flow: Dataflow):
         flow.stateful_map("Calculate RSI", self.builder, self.mapper)
+
+
+class MA:
+    """Moving average."""
+
+    def __init__(self, window: int) -> None:
+        """Constructor.
+
+        Args:
+            window - controls the window of average.
+        """
+        self.window = window
+        self.name = f"moving_average_{window}"
+        self.alpha = 2.0 / (window + 1.0)
+
+    @staticmethod
+    def builder() -> State:
+        return {}
+
+    def mapper(self, state: State, current: KV) -> Tuple[KV, KV]:
+        c_ma = exponential_moving_average(
+            self.alpha, current["close"], state.get(self.name, current["close"])
+        )
+        current.update({self.name: c_ma})
+        return {self.name: c_ma}, current
+
+    def __call__(self, flow: Dataflow):
+        flow.stateful_map(
+            f"Calculate Moving Average {self.window}", self.builder, self.mapper
+        )
+
+
+class MFI:
+    """Money Flow Index.
+
+    https://www.investopedia.com/terms/m/mfi.asp
+    """
+
+    def __init__(self) -> None:
+        self.alpha = 2.0 / (14.0 + 1.0)
+
+    @staticmethod
+    def builder() -> State:
+        return {}
+
+    def mapper(self, state: State, current: KV) -> Tuple[KV, KV]:
+        typical_price = (current["close"] + current["high"] + current["low"]) / 3.0
+        raw_money_flow = typical_price * current["volume"]
+
+        typical_price_prev = state.get("typical_price", typical_price)
+        positive_money_flow = (
+            raw_money_flow if typical_price > typical_price_prev else 0.0
+        )
+        negative_money_flow = (
+            raw_money_flow if typical_price < typical_price_prev else 0.0
+        )
+
+        positive_money_flow_ma = exponential_moving_average(
+            self.alpha,
+            positive_money_flow,
+            state.get("positive_money_flow_ma", positive_money_flow),
+        )
+
+        negative_money_flow_ma = exponential_moving_average(
+            self.alpha,
+            negative_money_flow,
+            state.get("negative_money_flow_ma", negative_money_flow),
+        )
+
+        if negative_money_flow_ma > 0:
+            money_flow_ratio = positive_money_flow_ma / negative_money_flow_ma
+        else:
+            money_flow_ratio = 10000.0
+
+        money_flow_index = 100.0 - (100.0 / (1 + money_flow_ratio))
+
+        current.update(
+            {
+                "money_flow_index": money_flow_index,
+                "mfi_delta": money_flow_index
+                - state.get("money_flow_index", money_flow_index),
+            }
+        )
+
+        state.update(
+            {
+                "typical_price": typical_price,
+                "positive_money_flow_ma": positive_money_flow_ma,
+                "negative_money_flow_ma": negative_money_flow_ma,
+                "money_flow_index": money_flow_index,
+            }
+        )
+
+        return state, current
+
+    def __call__(self, flow: Dataflow):
+        flow.stateful_map("Money Flow Index", self.builder, self.mapper)
+
+
+class SwingLow:
+    """Swing Low.
+
+    https://www.investopedia.com/terms/s/swinglow.asp
+    """
+
+    def __init__(self):
+        self.period = 20
+
+    @staticmethod
+    def builder() -> State:
+        return {}
+
+    def mapper(self, state: State, current: KV) -> Tuple[KV, KV]:
+        if "closes" not in state:
+            state["closes"] = []
+        state["closes"].append(current["close"])
+        swing_low = min(state["closes"])
+
+        current.update({"swing_low": swing_low})
+
+        return {"closes": state["closes"][-self.period :]}, current
+
+    def __call__(self, flow: Dataflow):
+        flow.stateful_map("Swing Low", self.builder, self.mapper)
+
+
+class CoppockCurve:
+    """Coppock Curve.
+
+    https://www.investopedia.com/terms/c/coppockcurve.asp
+    """
+
+    def __init__(self):
+        self.roc_long_period = 14 * 22  # 14 monthes, 22 woring days in month
+        self.roc_short_period = 10 * 22  # 10 monthes
+        self.wma_period = 10 * 22  # 10 monthes
+        self.alpha = 2.0 / (self.wma_period + 1.0)
+
+    @staticmethod
+    def builder() -> State:
+        return {}
+
+    def mapper(self, state: State, current: KV) -> Tuple[KV, KV]:
+        if "closes" not in state:
+            state["closes"] = []
+
+        closes = state["closes"][-self.roc_long_period :]
+        closes.append(current["close"])
+
+        if len(closes) < self.roc_long_period:
+            roc_long = 0.0
+            roc_short = 0.0
+        else:
+            roc_long = 100.0 * (
+                (current["close"] - closes[-self.roc_long_period])
+                / (closes[-self.roc_long_period])
+            )
+
+            roc_short = 100.0 * (
+                (current["close"] - closes[-self.roc_short_period])
+                / (closes[-self.roc_short_period])
+            )
+
+        roc = roc_long + roc_short
+        coppock_curve = exponential_moving_average(
+            self.alpha, roc, state.get("coppock_curve", roc)
+        )
+
+        current.update({"coppock_curve": coppock_curve})
+        state.update({"coppock_curve": coppock_curve, "closes": closes})
+
+        return state, current
+
+    def __call__(self, flow: Dataflow):
+        flow.stateful_map("Coppock Curve", self.builder, self.mapper)

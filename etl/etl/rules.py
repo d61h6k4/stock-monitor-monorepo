@@ -126,3 +126,77 @@ def adx_rule(
     return Decision(
         ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg
     )
+
+
+def mfi_rule(
+    ticker: str,
+    current_price: float,
+    pct_change: float,
+    mfi_value: float,
+    mfi_delta: float,
+) -> Decision:
+    """MFI rule."""
+
+    rule = Rule(
+        name="MFI",
+        description="Money Flow Index that begins to fall below a reading of 80 while "
+        "the underlying security continues to climb is a price reversal "
+        "signal to the downside. Conversely, a very low MFI reading that "
+        "climbs above a reading of 20 while the underlying security "
+        "continues to sell off is a price reversal signal to the upside.",
+    )
+
+    decision_action = Action.HOLD
+    if mfi_value + mfi_delta > 80 and mfi_value < 80 and pct_change > 0:
+        decision_action = Action.SELL
+    elif mfi_value > 20 and mfi_value - mfi_delta < 20 and pct_change < 0:
+        decision_action = Action.BUY
+
+    exp_msg = f"Current price is {current_price:,.2f}, MFI value is {mfi_value:,.1f}."
+    return Decision(
+        ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg
+    )
+
+
+def swing_low_rule(ticker: str, current_price: float, swing_low: float) -> Decision:
+    """Swing Low rule."""
+
+    rule = Rule(
+        name="Swing Low",
+        description="A stop-loss order should be placed below the swing low to close "
+        "the trade if price unexpectedly reverses.",
+    )
+
+    decision_action = Action.HOLD
+    if current_price < swing_low:
+        decision_action = Action.SELL
+
+    exp_msg = f"Current price is {current_price:,.2f}, MFI value is {swing_low:,.1f}."
+    return Decision(
+        ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg
+    )
+
+
+def coppock_curve_rule(
+    ticker: str, current_price: float, coppock_curve: float
+) -> Decision:
+    """Coppock Curve rule."""
+
+    rule = Rule(
+        name="Coppock Curve",
+        description="The zero line of the Coppock Curve acts as a trade trigger; buy "
+        "when the CC moves above zero, and sell when the CC moves below zero. "
+        "Investors can use the sell signal to close out their long positions and then "
+        "re-initiate long positions when CC crosses back above zero. Traders who wish "
+        "to be more active can close out longs and initiate short trades when the CC "
+        "crosses below zero.",
+    )
+
+    decision_action = Action.BUY
+    if coppock_curve < 0:
+        decision_action = Action.SELL
+
+    exp_msg = f"Current price is {current_price:,.2f}, coppock curve vaue is {coppock_curve:,.2f}."
+    return Decision(
+        ticker=ticker, rule=rule, action=decision_action, explanation=exp_msg
+    )
