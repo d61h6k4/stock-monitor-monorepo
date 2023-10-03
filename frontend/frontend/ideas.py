@@ -62,7 +62,9 @@ class RetrieveServicer:
 
     def retrieve(self) -> Sequence[Ticker]:
         tickers = []
-        for _, row in self.conn.query("SELECT * FROM tickers").iterrows():
+        for _, row in self.conn.query(
+            "SELECT * FROM tickers", ttl=timedelta(hours=1)
+        ).iterrows():
             tickers.append(
                 Ticker(
                     symbol=row["symbol"],
@@ -125,6 +127,7 @@ class ScoreServicer:
                ORDER BY symbol, date DESC
             """,
             params={"symbols": tuple(symbols.keys())},
+            ttl=timedelta(hours=1),
         )
 
         enriched = []
@@ -294,7 +297,7 @@ def main():
 
     args = parse_args()
     conn_info = f"postgresql://{args.postgres_user}:{args.postgres_password}@{args.postgres_host}:5432/{args.postgres_db}"
-    conn = st.experimental_connection("sql", url=conn_info, ttl=timedelta(hours=1))
+    conn = st.experimental_connection("sql", type="sql", url=conn_info)
 
     query_params = st.experimental_get_query_params()
     if "symbol" in query_params:
@@ -337,5 +340,6 @@ def main():
         else:
             with pagination:
                 st.info("There is no ticker.")
+
 
 main()
