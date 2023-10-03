@@ -19,10 +19,10 @@ def stocks():
     from stock_monitor_data.portfolio import portfolio
 
     yield from portfolio("1d", "1d")
-    # yield from oil_and_gas_stocks("1d", "1d")
-    # yield from etfs("1d", "1d")
-    # yield from crypto("1d", "1d")
-    # yield from ideas("1d", "1d")
+    yield from oil_and_gas_stocks("1d", "1d")
+    yield from etfs("1d", "1d")
+    yield from crypto("1d", "1d")
+    yield from ideas("1d", "1d")
 
 
 def parse_args():
