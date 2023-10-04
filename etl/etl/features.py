@@ -52,12 +52,24 @@ def calculate_features():
         ),
     )
 
-    def deserialize(raw_item_kv):
-        item_v = json.loads(raw_item_kv[1])
+    def deserialize(key__payload):
+        key, payload = key__payload
+        return key, json.loads(payload)
+
+    flow.map(deserialize)
+
+    def is_stock_data(key__payload):
+        _, payload = key__payload
+        return "TICKER_PRICE" == payload["kind"]
+
+    flow.filter(is_stock_data)
+
+    def parse(key__payload):
+        _, item_v = key__payload
         item_v["date"] = datetime.fromisoformat(item_v["date"]).astimezone(timezone.utc)
         return item_v["symbol"], item_v
 
-    flow.map(deserialize)
+    flow.map(parse)
 
     AverageTrueRange(p=14)(flow)
     AverageDirectionalIndex(p=14)(flow)

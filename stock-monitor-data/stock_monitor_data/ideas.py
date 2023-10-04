@@ -1187,7 +1187,7 @@ def ideas(period: str, interval: str):
                             factored in wage increases similar to those agreed upon by other industry players,
                             such as Lockheed, into their guidance.
                             [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
-                   """,
+                        """,
         ),
         Stock(
             ticker_name="ARCO",

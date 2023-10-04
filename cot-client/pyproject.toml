@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "cot-client"
+version = "0.1.0"
+description = ""
+authors = ["Danila <ddbihbka@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.11,<3.13"
+requests = "^2.31.0"
+pandas = "^2.1.1"
+xlrd = "^2.0.1"
+rich = "^13.6.0"
+kafka-python = "^2.0.2"
+numpy = "^1.26.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

@@ -1,0 +1,13 @@
+[Unit]
+Description=Periodically run COT data producer
+After=network.target
+StartLimitIntervalSec=0
+Wants=cot.timer
+
+[Service]
+Type=oneshot
+User=ubuntu
+ExecStart=make --directory /home/ubuntu/stock-monitor-monorepo cot
+
+[Install]
+WantedBy=multi-user.target

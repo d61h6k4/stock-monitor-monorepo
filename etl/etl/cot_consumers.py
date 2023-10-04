@@ -16,23 +16,17 @@ class SQLSink(StatelessSink):
         self.connection = psycopg.connect(conn_info)
 
         self.features = [
-            "open",
-            "high",
-            "low",
-            "close",
-            "volume",
-            "pdi",
-            "ndi",
-            "adx",
-            "macd",
-            "macd_signal",
-            "rsi",
-            "dividends",
-            "moving_average_50",
-            "moving_average_200",
-            "money_flow_index",
-            "swing_low",
-            "coppock_curve",
+            "open_interest_all",
+            "prod_merc_positions_long_all",
+            "prod_merc_positions_short_all",
+            "swap_positions_long_all",
+            "swap_positions_short_all",
+            "m_money_positions_long_all",
+            "m_money_positions_short_all",
+            "other_rept_positions_long_all",
+            "other_rept_positions_short_all",
+            "nonrept_positions_long_all",
+            "nonrept_positions_short_all",
         ]
 
         self.prepare_tables()
@@ -41,15 +35,16 @@ class SQLSink(StatelessSink):
         features_schema = ",".join([f"{f} REAL" for f in self.features])
         with self.connection.cursor() as cursor:
             cursor.execute(
-                f"""CREATE TABLE IF NOT EXISTS history (
+                f"""CREATE TABLE IF NOT EXISTS cot_history (
                     record_id SERIAL PRIMARY KEY,
-                    symbol VARCHAR(12) NOT NULL,
-                    date DATE,
+                    market_and_exchange_names TEXT NOT NULL,
+                    cftc_commodity_code INTEGER,
+                    report_date DATE,
                     {features_schema})
                 """
             )
             self.connection.commit()
-        print("Table history is created.")
+        print("Table cot_history is created.")
 
     def close(self):
         self.cursor.close()
@@ -63,24 +58,31 @@ class SQLSink(StatelessSink):
 
         names = ",".join(self.features)
         values = ",".join([f"%({f})s" for f in self.features])
+
         with self.connection.cursor() as cursor:
-            cursor.executemany(
-                f"""INSERT INTO 
-                    history 
+            try:
+                cursor.executemany(
+                    f"""INSERT INTO 
+                    cot_history 
                     (
-                        symbol, 
-                        date, 
+                        market_and_exchange_names,
+                        cftc_commodity_code,
+                        report_date,
                         {names}
                     )
                    VALUES (
-                        %(symbol)s, 
-                        %(date)s, 
+                        %(market_and_exchange_names)s, 
+                        %(cftc_commodity_code)s, 
+                        %(report_date)s, 
                         {values}
                     )
                 """,
-                records,
-            )
-            self.connection.commit()
+                    records,
+                )
+            except Exception as e:
+                print(records)
+                print(repr(e))
+        self.connection.commit()
 
 
 class SQLOutput(DynamicOutput):
@@ -102,7 +104,7 @@ def sink_to_db():
     DB_NAME = os.getenv("POSTGRES_DB")
     DB_PASSWORD = os.getenv("POSTGRES_PASSWORD")
     BOOTSTRAP_SERVERS = os.getenv("BOOTSTRAP_SERVERS", "localhost:19092").split(",")
-    KAFKA_INPUT_TOPICS = os.getenv("KAFKA_INPUT_TOPICS", "features").split(",")
+    KAFKA_INPUT_TOPICS = os.getenv("KAFKA_INPUT_TOPICS", "events").split(",")
 
     flow = Dataflow()
     flow.input(
@@ -118,6 +120,12 @@ def sink_to_db():
         return key, json.loads(payload)
 
     flow.map(deserialize)
+
+    def is_cot_data(key__payload):
+        _, payload = key__payload
+        return "COMMITMENT_OF_TRADERS" == payload["kind"]
+
+    flow.filter(is_cot_data)
 
     flow.output("sink_to_db", SQLOutput(DB_HOST, DB_USER, DB_NAME, DB_PASSWORD))
 

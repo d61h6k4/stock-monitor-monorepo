@@ -1,0 +1,10 @@
+[Unit]
+Description=Syncthing monitoring
+Requires=cot.service
+
+[Timer]
+Unit=cot.service
+OnCalendar=Sat 4:00:00
+
+[Install]
+WantedBy=timers.target
