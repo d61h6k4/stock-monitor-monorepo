@@ -43,15 +43,15 @@ def ideas(period: str, interval: str):
                 price=3.08, date=datetime(2024, 5, 31, tzinfo=timezone.utc)
             ),
             description=r"""Vendor for global wireless network operators specializing in backhaul solutions.
-                            Shareholders have recently rejected a hostile takeover by peer \$AVNW at \$3.8/share.
+                            Shareholders have recently rejected a hostile takeover by peer $AVNW at $3.8/share.
                             Renewed talks between AVNW and CRNT present the potential for near-term upside
-                            realization. While \$AVNW is the leader in NA backhaul, CRNT is now encroaching on
+                            realization. While $AVNW is the leader in NA backhaul, CRNT is now encroaching on
                             its territory, having secured contracts with every NA Tier 1 operator. AVNW used a
                             difficult equity market environment to try to opportunistically scoop up an
                             undervalued asset.Post proxy fight CRNT management is forced to drive shareholder
                             value.Trades near its historical 1x book value floor. Failed takeover attempt at
-                            \$3.08/share in Aug`22. Management`s internal value estimate of \$5/share.
-                            **Exp. gain: +70% to\$3.08+**
+                            $3.08/share in Aug`22. Management`s internal value estimate of $5/share.
+                            **Exp. gain: +70% to$3.08+**
                             [Source](https://twitter.com/InvestSpecial/status/1610585909128302593)
                         """,
         ),
@@ -63,17 +63,17 @@ def ideas(period: str, interval: str):
                 price=87, date=datetime(2023, 12, 31, tzinfo=timezone.utc)
             ),
             description=r"""Semiconductor assembly services provider - the world`s most wonderfully boring
-                                  businesses to own. At 9x earnings and shifting into higher margin services.
-                                  For a semi business, it has very low cyclicality and low capex needs, and yet is
-                                  delivering above-industry revenue growth with 3 year CAGR of 20%. Oligopolistic
-                                  industry - AMKR is the No.2 player with a 25% share, behind \$ASX with 35%. Due to
-                                  increasing chip complexity, the industry is shifting towards less commoditized and
-                                  more advanced packaging/assembly solutions, requiring more R&D and tighter
-                                  integration with customers. This also drives increasing margins for key players.
-                                  Should trade at an above-market multiple of 20x vs 9x today. `23 and `24 EPS are
-                                  expected at \$3 and \$4. Easy double with \$4 fwd EPS and 10.5x multiple. DCF model
-                                  results in \$87/share. **Exp. gain: +100% by 2H23.**
-                                  [Source.](https://twitter.com/InvestSpecial/status/1612025171879010305)""",
+                            businesses to own. At 9x earnings and shifting into higher margin services.
+                            For a semi business, it has very low cyclicality and low capex needs, and yet is
+                            delivering above-industry revenue growth with 3 year CAGR of 20%. Oligopolistic
+                            industry - AMKR is the No.2 player with a 25% share, behind $ASX with 35%. Due to
+                            increasing chip complexity, the industry is shifting towards less commoditized and
+                            more advanced packaging/assembly solutions, requiring more R&D and tighter
+                            integration with customers. This also drives increasing margins for key players.
+                            Should trade at an above-market multiple of 20x vs 9x today. `23 and `24 EPS are
+                            expected at $3 and $4. Easy double with $4 fwd EPS and 10.5x multiple. DCF model
+                            results in $87/share. **Exp. gain: +100% by 2H23.**
+                            [Source.](https://twitter.com/InvestSpecial/status/1612025171879010305)""",
         ),
         Stock(
             ticker_name="XMTR",
@@ -593,14 +593,15 @@ def ideas(period: str, interval: str):
             expectation=Expectation(
                 price=6, date=datetime(2023, 12, 31, tzinfo=timezone.utc)
             ),
-            description=r"""CBD is a Brazilian holding company that is spinning off its Colombian grocery chain, Grupo Exito,
-                                   in the second quarter of 2023. Shareholders will receive 4 shares of Grupo Exito, which is currently
-                                   trading at a higher value than CBD's remaining assets (referred to as the "stub"). However,
-                                   the stub includes multiple assets that should be worth at least \$0.50/share, as well as a
-                                   high-end grocery chain in Brazil. Assuming the stub trades at 0 and Exito is valued correctly,
-                                   the potential upside is around 20%. The author believes that both the stub and Exito should be worth at
-                                   least \$6.00/share in the long term, which is at least a double from the current price.
-                                   [Source](https://www.clarksquarecapital.com/p/companhia-brasileira-de-distribuicao?publication_id=802343&utm_source=substack&utm_medium=email)
+            description=r"""CBD is a Brazilian holding company that is spinning off its Colombian grocery chain, Grupo 
+                            Exito, in the second quarter of 2023. Shareholders will receive 4 shares of Grupo Exito, 
+                            which is currently trading at a higher value than CBD's remaining assets (referred to as 
+                            the "stub"). However, the stub includes multiple assets that should be worth at least 
+                            $0.50/share, as well as a high-end grocery chain in Brazil. Assuming the stub trades at 0 
+                            and Exito is valued correctly, the potential upside is around 20%. The author believes 
+                            that both the stub and Exito should be worth at least $6.00/share in the long term, which 
+                            is at least a double from the current price.
+                            [Source](https://www.clarksquarecapital.com/p/companhia-brasileira-de-distribuicao)
                   """,
         ),
         Stock(
@@ -735,12 +736,13 @@ def ideas(period: str, interval: str):
                 price=24, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
             ),
             description=r"""Primarily a manufacturer of airplane cockpit printers plus a provider of label printers.
-                                   Cockpit business is an actual monopoly protected from larger peers due to a small and
-                                   niche enough market on top of the FAA's expensive regulatory framework.
-                                   Crux of thesis centers around the expected increase in airplane production to pre-Covid
-                                   levels leading to continued growth in revenues and earnings. At 10x 2024E EBITDA multiple vs peers at 15x,
-                                   ALOT is \$24/share stock.
-                                   [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64387c7cf1e5c4626d787d38/1681423485063/Atai+Capital+-+Q1-2023+Letter.pdf)""",
+                            Cockpit business is an actual monopoly protected from larger peers due to a small and
+                            niche enough market on top of the FAA's expensive regulatory framework.
+                            Crux of thesis centers around the expected increase in airplane production to 
+                            pre-Covid levels leading to continued growth in revenues and earnings. At 10x 2024E 
+                            EBITDA multiple vs peers at 15x, ALOT is $24/share stock.
+                            [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64387c7cf1e5c4626d787d38/1681423485063/Atai+Capital+-+Q1-2023+Letter.pdf)
+                        """,
         ),
         Stock(
             ticker_name="BNED",
@@ -749,14 +751,16 @@ def ideas(period: str, interval: str):
             expectation=Expectation(
                 price=3, date=datetime(2023, 12, 15, tzinfo=timezone.utc)
             ),
-            description=r"""Textbook retailer transitioning into a durable omnichannel player based on its First Day Complete (FDC) program.
-                                   Via the FDC, \$BNED provides the students with all their books directly through the school by bundling the costs
-                                   into a tuition fee. Due to publishers' discounts, students save 30-50%, schools receive commissions on sales,
-                                   and publishers actually get paid. While new economics are attractive only 20% of schools are on the platform.
-                                   This is about to change with \$BNED recently making the conversion mandatory. If transition is successful,
-                                   there is a path to \$125m+ in EBITDA. Given the attractive economics and presence of an activist with a
-                                   10% stake, the target seems achievable. Overlooked due to small \$100m Mcap and minimal coverage.
-                                   [Source](https://static1.squarespace.com/static/5498841ce4b0311b8ddc012b/t/644bdf2a12435708a8affde7/1682693930744/Greenhaven+Road+2023+Q1+Quarterly+Letter%5B69%5D.pdf)""",
+            description=r"""Textbook retailer transitioning into a durable omnichannel player based on its First Day 
+                            Complete (FDC) program. Via the FDC, $BNED provides the students with all their books 
+                            directly through the school by bundling the costs into a tuition fee. Due to publishers' 
+                            discounts, students save 30-50%, schools receive commissions on sales, and publishers 
+                            actually get paid. While new economics are attractive only 20% of schools are on the 
+                            platform. This is about to change with $BNED recently making the conversion mandatory. 
+                            If transition is successful, there is a path to $125m+ in EBITDA. Given the attractive 
+                            economics and presence of an activist with a 10% stake, the target seems achievable. 
+                            Overlooked due to small $100m Mcap and minimal coverage.
+                            [Source](https://static1.squarespace.com/static/5498841ce4b0311b8ddc012b/t/644bdf2a12435708a8affde7/1682693930744/Greenhaven+Road+2023+Q1+Quarterly+Letter%5B69%5D.pdf)""",
         ),
         Stock(
             ticker_name="PLYA",
@@ -809,10 +813,10 @@ def ideas(period: str, interval: str):
             expectation=Expectation(
                 price=10, date=datetime(2025, 6, 15, tzinfo=timezone.utc)
             ),
-            description=r"""The current value of the investments, cash, and real estate can be ballparked between ~\$81.7M-\$90.7M,
-                                   the book value sits at ~\$42.7M and the market cap is \$34M. Sum-of-the-parts story has been the stable
-                                   thesis for the better part of a year and a half now and hasn`t worked yet. So, the question begs, will it ever?
-                                   [Source](https://www.wsgresearch.com/p/fg-group-holdings-multiple-ways-to?utm_source=substack&utm_medium=email)""",
+            description=r"""The current value of the investments, cash, and real estate can be ballparked between ~$81.7M-$90.7M,
+                            the book value sits at $42.7M and the market cap is $34M. Sum-of-the-parts story has been the stable
+                            thesis for the better part of a year and a half now and hasn`t worked yet. So, the question begs, will it ever?
+                            [Source](https://www.wsgresearch.com/p/fg-group-holdings-multiple-ways-to?utm_source=substack&utm_medium=email)""",
         ),
         Stock(
             ticker_name="OB",
@@ -1164,25 +1168,25 @@ def ideas(period: str, interval: str):
                 price=80, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
             ),
             description=r"""Primary supplier for Boeing 737 MAX fuselage and also does business with Airbus on
-                                   wings. With a solid outlook for 2025 and a backlog of \$37bn, SPR is
-                                   well-positioned to benefit from a robust demand for commercial aircraft. The recent
-                                   quality issue and the slow ramp-up of the Boeing supply chain have caused the stock
-                                   price to decline, presenting an opportunistic entry point. These issues are
-                                   manageable and do not pose a significant threat to the company's future prospects.
-                                   The recent setback with quality issues, involving two fasteners on the fuselage,
-                                   led to a temporary and minor halt in production. This problem was not a safety
-                                   concern and has now been addressed, with repairs expected to be completed by July.
-                                   While the ramp-up of the Boeing supply chain has been slow, similar challenges
-                                   have been faced in the past during the 787 production period. The demand for
-                                   commercial aircraft is strong, with Boeing receiving new orders for the MAX and
-                                   Airbus growing its backlog. As production levels increase, Spirit is expected to
-                                   generate significant cash flow. Meanwhile, Spirit has a substantial cash reserve
-                                   of $568m and a debt profile that can be refinanced as it matures (most of Spirit's
-                                   bonds are currently trading at par). Labor contract negotiations also represent a
-                                   near-term challenge. However, an outcome is soon expected and management has
-                                   factored in wage increases similar to those agreed upon by other industry players,
-                                   such as Lockheed, into their guidance.
-                                   [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
+                            wings. With a solid outlook for 2025 and a backlog of $37bn, SPR is
+                            well-positioned to benefit from a robust demand for commercial aircraft. The recent
+                            quality issue and the slow ramp-up of the Boeing supply chain have caused the stock
+                            price to decline, presenting an opportunistic entry point. These issues are
+                            manageable and do not pose a significant threat to the company's future prospects.
+                            The recent setback with quality issues, involving two fasteners on the fuselage,
+                            led to a temporary and minor halt in production. This problem was not a safety
+                            concern and has now been addressed, with repairs expected to be completed by July.
+                            While the ramp-up of the Boeing supply chain has been slow, similar challenges
+                            have been faced in the past during the 787 production period. The demand for
+                            commercial aircraft is strong, with Boeing receiving new orders for the MAX and
+                            Airbus growing its backlog. As production levels increase, Spirit is expected to
+                            generate significant cash flow. Meanwhile, Spirit has a substantial cash reserve
+                            of $568m and a debt profile that can be refinanced as it matures (most of Spirit's
+                            bonds are currently trading at par). Labor contract negotiations also represent a
+                            near-term challenge. However, an outcome is soon expected and management has
+                            factored in wage increases similar to those agreed upon by other industry players,
+                            such as Lockheed, into their guidance.
+                            [Source](https://ideahive.substack.com/p/vic-pitch-summaries-june-25)
                    """,
         ),
         Stock(
@@ -1446,8 +1450,8 @@ def ideas(period: str, interval: str):
                 price=83, date=datetime(2024, 9, 15, tzinfo=timezone.utc)
             ),
             description=r"""The thesis here is straightforward, just like AstroNova, we believe Bel Fuse`s
-                            EBITDA is going to expand materially over the coming years, from \$83M in 2022
-                            (\$100M LTM) to \$120M in 2024, and we also don`t think \$140M is out of the cards
+                            EBITDA is going to expand materially over the coming years, from $83M in 2022
+                            ($100M LTM) to $120M in 2024, and we also don`t think $140M is out of the cards
                             for 2025.
                             [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64aeb0347a63bf404bec0f6f/1689169973044/Atai+Capital+-+Q2-2023+Letter.pdf)
                         """,
@@ -1672,21 +1676,6 @@ def ideas(period: str, interval: str):
                         """,
         ),
         Stock(
-            ticker_name="MINDP",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=8.0, date=datetime(2023, 12, 15, tzinfo=timezone.utc)
-            ),
-            description=r"""Weird divident play.
-                            On top of this, you have the \$2.25 that will be paid out annually as dividends
-                            going forward, about a 30% yield at current levels. Not a bad payment while you
-                            wait for the larger upside. Lastly, by holding the preferred shares for the longer
-                            term you can clip off a very safe and respectable 9% coupon as a terminal value.
-                            [Source](https://breeleycapital.substack.com/p/mind-technology-preferred-one-to)
-                          """,
-        ),
-        Stock(
             ticker_name="KDP",
             period=period,
             interval=interval,
@@ -1728,21 +1717,6 @@ def ideas(period: str, interval: str):
                             has grown by 450%, the land area used for farming corn hasn’t gone up at all ! 
                             This is the result of more efficient farming and importantly fertilizers.
                             [Source](https://moderninvesting.substack.com/p/1-fertilizer-market)
-                        """,
-        ),
-        Stock(
-            ticker_name="TRT.L",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=100, date=datetime(2023, 12, 15, tzinfo=timezone.utc)
-            ),
-            description=r"""turnaround after years of losses with the help of a highly profitable license 
-                            deal by new management. A substantial part of the current market cap is backed 
-                            by future cashflows of this license deal that will be used to maximize shareholder 
-                            value via buybacks and investments in a controlled manner in highly promising & 
-                            patented SAW technology
-                            [Source](https://underfollowedstocks.substack.com/p/transense)
                         """,
         ),
         Stock(
@@ -2003,19 +1977,6 @@ def ideas(period: str, interval: str):
                             is expecting sales to decline in both the U.S. and China in Q1 FY24, but to show 
                             positive growth for the full year. 
                             [Source](https://librariancapital.substack.com/p/pernod-ricard-near-52-week-low-after)
-                        """,
-        ),
-        Stock(
-            ticker_name="PFSW",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=8, date=datetime(2024, 3, 15, tzinfo=timezone.utc)
-            ),
-            description=r"""PFSweb - The ongoing strategic review at the e-commerce order fulfillment services 
-                            provider is likely to culminate in a potential company sale as indicated by the 
-                            management's clear focus on this outcome.
-                            [Source](https://twitter.com/ideahive/status/1698612475451621631)
                         """,
         ),
         Stock(
