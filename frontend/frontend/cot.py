@@ -102,7 +102,7 @@ def main():
                FROM 
                 cot_history
             """,
-            ttl=timedelta(days=7),
+            ttl=timedelta(hours=1),
         )
 
         market_and_exchange_names = st.multiselect(
@@ -132,7 +132,7 @@ def main():
                 "since": since,
                 "names": tuple(n for n, _ in market_and_exchange_names),
             },
-            ttl=timedelta(seconds=3600),
+            ttl=timedelta(hours=1),
         )
 
         main = st.container()
