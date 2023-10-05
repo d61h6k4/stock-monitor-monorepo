@@ -36,9 +36,11 @@ def parse_args():
     return parser.parse_args()
 
 
-def show_cot(container: Any, df: pd.DataFrame):
+def show_cot(container: Any, df: pd.DataFrame, since: datetime, period: timedelta):
     def base_chart():
-        base = alt.Chart(df).encode(alt.X("report_date:T", axis=alt.Axis(title=None)))
+        base = alt.Chart(df[df.report_date >= since]).encode(
+            alt.X("report_date:T", axis=alt.Axis(title=None))
+        )
         open_interest_line = base.mark_line().encode(
             alt.Y("open_interest_all:Q", axis=alt.Axis(title="CoT"))
         )
@@ -65,22 +67,65 @@ def show_cot(container: Any, df: pd.DataFrame):
                         "other_rept",
                         "non_rept",
                     ],
-                    range=[
-                        "#E54B4B",
-                        "#9C2525",
-                        "#005397",
-                        "#0BBCD6",
-                        "#F0CF61"
-                    ],
+                    range=["#E54B4B", "#9C2525", "#005397", "#0BBCD6", "#F0CF61"],
                 ),
             )
         )
         return open_interest_line + prod_bar
 
+    def cot_index():
+        def preserve(rows):
+            return rows[-1]
+
+        cot_df = (
+            df[
+                [
+                    "report_date",
+                    "prod_merc_positions_long_all",
+                    "prod_merc_positions_short_all",
+                    "swap_positions_long_all",
+                    "swap_positions_short_all",
+                ]
+            ]
+            .assign(
+                comm_net=lambda df: (
+                    (
+                        df["prod_merc_positions_long_all"]
+                        - df["prod_merc_positions_short_all"]
+                        + df["swap_positions_long_all"]
+                        - df["swap_positions_short_all"]
+                    )
+                )
+            )[["report_date", "comm_net"]]
+            .groupby("report_date")
+            .sum()["comm_net"]
+            .rolling(int(period.days / 7.0))
+            .agg(["min", "max", preserve])
+            .dropna()
+            .assign(
+                cot_index=lambda df: 100.0
+                * (df["preserve"] - df["min"])
+                / (df["max"] - df["min"])
+            )
+            .reset_index()
+        )
+
+        bar = (
+            alt.Chart(cot_df[cot_df.report_date >= since])
+            .mark_bar(color="#EF3E4A")
+            .encode(
+                alt.X("report_date:T", axis=alt.Axis(title=None)),
+                alt.Y("cot_index:Q", axis=alt.Axis(title="CoT Index")),
+            )
+        )
+
+        return bar
+
     with container:
         st.altair_chart(
             alt.vconcat(
                 base_chart().properties(width=1024),
+                cot_index().properties(height=150, width=1024),
             ),
             theme="streamlit",
             use_container_width=True,
@@ -118,25 +163,48 @@ def main():
         )
 
         since = st.date_input("Since", value=datetime(2018, 1, 1))
+        period = timedelta(
+            weeks=st.slider(
+                "Period for COT index (in weeks).",
+                value=52 * 3,
+                step=1,
+                min_value=52,
+                max_value=52 * 7,
+            )
+        )
 
     if market_and_exchange_names:
         df = conn.query(
             """SELECT
-                *
+                report_date,
+                market_and_exchange_names,
+                cftc_commodity_code,
+                open_interest_all,
+                prod_merc_positions_long_all,
+                prod_merc_positions_short_all,
+                swap_positions_long_all,
+                swap_positions_short_all,
+                m_money_positions_long_all,
+                m_money_positions_short_all,
+                other_rept_positions_long_all,
+                other_rept_positions_short_all,
+                nonrept_positions_long_all,
+                nonrept_positions_short_all
                FROM
                  cot_history
                WHERE
                  report_date >= :since AND market_and_exchange_names IN :names
+               ORDER BY report_date
             """,
             params={
-                "since": since,
+                "since": since - period,
                 "names": tuple(n for n, _ in market_and_exchange_names),
             },
             ttl=timedelta(hours=1),
         )
 
         main = st.container()
-        show_cot(main, df)
+        show_cot(main, df, since, period)
 
 
 main()
