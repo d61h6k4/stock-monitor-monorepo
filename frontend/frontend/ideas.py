@@ -199,7 +199,7 @@ def show_history(connection: st.connections.SQLConnection, symbol: str):
         f"SELECT * FROM history WHERE symbol = :symbol AND date > :date",
         params={
             "symbol": symbol,
-            "date": datetime.now(tz=timezone.utc) - timedelta(weeks=26),
+            "date": datetime.now(tz=timezone.utc) - timedelta(weeks=52),
         },
     )
 
