@@ -38,9 +38,9 @@ def parse_args():
 
 def show_cot(container: Any, df: pd.DataFrame, since: datetime, period: timedelta):
     def base_chart():
-        base = alt.Chart(df[df.report_date >= since]).encode(
-            alt.X("report_date:T", axis=alt.Axis(title=None))
-        )
+        base = alt.Chart(
+            df[df.report_date >= since].groupby("report_date").sum().reset_index()
+        ).encode(alt.X("report_date:T", axis=alt.Axis(title=None)))
         open_interest_line = base.mark_line().encode(
             alt.Y("open_interest_all:Q", axis=alt.Axis(title="CoT"))
         )
@@ -75,7 +75,7 @@ def show_cot(container: Any, df: pd.DataFrame, since: datetime, period: timedelt
 
     def cot_index():
         def preserve(rows):
-            return rows[-1]
+            return rows.iloc[-1]
 
         cot_df = (
             df[
@@ -177,8 +177,6 @@ def main():
         df = conn.query(
             """SELECT
                 report_date,
-                market_and_exchange_names,
-                cftc_commodity_code,
                 open_interest_all,
                 prod_merc_positions_long_all,
                 prod_merc_positions_short_all,
