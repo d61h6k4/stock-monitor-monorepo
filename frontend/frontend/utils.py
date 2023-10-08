@@ -1,6 +1,6 @@
 import re
 
-ESCAPE_CHARS = re.escape(r"_*~`>#+-=|{}!$'")
+ESCAPE_CHARS = re.escape(r"!$'")
 
 
 def escape_markdown(txt: str) -> str:

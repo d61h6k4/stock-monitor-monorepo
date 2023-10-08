@@ -66,11 +66,11 @@ def ideas(period: str, interval: str):
                             businesses to own. At 9x earnings and shifting into higher margin services.
                             For a semi business, it has very low cyclicality and low capex needs, and yet is
                             delivering above-industry revenue growth with 3 year CAGR of 20%. Oligopolistic
-                            industry - AMKR is the No.2 player with a 25% share, behind $ASX with 35%. Due to
+                            industry - AMKR is the No.2 player with a 25% share, behind ASX with 35%. Due to
                             increasing chip complexity, the industry is shifting towards less commoditized and
                             more advanced packaging/assembly solutions, requiring more R&D and tighter
                             integration with customers. This also drives increasing margins for key players.
-                            Should trade at an above-market multiple of 20x vs 9x today. `23 and `24 EPS are
+                            Should trade at an above-market multiple of 20x vs 9x today. 23 and 24 EPS are
                             expected at $3 and $4. Easy double with $4 fwd EPS and 10.5x multiple. DCF model
                             results in $87/share. **Exp. gain: +100% by 2H23.**
                             [Source.](https://twitter.com/InvestSpecial/status/1612025171879010305)""",
@@ -1449,9 +1449,9 @@ def ideas(period: str, interval: str):
             expectation=Expectation(
                 price=83, date=datetime(2024, 9, 15, tzinfo=timezone.utc)
             ),
-            description=r"""The thesis here is straightforward, just like AstroNova, we believe Bel Fuse`s
+            description=r"""The thesis here is straightforward, just like AstroNova, we believe Bel Fuses
                             EBITDA is going to expand materially over the coming years, from $83M in 2022
-                            ($100M LTM) to $120M in 2024, and we also don`t think $140M is out of the cards
+                            ($100M LTM) to $120M in 2024, and we also donot think $140M is out of the cards
                             for 2025.
                             [Source](https://static1.squarespace.com/static/635cafa2259a125cc55eae33/t/64aeb0347a63bf404bec0f6f/1689169973044/Atai+Capital+-+Q2-2023+Letter.pdf)
                         """,
