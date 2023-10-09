@@ -1434,13 +1434,13 @@ def ideas(period: str, interval: str):
                 price=100, date=datetime(2025, 5, 14, tzinfo=timezone.utc)
             ),
             description=r"""Clasquin is operating in the global freight forwarding industry. It is a pure
-                                   play asset lite freight forwarding company. Clasquin has only 2.31 million shares
-                                   outstanding and we havent seen any dilution since the IPO in 2006. The founder owns
-                                   41.4% of the shares. This is a microcap with a total market value of 180 million
-                                   and an enterprise value of 159 million (net cash of 21 million) - based on 2022
-                                   year end results before the 2023 acquisition of Timar.
-                                   [Source](https://wintergems.substack.com/p/clasquin-epaalcla-a-french-microcap)
-                   """,
+                            play asset lite freight forwarding company. Clasquin has only 2.31 million shares
+                            outstanding and we havent seen any dilution since the IPO in 2006. The founder owns
+                            41.4% of the shares. This is a microcap with a total market value of 180 million
+                            and an enterprise value of 159 million (net cash of 21 million) - based on 2022
+                            year end results before the 2023 acquisition of Timar.
+                            [Source](https://wintergems.substack.com/p/clasquin-epaalcla-a-french-microcap)
+                        """,
         ),
         Stock(
             ticker_name="BELFB",
