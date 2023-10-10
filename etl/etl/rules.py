@@ -147,7 +147,7 @@ def mfi_rule(
     )
 
     decision_action = Action.HOLD
-    if mfi_value + mfi_delta > 80 and mfi_value < 80 and pct_change > 0:
+    if mfi_value - mfi_delta > 80 and mfi_value < 80 and pct_change > 0:
         decision_action = Action.SELL
     elif mfi_value > 20 and mfi_value - mfi_delta < 20 and pct_change < 0:
         decision_action = Action.BUY
