@@ -912,7 +912,7 @@ def ideas(period: str, interval: str):
                                    [Source](https://ideahive.substack.com/p/new-pitch-seadrill-srdl)""",
         ),
         Stock(
-            ticker_name="FINMY",
+            ticker_name="LDO.MI",
             period=period,
             interval=interval,
             expectation=Expectation(

@@ -43,8 +43,11 @@ def parse_args():
 
 def create_tables(connection: psycopg.Connection):
     with connection.cursor() as cursor:
+        cursor.execute("DROP TABLE tickers;")
+        connection.commit()
+
         cursor.execute(
-            """CREATE TABLE IF NOT EXISTS tickers (
+            """CREATE TABLE tickers (
                     symbol VARCHAR(12) NOT NULL PRIMARY KEY,
                     business_summary TEXT,
                     market_cap REAL,
@@ -57,7 +60,7 @@ def create_tables(connection: psycopg.Connection):
         connection.commit()
 
 
-def insert_if_not_exist(cursor: psycopg.Cursor, stock: Stock):
+def insert(cursor: psycopg.Cursor, stock: Stock):
     try:
         cursor.execute(
         """INSERT INTO tickers (
@@ -67,13 +70,7 @@ def insert_if_not_exist(cursor: psycopg.Cursor, stock: Stock):
                 forecast_price,
                 forecast_date,
                 description,
-                in_portfolio)
-            SELECT 
-              %s, %s, %s, %s, %s, %s, %s
-            WHERE 
-              NOT EXISTS (
-              SELECT symbol FROM tickers WHERE symbol = %s
-             );
+                in_portfolio);
         """,
         (
             stock.ticker_name,
@@ -121,7 +118,7 @@ def main():
 
             with conn.cursor() as cursor:
                 for stock in ideas("1d", "1d"):
-                    insert_if_not_exist(cursor, stock)
+                    insert(cursor, stock)
                     pgs.advance(process_stocks_task)
 
                     if stock.expectation.date < datetime.now(tz=timezone.utc):
