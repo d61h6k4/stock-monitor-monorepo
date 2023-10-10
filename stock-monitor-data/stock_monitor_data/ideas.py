@@ -2294,6 +2294,23 @@ def ideas(period: str, interval: str):
                             [Source](https://moderninvesting.substack.com/p/lithium-betting-on-the-inevitable)
                         """,
         ),
+        Stock(
+            ticker_name="SAVE",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=31, date=datetime(2024, 6, 30, tzinfo=timezone.utc)
+            ),
+            description=r"""The ongoing combination between JetBlue and Spirit Airlines offers a compelling merger 
+                            arbitrage play with a potential 88% return in less than a year. This opportunity exists 
+                            due to antitrust concerns as the DOJ has filed a lawsuit to stop the merger and the trial 
+                            is set for October 16. The market appears to be mispricing the odds of a favorable 
+                            litigation outcome as antitrust arguments seem overblown. The combined SAVE and JBLU would 
+                            remain only the fifth largest airline in the US, with the four legacy carriers controlling 
+                            80% of the market. 
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-12)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
