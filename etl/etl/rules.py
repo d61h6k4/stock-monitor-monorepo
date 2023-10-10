@@ -168,7 +168,7 @@ def swing_low_rule(ticker: str, current_price: float, swing_low: float) -> Decis
     )
 
     decision_action = Action.HOLD
-    if current_price < swing_low:
+    if current_price <= swing_low:
         decision_action = Action.SELL
 
     exp_msg = f"Current price is {current_price:,.2f}, MFI value is {swing_low:,.1f}."

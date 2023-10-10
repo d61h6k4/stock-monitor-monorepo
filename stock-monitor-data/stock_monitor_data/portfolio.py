@@ -39,6 +39,10 @@ def portfolio(period: str, interval: str):
             "buy_date": datetime(2023, 10, 2, tzinfo=timezone.utc),
             "confidence": 0.5,
         },
+        "LDO.MI": {
+            "buy_date": datetime(2023, 10, 10, tzinfo=timezone.utc),
+            "confidence": 0.5,
+        },
     }
 
     res = []
