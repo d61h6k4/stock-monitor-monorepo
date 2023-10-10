@@ -70,7 +70,10 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
                 forecast_price,
                 forecast_date,
                 description,
-                in_portfolio);
+                in_portfolio)
+            VALUES ( 
+              %s, %s, %s, %s, %s, %s, %s
+             );
         """,
         (
             stock.ticker_name,
@@ -80,7 +83,6 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
             stock.expectation.date,
             stock.description,
             False,
-            stock.ticker_name
         ),
     )
     except Exception as e:
