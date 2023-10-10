@@ -87,6 +87,7 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
     )
     except Exception as e:
         LOGGER.exception("Failed to insert %s", stock.ticker_name)
+        raise e from None
 
 
 def update_in_portfolio(cursor: psycopg.Cursor, stock: Stock):
