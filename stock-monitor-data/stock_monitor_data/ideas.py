@@ -2311,6 +2311,21 @@ def ideas(period: str, interval: str):
                             [Source](https://ideahive.substack.com/p/actionable-investment-ideas-12)
                         """,
         ),
+        Stock(
+            ticker_name="HUMBLE.ST",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=24.5, date=datetime(2025, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Decade driven by changing consumer preferences. Invest at half the EBITDA multiple of 
+                            SMID-cap staple peers despite having ~2x the expected EBITDA growth. Invest alongside a 
+                            management team and Board that has significant equity exposure and have been increasing 
+                            their stake. Invest at a price we estimate is a ~50% discount from a private equity bid 
+                            less than one year ago.
+                            [Source](https://static1.squarespace.com/static/5aaacb57506fbe4636414126/t/651336f09fd2b91b8a91467f/1695758065852/Alta+Fox+HUMBLE+SS+Presentation+Sept+2023.pdf)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
