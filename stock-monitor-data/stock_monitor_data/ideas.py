@@ -640,16 +640,16 @@ def ideas(period: str, interval: str):
             period=period,
             interval=interval,
             expectation=Expectation(
-                price=20, date=datetime(2023, 10, 15, tzinfo=timezone.utc)
+                price=20, date=datetime(2024, 1, 15, tzinfo=timezone.utc)
             ),
             description=r"""A less visible and safer bet on China reopening. Provider of VAT tax refund services for international
-                                   travelers, ~70% market share. Essentially a small royalty on travelers purchasing luxury goods abroad.
-                                   As China re-opens profits will inflect above pre-COVID. Some re-opened regions are spending 3x on like
-                                   for like basis through GB vs what they were pre-COVID. This business has 80% incremental margins from
-                                   any new revenue, >40% EBITDA margins, and 85% FCF conversion. Trades <10x 2019 EBITDA, without any credit
-                                   for dramatically higher luxury goods prices or cost take-outs since then.
-                                   As China reopens, GB could do \$1+/share of FCFresulting in a \$20+ stock.
-                                   [Source](https://twitter.com/InvestSpecial/status/1653327568173400067)
+                            travelers, ~70% market share. Essentially a small royalty on travelers purchasing luxury goods abroad.
+                            As China re-opens profits will inflect above pre-COVID. Some re-opened regions are spending 3x on like
+                            for like basis through GB vs what they were pre-COVID. This business has 80% incremental margins from
+                            any new revenue, >40% EBITDA margins, and 85% FCF conversion. Trades <10x 2019 EBITDA, without any credit
+                            for dramatically higher luxury goods prices or cost take-outs since then.
+                            As China reopens, GB could do \$1+/share of FCFresulting in a \$20+ stock.
+                            [Source](https://twitter.com/InvestSpecial/status/1653327568173400067)
                    """,
         ),
         Stock(

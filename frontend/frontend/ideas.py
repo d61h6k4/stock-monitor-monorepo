@@ -54,6 +54,10 @@ class Ticker(NamedTuple):
     current_price: float = 0.0
     dividends: float = 0.0
     score: float = 0.0
+    moving_average_50: float = 0.0
+    moving_average_200: float = 0.0
+    money_flow_index: float = 0.0
+    coppock_curve: float = 0.0
 
 
 class RetrieveServicer:
@@ -108,6 +112,13 @@ class ScoreServicer:
             score += 2.0 * (1.0 if candidate.pdi > candidate.ndi else -1.0)
             score += 1.0 * (1.0 if candidate.macd > candidate.macd_signal else -1.0)
             score += 0.5 * (1.0 if candidate.rsi < 75 else -1.0)
+            score += 0.5 * (1.0 if candidate.money_flow_index < 80 else -1.0)
+            score += 2.0 * (
+                1.0
+                if candidate.moving_average_50 > candidate.moving_average_200
+                else -1.0
+            )
+            score += 1.0 * (1.0 if candidate.coppock_curve > 0.0 else -1.0)
 
             return score
 
@@ -121,7 +132,21 @@ class ScoreServicer:
             return candidates
 
         df = self.conn.query(
-            """SELECT DISTINCT ON (symbol) symbol, date, close, macd, rsi, adx, pdi, ndi, macd_signal, dividends
+            """SELECT 
+                DISTINCT ON (symbol) symbol, 
+                date, 
+                close, 
+                macd, 
+                rsi, 
+                adx, 
+                pdi, 
+                ndi, 
+                macd_signal, 
+                dividends,
+                moving_average_50,
+                moving_average_200,
+                money_flow_index,
+                coppock_curve
                FROM history 
                WHERE symbol IN :symbols 
                ORDER BY symbol, date DESC
@@ -143,6 +168,10 @@ class ScoreServicer:
                     ndi=row["ndi"],
                     macd_signal=row["macd_signal"],
                     dividends=row["dividends"],
+                    moving_average_50=row["moving_average_50"],
+                    moving_average_200=row["moving_average_200"],
+                    money_flow_index=row["money_flow_index"],
+                    coppock_curve=row["coppock_curve"],
                 )
             )
 
