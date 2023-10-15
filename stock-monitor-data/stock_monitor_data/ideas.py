@@ -710,9 +710,9 @@ def ideas(period: str, interval: str):
                 price=180, date=datetime(2028, 3, 15, tzinfo=timezone.utc)
             ),
             description=r"""In my opinion ORLEN has the potential the be an investment comparable to PetroChina.
-                                   I am bullish on oil prices and ORLEN gives me trough the ridiculously low valuation a good downside protection.
-                                   Here is another quote from Buffet regarding PetroChina.
-                                   [Source](https://moderninvesting.substack.com/p/the-next-petrochina)""",
+                            I am bullish on oil prices and ORLEN gives me trough the ridiculously low valuation a good downside protection.
+                            Here is another quote from Buffet regarding PetroChina.
+                            [Source](https://moderninvesting.substack.com/p/the-next-petrochina)""",
         ),
         Stock(
             ticker_name="KD",
@@ -881,16 +881,16 @@ def ideas(period: str, interval: str):
                 price=365, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
             ),
             description=r"""Medial aesthetic company with a new groundbreaking acne treatment device AviClear.
-                                   Stock is oversold due to a recent boardroom brawl and a pullback in near-term guidance
-                                   due to the sales team focusing on AviClear instead of the base business. The recent boardroom
-                                   turmoil, although disruptive in the short term, is likely to pave the way for leadership upgrades.
-                                   AviClear is the first FDA-approved laser acne treatment device and has many advantages over its
-                                   main competitor Accure. AviClear has a unique business model where an annual fee of \$5k and \$1.5k
-                                   fee per patient is charged, instead of selling the device outright for \$100k+. Dermatologists and
-                                   key opinion leaders have expressed confidence in its potential to change the landscape of acne treatment.
-                                   The addressable market is substantial, with over 60 million people suffering from acne in the US alone.
-                                   If AviClear captures just 10% of the market, it could result in significant sales and earnings growth for Cutera.
-                                   [Source](https://ideahive.substack.com/p/new-pitch-cutera-cutr)
+                            Stock is oversold due to a recent boardroom brawl and a pullback in near-term guidance
+                            due to the sales team focusing on AviClear instead of the base business. The recent boardroom
+                            turmoil, although disruptive in the short term, is likely to pave the way for leadership upgrades.
+                            AviClear is the first FDA-approved laser acne treatment device and has many advantages over its
+                            main competitor Accure. AviClear has a unique business model where an annual fee of \$5k and \$1.5k
+                            fee per patient is charged, instead of selling the device outright for \$100k+. Dermatologists and
+                            key opinion leaders have expressed confidence in its potential to change the landscape of acne treatment.
+                            The addressable market is substantial, with over 60 million people suffering from acne in the US alone.
+                            If AviClear captures just 10% of the market, it could result in significant sales and earnings growth for Cutera.
+                            [Source](https://ideahive.substack.com/p/new-pitch-cutera-cutr)
                    """,
         ),
         Stock(
@@ -1322,13 +1322,13 @@ def ideas(period: str, interval: str):
                 price=10, date=datetime(2027, 3, 15, tzinfo=timezone.utc)
             ),
             description=r"""All in all, Vår is a very attractive investment opportunity right now.
-                                   With a dividend of 15-20% this year, that I expect to grow over the next years.
-                                   With the acquisition of Neptune Energy and multiple projects that will be
-                                   finished over the next years, I expect very good shareholder returns over the
-                                   long run. Notably the sentiment for European oil & gas producers is bad, but
-                                   even with all the headwinds the stock will still perform well. Now imagine,
-                                   that some of these headwinds could go away.
-                                   [Source](https://moderninvesting.substack.com/p/var-energi-norways-dividend-monster)
+                            With a dividend of 15-20% this year, that I expect to grow over the next years.
+                            With the acquisition of Neptune Energy and multiple projects that will be
+                            finished over the next years, I expect very good shareholder returns over the
+                            long run. Notably the sentiment for European oil & gas producers is bad, but
+                            even with all the headwinds the stock will still perform well. Now imagine,
+                            that some of these headwinds could go away.
+                            [Source](https://moderninvesting.substack.com/p/var-energi-norways-dividend-monster)
                    """,
         ),
         Stock(

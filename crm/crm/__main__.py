@@ -43,7 +43,7 @@ def parse_args():
 
 def create_tables(connection: psycopg.Connection):
     with connection.cursor() as cursor:
-        cursor.execute("DROP TABLE tickers;")
+        cursor.execute("DROP TABLE IF EXISTS tickers;")
         connection.commit()
 
         cursor.execute(
