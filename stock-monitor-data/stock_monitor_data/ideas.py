@@ -2326,6 +2326,42 @@ def ideas(period: str, interval: str):
                             [Source](https://static1.squarespace.com/static/5aaacb57506fbe4636414126/t/651336f09fd2b91b8a91467f/1695758065852/Alta+Fox+HUMBLE+SS+Presentation+Sept+2023.pdf)
                         """,
         ),
+        Stock(
+            ticker_name="BLD",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=300, date=datetime(2025, 1, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""BLD, a major player in the insulation industry, offers distinctive advantages for 
+                            stakeholders. For manufacturers, BLD's extensive scale provides cost leverage and a 
+                            valuable partnership, streamlining distribution and reducing costs. Contractors and 
+                            home builders benefit from BLD's national reach, receiving a reliable and convenient 
+                            one-stop-shopping experience with flexible delivery options and favorable payment terms. 
+                            Moreover, BLD's acquisition strategy allows acquired businesses to maintain their local 
+                            approach while gaining access to national resources, leading to enhanced efficiency and 
+                            cost savings. Overall, BLD stands out in the insulation business by offering unique 
+                            benefits to manufacturers, contractors, home builders, and acquired distributors.
+                            [Source](https://justvalue.substack.com/p/topbuild-bld-mastering-the-insulation)
+                        """,
+        ),
+        Stock(
+            ticker_name="LRN",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=80, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Trend-setting business with significant potential: Growing demand for virtual education due 
+                            to widespread acceptance (largely driven by COVID-19) and the new generation of parents who 
+                            are digital natives. Additionally, the development of AI can further enhance scalability. 
+                            Since 2018, revenue has grown from $918 million to $1.9 billion, expanding EBITDA and EBIT 
+                            margins (operating leverage) and increasing EPS by 226% in the last 4 years. Development of 
+                            a new division that has experienced organic growth of 91% and 71% in 2022 and 2023, 
+                            respectively. Healthy financial situation with net debt close to $0MM
+                            [Source](https://moram.substack.com/p/stride-thesis-detailed-analysis-of)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
