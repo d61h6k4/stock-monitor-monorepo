@@ -45,6 +45,7 @@ def create_tables(connection: psycopg.Connection):
     with connection.cursor() as cursor:
         cursor.execute("DROP TABLE IF EXISTS tickers;")
         connection.commit()
+        LOGGER.info("Table droped.")
 
         cursor.execute(
             """CREATE TABLE tickers (
@@ -58,6 +59,7 @@ def create_tables(connection: psycopg.Connection):
                 """
         )
         connection.commit()
+        LOGGER.info("Table created.")
 
 
 def insert(cursor: psycopg.Cursor, stock: Stock):
