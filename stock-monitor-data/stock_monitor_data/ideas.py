@@ -2362,6 +2362,37 @@ def ideas(period: str, interval: str):
                             [Source](https://moram.substack.com/p/stride-thesis-detailed-analysis-of)
                         """,
         ),
+        Stock(
+            ticker_name="DRX.TO",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=8, date=datetime(2027, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""ADF is entering a multi-year growth phase due to major tailwinds in
+                            infrastructure spending and non-residential construction.
+                            ADF spent the last two years adding a robotic fabrication line to its
+                            Terrebonne, Quebec facility, which has significantly expanded margins.
+                            The Company has largely improved its balance sheet over the last year.
+                            ADF currently trades at 3.6x FY25E EBITDA compared to steel fabricators
+                            at 7.0x and Canadian industrials at 8.3x.
+                            [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/60feaaca-daef-1830-9af3-ea2144fdb80e/20231016_Atrium_DRX_Initiation_Report.01.pdf)
+                        """,
+        ),
+        Stock(
+            ticker_name="BAC",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=50, date=datetime(2026, 11, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Deposits, Net Interest Margin and NII were all flattish q/q in Q3.
+                            NII will decline modestly, but IB Fees and Expenses should improve.
+                            YTD credit costs comparable to 2019; ROTCE of 16.1% is representative.
+                            Basel III impact is less than the 20% headline due to excess capital now.
+                            [Source](https://librariancapital.substack.com/p/bank-of-america-stable-q3-85x-pe)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
