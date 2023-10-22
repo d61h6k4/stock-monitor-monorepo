@@ -7,6 +7,8 @@ import altair as alt
 import streamlit as st
 from numerize.numerize import numerize
 
+from psycopg2.errors import UndefinedTable
+
 from frontend.utils import escape_markdown
 
 
@@ -66,20 +68,24 @@ class RetrieveServicer:
 
     def retrieve(self) -> Sequence[Ticker]:
         tickers = []
-        for _, row in self.conn.query(
-            "SELECT * FROM tickers", ttl=timedelta(hours=1)
-        ).iterrows():
-            tickers.append(
-                Ticker(
-                    symbol=row["symbol"],
-                    forecast_price=row["forecast_price"],
-                    forecast_date=row["forecast_date"],
-                    market_cap=row["market_cap"],
-                    business_summary=row["business_summary"],
-                    description=row["description"],
-                    in_portfolio=row["in_portfolio"],
+        try:
+            for _, row in self.conn.query(
+                "SELECT * FROM tickers", ttl=timedelta(hours=1)
+            ).iterrows():
+                tickers.append(
+                    Ticker(
+                        symbol=row["symbol"],
+                        forecast_price=row["forecast_price"],
+                        forecast_date=row["forecast_date"],
+                        market_cap=row["market_cap"],
+                        business_summary=row["business_summary"],
+                        description=row["description"],
+                        in_portfolio=row["in_portfolio"],
+                    )
                 )
-            )
+
+        except UndefinedTable as e:
+            st.error(repr(e))
         return tickers
 
 
@@ -224,11 +230,59 @@ def show_ticker(container: Any, ticker: Ticker):
 
 
 def show_history(connection: st.connections.SQLConnection, symbol: str):
+    with st.sidebar:
+        period = st.date_input(
+            "Period", value=datetime.now(tz=timezone.utc) - timedelta(weeks=52)
+        )
+        interval = st.selectbox("Interval", options=["day", "week", "month"])
+
+    columns = [
+        "pdi",
+        "ndi",
+        "adx",
+        "macd",
+        "macd_signal",
+        "rsi",
+        "dividends",
+        "moving_average_50",
+        "moving_average_200",
+        "money_flow_index",
+        "swing_low",
+        "coppock_curve",
+    ]
+    avg_columns = ",".join([f"AVG({x}) AS {x}" for x in columns])
     df = connection.query(
-        "SELECT * FROM history WHERE symbol = :symbol AND date > :date",
+        f"""
+        SELECT
+            symbol,
+            interval as date,
+            MAX(interval_open) AS open,
+            MAX(high) AS high,
+            MIN(low) AS low,
+            MAX(interval_close) AS close,
+            SUM(volume) AS volume,
+            {avg_columns}
+        FROM (
+            SELECT
+              FIRST_VALUE(open) OVER(PARTITION BY interval ORDER BY interval) AS interval_open,
+              LAST_VALUE(close) OVER(PARTITION BY interval ORDER BY interval) AS interval_close,
+              *
+            FROM (
+                SELECT 
+                    date_trunc(:interval, date) as interval,
+                    *
+                FROM history 
+                WHERE symbol = :symbol AND date > :date
+            )
+        )
+        GROUP BY symbol, interval
+        ORDER BY interval
+        ;
+        """,
         params={
+            "interval": interval,
             "symbol": symbol,
-            "date": datetime.now(tz=timezone.utc) - timedelta(weeks=52),
+            "date": period,
         },
     )
 
