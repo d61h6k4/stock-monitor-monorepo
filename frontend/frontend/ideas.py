@@ -46,6 +46,8 @@ class Ticker(NamedTuple):
     market_cap: float
     business_summary: str
     description: str
+    industry: str
+    sector: str
     in_portfolio: bool
     adx: float = 0.0
     pdi: float = 0.0
@@ -80,6 +82,8 @@ class RetrieveServicer:
                         market_cap=row["market_cap"],
                         business_summary=row["business_summary"],
                         description=row["description"],
+                        industry=row["industry"],
+                        sector=row["sector"],
                         in_portfolio=row["in_portfolio"],
                     )
                 )
@@ -90,15 +94,24 @@ class RetrieveServicer:
 
 
 class FilterServicer:
-    def __init__(self, ticker_name: str, only_in_portfolio: bool) -> None:
+    def __init__(
+        self, ticker_name: str, only_in_portfolio: bool, industry: str, sector: str
+    ) -> None:
         self.ticker_name = ticker_name.upper()
         self.only_in_portfolio = only_in_portfolio
+        self.industry = industry
+        self.sector = sector
 
     def filter(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
         if self.ticker_name:
             return [x for x in candidates if x.symbol.upper() == self.ticker_name]
         if self.only_in_portfolio:
             return [x for x in candidates if x.in_portfolio]
+        if self.industry:
+            candidates = [x for x in candidates if x.industry == self.industry]
+        if self.sector:
+            candidates = [x for x in candidates if x.sector == self.sector]
+
         return candidates
 
 
@@ -438,6 +451,16 @@ def main():
         with st.sidebar:
             ticker_name = st.text_input("Ticker", value="", max_chars=12)
             only_in_portfolio = st.toggle("Only portfolio stocks.")
+            industry = st.multiselect(
+                "Select industry",
+                options=conn.query(
+                    "SELECT DISTINCT industry FROM tickers"
+                ).industry.values,
+            )
+            sector = st.multiselect(
+                "Select sector",
+                options=conn.query("SELECT DISTINCT sector FROM tickers").sector.values,
+            )
 
         with st.spinner("Generating candidates..."):
             candidates = ScoreServicer(connection=conn).score(

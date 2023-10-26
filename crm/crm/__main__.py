@@ -4,6 +4,7 @@ import psycopg
 from argparse import ArgumentParser
 from datetime import datetime, timezone
 
+from textwrap import dedent
 
 from rich.logging import RichHandler
 from rich import progress
@@ -87,7 +88,7 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
             stock.market_cap,
             stock.expectation.price,
             stock.expectation.date,
-            stock.description,
+            dedent(stock.description),
             stock.industry,
             stock.sector,
             False,
