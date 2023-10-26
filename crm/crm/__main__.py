@@ -55,6 +55,8 @@ def create_tables(connection: psycopg.Connection):
                     forecast_price REAL,
                     forecast_date DATE,
                     description TEXT,
+                    industry TEXT,
+                    sector TEXT,
                     in_portfolio BOOL)
                 """
         )
@@ -72,9 +74,11 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
                 forecast_price,
                 forecast_date,
                 description,
+                industry,
+                sector,
                 in_portfolio)
             VALUES ( 
-              %s, %s, %s, %s, %s, %s, %s
+              %s, %s, %s, %s, %s, %s, %s, %s, %s
              );
         """,
         (
@@ -84,6 +88,8 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
             stock.expectation.price,
             stock.expectation.date,
             stock.description,
+            stock.industry,
+            stock.sector,
             False,
         ),
     )

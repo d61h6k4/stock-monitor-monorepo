@@ -40,8 +40,7 @@ class NotifierSink(StatelessSink):
             _, decision = key__payload
             try:
                 self.notify.send_unique_decision("dbihbka", decision)
-            except HTTPError as e:
-                print(repr(e))
+            except HTTPError:
                 time.sleep(2)
 
 
