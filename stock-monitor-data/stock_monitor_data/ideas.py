@@ -2424,6 +2424,23 @@ def ideas(period: str, interval: str):
                             large, OPEX-driven demand cycle? 
                         """,
         ),
+        Stock(
+            ticker_name="MIPS.ST",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=500, date=datetime(2026, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Niche industrial market leader with a 50%+ market share and providing solutions for over 
+                            seven decades. This business is a circular economy investment whereby materials can be 
+                            refurbished and reused to prolong their useful life, reducing waste. There is little 
+                            industry disruption risk, and alternatives are time and cost-consuming. The product 
+                            demand/relevance also benefits from the US restoring manufacturing. Importantly, the 
+                            business's intrinsic value is undervalued and deserves a starter position at the current 
+                            range.
+                            [Source](https://www.sleepwellinvestments.com/p/mips-ab-q3-23-thesis-tracking-higher)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
