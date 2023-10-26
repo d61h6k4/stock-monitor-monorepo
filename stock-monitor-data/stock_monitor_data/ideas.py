@@ -2120,7 +2120,12 @@ def ideas(period: str, interval: str):
             expectation=Expectation(
                 price=200, date=datetime(2024, 11, 15, tzinfo=timezone.utc)
             ),
-            description=r"""Google - bet on AI, TPU""",
+            description=r"""Ad revenues grew 9.5% in Q3, including 12.5% in YouTube
+                            Ad revenues had a 2019-23 CAGR of ~15% in each of Q1-3
+                            Google Cloud revenue growth slowed, but was still 22%
+                            EPS is up 18.8% YTD; P/E is 24.7x relative to LTM EPS
+                            [Source](https://librariancapital.substack.com/p/alphabet-core-ad-revenue-growth-back)
+                        """,
         ),
         Stock(
             ticker_name="CRWD",
@@ -2391,6 +2396,32 @@ def ideas(period: str, interval: str):
                             YTD credit costs comparable to 2019; ROTCE of 16.1% is representative.
                             Basel III impact is less than the 20% headline due to excess capital now.
                             [Source](https://librariancapital.substack.com/p/bank-of-america-stable-q3-85x-pe)
+                        """,
+        ),
+        Stock(
+            ticker_name="U-UN.TO",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=50, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Over the next 12-18 months, which commodity has a more attractive demand picture? 
+                            The one whose consumption is primarily tied to economic growth/development and maybe 
+                            the Green Energy transition? Or the one that’s mission-critical and a small COG in a 
+                            large, OPEX-driven demand cycle? 
+                        """,
+        ),
+        Stock(
+            ticker_name="YCA.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=50, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Over the next 12-18 months, which commodity has a more attractive demand picture? 
+                            The one whose consumption is primarily tied to economic growth/development and maybe 
+                            the Green Energy transition? Or the one that’s mission-critical and a small COG in a 
+                            large, OPEX-driven demand cycle? 
                         """,
         ),
     ]
