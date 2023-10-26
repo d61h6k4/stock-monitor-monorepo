@@ -2,6 +2,7 @@
 import io
 import logging
 import tempfile
+from typing import Any
 import zipfile
 from collections.abc import Mapping, Sequence
 from datetime import datetime
@@ -9,7 +10,7 @@ from pathlib import Path
 
 import pandas as pd
 from pandas import DataFrame
-from pydantic import BaseModel, validator
+from pydantic import BaseModel, field_validator
 from requests import Session
 from requests.exceptions import HTTPError
 from requests_cache import CacheMixin, SQLiteCache
@@ -27,21 +28,21 @@ session = CachedLimiterSession(
     expire_after=3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache("/cache/yfinance.cache"),
+    backend=SQLiteCache("cache/yfinance.cache"),
 )
 
 slow_session = CachedLimiterSession(
     expire_after=30 * 24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache("/cache/yfinance.slow.cache"),
+    backend=SQLiteCache("cache/yfinance.slow.cache"),
 )
 
 cot_session = CachedLimiterSession(
     expire_after=24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache("/cache/cot.cache"),
+    backend=SQLiteCache("cache/cot.cache"),
 )
 
 
@@ -57,17 +58,10 @@ class Stock(BaseModel):
     ticker_name: str
     period: str
     interval: str
-    business_summary: str = "NO DATA"
-    market_cap: float = 0.0
     expectation: Expectation | None = None
     description: str = ""
 
-    class Config:
-        """Allow DataFrame."""
-
-        arbitrary_types_allowed = True
-
-    @validator("period")
+    @field_validator("period")
     def is_valid_period_value(cls: "Stock", period: str) -> str:
         """Check the period value from predetermined set."""
         valid_periods = {
@@ -92,7 +86,7 @@ class Stock(BaseModel):
 
         return period
 
-    @validator("interval")
+    @field_validator("interval")
     def is_valid_interval_value(cls: "Stock", interval: str) -> str:
         """Checks the interval value from predetermined set."""
         valid_intervals = {
@@ -139,127 +133,33 @@ class Stock(BaseModel):
     def history(self, df: DataFrame):
         self.__dict__["history"] = df
 
-    @validator("business_summary", always=True)
-    def set_business_summary(
-        cls: "Stock", business_summary: str, values: Mapping[str, str]
-    ) -> str:
+    @property
+    def info(self) -> Mapping[str, Any]:
+        info = self.__dict__.get("info")
+        if info is None:
+            try:
+                info = Ticker(self.ticker_name, session=slow_session).get_info()
+            except HTTPError as e:
+                logger.exception(f"Ticker {self.ticker_name} doesn't exist. {e!r}")
+                info = {}
+            self.__dict__["info"] = info
+
+        return info
+
+    @property
+    def business_summary(self) -> str:
         """Extract business summary."""
-        ticker = Ticker(values["ticker_name"], session=slow_session)
-        try:
-            return ticker.get_info().get("longBusinessSummary", business_summary)
-        except HTTPError as e:
-            logger.exception(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
-            return business_summary
+        return self.info.get("longBusinessSummary", "")
 
-    @validator("market_cap", always=True)
-    def set_market_cap(
-        cls: "Stock", market_cap: float, values: Mapping[str, str]
-    ) -> float:
+    @property
+    def market_cap(self) -> float:
         """Extract market cap."""
-        ticker = Ticker(values["ticker_name"], session=slow_session)
-        try:
-            return ticker.get_info().get("marketCap", market_cap)
-        except HTTPError as e:
-            logger.exception(f"Ticker {values['ticker_name']} doesn't exist. {e!r}")
-            return 1.0
+        return self.info.get("marketCap", 1.0)
 
+    @property
+    def industry(self) -> str:
+        return self.info.get("industry", "Unknown industry")
 
-class COT(BaseModel):
-    """Representation of the Commitment of traders data."""
-
-    since: int
-    history: DataFrame = DataFrame()
-
-    class Config:
-        """Allow DataFrame."""
-
-        arbitrary_types_allowed = True
-
-    @validator("since")
-    def is_valid_since_value(cls: "COT", since: int) -> int:
-        """Checks since is year >= 2010."""
-        if since < 2010:
-            msg = "COT data available only since 2010."
-            raise ValueError(msg)
-        if since > datetime.today().year:
-            msg = "No way to load data from the future"
-            raise ValueError(msg)
-
-        return since
-
-    @validator("history", always=True)
-    def download_history(
-        cls: "COT", history: DataFrame, values: Mapping[str, int]
-    ) -> DataFrame:
-        """Downloads the data."""
-
-        def load_combine_reports_per_year(year: int) -> DataFrame:
-            with tempfile.TemporaryDirectory() as temp_dir:
-                temp_dir = Path(temp_dir)
-                zip_file_url = (
-                    f"https://www.cftc.gov/files/dea/history/dea_com_xls_{year}.zip"
-                )
-                r = cot_session.get(zip_file_url)
-
-                with zipfile.ZipFile(io.BytesIO(r.content)) as zip_ref:
-                    zip_ref.extractall(temp_dir / "data")
-
-                return pd.read_excel(temp_dir / "data/annualof.xls")
-
-        def load_combine_reports_since_year(year: int) -> DataFrame:
-            dfs = []
-
-            for dt in range(year, datetime.today().year + 1):
-                dfs.append(load_combine_reports_per_year(dt))
-
-            return pd.concat(dfs)
-
-        assert history.empty
-
-        return load_combine_reports_since_year(values["since"])
-
-    @staticmethod
-    def commercials_by_names_or_codes(
-        df: DataFrame,
-        names: Sequence[str] | None = None,
-        codes: Sequence[int] | None = None,
-    ) -> DataFrame:
-        """Returns commercials data from `df`."""
-        assert names or codes, "Function requires to be provided or names or codes."
-        assert "Comm_Positions_Long_All" in df.columns
-        assert "Comm_Positions_Short_All" in df.columns
-
-        if not names:
-            names = []
-        if not codes:
-            codes = []
-
-        return_columns = [
-            "Market_and_Exchange_Names",
-            "CFTC_Commodity_Code",
-            "Report_Date_as_MM_DD_YYYY",
-            "Comm_Positions_Long_All",
-            "Comm_Positions_Short_All",
-            "Open_Interest_All",
-            "NonComm_Positions_Long_All",
-            "NonComm_Positions_Short_All",
-            "NonRept_Positions_Long_All",
-            "NonRept_Positions_Short_All",
-        ]
-        return df[return_columns].query(
-            "Market_and_Exchange_Names == @names or CFTC_Commodity_Code == @codes"
-        )
-
-
-class Arbitrage(BaseModel):
-    class Config:
-        """Allow DataFrame."""
-
-        arbitrary_types_allowed = True
-
-    target: Stock
-    buyer: Stock | str
-    offer_price: float
-    additional_buyer_ratio: float
-    expecting_closing: datetime
-    commentary: str
+    @property
+    def sector(self) -> str:
+        return self.info.get("sector", "Unknown sector")
