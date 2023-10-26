@@ -1,6 +1,7 @@
 from datetime import datetime, timedelta
 import json
 import os
+import time
 
 from requests import HTTPError
 import psycopg
@@ -41,6 +42,7 @@ class NotifierSink(StatelessSink):
                 self.notify.send_unique_decision("dbihbka", decision)
             except HTTPError as e:
                 print(repr(e))
+                time.sleep(2)
 
 
 class NotifierOutput(DynamicOutput):
