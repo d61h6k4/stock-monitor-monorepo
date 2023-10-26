@@ -70,7 +70,7 @@ class RetrieveServicer:
         tickers = []
         try:
             for _, row in self.conn.query(
-                "SELECT * FROM tickers", ttl=timedelta(hours=1)
+                "SELECT * FROM tickers", ttl=timedelta(minutes=1)
             ).iterrows():
                 tickers.append(
                     Ticker(
@@ -158,7 +158,7 @@ class ScoreServicer:
                ORDER BY symbol, date DESC
             """,
             params={"symbols": tuple(symbols.keys())},
-            ttl=timedelta(hours=1),
+            ttl=timedelta(minutes=1),
         )
 
         enriched = []

@@ -1,6 +1,8 @@
 from datetime import datetime, timedelta
 import json
 import os
+
+from requests import HTTPError
 import psycopg
 from typing import Any, Iterable, Mapping, Sequence, Set, Tuple
 
@@ -35,7 +37,10 @@ class NotifierSink(StatelessSink):
     def write_batch(self, items: Iterable[Tuple[str, Decision]]):
         for key__payload in items:
             _, decision = key__payload
-            self.notify.send_unique_decision("dbihbka", decision)
+            try:
+                self.notify.send_unique_decision("dbihbka", decision)
+            except HTTPError as e:
+                print(repr(e))
 
 
 class NotifierOutput(DynamicOutput):
