@@ -99,8 +99,8 @@ class FilterServicer:
     ) -> None:
         self.ticker_name = ticker_name.upper()
         self.only_in_portfolio = only_in_portfolio
-        self.industry = industry
-        self.sector = sector
+        self.industry = set(industry)
+        self.sector = set(sector)
 
     def filter(self, candidates: Sequence[Ticker]) -> Sequence[Ticker]:
         if self.ticker_name:
@@ -108,9 +108,9 @@ class FilterServicer:
         if self.only_in_portfolio:
             return [x for x in candidates if x.in_portfolio]
         if self.industry:
-            candidates = [x for x in candidates if x.industry == self.industry]
+            candidates = [x for x in candidates if x.industry in self.industry]
         if self.sector:
-            candidates = [x for x in candidates if x.sector == self.sector]
+            candidates = [x for x in candidates if x.sector in self.sector]
 
         return candidates
 
