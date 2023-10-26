@@ -467,6 +467,8 @@ def main():
                 FilterServicer(
                     ticker_name=ticker_name,
                     only_in_portfolio=only_in_portfolio,
+                    sector=sector,
+                    industry=industry,
                 ).filter(RetrieveServicer(conn).retrieve())
             )
 
