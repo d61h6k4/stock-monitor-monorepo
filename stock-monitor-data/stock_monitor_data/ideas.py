@@ -1564,18 +1564,6 @@ def ideas(period: str, interval: str):
             """,
         ),
         Stock(
-            ticker_name="RTX",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=120, date=datetime(2026, 8, 15, tzinfo=timezone.utc)
-            ),
-            description=r"""The structural growth drivers behind RTX, particularly the long-term growth
-                            in global passenger air travel and rising national defense budgets, remain
-                            powerful and should continue to drive strong underlying earnings growth.
-                            [Source](https://librariancapital.substack.com/p/rtx-faqs-on-powdered-metal-issue)""",
-        ),
-        Stock(
             ticker_name="NETI",
             period=period,
             interval=interval,
@@ -2469,7 +2457,7 @@ def ideas(period: str, interval: str):
                             At $39.26, we see a 14.3% IRR, driven by the 9.6% Dividend Yield
                             [Source](https://librariancapital.substack.com/p/altria-when-the-theatre-manager-shouts)
                         """,
-        ),
+        ), 
     ]
 
     return reversed(ideas)
