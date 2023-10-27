@@ -2470,23 +2470,6 @@ def ideas(period: str, interval: str):
                             [Source](https://librariancapital.substack.com/p/altria-when-the-theatre-manager-shouts)
                         """,
         ),
-        Stock(
-            ticker_name="CNS.MI",
-            period=period,
-            interval=interval,
-            expectation=Expectation(
-                price=6, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
-            ),
-            description=r"""Qualitatively, there are many favorable characteristics that the company shares with multi-bagger 
-                            microcaps: 1) founder-led firm with significant insider ownership, 2) competitive advantages within 
-                            their niche, 3) long-runway of growth with impressive returns on invested capital (25%+ since 2018) 
-                            and return on equity (33%+) and 4) sensible capital allocation. Civitanavi has averaged ~25-30% 
-                            EBITDA margins before going public. If they can sustain 30%+ revenue growth over the medium to 
-                            long term at those historical margins, then the stock is headed much higher with or without a 
-                            multiple rerating.
-                            [Source](https://zippycapital.substack.com/p/civitanavi-systems-spa-a-high-potential)
-                        """,
-        ),
     ]
 
     return reversed(ideas)
