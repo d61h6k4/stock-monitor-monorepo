@@ -2441,6 +2441,52 @@ def ideas(period: str, interval: str):
                             [Source](https://www.sleepwellinvestments.com/p/mips-ab-q3-23-thesis-tracking-higher)
                         """,
         ),
+        Stock(
+            ticker_name="RTX",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=78.41 * 1.98, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Analyses confirmed other engines will not see significant impact
+                            RTX will now buy back $10bn more shares this year
+                            Q3 was positive, with strong growth in commercial aerospace
+                            RTX’s market cap remains $27bn (19%) lower than on July 24
+                            [Source](https://librariancapital.substack.com/p/rtx-powdered-metal-de-risked-further)
+                        """,
+        ),
+        Stock(
+            ticker_name="MO",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=40, date=datetime(2025, 9, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Altria’s cigarette volume fell by 10% in Q3, same as last year
+                            Smokeable revenues and EBIT both fell in Q3
+                            Management now sees disposable E-vapor as a key headwind
+                            We cut our forecasts but retain our Buy rating due to valuation
+                            At $39.26, we see a 14.3% IRR, driven by the 9.6% Dividend Yield
+                            [Source](https://librariancapital.substack.com/p/altria-when-the-theatre-manager-shouts)
+                        """,
+        ),
+        Stock(
+            ticker_name="CNS.MI",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=6, date=datetime(2026, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Qualitatively, there are many favorable characteristics that the company shares with multi-bagger 
+                            microcaps: 1) founder-led firm with significant insider ownership, 2) competitive advantages within 
+                            their niche, 3) long-runway of growth with impressive returns on invested capital (25%+ since 2018) 
+                            and return on equity (33%+) and 4) sensible capital allocation. Civitanavi has averaged ~25-30% 
+                            EBITDA margins before going public. If they can sustain 30%+ revenue growth over the medium to 
+                            long term at those historical margins, then the stock is headed much higher with or without a 
+                            multiple rerating.
+                            [Source](https://zippycapital.substack.com/p/civitanavi-systems-spa-a-high-potential)
+                        """,
+        ),
     ]
 
     return reversed(ideas)

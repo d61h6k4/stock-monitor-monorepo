@@ -137,9 +137,9 @@ def notify():
                 self._portfolio is None
                 or datetime.now() - self.last_update_time > timedelta(days=1)
             ):
-                with self.connection.cursor() as cursor:
-                    cursor.execute("SELECT symbol FROM tickers WHERE in_portfolio")
-                    self._portfolio = set((x[0] for x in cursor.fetchall()))
+                with self.connection.cursor() as cur:
+                    cur.execute("SELECT symbol FROM tickers WHERE in_portfolio")
+                    self._portfolio = set([x[0] for x in cur.fetchall()])
 
                 self.last_update_time = datetime.now()
             return self._portfolio
