@@ -2457,7 +2457,24 @@ def ideas(period: str, interval: str):
                             At $39.26, we see a 14.3% IRR, driven by the 9.6% Dividend Yield
                             [Source](https://librariancapital.substack.com/p/altria-when-the-theatre-manager-shouts)
                         """,
-        ), 
+        ),
+        Stock(
+            ticker_name="QYOU.V",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=0.15, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""QYOU Media has posted nine consecutive quarters of YoY growth,
+                            representing a 33% CAGR using its repeatable content strategy.
+                            • QYOU has shifted its focus to increasing profitability and we expect the
+                            Company to reach positive EBITDA by Q4/24.
+                            • The Company has strong tailwinds from the creator economy and social
+                            media adoption in India.
+                            • QYOU trades at 0.7x 2024E sales, a sizeable discount to its peer group.
+                            [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/ef6789ed-253a-fa55-9c3c-d43709835587/20231027_Atrium_QYOU_Initiation_Report.02.pdf)
+                        """,
+        ),
     ]
 
     return reversed(ideas)
