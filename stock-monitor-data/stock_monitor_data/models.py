@@ -17,6 +17,7 @@ from requests.exceptions import HTTPError
 from requests_cache import CacheMixin, SQLiteCache
 from requests_ratelimiter import LimiterMixin, MemoryQueueBucket
 from yfinance import Ticker
+from pyrate_limiter import Duration, RequestRate, Limiter
 
 logger = logging.getLogger(__name__)
 
@@ -33,6 +34,9 @@ session = CachedLimiterSession(
 )
 
 slow_session = CachedLimiterSession(
+    limiter=Limiter(
+        RequestRate(2, Duration.SECOND * 5)
+    ),  # max 2 requests per 5 seconds
     expire_after=30 * 24 * 3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
