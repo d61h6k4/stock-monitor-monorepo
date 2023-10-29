@@ -27,21 +27,15 @@ class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
 
 
 session = CachedLimiterSession(
+    limiter=Limiter(
+        RequestRate(2, Duration.SECOND * 5)
+    ),  # max 2 requests per 5 seconds
     expire_after=3600,
     per_second=0.9,
     bucket_class=MemoryQueueBucket,
     backend=SQLiteCache("cache/yfinance.cache"),
 )
 
-slow_session = CachedLimiterSession(
-    limiter=Limiter(
-        RequestRate(2, Duration.SECOND * 5)
-    ),  # max 2 requests per 5 seconds
-    expire_after=30 * 24 * 3600,
-    per_second=0.9,
-    bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache("cache/yfinance.slow.cache"),
-)
 
 cot_session = CachedLimiterSession(
     expire_after=24 * 3600,
@@ -143,7 +137,7 @@ class Stock(BaseModel):
         info = self.__dict__.get("info")
         if info is None:
             try:
-                info = Ticker(self.ticker_name, session=slow_session).get_info()
+                info = Ticker(self.ticker_name, session=session).get_info()
             except HTTPError as e:
                 logger.exception(f"Ticker {self.ticker_name} doesn't exist. {e!r}")
                 time.sleep(1)

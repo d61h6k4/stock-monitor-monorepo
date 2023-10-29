@@ -2475,6 +2475,38 @@ def ideas(period: str, interval: str):
                             [Source](https://mcusercontent.com/4bc421505c66d079778a0d0be/files/ef6789ed-253a-fa55-9c3c-d43709835587/20231027_Atrium_QYOU_Initiation_Report.02.pdf)
                         """,
         ),
+        Stock(
+            ticker_name="WFRD",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=150, date=datetime(2024, 9, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Bison has been investing in equities that stand to benefit from increased offshore and international
+                            drilling and development activity and higher day rates. One that remains oddly under the radar is
+                            Weatherford International (NASDAQ: WFRD), the forgotten fourth largest global oilfield services
+                            company behind Halliburton, Schlumberger, and Baker Hughes.
+                            [Source](https://bisoninterests.substack.com/p/weatherford-this-global-supplier)
+                        """,
+        ),
+        Stock(
+            ticker_name="GNS.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=6, date=datetime(2024, 6, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""The company is about to start commercialisation of a game-changing technology for the pig
+                            industry thanks to its gene editing technology. The latter should allow the farmers to 
+                            produce pigs resistant to Porcine Reproductive and Respiratory Syndrome (PRRS). The costs
+                            of this disease are estimated at c. $2bn in the US and EU alone. On 5 October 2023, Columbia
+                            became the first country to approve future sales of PRRS-resistant pigs. Genus expects to
+                            receive US FDA approval in H1 ‘24, with further approvals sought in Canada, China, Japan,
+                            Mexico, and Brazil.
+                            [Source](https://hiddenvaluegems.com/on-markets-investing/tpost/703tv2c0k1-monthly-stock-ideas-lab-msil-7-october-2)
+                        """,
+        ),
+        
     ]
 
     return reversed(ideas)
