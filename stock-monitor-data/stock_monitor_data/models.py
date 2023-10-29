@@ -143,7 +143,7 @@ class Stock(BaseModel):
         info = self.__dict__.get("info")
         if info is None:
             try:
-                info = Ticker(self.ticker_name).get_info()
+                info = Ticker(self.ticker_name, session=slow_session).get_info()
             except HTTPError as e:
                 logger.exception(f"Ticker {self.ticker_name} doesn't exist. {e!r}")
                 time.sleep(1)
