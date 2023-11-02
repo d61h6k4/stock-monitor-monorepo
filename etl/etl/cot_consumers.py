@@ -1,4 +1,6 @@
+from datetime import timedelta
 import json
+import logging
 import os
 import psycopg
 
@@ -10,9 +12,10 @@ from bytewax.outputs import DynamicOutput, StatelessSink
 
 
 class SQLSink(StatelessSink):
-    def __init__(self, conn_info: str):
+    def __init__(self, conn_info: str, worker_index: int):
         super().__init__()
 
+        self.logger = logging.getLogger(f"etl.cot_consumers.{worker_index}")
         self.connection = psycopg.connect(conn_info)
 
         self.features = [
@@ -44,7 +47,7 @@ class SQLSink(StatelessSink):
                 """
             )
             self.connection.commit()
-        print("Table cot_history is created.")
+        self.logger.info("Table cot_history is created.")
 
     def close(self):
         self.cursor.close()
@@ -80,8 +83,10 @@ class SQLSink(StatelessSink):
                     records,
                 )
             except Exception as e:
-                print(records)
-                print(repr(e))
+                self.logger.exception("Failed to insert %s", records)
+
+                raise e from None
+
         self.connection.commit()
 
 
@@ -95,7 +100,7 @@ class SQLOutput(DynamicOutput):
         )
 
     def build(self, worker_index: int, worker_count: int) -> SQLSink:
-        return SQLSink(self.conn_info)
+        return SQLSink(self.conn_info, worker_index)
 
 
 def sink_to_db():
@@ -127,6 +132,7 @@ def sink_to_db():
 
     flow.filter(is_cot_data)
 
+    flow.batch("prebatch", 1000, timedelta(seconds=60))
     flow.output("sink_to_db", SQLOutput(DB_HOST, DB_USER, DB_NAME, DB_PASSWORD))
 
     return flow

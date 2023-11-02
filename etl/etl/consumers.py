@@ -1,3 +1,4 @@
+from datetime import timedelta
 import json
 import os
 import psycopg
@@ -134,6 +135,7 @@ def sink_to_db():
 
     flow.map(deserialize)
 
+    flow.batch("prebatch", 1000, timedelta(seconds=60))
     flow.output("sink_to_db", SQLOutput(DB_HOST, DB_USER, DB_NAME, DB_PASSWORD))
 
     return flow
