@@ -62,10 +62,14 @@ class SQLSink(StatelessSink):
     def write_batch(self, items: Iterable[Tuple[str, Mapping[str, Any]]]):
         records = []
         for key__payload in items:
-            _, item = key__payload
-            records.append(
-                {k: round(v, 5) if k in self.features else v for k, v in item.items()}
-            )
+            _, batch = key__payload
+            for item in batch:
+                records.append(
+                    {
+                        k: round(v, 5) if k in self.features else v
+                        for k, v in item.items()
+                    }
+                )
 
         names = ",".join(self.features)
         values = ",".join([f"%({f})s" for f in self.features])
@@ -135,7 +139,7 @@ def sink_to_db():
         # For batch we need key
         if key is None:
             key = "ALL"
-            
+
         return key, json.loads(payload)
 
     flow.map(deserialize)
