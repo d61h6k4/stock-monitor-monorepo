@@ -62,7 +62,9 @@ class SQLSink(StatelessSink):
         records = []
         for key__payload in items:
             _, item = key__payload
-            records.append(item)
+            records.append(
+                {k: round(v, 5) if k in self.features else v for k, v in item.items()}
+            )
 
         names = ",".join(self.features)
         values = ",".join([f"%({f})s" for f in self.features])
