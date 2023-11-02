@@ -4,7 +4,7 @@ from bytewax.testing import TestingInput, TestingOutput, run_main
 
 
 def test_batch_operator():
-    in_data = [("ALL", x) for x in range(10)]
+    in_data = [(b"ALL".decode("utf8"), x) for x in range(10)]
     flow = Dataflow()
     flow.input("in", TestingInput(in_data))
     # Use a long timeout to avoid triggering that.

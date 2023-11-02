@@ -136,11 +136,7 @@ def sink_to_db():
     def deserialize(key__payload):
         key, payload = key__payload
 
-        # For batch we need key
-        if key is None:
-            key = "ALL"
-
-        return key, json.loads(payload)
+        return key.decode("utf8"), json.loads(payload)
 
     flow.map(deserialize)
 
