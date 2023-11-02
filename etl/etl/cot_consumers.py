@@ -137,7 +137,7 @@ def sink_to_db():
 
     flow.filter(is_cot_data)
 
-    flow.batch("cot_prebatch", maxsize=1000, timeout=timedelta(seconds=60))
+    flow.batch("cot_prebatch", 1000, timedelta(seconds=60))
     flow.output("cot_sink_to_db", SQLOutput(DB_HOST, DB_USER, DB_NAME, DB_PASSWORD))
 
     return flow
