@@ -1,6 +1,7 @@
 import json
 import os
 import psycopg
+import logging
 
 from typing import Any, Iterable, Mapping, Tuple
 
@@ -10,8 +11,10 @@ from bytewax.outputs import DynamicOutput, StatelessSink
 
 
 class SQLSink(StatelessSink):
-    def __init__(self, conn_info: str):
+    def __init__(self, conn_info: str, worker_index: int):
         super().__init__()
+
+        self.logger = logging.getLogger(f"etl.consumers.{worker_index}")
 
         self.connection = psycopg.connect(conn_info)
 
@@ -49,7 +52,7 @@ class SQLSink(StatelessSink):
                 """
             )
             self.connection.commit()
-        print("Table history is created.")
+        self.logger.info("Table history is created.")
 
     def close(self):
         self.cursor.close()
@@ -64,8 +67,9 @@ class SQLSink(StatelessSink):
         names = ",".join(self.features)
         values = ",".join([f"%({f})s" for f in self.features])
         with self.connection.cursor() as cursor:
-            cursor.executemany(
-                f"""INSERT INTO 
+            try:
+                cursor.executemany(
+                    f"""INSERT INTO 
                     history 
                     (
                         symbol, 
@@ -78,9 +82,18 @@ class SQLSink(StatelessSink):
                         {values}
                     )
                 """,
-                records,
-            )
-            self.connection.commit()
+                    records,
+                )
+            except Exception as e:
+                self.logger.exception("Failed to insert")
+
+                raise e from None
+            try:
+                self.connection.commit()
+            except Exception as e:
+                self.logger.exception("Failed to commit.")
+
+                raise e from None
 
 
 class SQLOutput(DynamicOutput):
@@ -93,7 +106,7 @@ class SQLOutput(DynamicOutput):
         )
 
     def build(self, worker_index: int, worker_count: int) -> SQLSink:
-        return SQLSink(self.conn_info)
+        return SQLSink(self.conn_info, worker_index)
 
 
 def sink_to_db():
