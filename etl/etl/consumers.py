@@ -85,7 +85,7 @@ class SQLSink(StatelessSink):
                     records,
                 )
             except Exception as e:
-                self.logger.exception("Failed to insert")
+                self.logger.exception("Failed to insert %s", records)
 
                 raise e from None
             try:
