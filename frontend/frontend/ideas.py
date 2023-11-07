@@ -441,7 +441,7 @@ def main():
 
     args = parse_args()
     conn_info = f"postgresql://{args.postgres_user}:{args.postgres_password}@{args.postgres_host}:5432/{args.postgres_db}"
-    conn = st.experimental_connection("sql", type="sql", url=conn_info)
+    conn = st.connection("sql", type="sql", url=conn_info)
 
     query_params = st.experimental_get_query_params()
     if "symbol" in query_params:
