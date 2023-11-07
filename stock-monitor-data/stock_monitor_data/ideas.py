@@ -2506,7 +2506,37 @@ def ideas(period: str, interval: str):
                             [Source](https://hiddenvaluegems.com/on-markets-investing/tpost/703tv2c0k1-monthly-stock-ideas-lab-msil-7-october-2)
                         """,
         ),
-        
+        Stock(
+            ticker_name="DLHC",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=20, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""The opportunity seems to exist as DLHC is a $200m market cap company with relatively low trading
+                            liquidity, resulting in limited interest from institutional investors. Several catalysts could
+                            help unlock the valuation discount compared to peers, including further value-accretive M&A, a 
+                            continued focus on debt reduction (currently 4x net-debt-to-EBITDA) and potential index inclusion. 
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-15)
+                        """,
+        ),
+        Stock(
+            ticker_name="NR",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=12, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""Assuming that the sale of the Fluid Systems segment can generate cash proceeds in the range of 
+                            $180m-$220m (in line with the segment's working capital), the Industrial Solutions business 
+                            currently carries a modest valuation of 5 times its 2025E EBITDA (after corporate overheads). 
+                            This is significantly below segment’s peers that are valued at 9-11x. Applying the same 
+                            valuation to NR’s Industrial Solutions segment would imply a share price target of 
+                            $10.90-$15.44/share (50%+ upside). NR's stock appears to be mispriced due to its lack of 
+                            sell-side coverage and the market's perception of it primarily as an oil and gas services company
+                            [Source](https://ideahive.substack.com/p/actionable-investment-ideas-15)    
+                        """,
+        ),
     ]
 
     return reversed(ideas)
