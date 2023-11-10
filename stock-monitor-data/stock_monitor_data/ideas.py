@@ -2537,6 +2537,20 @@ def ideas(period: str, interval: str):
                             [Source](https://ideahive.substack.com/p/actionable-investment-ideas-15)    
                         """,
         ),
+        Stock(
+            ticker_name="RMV.L",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=820, date=datetime(2026, 11, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""CoStar wants to be 1 in the U.K. and will spend aggressively
+                            We believe “network effect” and “free” will protect Rightmove
+                            Nick Train comments point to Rightmove as a new position
+                            Shares at 19.3x 2022 EPS and have a 1.9% Dividend Yield
+                            [Source](https://librariancapital.substack.com/p/rightmove-reassessing-after-costar)
+                        """,
+        ),
     ]
 
     return reversed(ideas)

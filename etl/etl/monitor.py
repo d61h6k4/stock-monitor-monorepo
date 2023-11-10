@@ -140,7 +140,8 @@ def notify():
                 with self.connection.cursor() as cur:
                     cur.execute("SELECT symbol FROM tickers WHERE in_portfolio;")
                     self._portfolio = set([x[0] for x in cur.fetchall()])
-
+                self.connection.commit()
+                
                 self.last_update_time = datetime.now()
             return self._portfolio
 
