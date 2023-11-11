@@ -102,6 +102,8 @@ def main():
         progress.TimeElapsedColumn(),
         refresh_per_second=1,  # bit slower updates
     ) as pgs:
+        
+        
         process_stocks_task = pgs.add_task("[green]Processing stocks:", total=None)
         for stock in stocks():
             process_events_task = pgs.add_task(

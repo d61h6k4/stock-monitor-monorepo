@@ -15,6 +15,7 @@ from stock_monitor_data.models import Stock
 
 LOGGER = logging.getLogger("crm")
 
+
 def parse_args():
     parser = ArgumentParser()
 
@@ -68,7 +69,7 @@ def create_tables(connection: psycopg.Connection):
 def insert(cursor: psycopg.Cursor, stock: Stock):
     try:
         cursor.execute(
-        """INSERT INTO tickers (
+            """INSERT INTO tickers (
                 symbol,
                 business_summary,
                 market_cap,
@@ -82,18 +83,18 @@ def insert(cursor: psycopg.Cursor, stock: Stock):
               %s, %s, %s, %s, %s, %s, %s, %s, %s
              );
         """,
-        (
-            stock.ticker_name,
-            stock.business_summary,
-            stock.market_cap,
-            stock.expectation.price,
-            stock.expectation.date,
-            dedent(stock.description),
-            stock.industry,
-            stock.sector,
-            False,
-        ),
-    )
+            (
+                stock.ticker_name,
+                stock.business_summary,
+                stock.market_cap,
+                stock.expectation.price,
+                stock.expectation.date,
+                dedent(stock.description),
+                stock.industry,
+                stock.sector,
+                False,
+            ),
+        )
     except Exception as e:
         LOGGER.exception("Failed to insert %s", stock.ticker_name)
         raise e from None
@@ -110,7 +111,6 @@ def update_in_portfolio(cursor: psycopg.Cursor, stock: Stock):
 
 
 def main():
-    
     args = parse_args()
 
     LOGGER.info("Connecting to %s/%s", args.postgres_host, args.postgres_db)
@@ -126,10 +126,13 @@ def main():
             progress.TimeElapsedColumn(),
             refresh_per_second=1,  # bit slower updates
         ) as pgs:
-            process_stocks_task = pgs.add_task("[green]Processing ideas:", total=None)
+            stocks = ideas("1d", "1d")
+            process_stocks_task = pgs.add_task(
+                "[green]Processing ideas:", total=len(stocks)
+            )
 
             with conn.cursor() as cursor:
-                for stock in ideas("1d", "1d"):
+                for stock in stocks:
                     insert(cursor, stock)
                     pgs.advance(process_stocks_task)
 
