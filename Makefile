@@ -7,8 +7,8 @@ clean:
 	rm -rf cache
 
 infrastructure:
-	mkdir cache
 	docker compose up -d --force-recreate --remove-orphans --detach --build
+	mkdir cache
 
 produce:
 	docker build -t yfinance-client -f yfinance-client/Dockerfile .

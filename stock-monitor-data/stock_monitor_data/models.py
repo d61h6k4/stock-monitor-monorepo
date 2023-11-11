@@ -1,23 +1,18 @@
 """Collection of the data models."""
-import io
-import logging
-import tempfile
-import time
-from typing import Any
-import zipfile
-from collections.abc import Mapping, Sequence
-from datetime import datetime
-from pathlib import Path
 
-import pandas as pd
+import logging
+import time
+from datetime import datetime
+from typing import Any, Mapping
+
 from pandas import DataFrame
 from pydantic import BaseModel, field_validator
+from pyrate_limiter import Duration, Limiter, RequestRate
 from requests import Session
 from requests.exceptions import HTTPError
-from requests_cache import CacheMixin, SQLiteCache
-from requests_ratelimiter import LimiterMixin, MemoryQueueBucket
+from requests_cache import DO_NOT_CACHE, CacheMixin
+from requests_ratelimiter import LimiterMixin
 from yfinance import Ticker
-from pyrate_limiter import Duration, RequestRate, Limiter
 
 logger = logging.getLogger(__name__)
 
@@ -30,18 +25,15 @@ session = CachedLimiterSession(
     limiter=Limiter(
         RequestRate(2, Duration.SECOND * 5)
     ),  # max 2 requests per 5 seconds
-    expire_after=3600,
-    per_second=0.9,
-    bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache("cache/yfinance.cache"),
+    expire_after=DO_NOT_CACHE,
 )
 
 
 cot_session = CachedLimiterSession(
-    expire_after=24 * 3600,
-    per_second=0.9,
-    bucket_class=MemoryQueueBucket,
-    backend=SQLiteCache("cache/cot.cache"),
+    limiter=Limiter(
+        RequestRate(2, Duration.SECOND * 5)
+    ),  # max 2 requests per 5 seconds
+    expire_after=DO_NOT_CACHE,
 )
 
 

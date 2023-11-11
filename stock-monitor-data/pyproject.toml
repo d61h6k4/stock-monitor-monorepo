@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "stock-monitor-data"
-version = "0.1.12"
+version = "0.1.13a1"
 description = ""
 authors = ["d61h6k4 <ddbihbka@gmail.com>"]
 readme = "README.md"
@@ -13,9 +13,9 @@ pydantic = "^2.0.0"
 requests = "^2.31.0"
 requests-cache = "^1.1.0"
 requests-ratelimiter = "^0.4.0"
-yfinance = "^0.2.20"
 xlrd = "^2.0.1"
 pyrate-limiter = "^3.1.0"
+yfinance = "^0.2.31"
 
 
 [tool.poetry.group.dev.dependencies]

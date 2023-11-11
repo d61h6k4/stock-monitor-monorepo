@@ -19,7 +19,9 @@ WORKDIR ${WORKDIR}
 COPY stock-monitor-data /stock-monitor-data
 COPY crm ${WORKDIR}
 
-RUN poetry install --only main
+RUN poetry install --only main &&\
+    ./.venv/bin/pip uninstall -y yfinance &&\
+    ./.venv/bin/pip install "git+https://github.com/ranaroussi/yfinance.git@feature/cookie-and-crumb"
 
 FROM python:3.11-slim
 
