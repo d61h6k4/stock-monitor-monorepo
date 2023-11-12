@@ -2551,6 +2551,22 @@ def ideas(period: str, interval: str):
                             [Source](https://librariancapital.substack.com/p/rightmove-reassessing-after-costar)
                         """,
         ),
+        Stock(
+            ticker_name="VTNR",
+            period=period,
+            interval=interval,
+            expectation=Expectation(
+                price=40, date=datetime(2025, 3, 15, tzinfo=timezone.utc)
+            ),
+            description=r"""All in all Margin should be avoided in the process of investing into cyclicals. 
+                            For companies at the bottom of the cycle, it is worth noting that the expiration 
+                            date of their debt should be considered while investing in them. Vertex VTNR 
+                            won’t go bankrupt till at least 2025. They have enough time to manage the situation 
+                            and with a Net debt position of 90m $ till 2025, while they generate conservatively 
+                            12.5m $ a quarter and have 222m $ in inventory, I don’t expect liquidity issues
+                            [Source](https://moderninvesting.substack.com/p/debt-and-cyclicals-magic-or-catastrophe)    
+                        """,
+        ),
     ]
 
     return reversed(ideas)
