@@ -2569,4 +2569,4 @@ def ideas(period: str, interval: str):
         ),
     ]
 
-    return reversed(ideas)
+    return ideas
