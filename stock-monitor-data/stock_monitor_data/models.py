@@ -7,7 +7,7 @@ from typing import Any, Mapping
 
 from pandas import DataFrame
 from pydantic import BaseModel, field_validator
-from pyrate_limiter import Duration, Limiter, RequestRate
+from pyrate_limiter import Duration, Limiter, Rate
 from requests import Session
 from requests.exceptions import HTTPError
 from requests_cache import DO_NOT_CACHE, CacheMixin
@@ -23,7 +23,7 @@ class CachedLimiterSession(CacheMixin, LimiterMixin, Session):
 
 session = CachedLimiterSession(
     limiter=Limiter(
-        RequestRate(2, Duration.SECOND * 5)
+        Rate(2, Duration.SECOND * 5)
     ),  # max 2 requests per 5 seconds
     expire_after=DO_NOT_CACHE,
 )
@@ -31,7 +31,7 @@ session = CachedLimiterSession(
 
 cot_session = CachedLimiterSession(
     limiter=Limiter(
-        RequestRate(2, Duration.SECOND * 5)
+        Rate(2, Duration.SECOND * 5)
     ),  # max 2 requests per 5 seconds
     expire_after=DO_NOT_CACHE,
 )
